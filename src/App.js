@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { Route, Switch } from "react-router-dom";
+// 组件
+import LoginController from "./page/login-controller.js";
+import IndexController from "./page/index-controller.js";
+import BackgroundController from './page/home-controller';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render () {
+    const NoMatch = () => <div>4 0 4  NOT  FOUND</div>
+    
+    return (
+      <div>
+        <Switch>
+          <Route path='/' exact component={IndexController} />
+          <Route path='/login' exact component={LoginController} />
+          <Route path='/background' component={BackgroundController} />
+          <Route component={NoMatch} />
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;
