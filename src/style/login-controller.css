@@ -3,12 +3,9 @@
   text-align: center;
 }
 
-.blank {
-  height: 150px;
-}
-
 .back {
   height: 100%;
+  padding-top: 150px;
 }
 
 .login-title {
