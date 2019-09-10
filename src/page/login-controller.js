@@ -67,7 +67,6 @@ class LoginController extends React.Component {
       passWord: md5(passWord)
     }).then(data => {
       if (data) {
-        this.props.recordUserId(data);
         // 需要放到token中
         this.props.history.push(`/${BCG_ROOT_NAME}/${HOME.path}`);
       }

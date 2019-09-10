@@ -35,5 +35,8 @@ export const RESPONSE_CODE = {
 
 // 服务器状态码
 export const SERVICE_CODE = {
+  Error: 0,
   Successed: 1,
+  SetToken: 2,
+  OutTimeToken: 3,
 };
