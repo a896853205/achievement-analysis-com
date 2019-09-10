@@ -1,11 +1,11 @@
 .test {
-  margin: auto;
+  margin: 0 auto;
   text-align: center;
 }
 
 .back {
   height: 100%;
-  padding-top: 150px;
+  background: rgb(240, 242, 245);
 }
 
 .login-title {

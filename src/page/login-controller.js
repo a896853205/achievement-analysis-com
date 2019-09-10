@@ -11,7 +11,7 @@ import { launchRequest } from "../util/request";
 import * as APIS from "../constants/api-constants";
 
 // UI组件
-import { Button, Input, Tag, Card } from "antd";
+import { Button, Input, Card } from "antd";
 
 // 关于数据模块交互
 import { connect } from "react-redux";

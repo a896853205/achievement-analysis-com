@@ -14,5 +14,6 @@ export const BCG_ROOT_NAME = 'background';
 //   }
 // }
 
+export const INDEX = { path: '', name: '首页' }
 export const LOGIN = { path: 'login', name: '登录页' };
 export const HOME = { path: 'home', name: '登录成功页' };
