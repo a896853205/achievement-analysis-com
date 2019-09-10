@@ -27,7 +27,8 @@ class LoginController extends React.Component {
   };
   render() {
     return (
-      <div>
+      <div className="back">
+        <div className="blank" />
         <Card className="test" style={{ width: 300 }}>
           <div className="login-title">智赢</div>
           <div className="login-sub-title">祝你智取未来</div>

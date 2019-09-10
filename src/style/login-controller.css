@@ -1,10 +1,18 @@
 .test {
-  margin: 200px auto;
+  margin: auto;
   text-align: center;
 }
 
+.blank {
+  height: 150px;
+}
+
+.back {
+  height: 100%;
+}
+
 .login-title {
-  margin: 0 auto;
+  margin: auto;
   font-size: 2em;
 }
 
