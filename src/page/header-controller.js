@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { LOGIN, INDEX } from "../constants/route-constants"
 // css
 import '../style/header.css';
+// 关于数据模块交互
+import { connect } from "react-redux";
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
@@ -30,45 +32,81 @@ class HeaderController extends React.Component {
                 to={{
                   pathname: `/${INDEX.path}`
                 }}
-              >
-              首页</Link>
+              >首页</Link>
             </Menu.Item>
-            <Menu.Item key="1">专业测评</Menu.Item>
-            <SubMenu
-              key="sub1"
-              title={
-                <span>
-                  <span>志愿填报</span>
-                </span>
-              }
-            >
-              <Menu.Item key="2">模拟填报</Menu.Item>
-              <Menu.Item key="3">正式填报</Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub2"
-              title={
-                <span>
-                  <span>新高考3+1+2</span>
-                </span>
-              }
-            >
-              <Menu.Item key="4">高考政策</Menu.Item>
-              <Menu.Item key="5">高考快讯</Menu.Item>
-            </SubMenu>
+            {
+              this.props.user.uuid ?
+                (<Menu.Item key="1">专业测评</Menu.Item>)
+                :
+                undefined
+            }
+            {
+              this.props.user.uuid ?
+                (<SubMenu
+                  key="sub1"
+                  title={
+                    <span>
+                      <span>志愿填报</span>
+                    </span>
+                  }
+                >
+                  <Menu.Item key="2">模拟填报</Menu.Item>
+                  <Menu.Item key="3">正式填报</Menu.Item>
+                </SubMenu>)
+                :
+                undefined
+            }
+            {
+              this.props.user.uuid ?
+                (<SubMenu
+                  key="sub2"
+                  title={
+                    <span>
+                      <span>新高考3+1+2</span>
+                    </span>
+                  }
+                >
+                  <Menu.Item key="4">高考政策</Menu.Item>
+                  <Menu.Item key="5">高考快讯</Menu.Item>
+                </SubMenu>)
+                :
+                undefined
+            }
           </Menu>
         </Col>
         <Col span={1} offset={12}>
-          <Link
-            to={{
-              pathname: `${LOGIN.path}`
-            }}
-          >
-            登录
-          </Link>
+          {
+            this.props.user.uuid ?
+              (<span>{this.props.user.nickname}</span>)
+              :
+              (<Link
+                to={{
+                  pathname: `${LOGIN.path}`
+                }}
+              >登录</Link>)
+          }
         </Col>
       </Header>
     );
   }
 }
-export default HeaderController;
+
+// 从store接收state数据
+const mapStateToProps = store => {
+  const userStore = store['userStore'];
+  let { user } = userStore;
+
+  return {
+    user,
+  }
+};
+
+// 向store dispatch action
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HeaderController);

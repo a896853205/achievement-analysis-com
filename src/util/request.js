@@ -152,7 +152,7 @@ async function _fetch(
 
       return null;
     } else if (responseData.status === DominConfigs.SERVICE_CODE.SetToken) {
-      localStorage.setItem('token', responseData.data);
+      localStorage.setItem('token', responseData.data.token);
 
       return responseData.data;
     } else if (responseData.status === DominConfigs.SERVICE_CODE.OutTimeToken) {

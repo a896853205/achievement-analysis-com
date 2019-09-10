@@ -1,17 +1,17 @@
 import { handleActions, createAction } from 'redux-actions'
 
 export const actions = {
-  recordUserId: createAction('recordUserId')
+  recordUser: createAction('recordUser')
 };
 
 export const userReducer = handleActions({
-  recordUserId(state, { payload: result }) {
+  recordUser(state, { payload: result }) {
 
     return {
       ...state,
-      userId: result
+      user: result
     }
   }
 }, {
-  userId: ''
+  user: {}
 })
