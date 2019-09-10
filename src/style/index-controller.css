@@ -1,0 +1,17 @@
+.logo {
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 24px 16px 0;
+  float: left;
+}
+.layout {
+  background: #000000;
+}
+
+.header {
+  background: #ffffff;
+  height: 66px;
+  box-shadow: 0 3px 10px #888888;
+  min-width: 1260px;
+}
