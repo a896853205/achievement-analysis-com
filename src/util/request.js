@@ -3,6 +3,9 @@ import * as APIs from '../constants/api-constants';
 import moment from 'moment';
 import { message } from 'antd';
 
+// 路由
+import { BCG_ROOT_NAME, LOGIN } from '../constants/route-constants';
+
 // 请求包装
 export async function launchRequest(
   url,
@@ -20,6 +23,7 @@ export async function launchRequest(
     Connection: 'keep-alive',
     t,
     os,
+    Authorization: localStorage.getItem('token')
   })
 
   const fetchParams = {
@@ -80,8 +84,8 @@ export function uploadProjectImageToQiniu(
   return new Promise(async (resolve, reject) => {
     const formdata = new FormData();
     let fetchParams = {},
-        responseData = {}
-  
+      responseData = {}
+
     // 获取上传token
     let tokenResponse = await launchRequest(
       APIs.GetUploadToken,
@@ -93,19 +97,19 @@ export function uploadProjectImageToQiniu(
     formdata.append('key', tokenResponse.key);
     formdata.append('token', tokenResponse.token);
     formdata.append('file', image);
-  
+
     fetchParams = {
       method: DominConfigs.REQUEST_TYPE.POST,
       body: formdata,
     };
-  
+
     responseData = await _fetch(
       APIs.UPLOAD_TO_QiNiu,
       {},
       DominConfigs.REQUEST_TYPE.POST,
       fetchParams
     );
-    
+
     if (responseData) {
       resolve(responseData);
     } else {
@@ -114,7 +118,7 @@ export function uploadProjectImageToQiniu(
   })
 }
 
-async function _fetch (
+async function _fetch(
   url,
   params = {},
   requestType,
@@ -140,15 +144,21 @@ async function _fetch (
   ) {
     // 请求成功 succ: 200 && status: 1
     if (responseData.status &&
-      responseData.status === DominConfigs.SERVICE_CODE.Successed) 
-      
-      return responseData.data;
+      responseData.status === DominConfigs.SERVICE_CODE.Successed) {
 
-    else {
-      console.log('respone', responseData);
+      return responseData.data;
+    } else if (responseData.status === DominConfigs.SERVICE_CODE.Error) {
       message.error(responseData.msg);
 
       return null;
+    } else if (responseData.status === DominConfigs.SERVICE_CODE.SetToken) {
+      localStorage.setItem('token', responseData.data);
+
+      return responseData.data;
+    } else if (responseData.status === DominConfigs.SERVICE_CODE.OutTimeToken) {
+      message.error(responseData.msg);
+
+      this.props.history.push(`/${BCG_ROOT_NAME}/${LOGIN.path}`);
     }
   }
 }
