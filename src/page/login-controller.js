@@ -1,5 +1,8 @@
 import React from "react";
 
+//样式文件
+import "../style/login-controller.css";
+
 // 路由
 import { BCG_ROOT_NAME, HOME } from "../constants/route-constants";
 
@@ -25,12 +28,29 @@ class LoginController extends React.Component {
   render() {
     return (
       <div>
-        <Card style={{ width: 300 }}>
-          <Input onChange={e => this.setState({ userName: e.target.value })} />
-          <Input.Password
-            onChange={e => this.setState({ passWord: e.target.value })}
+        <Card className="test" style={{ width: 300 }}>
+          <div className="login-title">智赢</div>
+          <div className="login-sub-title">祝你智取未来</div>
+          <Input
+            className="login-input"
+            onChange={e => this.setState({ userName: e.target.value })}
+            size="large"
+            placeholder="手机号或卡号"
           />
-          <Button onClick={this.handleSubmit}>登录</Button>
+          <Input.Password
+            className="login-input"
+            onChange={e => this.setState({ passWord: e.target.value })}
+            size="large"
+            placeholder="密码"
+          />
+          <Button
+            className="login-button"
+            onClick={this.handleSubmit}
+            type="primary"
+            size="large"
+          >
+            登录
+          </Button>
         </Card>
       </div>
     );

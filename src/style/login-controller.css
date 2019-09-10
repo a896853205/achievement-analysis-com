@@ -1,0 +1,22 @@
+.test {
+  margin: 200px auto;
+  text-align: center;
+}
+
+.login-title {
+  margin: 0 auto;
+  font-size: 2em;
+}
+
+.login-sub-title {
+  margin-bottom: 15px;
+}
+
+.login-input {
+  margin: 15px 0;
+}
+
+.login-button {
+  width: 250px;
+  margin: 15px 0;
+}
