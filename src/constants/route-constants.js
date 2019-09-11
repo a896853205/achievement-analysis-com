@@ -20,3 +20,4 @@ export const HOME = { path: 'home', name: '登录成功页' };
 
 export const VOLUNTARY = { path: 'voluntary', name: '填报志愿页' }
 export const QUESTIONNAIRE = { path: 'questionnaire', name: '问卷页' }
+export const PERSONAL = { path: 'personal', name: '问卷页' }

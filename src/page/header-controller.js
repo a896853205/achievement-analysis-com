@@ -10,6 +10,9 @@ import '../style/header.css';
 // 关于数据模块交互
 import { connect } from "react-redux";
 
+// 路由
+import { BCG_ROOT_NAME, PERSONAL } from "../constants/route-constants";
+
 const { Header } = Layout;
 const { SubMenu } = Menu;
 
@@ -17,7 +20,14 @@ class HeaderController extends React.Component {
   render() {
     let userMenu = (
       <Menu>
-        <Menu.Item>修改个人</Menu.Item>
+        <Menu.Item>
+          <Link
+            to={{
+              pathname: `${PERSONAL.path}`
+            }}>
+              修改个人
+          </Link>
+        </Menu.Item>
         <Menu.Item onClick={this.handleSignOut}>注销</Menu.Item>
       </Menu>
     )
