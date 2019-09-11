@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Switch } from "react-router-dom";
 
 // 请求文件
 import { launchRequest } from "../util/request";
@@ -8,10 +9,24 @@ import * as APIS from "../constants/api-constants";
 import { connect } from "react-redux";
 import { actions as userActions } from "../redux/user-model";
 
+// 自定义组件
+import HomeIndexController from './home/home-index-controller';
+import HomeVoluntaryController from './home/home-voluntary-controller';
+import HomeQuestionnaireController from './home/home-questionnaire-controller';
+
+// 路由
+import { BCG_ROOT_NAME, VOLUNTARY, QUESTIONNAIRE } from "../constants/route-constants";
+
 class HomeController extends React.Component {
   render() {
     return (
-      <div>登录成功页</div>
+      <div>
+        <Switch>
+          <Route path={`/${BCG_ROOT_NAME}/`} exact component={HomeIndexController} />
+          <Route path={`/${BCG_ROOT_NAME}/${VOLUNTARY.path}`} exact component={HomeVoluntaryController} />
+          <Route path={`/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}`} exact component={HomeQuestionnaireController} />
+        </Switch>
+      </div>
     );
   }
 

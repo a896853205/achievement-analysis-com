@@ -68,7 +68,7 @@ class LoginController extends React.Component {
       if (data) {
         this.props.recordUser(data.user);
         // 需要放到token中
-        this.props.history.push(`/${BCG_ROOT_NAME}/${HOME.path}`);
+        this.props.history.push(`/${BCG_ROOT_NAME}/`);
       }
     });
   };
