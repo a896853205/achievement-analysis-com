@@ -1,7 +1,7 @@
 import React from 'react';
 
 // UI组件
-import { Layout, Menu, Col } from "antd";
+import { Layout, Menu, Col, Dropdown, Icon } from "antd";
 // 路由
 import { Link } from "react-router-dom";
 import { LOGIN, INDEX } from "../constants/route-constants"
@@ -15,6 +15,12 @@ const { SubMenu } = Menu;
 
 class HeaderController extends React.Component {
   render() {
+    let userMenu = (
+      <Menu>
+        <Menu.Item>修改个人</Menu.Item>
+        <Menu.Item onClick={this.handleSignOut}>注销</Menu.Item>
+      </Menu>
+    )
     return (
       <Header className="header">
         <Col span={3}>
@@ -77,7 +83,9 @@ class HeaderController extends React.Component {
         <Col span={1} offset={12}>
           {
             this.props.user.uuid ?
-              (<span>{this.props.user.nickname}</span>)
+              (<Dropdown overlay={userMenu}>
+                <span className='user-menu-span'>{this.props.user.nickname} <Icon type="down" /></span>
+              </Dropdown>)
               :
               (<Link
                 to={{
@@ -88,6 +96,12 @@ class HeaderController extends React.Component {
         </Col>
       </Header>
     );
+  }
+
+  // 注销函数
+  handleSignOut () {
+    localStorage.clear();
+    window.location.href = '/login';
   }
 }
 

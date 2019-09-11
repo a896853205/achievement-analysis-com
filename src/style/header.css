@@ -12,3 +12,8 @@
   box-shadow: 0 3px 10px #888888;
   min-width: 1260px;
 }
+
+.user-menu-span {
+  color: #1890ff; 
+  cursor: pointer;
+}

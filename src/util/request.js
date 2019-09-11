@@ -3,9 +3,6 @@ import * as APIs from '../constants/api-constants';
 import moment from 'moment';
 import { message } from 'antd';
 
-// 路由
-import { BCG_ROOT_NAME, LOGIN } from '../constants/route-constants';
-
 // 请求包装
 export async function launchRequest(
   url,
@@ -23,7 +20,7 @@ export async function launchRequest(
     Connection: 'keep-alive',
     t,
     os,
-    Authorization: localStorage.getItem('token')
+    authorization: `Bearer ${localStorage.getItem('token')}`
   })
 
   const fetchParams = {
@@ -158,7 +155,7 @@ async function _fetch(
     } else if (responseData.status === DominConfigs.SERVICE_CODE.OutTimeToken) {
       message.error(responseData.msg);
 
-      this.props.history.push(`/${BCG_ROOT_NAME}/${LOGIN.path}`);
+      return null;
     }
   }
 }
