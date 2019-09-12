@@ -19,8 +19,8 @@ class App extends Component {
     return (
       <Layout className="layout">
         <HeaderController />
-        <Content style={{ padding: '0 50px' }}>
-          <div style={{ boxSizing: 'border-box', padding: 24 }}>
+        <Content>
+          <div>
             <Switch>
               <Route path='/' exact component={IndexController} />
               <Route path='/login' exact component={LoginController} />
