@@ -42,7 +42,7 @@ class FooterController extends React.Component {
                   target="_blank"
                   rel="noopener noreferrer"
                   href="https://www.zhihu.com/org/ji-he-61-7/activities"
-                  className="footer_inlineblock"
+                  className="footer-inlineblock"
                 >
                   知乎
                 </a>
@@ -50,18 +50,18 @@ class FooterController extends React.Component {
                   target="_blank"
                   rel="noopener noreferrer"
                   href="https://weibo.com/gamecore"
-                  className="footer_inlineblock"
+                  className="footer-inlineblock"
                 >
                   微博
                 </a>
-                <span className="footer_inlineblock" title="gamecores">
+                <span className="footer-inlineblock" title="gamecores">
                   微信
                 </span>
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
                   href="https://podcasts.apple.com/cn/podcast/id420660752"
-                  className="footer_inlineblock"
+                  className="footer-inlineblock"
                 >
                   Podcast
                 </a>
@@ -69,7 +69,7 @@ class FooterController extends React.Component {
                   target="_blank"
                   rel="noopener noreferrer"
                   href="https://shop124260606.taobao.com/"
-                  className="footer_inlineblock"
+                  className="footer-inlineblock"
                 >
                   机核铺
                 </a>
@@ -77,7 +77,7 @@ class FooterController extends React.Component {
                   target="_blank"
                   rel="noopener noreferrer"
                   href="https://shop463835368.taobao.com/index.htm"
-                  className="footer_inlineblock"
+                  className="footer-inlineblock"
                 >
                   核市
                 </a>
@@ -85,7 +85,7 @@ class FooterController extends React.Component {
                   target="_blank"
                   rel="noopener noreferrer"
                   href="https://www.gcores.com/rss"
-                  className="footer_inlineblock"
+                  className="footer-inlineblock"
                 >
                   RSS
                 </a>
@@ -112,7 +112,58 @@ class FooterController extends React.Component {
               </div>
             </Col>
           </Row>
-          <div className="footer-btm"> </div>
+          <Row type="flex" className="footer-btm">
+            <Col span={12} className="footer-links footer-btm-left">
+              <a
+                href="http://hrbust.edu.cn"
+                rel="noopener noreferrer"
+                className="footer-inlineblock"
+                role="button"
+                tabindex="0"
+                target="_blank"
+              >
+                联系我们 / CONTACT US
+              </a>
+              <a
+                href="https://www.gcores.com/articles/18293"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-inlineblock"
+              >
+                投稿须知
+              </a>
+              <a
+                href="https://www.gcores.com/terms"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-inlineblock"
+              >
+                用户协议
+              </a>
+              <a
+                href="https://www.gcores.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-inlineblock"
+              >
+                隐私政策
+              </a>
+              <a
+                href="https://www.gcores.com/jobs"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-inlineblock"
+              >
+                工作招聘
+              </a>
+            </Col>
+
+            <Col span={12} className="footer-btm-right">
+              <p>
+                All Rights Reserved 2009-2019 GAMECORES - Terms &amp; Conditions
+              </p>
+            </Col>
+          </Row>
         </div>
       </Footer>
     );
