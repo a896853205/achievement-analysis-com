@@ -18,7 +18,9 @@ if (SAP_CONTROL === ENVIRONMENT.DEV) {
 // 模块
 export const PART = {
   OPT_USER: '/users',
+  OPT_SYSTEM: '/system',
   OPT_UPLOAD: '/upload',
+  OPT_ENTRY_SCORE: '/entryScore'
 };
 
 // 请求类型
