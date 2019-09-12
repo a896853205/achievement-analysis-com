@@ -2,16 +2,19 @@ import React from 'react';
 
 // UI组件
 import { Layout, Menu, Col, Dropdown, Icon } from "antd";
+
 // 路由
 import { Link } from "react-router-dom";
 import { LOGIN, INDEX } from "../constants/route-constants"
+
 // css
 import '../style/header.css';
+
 // 关于数据模块交互
 import { connect } from "react-redux";
 
 // 路由
-import { BCG_ROOT_NAME, PERSONAL } from "../constants/route-constants";
+import { PERSONAL } from "../constants/route-constants";
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
