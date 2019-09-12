@@ -12,10 +12,33 @@
 }
 
 .index-container {
-  max-width: 1300px;
   margin: 0 auto;
 }
 
 .card {
   margin: 0 auto;
+}
+
+.black-row {
+  margin: 0 auto;
+  max-width: 1300px;
+}
+
+.outter-row-dark {
+  text-align: center;
+  background: #F6F6F7;
+  padding: 20px 0;
+}
+
+.outter-row-light {
+  text-align: center;
+  background: #FFFFFF;
+  padding: 20px 0;
+}
+
+.title {
+  margin: 0 auto;
+  max-width: 1300px;
+  font-size: 20px;
+  text-align: left;
 }
