@@ -15,5 +15,6 @@ export const EQUIP_BUY = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_EQUIP}/b
  ***************************/
 export const USER_LOGIN = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/login`;  // 登录
 export const GET_USER_INFO = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/getUserInfo` // 获取用户信息
+export const SET_USER_INFO = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/setUserInfo` // 获取用户信息
 // 获取上传Token
 export const GetUploadToken = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_UPLOAD}/getuploadtoken`;

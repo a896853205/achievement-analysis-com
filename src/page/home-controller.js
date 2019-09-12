@@ -13,18 +13,23 @@ import { actions as userActions } from "../redux/user-model";
 import HomeIndexController from './home/home-index-controller';
 import HomeVoluntaryController from './home/home-voluntary-controller';
 import HomeQuestionnaireController from './home/home-questionnaire-controller';
+import HomePersonalController from './home/home-personal-controller';
 
 // 路由
-import { BCG_ROOT_NAME, VOLUNTARY, QUESTIONNAIRE } from "../constants/route-constants";
+import { BCG_ROOT_NAME, VOLUNTARY, QUESTIONNAIRE, PERSONAL } from "../constants/route-constants";
 
 class HomeController extends React.Component {
   render() {
+    const NoMatch = () => <div>4 0 4  NOT  FOUND</div>
+
     return (
       <div>
         <Switch>
           <Route path={`/${BCG_ROOT_NAME}/`} exact component={HomeIndexController} />
           <Route path={`/${BCG_ROOT_NAME}/${VOLUNTARY.path}`} exact component={HomeVoluntaryController} />
           <Route path={`/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}`} exact component={HomeQuestionnaireController} />
+          <Route path={`/${BCG_ROOT_NAME}/${PERSONAL.path}`} exact component={HomePersonalController} />
+          <Route component={NoMatch} />
         </Switch>
       </div>
     );
