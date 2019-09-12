@@ -1,0 +1,12 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  color: #ababab;
+}
+.footer a {
+  color: #ababab;
+}
+/* .footer-left,
+.footer-right {
+  flex-grow: 1;
+} */
