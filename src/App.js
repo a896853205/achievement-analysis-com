@@ -19,7 +19,7 @@ class App extends Component {
     return (
       <Layout className="layout">
         <HeaderController />
-        <Content style={{ padding: '0 50px', marginTop: 64 }}>
+        <Content style={{ padding: '0 50px' }}>
           <div style={{ boxSizing: 'border-box', padding: 24 }}>
             <Switch>
               <Route path='/' exact component={IndexController} />

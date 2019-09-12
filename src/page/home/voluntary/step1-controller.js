@@ -7,19 +7,24 @@ import {
   Radio,
   InputNumber,
   Button,
+  Select,
 } from 'antd';
 
 // 请求文件
 import { launchRequest } from "../../../util/request";
 import * as APIS from "../../../constants/api-constants";
+import * as DominConfigs from '../../../constants/domin-constants';
 
 // 关于数据模块交互
 import { connect } from "react-redux";
 import { actions as voluntaryActions } from '../../../redux/voluntary-model';
 
+const { Option } = Select;
+
 class Step1Controller extends React.Component {
   state = {
     loading: false,
+    provinceList: []
   }
   render() {
     const { getFieldDecorator } = this.props.form,
@@ -33,8 +38,17 @@ class Step1Controller extends React.Component {
           sm: { span: 8 },
         },
       },
-      isConfirm = !!this.props.user.confirm;
+      isConfirm = !!this.props.user.confirm,
+      optionList = this.state.provinceList.map(provinceItem => {
+        return (<Option key={provinceItem.id} value={provinceItem.id}>{provinceItem.province_name}</Option>);
+      });  // 地区的list
 
+    let yearsList = [];
+    for (let i = -1; i < 3; i++) {
+      yearsList.push(
+        <Option key={new Date().getFullYear() - i} value={new Date().getFullYear() - i}>{new Date().getFullYear() - i}</Option>
+      )
+    }
 
     return (
       <div>
@@ -48,6 +62,34 @@ class Step1Controller extends React.Component {
                 },
               ],
             })(<Input placeholder="请输入姓名" disabled={isConfirm} />)}
+          </Form.Item>
+          <Form.Item label="地区">
+            {getFieldDecorator('addressProvince', {
+              rules: [
+                {
+                  required: true,
+                  message: '请选择地区',
+                },
+              ],
+            })(
+              <Select disabled={isConfirm}>
+                {optionList}
+              </Select>
+            )}
+          </Form.Item>
+          <Form.Item label="考试年份">
+            {getFieldDecorator('examYear', {
+              rules: [
+                {
+                  required: true,
+                  message: '请选择考试年份',
+                },
+              ],
+            })(
+              <Select disabled={isConfirm}>
+                {yearsList}
+              </Select>
+            )}
           </Form.Item>
           <Form.Item label="性别">
             {getFieldDecorator('gender', {
@@ -106,6 +148,14 @@ class Step1Controller extends React.Component {
         </Form>
       </div >
     )
+  }
+
+  componentDidMount = async () => {
+    let data = await launchRequest(APIS.GET_ADDRESS_OPTION, {}, DominConfigs.REQUEST_TYPE.GET);
+
+    this.setState({
+      provinceList: data.provinceList
+    });
   }
 
   // 保存并下一步
@@ -175,6 +225,12 @@ export default connect(
       score: Form.createFormField({
         value: user.score,
       }),
+      addressProvince: Form.createFormField({
+        value: user.address_province,
+      }),
+      examYear: Form.createFormField({
+        value: user.exam_year,
+      })
     }
   }
 })(Step1Controller));
