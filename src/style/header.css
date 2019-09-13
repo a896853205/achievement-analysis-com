@@ -18,6 +18,10 @@
   cursor: pointer;
 }
 
-.title1 {
+.logo-box {
   text-align: center;
+}
+
+.header-personal-box {
+  text-align: right;
 }
