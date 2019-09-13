@@ -55,16 +55,14 @@ class HeaderController extends React.Component {
 								onClick={this.test}
 								title={
 									<span>
-										<span>志愿填报</span>
+										<span>
+											志愿填报 <Icon type='down' />
+										</span>
 									</span>
 								}
 							>
 								<Menu.Item key='2'>
-									<Link
-										to={`/${BCG_ROOT_NAME}/${VOLUNTARY.path}`}
-									>
-										模拟填报
-									</Link>
+									<Link to={`/${BCG_ROOT_NAME}/${VOLUNTARY.path}`}>模拟填报</Link>
 								</Menu.Item>
 								<Menu.Item key='3'>正式填报</Menu.Item>
 							</SubMenu>
@@ -76,7 +74,9 @@ class HeaderController extends React.Component {
 								key='sub2'
 								title={
 									<span>
-										<span>新高考3+1+2</span>
+										<span>
+											新高考3+1+2 <Icon type='down' />
+										</span>
 									</span>
 								}
 							>
@@ -103,7 +103,7 @@ class HeaderController extends React.Component {
 					) : (
 						<Link
 							to={{
-								pathname: `${LOGIN.path}`
+								pathname: `/${LOGIN.path}`
 							}}
 						>
 							登录
@@ -132,7 +132,7 @@ const mapStateToProps = (store) => {
 };
 
 // 向store dispatch action
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = () => {
 	return {};
 };
 
