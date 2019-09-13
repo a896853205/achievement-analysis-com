@@ -27,9 +27,7 @@ class HomePersonalController extends React.Component {
 				>
 					<Menu.Item key='1'>
 						<Link
-							to={{
-								pathname: `${BASIC.path}`
-							}}
+							to={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${BASIC.path}`}
 						>
 							<Icon type='user' />
 							基本信息修改
@@ -37,9 +35,7 @@ class HomePersonalController extends React.Component {
 					</Menu.Item>
 					<Menu.Item key='2'>
 						<Link
-							to={{
-								pathname: `${PASSWORD.path}`
-							}}
+							to={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${PASSWORD.path}`}
 						>
 							<Icon type='key' />
 							密码修改

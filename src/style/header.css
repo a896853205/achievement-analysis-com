@@ -17,3 +17,11 @@
   color: #1890ff; 
   cursor: pointer;
 }
+
+.logo-box {
+  text-align: center;
+}
+
+.header-personal-box {
+  text-align: right;
+}
