@@ -1,11 +1,33 @@
+
 .personal-box {
   display: flex;
 }
 
+.slidebar {
+  height: 700px;
+}
+.slidebar,
 .personl-menu {
-  width: 256px;
+  text-align: center;
+  width: 270px;
+  background: #eeeef0;
+  color: #888;
+}
+
+.personl-menu li {
+  padding: 0!important;
+}
+
+.aus-user {
+  padding: 20px 0;
+}
+
+.aus-user-thumb {
+  background: #aaa;
+  border-radius: 50%;
+  margin-bottom: 5px;
 }
 
 .personal-contant {
-  width: calc(100% - 256px);
+  width: calc(100% - 270px);
 }
