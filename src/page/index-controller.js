@@ -27,7 +27,7 @@ class IndexController extends React.Component {
               </Carousel>
             </Col>
             <Col span={12}>
-              <Card style={{ width: 300 }} className="card">
+              <Card style={{ width: 500 }} className="card">
                 <p>2019志愿模拟填报</p>
                 <p>Card content</p>
                 <p>Card content</p>

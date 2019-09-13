@@ -40,7 +40,7 @@ class HeaderController extends React.Component {
     );
     return (
       <Header className="header">
-        <Col span={11}>
+        <Col span={10}>
           <Menu
             theme="light"
             mode="horizontal"
@@ -96,7 +96,7 @@ class HeaderController extends React.Component {
             )}
           </Menu>
         </Col>
-        <Col span={3}>
+        <Col span={4} className="title1">
           <div>这里是LOGO</div>
         </Col>
         <Col span={1} offset={9}>
