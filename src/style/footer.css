@@ -1,60 +1,82 @@
 p {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-size: 12px;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+  color: inherit;
+  background-color: transparent;
 }
 
 .footer {
-    padding: 63px 0;
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.65);
-    text-align: left;
+  padding: 63px 0;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.65);
+  text-align: left;
 }
 
 .container {
-    margin: 0 auto;
-    width: 100%;
-    padding: 0 15px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1300px;
 }
 
 .footer-logo {
-    margin-bottom: 30px;
-    max-height: 26px;
-    vertical-align: middle;
+  margin-bottom: 30px;
+  max-height: 26px;
+  vertical-align: middle;
 }
 
-.footer-body-left,
 .footer-body-right {
-    padding: 0 15px;
+  text-align: right;
+}
+
+.footer-body-left {
+  padding-right: 30px;
 }
 
 .footer-title {
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ced4da;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ced4da;
 }
 
 .footer-intro {
-    font-size: 12px;
-    color: #5a5a5a;
-    line-height: 2.1;
+  color: #5a5a5a;
+  line-height: 2.1;
 }
 
-@media (min-width:576px) {
-    .container {
-        max-width: 570px;
-    }
+.footer-links {
+  color: #323232;
+  font-size: 14px;
 }
 
-@media (min-width:1024px) {
-    .container {
-        max-width: 914px;
-    }
+.footer-thirdPlatforms {
+  margin-bottom: 30px;
 }
 
-@media (min-width:1256px) {
-    .container {
-        max-width: 1030px;
-    }
+.footer-body-right .footer-inlineblock {
+  margin: 0 0 0 18px;
 }
+
+.footer-btm {
+  margin-top: 50px;
+}
+.footer-btm-left .footer-inlineblock {
+  margin: 0 18px 0 0;
+}
+
+.footer-btm-left {
+  text-align: left;
+}
+
+.footer-btm-right {
+  text-align: right;
+}
+
+

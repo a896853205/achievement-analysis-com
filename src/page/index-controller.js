@@ -10,7 +10,7 @@ class IndexController extends React.Component {
       <div className="index-container">
         <div className="outter-row-dark">
           <Row className="black-row">
-            <Col span={12}>
+            <Col span={15}>
               <Carousel className="carou" autoplay>
                 <div>
                   <h3>1</h3>

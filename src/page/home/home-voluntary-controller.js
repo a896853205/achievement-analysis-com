@@ -1,7 +1,10 @@
 import React from 'react';
 
 // UI组件
-import { Steps } from 'antd';
+import { 
+  Steps,
+  Divider
+} from 'antd';
 
 // css
 import '../../style/home-voluntary.css';
@@ -40,6 +43,7 @@ class HomeVoluntaryController extends React.Component {
             <Step key={item.title} title={item.title} />
           ))}
         </Steps>
+        <Divider >{steps[this.props.step].title}</Divider>
         <div className="steps-content">
           {steps[this.props.step].content}
         </div>
