@@ -20,9 +20,6 @@ const { Header } = Layout;
 const { SubMenu } = Menu;
 
 class HeaderController extends React.Component {
-	test = () => {
-		//this.props.history.push("/login");
-	};
 	render() {
 		let userMenu = (
 			<Menu>
