@@ -28,7 +28,7 @@ class HomeController extends React.Component {
           <Route path={`/${BCG_ROOT_NAME}/`} exact component={HomeIndexController} />
           <Route path={`/${BCG_ROOT_NAME}/${VOLUNTARY.path}`} exact component={HomeVoluntaryController} />
           <Route path={`/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}`} exact component={HomeQuestionnaireController} />
-          <Route path={`/${BCG_ROOT_NAME}/${PERSONAL.path}`} exact component={HomePersonalController} />
+          <Route path={`/${BCG_ROOT_NAME}/${PERSONAL.path}`} component={HomePersonalController} />
           <Route component={NoMatch} />
         </Switch>
       </div>

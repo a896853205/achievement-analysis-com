@@ -1,0 +1,11 @@
+.personal-box {
+  display: flex;
+}
+
+.personl-menu {
+  width: 256px;
+}
+
+.personal-contant {
+  width: calc(100% - 256px);
+}

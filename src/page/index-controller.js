@@ -10,7 +10,7 @@ class IndexController extends React.Component {
       <div className="index-container">
         <div className="outter-row-dark">
           <Row className="black-row">
-            <Col span={12}>
+            <Col span={15}>
               <Carousel className="carou" autoplay>
                 <div>
                   <h3>1</h3>
@@ -26,7 +26,7 @@ class IndexController extends React.Component {
                 </div>
               </Carousel>
             </Col>
-            <Col span={12}>
+            <Col span={6} offset={1}>
               <Card style={{ width: 300 }} className="card">
                 <p>2019志愿模拟填报</p>
                 <p>Card content</p>
