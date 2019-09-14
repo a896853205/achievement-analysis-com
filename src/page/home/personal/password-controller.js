@@ -16,7 +16,6 @@ class PasswordController extends React.Component {
   };
 
   render() {
-    const { formLayout } = this.state;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -27,12 +26,6 @@ class PasswordController extends React.Component {
         sm: { span: 8 }
       }
     };
-    const buttonItemLayout =
-      formLayout === "horizontal"
-        ? {
-            wrapperCol: { span: 14, offset: 4 }
-          }
-        : null;
     return (
       <div class="con">
         <Form layout="formItemLayout">
