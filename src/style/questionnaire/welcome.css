@@ -1,0 +1,18 @@
+.main-img {
+  width: 100%;
+}
+
+.cont {
+  background: #f6f6f7;
+  height: 500px;
+  min-width: 1250px;
+  padding-top: 30px;
+}
+
+.typo {
+  text-align: left;
+  margin-left: 70px;
+  position: absolute;
+  top: 50%;
+  margin-top: -25%;
+}

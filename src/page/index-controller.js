@@ -87,7 +87,7 @@ class IndexController extends React.Component {
             {this.examInfo()}
           </Row>
         </div>
-        <div className="outter-row-dark">
+        <div className="outter-row dark">
           <Row className="title">
             <Col span={2}>
               <h2 className="ah_title">

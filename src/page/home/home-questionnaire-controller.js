@@ -8,7 +8,6 @@ class HomeQuestionnaireController extends React.Component {
   render() {
     return (
       <div>
-        问卷
         <WelcomeController />
         <QuestionnaireController />
         <ResultController />

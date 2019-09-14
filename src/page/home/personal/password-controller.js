@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Form, Input, Tooltip, Icon, Button } from "antd";
+import { Form, Input, Button } from "antd";
 
 import "../../../style/personal-password.css";
 class PasswordController extends React.Component {
