@@ -119,7 +119,7 @@ class FooterController extends React.Component {
                 rel="noopener noreferrer"
                 className="footer-inlineblock"
                 role="button"
-                tabindex="0"
+                tabIndex="0"
                 target="_blank"
               >
                 联系我们 / CONTACT US
