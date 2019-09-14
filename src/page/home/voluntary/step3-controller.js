@@ -6,7 +6,10 @@ import * as APIS from '../../../constants/api-constants';
 import * as DominConfigs from '../../../constants/domin-constants';
 
 // UI组件
-import { Checkbox } from 'antd';
+import { 
+	Checkbox,
+	Table
+} from 'antd';
 
 class Step3Controller extends React.Component {
 	state = {
@@ -15,7 +18,54 @@ class Step3Controller extends React.Component {
 		schoolType: [],
 		areaFeature: []
 	};
+
+	
 	render() {
+		const columns = [
+			{
+				title: '院校名称',
+				dataIndex: 'schoolName',
+				// render: text => <a>{text}</a>,
+			},
+			{
+				title: '地区',
+				dataIndex: 'province',
+			},
+			{
+				title: '招生计划',
+				dataIndex: 'province',
+			},
+			{
+				title: '投档概率',
+				dataIndex: 'province',
+			},
+			{
+				title: '专业',
+				dataIndex: 'province',
+			},
+			{
+				title: '填报',
+				dataIndex: 'province',
+			},
+		];
+
+		const data = [
+			{
+				key: '1',
+				schoolName: 'John Brown',
+				province: 32,
+			},
+			{
+				key: '2',
+				schoolName: 'John Brown',
+				province: 32,
+			},
+			{
+				key: '3',
+				schoolName: 'John Brown',
+				province: 32,
+			}
+		];
 		return (
 			<div>
 				<div>
@@ -61,7 +111,7 @@ class Step3Controller extends React.Component {
 					</div>
 				</div>
 				<div>
-					
+					<Table columns={columns} dataSource={data} />
 				</div>
 			</div>
 		);

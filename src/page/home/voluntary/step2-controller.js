@@ -27,7 +27,7 @@ class Step2Controller extends React.Component {
 			return (
 				<Card.Grid
 					style={gridStyle}
-					onClick={(e) => {
+					onClick={() => {
 						this.handleClickCard(entryScoreItem.lot_id);
 					}}
 				>
