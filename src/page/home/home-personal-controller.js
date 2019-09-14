@@ -30,7 +30,7 @@ class HomePersonalController extends React.Component {
               src="https://alioss.gcores.com/default_thumb/user-large.png"
               alt=""
             />
-            <p class="aus-user-name">hrbust_cheny</p>
+            <p className="aus-user-name">hrbust_cheny</p>
           </div>
           <Menu
             onClick={this.handleClick}

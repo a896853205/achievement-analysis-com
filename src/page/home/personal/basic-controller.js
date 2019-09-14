@@ -8,6 +8,9 @@ import { launchRequest } from "../../../util/request";
 import * as APIS from "../../../constants/api-constants";
 import * as DominConfigs from "../../../constants/domin-constants";
 
+// CSS
+import "../../../style/basic.css";
+
 const { Option } = Select;
 
 class BasicController extends React.Component {
@@ -16,13 +19,23 @@ class BasicController extends React.Component {
     provinceList: []
   };
   render() {
-    const optionList = this.state.provinceList.map(provinceItem => {
-      return (
-        <Option key={provinceItem.id} value={provinceItem.id}>
-          {provinceItem.province_name}
-        </Option>
-      );
-    }); // 地区的list
+    const formItemLayout = {
+        labelCol: {
+          xs: { span: 24 },
+          sm: { span: 8 }
+        },
+        wrapperCol: {
+          xs: { span: 24 },
+          sm: { span: 8 }
+        }
+      },
+      optionList = this.state.provinceList.map(provinceItem => {
+        return (
+          <Option key={provinceItem.id} value={provinceItem.id}>
+            {provinceItem.province_name}
+          </Option>
+        );
+      }); // 地区的list
 
     let yearsList = [];
     for (let i = -1; i < 3; i++) {
@@ -37,8 +50,8 @@ class BasicController extends React.Component {
     }
 
     return (
-      <div>
-        <Form>
+      <div className="basic-info">
+        <Form {...formItemLayout} onSubmit={this.handleSubmit}>
           <Form.Item label="姓名">
             <Input placeholder="请输入姓名" />
           </Form.Item>
@@ -63,10 +76,11 @@ class BasicController extends React.Component {
           <Form.Item label="分数">
             <InputNumber />
           </Form.Item>
-          <Form.Item>
+          <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
             <Button
               type="primary"
               htmlType="submit"
+              shape="round"
               loading={this.state.loading}
             >
               保存
@@ -88,6 +102,13 @@ class BasicController extends React.Component {
       provinceList: data.provinceList
     });
   };
+
+  // 保存
+	handleSubmit = (e) => {
+		e.preventDefault(); //阻止button submit的默认行为
+
+    console.log('aaaaa');
+	};
 }
 
 export default BasicController;
