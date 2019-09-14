@@ -8,64 +8,68 @@ import * as DominConfigs from '../../../constants/domin-constants';
 // UI组件
 import { 
 	Checkbox,
-	Table
+	Table,
+	Select
 } from 'antd';
 
+// 关于数据模块交互
+import { connect } from 'react-redux';
+
+const { Option } = Select;
 class Step3Controller extends React.Component {
 	state = {
 		schoolNature: [],
 		schoolProperty: [],
 		schoolType: [],
-		areaFeature: []
+		areaFeature: [],
+		schoolList: []
 	};
 
-	
 	render() {
 		const columns = [
 			{
 				title: '院校名称',
-				dataIndex: 'schoolName',
+				dataIndex: 'school_name',
+				key: 'schoolName',
 				// render: text => <a>{text}</a>,
 			},
 			{
 				title: '地区',
-				dataIndex: 'province',
+				dataIndex: 'province_name',
+				key: 'province_name',
 			},
 			{
 				title: '招生计划',
-				dataIndex: 'province',
+				dataIndex: 'plan',
+				key: 'plan',
 			},
 			{
 				title: '投档概率',
-				dataIndex: 'province',
+				dataIndex: 'archives',
+				key: 'archives',
 			},
 			{
 				title: '专业',
-				dataIndex: 'province',
+				dataIndex: 'major',
+				key: 'major',
+				render: () => (<div>点击查看</div>)
 			},
 			{
 				title: '填报',
-				dataIndex: 'province',
-			},
-		];
-
-		const data = [
-			{
-				key: '1',
-				schoolName: 'John Brown',
-				province: 32,
-			},
-			{
-				key: '2',
-				schoolName: 'John Brown',
-				province: 32,
-			},
-			{
-				key: '3',
-				schoolName: 'John Brown',
-				province: 32,
+				dataIndex: 'option',
+				key: 'option',
+				render: () => (
+					<Select>
+						<Option value={0}>志愿A</Option>
+						<Option value={1}>志愿B</Option>
+						<Option value={2}>志愿C</Option>
+						<Option value={3}>志愿D</Option>
+						<Option value={4}>志愿E</Option>
+					</Select>
+				)
 			}
 		];
+
 		return (
 			<div>
 				<div>
@@ -111,7 +115,7 @@ class Step3Controller extends React.Component {
 					</div>
 				</div>
 				<div>
-					<Table columns={columns} dataSource={data} />
+					<Table rowKey={record => record.school_id} columns={columns} dataSource={this.state.schoolList} />
 				</div>
 			</div>
 		);
@@ -122,19 +126,38 @@ class Step3Controller extends React.Component {
 			loading: true
 		});
 
-		let { schoolNature, schoolProperty, schoolType, areaFeature } = await launchRequest(
-			APIS.GET_SCHOOL_OPTION,
-			{},
-			DominConfigs.REQUEST_TYPE.GET
-		);
+		let [ { schoolNature, schoolProperty, schoolType, areaFeature }, { schoolList } ] = await Promise.all([
+			launchRequest(APIS.GET_SCHOOL_OPTION, {}, DominConfigs.REQUEST_TYPE.GET),
+			launchRequest(APIS.GET_SCHOOL, { lotId: this.props.lotId })
+		]);
 
-		this.setState({
+		console.table(schoolList);
+
+		await this.setState({
 			schoolNature,
 			schoolProperty,
 			schoolType,
 			areaFeature,
-			loading: false
+			loading: false,
+			schoolList
 		});
 	};
 }
-export default Step3Controller;
+
+// 从store接收state数据
+const mapStateToProps = (store) => {
+	const voluntaryStore = store['voluntaryStore'];
+  let { lot_id } = voluntaryStore;
+
+  return {
+    lotId: lot_id
+  }
+};
+
+// 向store dispatch action
+const mapDispatchToProps = (dispatch) => {
+	return {
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Step3Controller);

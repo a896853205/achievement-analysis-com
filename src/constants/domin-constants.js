@@ -20,7 +20,8 @@ export const PART = {
   OPT_USER: '/users',
   OPT_SYSTEM: '/system',
   OPT_UPLOAD: '/upload',
-  OPT_ENTRY_SCORE: '/entryScore'
+  OPT_ENTRY_SCORE: '/entryScore',
+  OPT_SCHOOL: '/school',
 };
 
 // 请求类型
