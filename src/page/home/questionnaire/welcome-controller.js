@@ -1,7 +1,7 @@
 import React from "react";
 
 import "../../../style/questionnaire/welcome.css";
-import { Carousel, Row, Col, Card, Typography, Divider, Button} from "antd";
+import { Row, Col, Typography, Button } from "antd";
 const { Title, Paragraph, Text } = Typography;
 
 class WelcomeController extends React.Component {
@@ -25,7 +25,12 @@ class WelcomeController extends React.Component {
               <Paragraph>
                 只要你认真、真实地填写了测试问卷，那么通常情况下你都能得到一个确实和你的性格相匹配地类型，从而我们可以得知您所适合报考的专业。
               </Paragraph>
-              <Button type="primary" htmlType="submit" shape="round" size="normal">
+              <Button
+                type="primary"
+                htmlType="submit"
+                shape="round"
+                size="normal"
+              >
                 开始测试
               </Button>
             </Typography>
@@ -34,6 +39,7 @@ class WelcomeController extends React.Component {
             <img
               src={require("../../../assets/images/questionnaire-welcome/draw.png")}
               className="main-img"
+              alt=""
             ></img>
           </Col>
         </Row>
