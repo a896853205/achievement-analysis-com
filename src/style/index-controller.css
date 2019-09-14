@@ -39,6 +39,15 @@
   padding: 20px 0;
 }
 
+.outter-row {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.dark {
+  background: #f6f6f7;
+}
+
 .title {
   margin: 0 auto;
   max-width: 1140px;

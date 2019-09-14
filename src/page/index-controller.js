@@ -15,6 +15,7 @@ class IndexController extends React.Component {
               className="news-img"
               height="100%"
               width="100%"
+              alt=""
               src="https://image.gcores.com/478de810-3d09-4eef-8a29-369bbc016865.jpg?x-oss-process=image/resize,limit_1,m_lfit,w_1600/quality,q_90"
             ></img>
             <div class="news_content">
@@ -87,7 +88,7 @@ class IndexController extends React.Component {
             {this.examInfo()}
           </Row>
         </div>
-        <div className="outter-row-dark">
+        <div className="outter-row dark">
           <Row className="title">
             <Col span={2}>
               <h2 className="ah_title">
