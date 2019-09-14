@@ -19,44 +19,49 @@ class Step3Controller extends React.Component {
 		return (
 			<div>
 				<div>
-					所在地区
-					{this.state.schoolNature.map((natureItem) => {
-						return (
-							<Checkbox key={natureItem.id} onChange={() => {}}>
-								{natureItem.type}
-							</Checkbox>
-						);
-					})}
+					<div>
+						所在地区
+						{this.state.schoolNature.map((natureItem) => {
+							return (
+								<Checkbox key={natureItem.id} onChange={() => {}}>
+									{natureItem.type}
+								</Checkbox>
+							);
+						})}
+					</div>
+					<div>
+						学校属性
+						{this.state.schoolProperty.map((propertyItem) => {
+							return (
+								<Checkbox key={propertyItem.id} onChange={() => {}}>
+									{propertyItem.type}
+								</Checkbox>
+							);
+						})}
+					</div>
+					<div>
+						高校类别
+						{this.state.schoolType.map((typeItem) => {
+							return (
+								<Checkbox key={typeItem.id} onChange={() => {}}>
+									{typeItem.type}
+								</Checkbox>
+							);
+						})}
+					</div>
+					<div>
+						地域特色
+						{this.state.areaFeature.map((areaFeatureItem) => {
+							return (
+								<Checkbox key={areaFeatureItem.id} onChange={() => {}}>
+									{areaFeatureItem.type}
+								</Checkbox>
+							);
+						})}
+					</div>
 				</div>
 				<div>
-					学校属性
-					{this.state.schoolProperty.map((propertyItem) => {
-						return (
-							<Checkbox key={propertyItem.id} onChange={() => {}}>
-								{propertyItem.type}
-							</Checkbox>
-						);
-					})}
-				</div>
-				<div>
-					高校类别
-					{this.state.schoolType.map((typeItem) => {
-						return (
-							<Checkbox key={typeItem.id} onChange={() => {}}>
-								{typeItem.type}
-							</Checkbox>
-						);
-					})}
-				</div>
-				<div>
-					地域特色
-					{this.state.areaFeature.map((areaFeatureItem) => {
-						return (
-							<Checkbox key={areaFeatureItem.id} onChange={() => {}}>
-								{areaFeatureItem.type}
-							</Checkbox>
-						);
-					})}
+					
 				</div>
 			</div>
 		);

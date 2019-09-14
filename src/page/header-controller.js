@@ -14,7 +14,7 @@ import '../style/header.css';
 import { connect } from 'react-redux';
 
 // 路由
-import { PERSONAL, VOLUNTARY, BCG_ROOT_NAME } from '../constants/route-constants';
+import { PERSONAL, VOLUNTARY, BCG_ROOT_NAME, QUESTIONNAIRE } from '../constants/route-constants';
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
@@ -48,7 +48,13 @@ class HeaderController extends React.Component {
 								首页
 							</Link>
 						</Menu.Item>
-						{this.props.user.uuid ? <Menu.Item key='1'>专业测评</Menu.Item> : undefined}
+						{this.props.user.uuid ? (
+							<Menu.Item key='1'>
+								<Link to={`/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}`}>专业测评</Link>
+							</Menu.Item>
+						) : (
+							undefined
+						)}
 						{this.props.user.uuid ? (
 							<SubMenu
 								key='sub1'
