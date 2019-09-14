@@ -38,12 +38,14 @@ class IndexController extends React.Component {
                   <img
                     className="carou-img"
                     src="https://image.gcores.com/478de810-3d09-4eef-8a29-369bbc016865.jpg?x-oss-process=image/resize,limit_1,m_lfit,w_1600/quality,q_90"
+                    alt="banner1"
                   ></img>
                 </div>
                 <div>
                   <img
                     className="carou-img"
                     src="https://image.gcores.com/478de810-3d09-4eef-8a29-369bbc016865.jpg?x-oss-process=image/resize,limit_1,m_lfit,w_1600/quality,q_90"
+                    alt="banner2"
                   ></img>
                 </div>
               </Carousel>
