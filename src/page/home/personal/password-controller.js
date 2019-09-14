@@ -1,6 +1,8 @@
 import React from "react";
 
 import { Form, Input, Tooltip, Icon, Button } from "antd";
+
+import "../../../style/personal-password.css";
 class PasswordController extends React.Component {
   constructor() {
     super();
@@ -15,13 +17,16 @@ class PasswordController extends React.Component {
 
   render() {
     const { formLayout } = this.state;
-    const formItemLayout =
-      formLayout === "horizontal"
-        ? {
-            labelCol: { span: 4 },
-            wrapperCol: { span: 14 }
-          }
-        : null;
+    const formItemLayout = {
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 8 }
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 8 }
+      }
+    };
     const buttonItemLayout =
       formLayout === "horizontal"
         ? {
@@ -29,19 +34,26 @@ class PasswordController extends React.Component {
           }
         : null;
     return (
-      <div>
-        <Form layout="horizontal">
+      <div class="con">
+        <Form layout="formItemLayout">
           <Form.Item label="原密码" {...formItemLayout}>
-            <Input placeholder="请输入原密码" />
+            <Input placeholder="请输入原密码" type="password" />
           </Form.Item>
           <Form.Item label="新密码" {...formItemLayout}>
-            <Input placeholder="请输入新密码" />
+            <Input placeholder="请输入新密码" type="password" />
           </Form.Item>
           <Form.Item label="确认密码" {...formItemLayout}>
-            <Input placeholder="请重新输入新密码" />
+            <Input placeholder="请重新输入新密码" type="password" />
           </Form.Item>
-          <Form.Item {...buttonItemLayout}>
-            <Button type="primary">Submit</Button>
+          <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              shape="round"
+              loading={this.state.loading}
+            >
+              保存
+            </Button>
           </Form.Item>
         </Form>
       </div>
