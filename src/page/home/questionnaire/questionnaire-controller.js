@@ -62,10 +62,9 @@ class QuestionnaireController extends React.Component {
 
   componentDidMount = async () => {
     let data = await launchRequest(APIS.GET_QUESTIONNAIRE_TEST, {});
-    
 
-    console.log('data', data);
-    
+    console.log("data", data);
+
     await this.setState({
       questions: data.questionList,
       loading: false
@@ -77,10 +76,7 @@ class QuestionnaireController extends React.Component {
       return;
     }
     let tempAnswers = this.state.ans;
-    tempAnswers.push({
-      id: this.state.index + 1,
-      ans: type
-    });
+    tempAnswers.push(type);
     await this.setState({
       index:
         this.state.index === this.state.questions.length - 1
@@ -91,6 +87,9 @@ class QuestionnaireController extends React.Component {
     if (this.state.ans.length === this.state.questions.length) {
       console.log("答完了");
       console.log("目前的答案", this.state.ans);
+      await launchRequest(APIS.UPLOAD_QUESTIONNAIRE_RESULT, {
+        quesResult: this.state.ans
+      });
       await this.setState({
         finished: true
       });

@@ -6,11 +6,11 @@ export const actions = {
 
 export const questionnaireReducer = handleActions(
   {
-    setQuesStatus(state, { payload: status }) {
+    setQuesStatus(state, { payload: results }) {
 
       return {
         ...state,
-        status: status
+        status: results
       };
     }
   },
