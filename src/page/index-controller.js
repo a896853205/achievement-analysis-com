@@ -9,7 +9,7 @@ class IndexController extends React.Component {
     let res = [];
     for (let i = 0; i < 5; i++) {
       res.push(
-        <Col span={4}>
+        <Col key={i} span={4}>
           <div className="news-img">
             <img
               className="news-img"
@@ -18,7 +18,7 @@ class IndexController extends React.Component {
               alt=""
               src="https://image.gcores.com/478de810-3d09-4eef-8a29-369bbc016865.jpg?x-oss-process=image/resize,limit_1,m_lfit,w_1600/quality,q_90"
             ></img>
-            <div class="news_content">
+            <div className="news_content">
               <h3>高考将于2020年全面取消</h3>
             </div>
           </div>
@@ -29,7 +29,7 @@ class IndexController extends React.Component {
   }
   render() {
     return (
-      <div className="index-container">
+      <div className="index-container page-min-width">
         <div className="outter-row-dark">
           <Row className="black-row">
             <Col span={15}>

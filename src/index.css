@@ -83,3 +83,19 @@ hr {
 /* 让非ie浏览器默认也显示垂直滚动条，防止因滚动条引起的闪烁 */
 html { overflow-y: scroll; }
 
+.box-min-width {
+  width: 1140px;
+  margin: 0 auto;
+}
+
+.page-min-width {
+  min-width: 1140px;
+}
+
+.bg-dark {
+  background: #f6f6f7;
+}
+
+.bg-light {
+  background: #ffffff;
+}

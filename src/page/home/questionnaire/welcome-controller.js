@@ -1,10 +1,22 @@
 import React from "react";
 
+//数据模块交互
+import { connect } from "react-redux";
+import { actions as questionnaireActions } from "../../../redux/questionnaire-model";
+
+// 请求文件
+import { launchRequest } from "../../../util/request";
+import * as APIS from "../../../constants/api-constants";
+
 import "../../../style/questionnaire/welcome.css";
 import { Row, Col, Typography, Button } from "antd";
 const { Title, Paragraph, Text } = Typography;
 
 class WelcomeController extends React.Component {
+  state = {
+    loading: true,
+    questionnaireDone: false
+  };
   render() {
     return (
       <div className="cont">
@@ -29,9 +41,17 @@ class WelcomeController extends React.Component {
                 type="primary"
                 htmlType="submit"
                 shape="round"
-                size="normal"
+                size="large"
+                disabled={this.state.loading}
+                onClick={() => {
+                  this.handleStart();
+                }}
               >
-                开始测试
+                {this.state.loading
+                  ? "加载中..."
+                  : this.state.questionnaireDone
+                  ? "查看结果"
+                  : "开始测试"}
               </Button>
             </Typography>
           </Col>
@@ -46,5 +66,42 @@ class WelcomeController extends React.Component {
       </div>
     );
   }
+
+  handleStart = () => {
+    this.state.questionnaireDone
+      ? this.props.setQuesStatus(2)
+      : this.props.setQuesStatus(1);
+  };
+
+  componentDidMount = async () => {
+    let status = await launchRequest(APIS.GET_QUESTIONNAIRE_STATUS);
+    status = status.status[0].isEvaluate;
+    console.log("status", status);
+    await this.setState({
+      loading: false,
+      questionnaireDone: status ? true : false,
+    });
+  };
 }
-export default WelcomeController;
+
+const mapStateToProps = store => {
+  const questionnaireStore = store["questionnaireStore"];
+  let { status } = questionnaireStore;
+
+  return {
+    status
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setQuesStatus: pageIndex => {
+      dispatch(questionnaireActions.setQuesStatus(pageIndex));
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WelcomeController);
