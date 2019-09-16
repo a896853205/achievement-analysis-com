@@ -7,6 +7,9 @@ import * as APIS from '../../../../constants/api-constants';
 // UI组件
 import { Table, Select } from 'antd';
 
+// 关于数据模块交互
+import { connect } from "react-redux";
+
 class SubTableController extends React.Component {
 	state = {
 		majorList: []
@@ -61,7 +64,8 @@ class SubTableController extends React.Component {
 
 	componentDidMount = async () => {
 		let { majorList } = await launchRequest(APIS.GET_MAJOR, {
-			schoolId: this.props.schoolId
+			schoolId: this.props.schoolId,
+			lotId: this.props.lotId,
 		});
 
 		console.table(majorList);
@@ -71,4 +75,23 @@ class SubTableController extends React.Component {
 		});
 	};
 }
-export default SubTableController;
+
+// 从store接收state数据
+const mapStateToProps = store => {
+  const voluntaryStore = store["voluntaryStore"];
+  let { lot_id } = voluntaryStore;
+
+  return {
+    lotId: lot_id
+  };
+};
+
+// 向store dispatch action
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SubTableController);
