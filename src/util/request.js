@@ -155,6 +155,10 @@ async function _fetch(
     } else if (responseData.status === DominConfigs.SERVICE_CODE.OutTimeToken) {
       message.error(responseData.msg);
 
+      // token过期
+      // 没法使用history
+      window.href = '/login';
+      
       return null;
     }
   }

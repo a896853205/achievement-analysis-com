@@ -27,12 +27,12 @@ class Step2Controller extends React.Component {
 			return (
 				<Card.Grid
 					style={gridStyle}
-					key={entryScoreItem.lot_id}
+					key={entryScoreItem.id}
 					onClick={() => {
-						this.handleClickCard(entryScoreItem.lot_id);
+						this.handleClickCard(entryScoreItem.id);
 					}}
 				>
-					{entryScoreItem.lot_name}
+					{entryScoreItem.lots_name}
 				</Card.Grid>
 			);
 		});
@@ -50,10 +50,10 @@ class Step2Controller extends React.Component {
 			loading: true
 		});
 
-		let data = await launchRequest(APIS.GET_ENTRY_SCORE, {}, DominConfigs.REQUEST_TYPE.GET);
+		let { lotsOption } = await launchRequest(APIS.GET_LOTS_OPTION, {}, DominConfigs.REQUEST_TYPE.GET);
 
 		this.setState({
-			entryScoreList: data,
+			entryScoreList: lotsOption,
 			loading: false
 		});
 	};
