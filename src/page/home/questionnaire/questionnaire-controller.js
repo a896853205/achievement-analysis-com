@@ -9,9 +9,9 @@ import * as APIS from "../../../constants/api-constants";
 
 import "../../../style/questionnaire/questionnaire.css";
 
-import { Typography, Row, Col, Button } from "antd";
+import { Typography, Button } from "antd";
 
-const { Title, Paragraph, Text } = Typography;
+const { Title } = Typography;
 class QuestionnaireController extends React.Component {
   state = {
     questions: [],
