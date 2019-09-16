@@ -61,7 +61,7 @@ class QuestionnaireController extends React.Component {
   }
 
   componentDidMount = async () => {
-    let data = await launchRequest(APIS.GET_QUESTIONNAIRE_TEST, {});
+    let data = await launchRequest(APIS.GET_QUESTIONNAIRE_LIST, {});
 
     console.log("data", data);
 
