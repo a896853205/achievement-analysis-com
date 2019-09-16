@@ -1,0 +1,43 @@
+.main-img {
+  width: 100%;
+}
+
+.cont {
+  height: 500px;
+  min-width: 1250px;
+  padding-top: 30px;
+}
+
+.ques-top {
+  padding-top: 110px;
+}
+
+.bg-light {
+  background: #ffffff;
+}
+
+.bg-dark {
+  background: #f6f6f7;
+}
+
+.typo {
+  text-align: left;
+  margin-left: 70px;
+  position: absolute;
+  top: 50%;
+  margin-top: -25%;
+}
+
+.question-button-con {
+  text-align: center;
+}
+
+.question-button {
+  width: 400px;
+  height: 50px;
+  margin: 10px 0;
+}
+
+.ques-title {
+  text-align: center;
+}

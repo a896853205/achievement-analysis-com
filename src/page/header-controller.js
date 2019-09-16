@@ -48,52 +48,47 @@ class HeaderController extends React.Component {
 								首页
 							</Link>
 						</Menu.Item>
-						{this.props.user.uuid ? (
-							<Menu.Item key='1'>
-								<Link to={`/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}`}>专业测评</Link>
+						<Menu.Item key='1'>
+							<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}` : '/login'}>
+								专业测评
+							</Link>
+						</Menu.Item>
+						<SubMenu
+							key='sub1'
+							title={
+								<span>
+									<Link
+										to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}` : '/login'}
+									>
+										志愿填报 <Icon type='down' />
+									</Link>
+								</span>
+							}
+						>
+							<Menu.Item key='2'>
+								<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : '/login'}>
+									模拟填报
+								</Link>
 							</Menu.Item>
-						) : (
-							undefined
-						)}
-						{this.props.user.uuid ? (
-							<SubMenu
-								key='sub1'
-								onClick={this.test}
-								title={
-									<span>
-										<span>
-											志愿填报 <Icon type='down' />
-										</span>
-									</span>
-								}
-							>
-								<Menu.Item key='2'>
-									<Link to={`/${BCG_ROOT_NAME}/${VOLUNTARY.path}`}>模拟填报</Link>
-								</Menu.Item>
-								<Menu.Item key='3'>正式填报</Menu.Item>
-							</SubMenu>
-						) : (
-							undefined
-						)}
-						{this.props.user.uuid ? (
-							<SubMenu
-								key='sub2'
-								title={
-									<span>
-										<span>
-											新高考3+1+2 <Icon type='down' />
-										</span>
-									</span>
-								}
-							>
-								<Menu.Item key='4'>高考政策</Menu.Item>
-								<Menu.Item key='5'>
-									<Link to='/login'>About</Link>
-								</Menu.Item>
-							</SubMenu>
-						) : (
-							undefined
-						)}
+							<Menu.Item key='3'>正式填报</Menu.Item>
+						</SubMenu>
+						<SubMenu
+							key='sub2'
+							title={
+								<span>
+									新高考3+1+2 <Icon type='down' />
+								</span>
+							}
+						>
+							<Menu.Item key='4'>
+								<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : '/login'}>
+									高考政策
+								</Link>
+							</Menu.Item>
+							<Menu.Item key='5'>
+								<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : '/login'}>About</Link>
+							</Menu.Item>
+						</SubMenu>
 					</Menu>
 				</Col>
 				<Col span={2} className='logo-box'>

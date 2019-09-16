@@ -22,6 +22,7 @@ export const PART = {
   OPT_UPLOAD: '/upload',
   OPT_ENTRY_SCORE: '/entryScore',
   OPT_SCHOOL: '/school',
+  OPT_QUESTIONNAIRE: '/questionnaire',
 };
 
 // 请求类型

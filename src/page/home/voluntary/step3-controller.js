@@ -1,21 +1,21 @@
-import React from 'react';
+import React from "react";
 
 // 请求文件
-import { launchRequest } from '../../../util/request';
-import * as APIS from '../../../constants/api-constants';
-import * as DominConfigs from '../../../constants/domin-constants';
+import { launchRequest } from "../../../util/request";
+import * as APIS from "../../../constants/api-constants";
+import * as DominConfigs from "../../../constants/domin-constants";
 
 // 自定义组件
-import SubTableController from './step3/sub-table-controller';
+import SubTableController from "./step3/sub-table-controller";
 
 // css
-import '../../../style/voluntary/step3.css';
+import "../../../style/voluntary/step3.css";
 
 // UI组件
-import { Checkbox, Table, Select, Icon } from 'antd';
+import { Checkbox, Table, Select, Icon } from "antd";
 
 // 关于数据模块交互
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
 const { Option } = Select;
 class Step3Controller extends React.Component {
@@ -272,18 +272,21 @@ class Step3Controller extends React.Component {
 }
 
 // 从store接收state数据
-const mapStateToProps = (store) => {
-	const voluntaryStore = store['voluntaryStore'];
-	let { lot_id } = voluntaryStore;
+const mapStateToProps = store => {
+  const voluntaryStore = store["voluntaryStore"];
+  let { lot_id } = voluntaryStore;
 
-	return {
-		lotId: lot_id
-	};
+  return {
+    lotId: lot_id
+  };
 };
 
 // 向store dispatch action
-const mapDispatchToProps = (dispatch) => {
-	return {};
+const mapDispatchToProps = dispatch => {
+  return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Step3Controller);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Step3Controller);
