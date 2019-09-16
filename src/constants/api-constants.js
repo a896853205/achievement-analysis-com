@@ -32,7 +32,7 @@ export const GetUploadToken = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_UPL
 /**
  * optquestionnaire
  **************************/
-export const GET_QUESTIONNAIRE_TEST = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_QUESTIONNAIRE}/test`;
+export const GET_QUESTIONNAIRE_LIST = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_QUESTIONNAIRE}/getList`;
 export const GET_QUESTIONNAIRE_STATUS = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_QUESTIONNAIRE}/getStatus`;
 export const UPLOAD_QUESTIONNAIRE_RESULT = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_QUESTIONNAIRE}/uploadResult`;
 export const GET_QUESTIONNAIRE_RANK = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_QUESTIONNAIRE}/getRank`;
