@@ -101,66 +101,71 @@ class Step3Controller extends React.Component {
 			<div>
 				<div>
 					<div>
-						办学性质
-						<Checkbox.Group onChange={this.handleNatureChange}>
-							{this.state.schoolNature.map((natureItem) => {
-								return (
-									<Checkbox value={natureItem.id} key={natureItem.id}>
-										{natureItem.type}
-									</Checkbox>
-								);
-							})}
-						</Checkbox.Group>
+						<div>
+							办学性质
+							<Checkbox.Group onChange={this.handleNatureChange}>
+								{this.state.schoolNature.map((natureItem) => {
+									return (
+										<Checkbox value={natureItem.id} key={natureItem.id}>
+											{natureItem.type}
+										</Checkbox>
+									);
+								})}
+							</Checkbox.Group>
+						</div>
+						<div>
+							学校属性
+							<Checkbox.Group onChange={this.handlePropertyChange}>
+								{this.state.schoolProperty.map((propertyItem) => {
+									return (
+										<Checkbox key={propertyItem.id} value={propertyItem.id}>
+											{propertyItem.type}
+										</Checkbox>
+									);
+								})}
+							</Checkbox.Group>
+						</div>
+						<div>
+							高校类别
+							<Checkbox.Group onChange={this.handleTypeChange}>
+								{this.state.schoolType.map((typeItem) => {
+									return (
+										<Checkbox key={typeItem.id} value={typeItem.id}>
+											{typeItem.type}
+										</Checkbox>
+									);
+								})}
+							</Checkbox.Group>
+						</div>
+						<div>
+							地域特色
+							<Checkbox.Group onChange={this.handleAreaFeatureChange}>
+								{this.state.areaFeature.map((areaFeatureItem) => {
+									return (
+										<Checkbox key={areaFeatureItem.id} value={areaFeatureItem.id}>
+											{areaFeatureItem.type}
+										</Checkbox>
+									);
+								})}
+							</Checkbox.Group>
+						</div>
 					</div>
 					<div>
-						学校属性
-						<Checkbox.Group onChange={this.handlePropertyChange}>
-							{this.state.schoolProperty.map((propertyItem) => {
-								return (
-									<Checkbox key={propertyItem.id} value={propertyItem.id}>
-										{propertyItem.type}
-									</Checkbox>
-								);
-							})}
-						</Checkbox.Group>
-					</div>
-					<div>
-						高校类别
-						<Checkbox.Group onChange={this.handleTypeChange}>
-							{this.state.schoolType.map((typeItem) => {
-								return (
-									<Checkbox key={typeItem.id} value={typeItem.id}>
-										{typeItem.type}
-									</Checkbox>
-								);
-							})}
-						</Checkbox.Group>
-					</div>
-					<div>
-						地域特色
-						<Checkbox.Group onChange={this.handleAreaFeatureChange}>
-							{this.state.areaFeature.map((areaFeatureItem) => {
-								return (
-									<Checkbox key={areaFeatureItem.id} value={areaFeatureItem.id}>
-										{areaFeatureItem.type}
-									</Checkbox>
-								);
-							})}
-						</Checkbox.Group>
+						<Table
+							rowKey={(record) => record.school_id}
+							columns={columns}
+							dataSource={this.state.schoolList}
+							onExpand={this.onExpand}
+							expandIcon={CustomExpandIcon}
+							expandedRowRender={(record) => (
+								<SubTableController schoolId={record.school_id} style={{ margin: 0 }} />
+							)}
+							loading={this.state.loading}
+						/>
 					</div>
 				</div>
 				<div>
-					<Table
-						rowKey={(record) => record.school_id}
-						columns={columns}
-						dataSource={this.state.schoolList}
-						onExpand={this.onExpand}
-						expandIcon={CustomExpandIcon}
-						expandedRowRender={(record) => (
-							<SubTableController schoolId={record.school_id} style={{ margin: 0 }} />
-						)}
-						loading={this.state.loading}
-					/>
+					志愿表
 				</div>
 			</div>
 		);
@@ -190,25 +195,25 @@ class Step3Controller extends React.Component {
 
 	// 办学性质改变
 	handleNatureChange = async (checkedValues) => {
-		await this.setState({ 
+		await this.setState({
 			natureValues: checkedValues,
-			loading: true,
+			loading: true
 		});
 
 		// 调用查询表格数据函数
 		let { schoolList } = await this.getSchool();
-		
+
 		this.setState({
 			schoolList,
-			loading: false,
-		})
+			loading: false
+		});
 	};
 
 	// 学校属性改变
 	handlePropertyChange = async (checkedValues) => {
-		await this.setState({ 
+		await this.setState({
 			propertyValues: checkedValues,
-			loading: true,
+			loading: true
 		});
 
 		// 调用查询表格数据函数
@@ -216,15 +221,15 @@ class Step3Controller extends React.Component {
 
 		this.setState({
 			schoolList,
-			loading: false,
-		})
+			loading: false
+		});
 	};
 
 	// 高校类别改变
 	handleTypeChange = async (checkedValues) => {
 		await this.setState({
 			typeValues: checkedValues,
-			loading: true,
+			loading: true
 		});
 
 		// 调用查询表格数据函数
@@ -232,15 +237,15 @@ class Step3Controller extends React.Component {
 
 		this.setState({
 			schoolList,
-			loading: false,
-		})
+			loading: false
+		});
 	};
 
 	// 地域特色改变
 	handleAreaFeatureChange = async (checkedValues) => {
 		await this.setState({
 			areaFeatureValues: checkedValues,
-			loading: true,
+			loading: true
 		});
 
 		// 调用查询表格数据函数
@@ -248,14 +253,14 @@ class Step3Controller extends React.Component {
 
 		this.setState({
 			schoolList,
-			loading: false,
-		})
+			loading: false
+		});
 	};
 
 	getSchool = async () => {
 		// 获取学校配置项
 		let { natureValues, propertyValues, typeValues, areaFeatureValues } = this.state;
-		
+
 		return await launchRequest(APIS.GET_SCHOOL, {
 			lotId: this.props.lotId,
 			natureValues,
