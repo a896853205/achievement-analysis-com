@@ -16,10 +16,10 @@ class IndexController extends React.Component {
               height="100%"
               width="100%"
               alt=""
-              src="https://image.gcores.com/478de810-3d09-4eef-8a29-369bbc016865.jpg?x-oss-process=image/resize,limit_1,m_lfit,w_1600/quality,q_90"
+              src="http://img3.youzy.cn/content/media/thumbs/p00190135.jpeg"
             ></img>
             <div className="news_content">
-              <h3>高考将于2020年全面取消</h3>
+              <h3>中国大学排名汇总</h3>
             </div>
           </div>
         </Col>
@@ -37,7 +37,7 @@ class IndexController extends React.Component {
                 <div>
                   <img
                     className="carou-img"
-                    src="https://image.gcores.com/478de810-3d09-4eef-8a29-369bbc016865.jpg?x-oss-process=image/resize,limit_1,m_lfit,w_1600/quality,q_90"
+                    src="https://cdn.dribbble.com/users/418188/screenshots/6665427/design_for_education_illustration_tubik_2x.png"
                     alt="banner1"
                   ></img>
                 </div>

@@ -27,7 +27,7 @@ class PasswordController extends React.Component {
       }
     };
     return (
-      <div class="con">
+      <div className="con">
         <Form layout="formItemLayout">
           <Form.Item label="原密码" {...formItemLayout}>
             <Input placeholder="请输入原密码" type="password" />

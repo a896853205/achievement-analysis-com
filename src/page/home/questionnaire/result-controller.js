@@ -3,7 +3,6 @@ import ReactEcharts from "echarts-for-react";
 // 请求文件
 import { launchRequest } from "../../../util/request";
 import * as APIS from "../../../constants/api-constants";
-import { nullLiteral } from "@babel/types";
 
 import "../../../style/questionnaire/result.css";
 
@@ -33,7 +32,14 @@ class ResultController extends React.Component {
         {
           name: "类型",
           type: "radar",
-          itemStyle: { normal: { areaStyle: { type: "default" } } },
+          itemStyle: {
+            color: "#4091f7",
+            borderColor: "#4091f7"
+          },
+          areaStyle: {
+            color: "#4091f7",
+            borderColor: "#4091f7"
+          },
           data: [
             {
               value: [],
