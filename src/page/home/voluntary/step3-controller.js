@@ -206,8 +206,9 @@ class Step3Controller extends React.Component {
 									key={voluntaryItem.five_volunteer_id}
 									extra={genExtra(voluntaryItem)}
 								>
-									<div style={{ paddingLeft: 24 }}>专业1 计算机技术</div>
-									<div style={{ paddingLeft: 24 }}>专业2 软件工程</div>
+									{voluntaryItem.major.map((majorItem, index) => (
+										<div key={index} style={{ paddingLeft: 24 }}>{`专业${index + 1} ${majorItem.majorName}`}</div>
+									))}
 								</Panel>
 							))}
 						</Collapse>

@@ -4,8 +4,9 @@ export const actions = {
 	nextStep: createAction('nextStep'),
 	setLotId: createAction('setLotId'),
 	initVoluntary: createAction('initVoluntary'),
-  recordSchool: createAction('recordSchool'),
-  deleteVoluntary: createAction('deleteVoluntary'),
+	recordSchool: createAction('recordSchool'),
+	deleteVoluntary: createAction('deleteVoluntary'),
+	recordMajor: createAction('recordMajor')
 };
 
 export const voluntaryReducer = handleActions(
@@ -26,6 +27,32 @@ export const voluntaryReducer = handleActions(
 			result.forEach((item, index, arr) => {
 				arr[index].schoolName = '';
 				arr[index].schoolId = undefined;
+				arr[index].major = [
+					{
+						majorId: '',
+						majorName: ''
+					},
+					{
+						majorId: '',
+						majorName: ''
+					},
+					{
+						majorId: '',
+						majorName: ''
+					},
+					{
+						majorId: '',
+						majorName: ''
+					},
+					{
+						majorId: '',
+						majorName: ''
+					},
+					{
+						majorId: '',
+						majorName: ''
+					}
+				];
 			});
 
 			return {
@@ -42,9 +69,35 @@ export const voluntaryReducer = handleActions(
 			if (oldIndex !== -1) {
 				voluntary[oldIndex].schoolName = '';
 				voluntary[oldIndex].schoolId = undefined;
-      }
-      
-      return {
+				voluntary[oldIndex].major = [
+					{
+						majorId: '',
+						majorName: ''
+					},
+					{
+						majorId: '',
+						majorName: ''
+					},
+					{
+						majorId: '',
+						majorName: ''
+					},
+					{
+						majorId: '',
+						majorName: ''
+					},
+					{
+						majorId: '',
+						majorName: ''
+					},
+					{
+						majorId: '',
+						majorName: ''
+					}
+				];
+			}
+
+			return {
 				...state,
 				voluntary
 			};
@@ -62,6 +115,32 @@ export const voluntaryReducer = handleActions(
 				voluntary[oldIndex].schoolName = '';
 				voluntary[oldIndex].schoolId = undefined;
 				// 这里还需要清除专业数组
+				voluntary[oldIndex].major = [
+					{
+						majorId: '',
+						majorName: ''
+					},
+					{
+						majorId: '',
+						majorName: ''
+					},
+					{
+						majorId: '',
+						majorName: ''
+					},
+					{
+						majorId: '',
+						majorName: ''
+					},
+					{
+						majorId: '',
+						majorName: ''
+					},
+					{
+						majorId: '',
+						majorName: ''
+					}
+				];
 			}
 
 			// 新位置修改
@@ -71,6 +150,62 @@ export const voluntaryReducer = handleActions(
 
 			voluntary[changeIndex].schoolName = schoolData.school_name;
 			voluntary[changeIndex].schoolId = schoolData.school_id;
+			voluntary[changeIndex].major = [
+				{
+					majorId: '',
+					majorName: ''
+				},
+				{
+					majorId: '',
+					majorName: ''
+				},
+				{
+					majorId: '',
+					majorName: ''
+				},
+				{
+					majorId: '',
+					majorName: ''
+				},
+				{
+					majorId: '',
+					majorName: ''
+				},
+				{
+					majorId: '',
+					majorName: ''
+				}
+			];
+
+			return {
+				...state,
+				voluntary
+			};
+		},
+		recordMajor(state, { payload: result }) {
+			let { voluntary } = state,
+				{ majorData, schoolId, changeMajorIndex } = result;
+			
+			// 找学校的志愿
+			let schoolIndex = voluntary.findIndex((item) => {
+				return item.schoolId === schoolId;
+			});
+
+			// 找专业的位置
+			let majorIndex = voluntary[schoolIndex].major.findIndex(item => {
+				return item.majorId === majorData.major_id;
+			});
+
+			// 这里还需要清除专业
+			if (majorIndex !== -1) {
+				voluntary[schoolIndex].major[majorIndex] = {
+					majorId: '',
+					majorName: ''
+				};
+			}
+
+			voluntary[schoolIndex].major[changeMajorIndex].majorId = majorData.major_id;
+			voluntary[schoolIndex].major[changeMajorIndex].majorName = majorData.major_name;
 
 			return {
 				...state,
