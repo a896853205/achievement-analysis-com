@@ -1,5 +1,22 @@
+.step3-box {
+  padding: 20px;
+}
+
 .expand-row-icon {
   cursor: pointer;
   color: #1890ff;
   width: 200px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content-left {
+  width: 70%;
+}
+
+.content-right {
+  width: 25%;
 }

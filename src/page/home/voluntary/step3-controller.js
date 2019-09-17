@@ -1,23 +1,25 @@
-import React from "react";
+import React from 'react';
 
 // 请求文件
-import { launchRequest } from "../../../util/request";
-import * as APIS from "../../../constants/api-constants";
-import * as DominConfigs from "../../../constants/domin-constants";
+import { launchRequest } from '../../../util/request';
+import * as APIS from '../../../constants/api-constants';
 
 // 自定义组件
-import SubTableController from "./step3/sub-table-controller";
+import SubTableController from './step3/sub-table-controller';
 
 // css
-import "../../../style/voluntary/step3.css";
+import '../../../style/voluntary/step3.css';
 
 // UI组件
-import { Checkbox, Table, Select, Icon } from "antd";
+import { Checkbox, Table, Select, Icon, Collapse } from 'antd';
 
 // 关于数据模块交互
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
+import { actions as voluntaryActions } from '../../../redux/voluntary-model';
 
 const { Option } = Select;
+const { Panel } = Collapse;
+
 class Step3Controller extends React.Component {
 	state = {
 		// option的数组
@@ -69,13 +71,30 @@ class Step3Controller extends React.Component {
 				key: 'option',
 				width: 150,
 				align: 'center',
-				render: () => (
-					<Select placeholder='选择志愿' style={{ width: 125 }}>
-						<Option value={0}>志愿A</Option>
-						<Option value={1}>志愿B</Option>
-						<Option value={2}>志愿C</Option>
-						<Option value={3}>志愿D</Option>
-						<Option value={4}>志愿E</Option>
+				render: (text, record) => (
+					<Select
+						placeholder='选择志愿'
+						style={{ width: 125 }}
+						onChange={(e) => {
+							this.handleSchoolChange(e, record);
+						}}
+						value={
+							this.props.voluntary.find((voluntaryItem) => {
+								return voluntaryItem.schoolId === record.school_id;
+							}) ? (
+								this.props.voluntary.find((voluntaryItem) => {
+									return voluntaryItem.schoolId === record.school_id;
+								}).five_volunteer_id
+							) : (
+								undefined
+							)
+						}
+					>
+						{this.props.voluntary.map((voluntaryItem) => (
+							<Option key={voluntaryItem.five_volunteer_id} value={voluntaryItem.five_volunteer_id}>
+								{voluntaryItem.volunteer_name}
+							</Option>
+						))}
 					</Select>
 				)
 			}
@@ -97,8 +116,18 @@ class Step3Controller extends React.Component {
 			}
 		};
 
+		const genExtra = (voluntaryItem) => (
+			<Icon
+				type='stop'
+				onClick={(event) => {
+					this.props.deleteVoluntary(voluntaryItem.five_volunteer_id);
+					event.stopPropagation();
+				}}
+			/>
+		);
+
 		return (
-			<div>
+			<div className='step3-box'>
 				<div>
 					<div>
 						<div>
@@ -150,7 +179,9 @@ class Step3Controller extends React.Component {
 							</Checkbox.Group>
 						</div>
 					</div>
-					<div>
+				</div>
+				<div className='content'>
+					<div className='content-left'>
 						<Table
 							rowKey={(record) => record.school_id}
 							columns={columns}
@@ -158,14 +189,29 @@ class Step3Controller extends React.Component {
 							onExpand={this.onExpand}
 							expandIcon={CustomExpandIcon}
 							expandedRowRender={(record) => (
-								<SubTableController schoolId={record.school_id} style={{ margin: 0 }} />
+								<SubTableController
+									key={record.school_id}
+									schoolId={record.school_id}
+									style={{ margin: 0 }}
+								/>
 							)}
 							loading={this.state.loading}
 						/>
 					</div>
-				</div>
-				<div>
-					志愿表
+					<div className='content-right'>
+						<Collapse bordered={false}>
+							{this.props.voluntary.map((voluntaryItem) => (
+								<Panel
+									header={`${voluntaryItem.volunteer_name} ${voluntaryItem.schoolName}`}
+									key={voluntaryItem.five_volunteer_id}
+									extra={genExtra(voluntaryItem)}
+								>
+									<div style={{ paddingLeft: 24 }}>专业1 计算机技术</div>
+									<div style={{ paddingLeft: 24 }}>专业2 软件工程</div>
+								</Panel>
+							))}
+						</Collapse>
+					</div>
 				</div>
 			</div>
 		);
@@ -176,18 +222,24 @@ class Step3Controller extends React.Component {
 			loading: true
 		});
 
-		let [ { schoolNature, schoolProperty, schoolType, areaFeature }, { schoolList } ] = await Promise.all([
-			launchRequest(APIS.GET_SCHOOL_OPTION, {}, DominConfigs.REQUEST_TYPE.GET),
+		let [
+			{ schoolNature, schoolProperty, schoolType, areaFeature, voluntaryOptionList },
+			{ schoolList }
+		] = await Promise.all([
+			launchRequest(APIS.GET_SCHOOL_OPTION, {
+				lotId: this.props.lotId
+			}),
 			this.getSchool()
 		]);
 
-		console.table(schoolList);
+		this.props.initVoluntary(voluntaryOptionList);
 
 		await this.setState({
 			schoolNature,
 			schoolProperty,
 			schoolType,
 			areaFeature,
+			voluntaryOptionList,
 			loading: false,
 			schoolList
 		});
@@ -269,24 +321,39 @@ class Step3Controller extends React.Component {
 			areaFeatureValues
 		});
 	};
+
+	handleSchoolChange = (value, record) => {
+		this.props.recordSchool({
+			changeVolunteerId: value,
+			schoolData: record
+		});
+	};
 }
 
 // 从store接收state数据
-const mapStateToProps = store => {
-  const voluntaryStore = store["voluntaryStore"];
-  let { lot_id } = voluntaryStore;
+const mapStateToProps = (store) => {
+	const voluntaryStore = store['voluntaryStore'];
+	let { lot_id, voluntary } = voluntaryStore;
 
-  return {
-    lotId: lot_id
-  };
+	return {
+		lotId: lot_id,
+		voluntary: [ ...voluntary ]
+	};
 };
 
 // 向store dispatch action
-const mapDispatchToProps = dispatch => {
-  return {};
+const mapDispatchToProps = (dispatch) => {
+	return {
+		initVoluntary: (params) => {
+			dispatch(voluntaryActions.initVoluntary(params));
+		},
+		recordSchool: (params) => {
+			dispatch(voluntaryActions.recordSchool(params));
+		},
+		deleteVoluntary: (params) => {
+			dispatch(voluntaryActions.deleteVoluntary(params));
+		}
+	};
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Step3Controller);
+export default connect(mapStateToProps, mapDispatchToProps)(Step3Controller);

@@ -106,7 +106,7 @@ export function uploadProjectImageToQiniu(image) {
 }
 
 async function _fetch(url, params = {}, requestType, fetchParams = {}) {
-	console.log(`-----------------\n发起${requestType}请求\n` + `* url: ${url}\n` + `* params:`);
+	console.log(`-----------------\n发起${requestType}请求\n * url: ${url}\n * params:`);
 	console.dir(params);
 
 	const response = await fetch(url, fetchParams);
