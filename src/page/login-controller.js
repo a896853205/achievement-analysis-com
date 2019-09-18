@@ -4,7 +4,7 @@ import React from "react";
 import "../style/login-controller.css";
 
 // 路由
-import { BCG_ROOT_NAME } from "../constants/route-constants";
+// import { BCG_ROOT_NAME } from "../constants/route-constants";
 
 // 请求文件
 import { launchRequest } from "../util/request";
@@ -68,7 +68,7 @@ class LoginController extends React.Component {
       if (data) {
         this.props.recordUser(data.user);
         // 需要放到token中
-        this.props.history.push(`/${BCG_ROOT_NAME}/`);
+        this.props.history.push(`/`);
       }
     });
   };

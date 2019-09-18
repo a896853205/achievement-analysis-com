@@ -2,6 +2,7 @@ import { handleActions, createAction } from 'redux-actions';
 
 export const actions = {
 	nextStep: createAction('nextStep'),
+	setStep: createAction('setStep'),
 	setLotId: createAction('setLotId'),
 	initVoluntary: createAction('initVoluntary'),
 	recordSchool: createAction('recordSchool'),
@@ -16,6 +17,12 @@ export const voluntaryReducer = handleActions(
 				...state,
 				step: (state.step + 1) % 4
 			};
+		},
+		setStep(state, { payload: result }) {
+			return {
+				...state,
+				step: result,
+			}
 		},
 		setLotId(state, { payload: result }) {
 			return {

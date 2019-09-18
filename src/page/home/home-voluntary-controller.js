@@ -16,6 +16,8 @@ import Step3 from './voluntary/step3-controller';
 
 // 关于数据模块交互
 import { connect } from "react-redux";
+import { actions as voluntaryActions } from '../../redux/voluntary-model';
+
 
 const { Step } = Steps;
 
@@ -38,7 +40,7 @@ class HomeVoluntaryController extends React.Component {
     ];
     return (
       <div className='home-voluntary-box'>
-        <Steps current={this.props.step}>
+        <Steps current={this.props.step} className='steps-box' onChange={this.handleStepChange}>
           {steps.map(item => (
             <Step key={item.title} title={item.title} />
           ))}
@@ -49,6 +51,11 @@ class HomeVoluntaryController extends React.Component {
         </div>
       </div>
     );
+  }
+
+  handleStepChange = (current) => {
+    // redux改变current
+    this.props.setStep(current);
   }
 }
 
@@ -64,7 +71,11 @@ const mapStateToProps = store => {
 
 // 向store dispatch action
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    setStep: (params) => {
+			dispatch(voluntaryActions.setStep(params));
+		}
+  };
 };
 
 export default connect(

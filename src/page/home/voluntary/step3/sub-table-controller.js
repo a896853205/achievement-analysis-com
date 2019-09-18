@@ -93,7 +93,7 @@ class SubTableController extends React.Component {
 			}
 		];
 
-		return <Table rowKey={(record) => record.major_id} columns={columns} dataSource={this.state.majorList} />;
+		return <Table pagination={false} rowKey={(record) => record.major_id} columns={columns} dataSource={this.state.majorList} />;
 	}
 
 	componentDidMount = async () => {

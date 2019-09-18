@@ -128,56 +128,54 @@ class Step3Controller extends React.Component {
 
 		return (
 			<div className='step3-box'>
-				<div>
-					<div>
-						<div>
-							办学性质
-							<Checkbox.Group onChange={this.handleNatureChange}>
-								{this.state.schoolNature.map((natureItem) => {
-									return (
-										<Checkbox value={natureItem.id} key={natureItem.id}>
-											{natureItem.type}
-										</Checkbox>
-									);
-								})}
-							</Checkbox.Group>
-						</div>
-						<div>
-							学校属性
-							<Checkbox.Group onChange={this.handlePropertyChange}>
-								{this.state.schoolProperty.map((propertyItem) => {
-									return (
-										<Checkbox key={propertyItem.id} value={propertyItem.id}>
-											{propertyItem.type}
-										</Checkbox>
-									);
-								})}
-							</Checkbox.Group>
-						</div>
-						<div>
-							高校类别
-							<Checkbox.Group onChange={this.handleTypeChange}>
-								{this.state.schoolType.map((typeItem) => {
-									return (
-										<Checkbox key={typeItem.id} value={typeItem.id}>
-											{typeItem.type}
-										</Checkbox>
-									);
-								})}
-							</Checkbox.Group>
-						</div>
-						<div>
-							地域特色
-							<Checkbox.Group onChange={this.handleAreaFeatureChange}>
-								{this.state.areaFeature.map((areaFeatureItem) => {
-									return (
-										<Checkbox key={areaFeatureItem.id} value={areaFeatureItem.id}>
-											{areaFeatureItem.type}
-										</Checkbox>
-									);
-								})}
-							</Checkbox.Group>
-						</div>
+				<div className='school-option-box'>
+					<div className='option-box'>
+						<span className='option-name'>办学性质</span>
+						<Checkbox.Group onChange={this.handleNatureChange}>
+							{this.state.schoolNature.map((natureItem) => {
+								return (
+									<Checkbox value={natureItem.id} key={natureItem.id}>
+										{natureItem.type}
+									</Checkbox>
+								);
+							})}
+						</Checkbox.Group>
+					</div>
+					<div className='option-box'>
+						<span className='option-name'>学校属性</span>
+						<Checkbox.Group onChange={this.handlePropertyChange}>
+							{this.state.schoolProperty.map((propertyItem) => {
+								return (
+									<Checkbox key={propertyItem.id} value={propertyItem.id}>
+										{propertyItem.type}
+									</Checkbox>
+								);
+							})}
+						</Checkbox.Group>
+					</div>
+					<div className='option-box'>
+						<span className='option-name'>高校类别</span>
+						<Checkbox.Group onChange={this.handleTypeChange}>
+							{this.state.schoolType.map((typeItem) => {
+								return (
+									<Checkbox key={typeItem.id} value={typeItem.id}>
+										{typeItem.type}
+									</Checkbox>
+								);
+							})}
+						</Checkbox.Group>
+					</div>
+					<div className='option-box'>
+						<span className='option-name'>地域特色</span>
+						<Checkbox.Group onChange={this.handleAreaFeatureChange}>
+							{this.state.areaFeature.map((areaFeatureItem) => {
+								return (
+									<Checkbox key={areaFeatureItem.id} value={areaFeatureItem.id}>
+										{areaFeatureItem.type}
+									</Checkbox>
+								);
+							})}
+						</Checkbox.Group>
 					</div>
 				</div>
 				<div className='content'>
@@ -207,7 +205,8 @@ class Step3Controller extends React.Component {
 									extra={genExtra(voluntaryItem)}
 								>
 									{voluntaryItem.major.map((majorItem, index) => (
-										<div key={index} style={{ paddingLeft: 24 }}>{`专业${index + 1} ${majorItem.majorName}`}</div>
+										<div key={index} style={{ paddingLeft: 24 }}>{`专业${index +
+											1} ${majorItem.majorName}`}</div>
 									))}
 								</Panel>
 							))}
