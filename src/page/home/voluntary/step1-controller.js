@@ -31,7 +31,6 @@ class Step1Controller extends React.Component {
 					sm: { span: 8 }
 				}
 			},
-			isConfirm = !!this.props.user.confirm,
 			optionList = this.state.provinceList.map((provinceItem) => {
 				return (
 					<Option key={provinceItem.id} value={provinceItem.id}>
@@ -60,7 +59,7 @@ class Step1Controller extends React.Component {
 									message: '请输入姓名'
 								}
 							]
-						})(<Input placeholder='请输入姓名' disabled={isConfirm} />)}
+						})(<Input placeholder='请输入姓名' />)}
 					</Form.Item>
 					<Form.Item label='地区'>
 						{getFieldDecorator('addressProvince', {
@@ -70,7 +69,7 @@ class Step1Controller extends React.Component {
 									message: '请选择地区'
 								}
 							]
-						})(<Select disabled={isConfirm}>{optionList}</Select>)}
+						})(<Select>{optionList}</Select>)}
 					</Form.Item>
 					<Form.Item label='考试年份'>
 						{getFieldDecorator('examYear', {
@@ -80,7 +79,7 @@ class Step1Controller extends React.Component {
 									message: '请选择考试年份'
 								}
 							]
-						})(<Select disabled={isConfirm}>{yearsList}</Select>)}
+						})(<Select>{yearsList}</Select>)}
 					</Form.Item>
 					<Form.Item label='性别'>
 						{getFieldDecorator('gender', {
@@ -91,7 +90,7 @@ class Step1Controller extends React.Component {
 								}
 							]
 						})(
-							<Radio.Group disabled={isConfirm}>
+							<Radio.Group>
 								<Radio value='1'>男</Radio>
 								<Radio value='2'>女</Radio>
 							</Radio.Group>
@@ -106,7 +105,7 @@ class Step1Controller extends React.Component {
 								}
 							]
 						})(
-							<Radio.Group disabled={isConfirm}>
+							<Radio.Group>
 								<Radio value='1'>理科</Radio>
 								<Radio value='2'>文科</Radio>
 							</Radio.Group>
@@ -120,18 +119,12 @@ class Step1Controller extends React.Component {
 									message: '请输入分数'
 								}
 							]
-						})(<InputNumber disabled={isConfirm} />)}
+						})(<InputNumber />)}
 					</Form.Item>
 					<Form.Item wrapperCol={{ span: 12, offset: 4 }}>
-						{isConfirm ? (
-							<Button type='primary' onClick={this.props.nextStep}>
-								下一步
-							</Button>
-						) : (
-							<Button type='primary' htmlType='submit' loading={this.state.loading}>
-								保存 并 下一步
-							</Button>
-						)}
+						<Button type='primary' htmlType='submit' loading={this.state.loading}>
+							保存 并 下一步
+						</Button>
 					</Form.Item>
 				</Form>
 			</div>

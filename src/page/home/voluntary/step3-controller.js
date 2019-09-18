@@ -3,6 +3,7 @@ import React from 'react';
 // 请求文件
 import { launchRequest } from '../../../util/request';
 import * as APIS from '../../../constants/api-constants';
+import * as DominConfigs from '../../../constants/domin-constants';
 
 // 自定义组件
 import SubTableController from './step3/sub-table-controller';
@@ -11,7 +12,14 @@ import SubTableController from './step3/sub-table-controller';
 import '../../../style/voluntary/step3.css';
 
 // UI组件
-import { Checkbox, Table, Select, Icon, Collapse } from 'antd';
+import { 
+	Checkbox,
+	Table,
+	Select,
+	Icon,
+	Collapse,
+	Radio
+} from 'antd';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
@@ -30,10 +38,11 @@ class Step3Controller extends React.Component {
 		schoolList: [],
 
 		// option选择的数组
+		lotsOption: [],
 		natureValues: [],
 		propertyValues: [],
 		typeValues: [],
-		areaFeatureValues: []
+		areaFeatureValues: [],
 	};
 
 	render() {
@@ -130,6 +139,18 @@ class Step3Controller extends React.Component {
 			<div className='step3-box'>
 				<div className='school-option-box'>
 					<div className='option-box'>
+						<span className='option-name'>报考批次</span>
+						<Radio.Group onChange={this.handleLotsChange} value={this.props.lotId}>
+							{this.state.lotsOption.map((lotsItem) => {
+								return (
+									<Radio value={lotsItem.id} key={lotsItem.id}>
+										{lotsItem.lots_name}
+									</Radio>
+								);
+							})}
+						</Radio.Group>
+					</div>
+					<div className='option-box'>
 						<span className='option-name'>办学性质</span>
 						<Checkbox.Group onChange={this.handleNatureChange}>
 							{this.state.schoolNature.map((natureItem) => {
@@ -224,12 +245,14 @@ class Step3Controller extends React.Component {
 
 		let [
 			{ schoolNature, schoolProperty, schoolType, areaFeature, voluntaryOptionList },
-			{ schoolList }
+			{ schoolList },
+			{ lotsOption }
 		] = await Promise.all([
 			launchRequest(APIS.GET_SCHOOL_OPTION, {
 				lotId: this.props.lotId
 			}),
-			this.getSchool()
+			this.getSchool(),
+			launchRequest(APIS.GET_LOTS_OPTION, {}, DominConfigs.REQUEST_TYPE.GET)
 		]);
 
 		this.props.initVoluntary(voluntaryOptionList);
@@ -241,9 +264,27 @@ class Step3Controller extends React.Component {
 			areaFeature,
 			voluntaryOptionList,
 			loading: false,
-			schoolList
+			schoolList,
+			lotsOption
 		});
 	};
+
+	// 学校批次改变
+	handleLotsChange = async (e) => {
+		await this.setState({
+			loading: true
+		});
+
+		this.props.setLotId(e.target.value);
+
+		// 调用查询表格数据函数
+		let { schoolList } = await this.getSchool();
+
+		this.setState({
+			schoolList,
+			loading: false
+		});
+	}
 
 	// 办学性质改变
 	handleNatureChange = async (checkedValues) => {
@@ -344,6 +385,9 @@ const mapStateToProps = (store) => {
 // 向store dispatch action
 const mapDispatchToProps = (dispatch) => {
 	return {
+		setLotId: (lotId) => {
+			dispatch(voluntaryActions.setLotId(lotId));
+		},
 		initVoluntary: (params) => {
 			dispatch(voluntaryActions.initVoluntary(params));
 		},

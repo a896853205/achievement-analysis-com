@@ -36,6 +36,7 @@ class Step2Controller extends React.Component {
 				</Card.Grid>
 			);
 		});
+
 		return (
 			<div>
 				<Card loading={this.state.loading} title='批次目录'>
