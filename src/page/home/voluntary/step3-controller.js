@@ -12,14 +12,7 @@ import SubTableController from './step3/sub-table-controller';
 import '../../../style/voluntary/step3.css';
 
 // UI组件
-import { 
-	Checkbox,
-	Table,
-	Select,
-	Icon,
-	Collapse,
-	Radio
-} from 'antd';
+import { Checkbox, Table, Select, Icon, Collapse, Radio, Button } from 'antd';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
@@ -35,6 +28,8 @@ class Step3Controller extends React.Component {
 		schoolProperty: [],
 		schoolType: [],
 		areaFeature: [],
+
+		gatherValue: 'a',
 		schoolList: [],
 
 		// option选择的数组
@@ -42,7 +37,7 @@ class Step3Controller extends React.Component {
 		natureValues: [],
 		propertyValues: [],
 		typeValues: [],
-		areaFeatureValues: [],
+		areaFeatureValues: []
 	};
 
 	render() {
@@ -201,6 +196,13 @@ class Step3Controller extends React.Component {
 				</div>
 				<div className='content'>
 					<div className='content-left'>
+						<Radio.Group className='btn-group' onChange={this.handleGatherChange}>
+							<Radio.Button className='btn' value='a'>集合A</Radio.Button>
+							<Radio.Button className='btn' value='b'>集合B</Radio.Button>
+							<Radio.Button className='btn' value='c'>集合C</Radio.Button>
+							<Radio.Button className='btn' value='d'>集合D</Radio.Button>
+							<Radio.Button className='btn' value='e'>集合E</Radio.Button>
+						</Radio.Group>
 						<Table
 							rowKey={(record) => record.school_id}
 							columns={columns}
@@ -232,6 +234,9 @@ class Step3Controller extends React.Component {
 								</Panel>
 							))}
 						</Collapse>
+						<Button onClick={this.handleClickCheckVoluntary}>
+							查看志愿表
+						</Button>
 					</div>
 				</div>
 			</div>
@@ -284,7 +289,7 @@ class Step3Controller extends React.Component {
 			schoolList,
 			loading: false
 		});
-	}
+	};
 
 	// 办学性质改变
 	handleNatureChange = async (checkedValues) => {
@@ -350,16 +355,33 @@ class Step3Controller extends React.Component {
 		});
 	};
 
+	// 改变集合
+	handleGatherChange = async (e) => {
+		await this.setState({
+			gatherValue: e.target.value,
+			loading: true
+		});
+
+		// 调用查询表格数据函数
+		let { schoolList } = await this.getSchool();
+
+		this.setState({
+			schoolList,
+			loading: false
+		});
+	}
+
 	getSchool = async () => {
 		// 获取学校配置项
-		let { natureValues, propertyValues, typeValues, areaFeatureValues } = this.state;
+		let { natureValues, propertyValues, typeValues, areaFeatureValues, gatherValue } = this.state;
 
 		return await launchRequest(APIS.GET_SCHOOL, {
 			lotId: this.props.lotId,
 			natureValues,
 			propertyValues,
 			typeValues,
-			areaFeatureValues
+			areaFeatureValues,
+			gatherValue
 		});
 	};
 
@@ -369,6 +391,11 @@ class Step3Controller extends React.Component {
 			schoolData: record
 		});
 	};
+
+	handleClickCheckVoluntary = () => {
+		this.props.recordVoluntaryDetail(this.props.voluntary);
+		this.props.nextStep();
+	}
 }
 
 // 从store接收state数据
@@ -396,7 +423,13 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		deleteVoluntary: (params) => {
 			dispatch(voluntaryActions.deleteVoluntary(params));
-		}
+		},
+		nextStep: () => {
+			dispatch(voluntaryActions.nextStep());
+		},
+		recordVoluntaryDetail: (params) => {
+			dispatch(voluntaryActions.recordVoluntaryDetail(params));
+		},
 	};
 };
 

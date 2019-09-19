@@ -7,7 +7,8 @@ export const actions = {
 	initVoluntary: createAction('initVoluntary'),
 	recordSchool: createAction('recordSchool'),
 	deleteVoluntary: createAction('deleteVoluntary'),
-	recordMajor: createAction('recordMajor')
+	recordMajor: createAction('recordMajor'),
+	recordVoluntaryDetail: createAction('recordVoluntaryDetail'),
 };
 
 export const voluntaryReducer = handleActions(
@@ -15,7 +16,7 @@ export const voluntaryReducer = handleActions(
 		nextStep(state) {
 			return {
 				...state,
-				step: (state.step + 1) % 4
+				step: (state.step + 1) % 5
 			};
 		},
 		setStep(state, { payload: result }) {
@@ -218,11 +219,21 @@ export const voluntaryReducer = handleActions(
 				...state,
 				voluntary
 			};
+		},
+
+		recordVoluntaryDetail(state, { payload: result }) {
+			return {
+				...state,
+				voluntaryDetail: result,
+			};
 		}
 	},
 	{
 		step: 0,
 		lot_id: 0,
-		voluntary: []
+		// 设置志愿用的数据
+		voluntary: [],
+		// 查看志愿用的数据
+		voluntaryDetail: [],
 	}
 );
