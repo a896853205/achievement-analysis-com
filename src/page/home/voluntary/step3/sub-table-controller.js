@@ -55,6 +55,13 @@ class SubTableController extends React.Component {
 				render: (record) => <span>-</span>
 			},
 			{
+				title: '风险系数',
+				dataIndex: 'risk',
+				key: 'risk',
+				align: 'center',
+				render: () => <span>-</span>
+			},
+			{
 				title: '填报',
 				dataIndex: 'option',
 				key: 'option',

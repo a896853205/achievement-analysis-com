@@ -7,16 +7,27 @@ import * as DominConfigs from '../../../constants/domin-constants';
 
 // 自定义组件
 import SubTableController from './step3/sub-table-controller';
+import SchoolDetailController from '../school/school-detail';
 
 // css
 import '../../../style/voluntary/step3.css';
 
 // UI组件
-import { Checkbox, Table, Select, Icon, Collapse, Radio, Button } from 'antd';
+import { 
+	Checkbox,
+	Table,
+	Select,
+	Icon, 
+	Collapse, 
+	Radio, 
+	Button,
+	Drawer
+} from 'antd';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
 import { actions as voluntaryActions } from '../../../redux/voluntary-model';
+import { actions as schoolActions } from '../../../redux/school-model';
 
 const { Option } = Select;
 const { Panel } = Collapse;
@@ -37,10 +48,14 @@ class Step3Controller extends React.Component {
 		natureValues: [],
 		propertyValues: [],
 		typeValues: [],
-		areaFeatureValues: []
+		areaFeatureValues: [],
+
+		// 抽屉显示
+		schoolDrawerVisible: false,
 	};
 
 	render() {
+		// 表格表头
 		const columns = [
 			{
 				title: '院校名称',
@@ -68,6 +83,20 @@ class Step3Controller extends React.Component {
 				key: 'archives',
 				align: 'center',
 				render: () => <span>-</span>
+			},
+			{
+				title: '风险系数',
+				dataIndex: 'risk',
+				key: 'risk',
+				align: 'center',
+				render: () => <span>-</span>
+			},
+			{
+				title: '详细信息',
+				dataIndex: 'schoolDetail',
+				key: 'schoolDetail',
+				align: 'center',
+				render: (text, record) => <Button onClick={() => {this.showSchoolDetail(record)}}>查看详细信息</Button>
 			},
 			{
 				title: '填报',
@@ -104,6 +133,7 @@ class Step3Controller extends React.Component {
 			}
 		];
 
+		// 查看专业的UI
 		const CustomExpandIcon = (props) => {
 			if (props.expanded) {
 				return (
@@ -120,6 +150,7 @@ class Step3Controller extends React.Component {
 			}
 		};
 
+		// 右侧志愿表的删除UI
 		const genExtra = (voluntaryItem) => (
 			<Icon
 				type='stop'
@@ -239,6 +270,15 @@ class Step3Controller extends React.Component {
 						</Button>
 					</div>
 				</div>
+				<Drawer
+          width={640}
+          placement="right"
+          closable={false}
+          onClose={() => {this.setState({schoolDrawerVisible: false})}}
+          visible={this.state.schoolDrawerVisible}
+        >
+					<SchoolDetailController />
+        </Drawer>
 			</div>
 		);
 	}
@@ -283,7 +323,17 @@ class Step3Controller extends React.Component {
 		this.props.setLotId(e.target.value);
 
 		// 调用查询表格数据函数
-		let { schoolList } = await this.getSchool();
+		let [
+			{ schoolList },
+			{ voluntaryOptionList }
+		] = await Promise.all([
+			this.getSchool(),
+			launchRequest(APIS.GET_SCHOOL_OPTION, {
+				lotId: this.props.lotId
+			})
+		]);
+
+		this.props.initVoluntary(voluntaryOptionList);
 
 		this.setState({
 			schoolList,
@@ -395,6 +445,11 @@ class Step3Controller extends React.Component {
 	handleClickCheckVoluntary = () => {
 		this.props.recordVoluntaryDetail(this.props.voluntary);
 		this.props.nextStep();
+	};
+
+	showSchoolDetail = (record) => {
+		this.props.showSchoolDetail(record.school_id);
+		this.setState({schoolDrawerVisible: true});
 	}
 }
 
@@ -430,6 +485,9 @@ const mapDispatchToProps = (dispatch) => {
 		recordVoluntaryDetail: (params) => {
 			dispatch(voluntaryActions.recordVoluntaryDetail(params));
 		},
+		showSchoolDetail: (params) => {
+			dispatch(schoolActions.showSchoolDetail(params));
+		}
 	};
 };
 
