@@ -23,6 +23,7 @@ export const PART = {
   OPT_ENTRY_SCORE: '/entryScore',
   OPT_SCHOOL: '/school',
   OPT_QUESTIONNAIRE: '/questionnaire',
+  OPT_VOLUNTARY: '/voluntary',
 };
 
 // 请求类型

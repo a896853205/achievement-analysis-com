@@ -425,14 +425,18 @@ class Step3Controller extends React.Component {
 		// 获取学校配置项
 		let { natureValues, propertyValues, typeValues, areaFeatureValues, gatherValue } = this.state;
 
-		return await launchRequest(APIS.GET_SCHOOL, {
-			lotId: this.props.lotId,
-			natureValues,
-			propertyValues,
-			typeValues,
-			areaFeatureValues,
-			gatherValue
-		});
+		if (this.props.lotId) {
+			return await launchRequest(APIS.GET_SCHOOL, {
+				lotId: this.props.lotId,
+				natureValues,
+				propertyValues,
+				typeValues,
+				areaFeatureValues,
+				gatherValue
+			});
+		} else {
+			return { schoolList: [] }
+		}
 	};
 
 	handleSchoolChange = (value, record) => {

@@ -9,6 +9,7 @@ export const actions = {
 	deleteVoluntary: createAction('deleteVoluntary'),
 	recordMajor: createAction('recordMajor'),
 	recordVoluntaryDetail: createAction('recordVoluntaryDetail'),
+	recordVoluntaryId: createAction('recordVoluntaryId')
 };
 
 export const voluntaryReducer = handleActions(
@@ -226,6 +227,13 @@ export const voluntaryReducer = handleActions(
 				...state,
 				voluntaryDetail: result,
 			};
+		},
+
+		recordVoluntaryId(state, { payload: result }) {
+			return {
+				...state,
+				voluntaryId: result,
+			};
 		}
 	},
 	{
@@ -234,6 +242,7 @@ export const voluntaryReducer = handleActions(
 		// 设置志愿用的数据
 		voluntary: [],
 		// 查看志愿用的数据
+		voluntaryId: '',
 		voluntaryDetail: [],
 	}
 );

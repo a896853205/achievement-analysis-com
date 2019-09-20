@@ -1,22 +1,18 @@
 import React from 'react';
 import { Route, Switch } from "react-router-dom";
 
-// 请求文件
-import { launchRequest } from "../util/request";
-import * as APIS from "../constants/api-constants";
-
 // 关于数据模块交互
 import { connect } from "react-redux";
-import { actions as userActions } from "../redux/user-model";
 
 // 自定义组件
 import HomeIndexController from './home/home-index-controller';
 import HomeVoluntaryController from './home/home-voluntary-controller';
 import HomeQuestionnaireController from './home/home-questionnaire-controller';
 import HomePersonalController from './home/home-personal-controller';
+import HomeVoluntaryResultController from './home/home-voluntary-result-controller';
 
 // 路由
-import { BCG_ROOT_NAME, VOLUNTARY, QUESTIONNAIRE, PERSONAL } from "../constants/route-constants";
+import { BCG_ROOT_NAME, VOLUNTARY, VOLUNTARY_RESULT, QUESTIONNAIRE, PERSONAL } from "../constants/route-constants";
 
 class HomeController extends React.Component {
   render() {
@@ -27,27 +23,13 @@ class HomeController extends React.Component {
         <Switch>
           <Route path={`/${BCG_ROOT_NAME}/`} exact component={HomeIndexController} />
           <Route path={`/${BCG_ROOT_NAME}/${VOLUNTARY.path}`} exact component={HomeVoluntaryController} />
+          <Route path={`/${BCG_ROOT_NAME}/${VOLUNTARY_RESULT.path}`} exact component={HomeVoluntaryResultController} />
           <Route path={`/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}`} exact component={HomeQuestionnaireController} />
           <Route path={`/${BCG_ROOT_NAME}/${PERSONAL.path}`} component={HomePersonalController} />
           <Route component={NoMatch} />
         </Switch>
       </div>
     );
-  }
-
-  componentDidMount () {
-
-    if (!this.props.user.uuid) {
-      launchRequest(APIS.GET_USER_INFO, {})
-      .then(data => {
-
-        if (data) {
-          this.props.recordUser(data);
-        } else {
-          this.props.history.push('/login');
-        }
-      });
-    }
   }
 }
 
@@ -64,9 +46,6 @@ const mapStateToProps = store => {
 // 向store dispatch action
 const mapDispatchToProps = dispatch => {
   return {
-    recordUser: params => {
-      dispatch(userActions.recordUser(params));
-    }
   };
 };
 

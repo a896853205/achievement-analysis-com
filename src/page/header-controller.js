@@ -1,20 +1,25 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom'
 
 // UI组件
 import { Layout, Menu, Col, Dropdown, Icon } from 'antd';
 
 // 路由
 import { Link } from 'react-router-dom';
-import { LOGIN, INDEX } from '../constants/route-constants';
 
 // css
 import '../style/header.css';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
+import { actions as userActions } from "../redux/user-model";
+
+// 请求文件
+import { launchRequest } from "../util/request";
+import * as APIS from "../constants/api-constants";
 
 // 路由
-import { PERSONAL, VOLUNTARY, BCG_ROOT_NAME, QUESTIONNAIRE } from '../constants/route-constants';
+import { PERSONAL, VOLUNTARY, BCG_ROOT_NAME, QUESTIONNAIRE, LOGIN, INDEX } from '../constants/route-constants';
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
@@ -115,10 +120,25 @@ class HeaderController extends React.Component {
 		);
 	}
 
+	componentDidMount () {
+
+    if (!this.props.user.uuid) {
+      launchRequest(APIS.GET_USER_INFO, {})
+      .then(data => {
+
+        if (data) {
+          this.props.recordUser(data);
+        } else {
+          this.props.history.push(`/${LOGIN.path}`);
+        }
+      });
+    }
+  }
+
 	// 注销函数
 	handleSignOut() {
 		localStorage.clear();
-		window.location.href = '/login';
+		this.props.history.push(`/${LOGIN.path}`);
 	}
 }
 
@@ -133,8 +153,12 @@ const mapStateToProps = (store) => {
 };
 
 // 向store dispatch action
-const mapDispatchToProps = () => {
-	return {};
+const mapDispatchToProps = (dispatch) => {
+	return {
+		recordUser: params => {
+      dispatch(userActions.recordUser(params));
+    }
+	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderController);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HeaderController));
