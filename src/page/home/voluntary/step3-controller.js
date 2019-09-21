@@ -357,7 +357,6 @@ class Step3Controller extends React.Component {
 				});
 			},
 			onCancel() {
-				console.log('Cancel');
 			}
 		});
 	};

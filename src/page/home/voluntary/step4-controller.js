@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 
 import VoluntaryDetailController from './voluntary-detail-controller';
 
@@ -12,9 +12,11 @@ import { launchRequest } from '../../../util/request';
 import * as APIS from '../../../constants/api-constants';
 
 // UI组件
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 
 import { BCG_ROOT_NAME, VOLUNTARY_RESULT } from '../../../constants/route-constants';
+
+const { confirm } = Modal;
 
 class Step4Controller extends React.Component {
 	state = {
@@ -33,29 +35,38 @@ class Step4Controller extends React.Component {
 	}
 
 	handleClickSubmit = async () => {
-		// loading
-		await this.setState({ btnLoading: true });
+		confirm({
+			title: '生成报表',
+			content: '您确定生成报表吗? 生成报表会使用一次填报机会.',
+			okText: '确认',
+			cancelText: '取消',
+			onOk: async () => {
+				// loading
+				await this.setState({ btnLoading: true });
 
-		// 提交到后台后返回uuid
-		let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
-			lotId: this.props.lotId,
-			voluntary: this.props.voluntary
+				// 提交到后台后返回uuid
+				let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
+					lotId: this.props.lotId,
+					voluntary: this.props.voluntary
+				});
+
+				if (voluntaryId) {
+					// 将uuid存入redux
+					this.props.recordVoluntaryIdGetResult(voluntaryId);
+
+					// 结束loading
+					await this.setState({ btnLoading: false });
+
+					// 跳转页面
+					this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY_RESULT.path}`);
+				} else {
+					// 结束loading
+					await this.setState({ btnLoading: false });
+					// 跳转到充值VIP页
+				}
+			},
+			onCancel() {}
 		});
-
-		if (voluntaryId) {
-			// 将uuid存入redux
-			this.props.recordVoluntaryIdGetResult(voluntaryId);
-
-			// 结束loading
-			await this.setState({ btnLoading: false });
-
-			// 跳转页面
-			this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY_RESULT.path}`);
-		} else {
-			// 结束loading
-			await this.setState({ btnLoading: false });
-			// 跳转到充值VIP页
-		}
 	};
 }
 

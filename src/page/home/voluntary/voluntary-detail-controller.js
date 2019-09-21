@@ -4,17 +4,27 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import { actions as voluntaryActions } from '../../../redux/voluntary-model';
 
+// css
+import '../../../style/voluntary/voluntary-detail.css';
+
+// UI
+import { Card } from 'antd';
 class VoluntaryDetailController extends React.Component {
 	render() {
 		return (
-			<div>
+			<div className='voluntary-detail-box'>
 				{this.props.voluntaryDetail.map((voluntaryItem) => (
-					<div key={voluntaryItem.five_volunteer_id}>
-            {`${voluntaryItem.volunteer_name} ${voluntaryItem.schoolName}`}
+					<Card className='voluntary-card' title={`${voluntaryItem.volunteer_name} ${voluntaryItem.schoolName}`} key={voluntaryItem.five_volunteer_id} style={{ width: 300 }}>
 						{voluntaryItem.major.map((majorItem, index) => (
-							<div key={index} style={{ paddingLeft: 24 }}>{`专业${index + 1} ${majorItem.majorName}`}</div>
+							<p key={index}>{`专业${index + 1} ${majorItem.majorName}`}</p>
 						))}
-					</div>
+					</Card>
+					// <div key={voluntaryItem.five_volunteer_id}>
+          //   {`${voluntaryItem.volunteer_name} ${voluntaryItem.schoolName}`}
+					// 	{voluntaryItem.major.map((majorItem, index) => (
+					// 		<div key={index} style={{ paddingLeft: 24 }}>{`专业${index + 1} ${majorItem.majorName}`}</div>
+					// 	))}
+					// </div>
 				))}
 			</div>
 		);

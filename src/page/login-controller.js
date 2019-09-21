@@ -23,7 +23,8 @@ import md5 from "md5";
 class LoginController extends React.Component {
   state = {
     userName: "",
-    passWord: ""
+    passWord: "",
+    loading: false,
   };
   render() {
     return (
@@ -48,6 +49,7 @@ class LoginController extends React.Component {
             onClick={this.handleSubmit}
             type="primary"
             size="large"
+            loading={this.state.loading}
           >
             登录
           </Button>
@@ -57,21 +59,29 @@ class LoginController extends React.Component {
   }
 
   // 登录函数
-  handleSubmit = () => {
+  handleSubmit = async () => {
+    await this.setState({
+      loading: true,
+    })
     // 提交表单
     let { userName, passWord } = this.state;
 
-    launchRequest(APIS.USER_LOGIN, {
+    let data = await launchRequest(APIS.USER_LOGIN, {
       userName,
       passWord: md5(passWord)
-    }).then(data => {
-      if (data) {
-        this.props.recordUser(data.user);
-        // 需要放到token中
-        this.props.history.push(`/`);
-      }
-    });
-  };
+    })
+
+    if (data) {
+      this.props.recordUser(data.user);
+      // 需要放到token中
+      this.props.history.push(`/`);
+    }
+
+    await this.setState({
+      loading: false,
+    })
+  }
+
 }
 
 // 从store接收state数据

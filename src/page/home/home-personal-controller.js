@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 // 自定义组件
 import BasicController from "./personal/basic-controller";
 import PasswordController from "./personal/password-controller";
+import MyVoluntaryController from "./personal/my-voluntary-controller";
 
 // UI组件
 import { Menu, Icon } from "antd";
@@ -14,7 +15,8 @@ import {
   BCG_ROOT_NAME,
   PERSONAL,
   BASIC,
-  PASSWORD
+  PASSWORD,
+  MY_VOLUNTARY
 } from "../../constants/route-constants";
 
 // CSS
@@ -51,6 +53,12 @@ class HomePersonalController extends React.Component {
                 修改密码
               </Link>
             </Menu.Item>
+            <Menu.Item key="3" className="personl-menu-item">
+              <Link to={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${MY_VOLUNTARY.path}`}>
+                <Icon type="schedule" />
+                我的志愿
+              </Link>
+            </Menu.Item>
           </Menu>
         </div>
 
@@ -65,6 +73,11 @@ class HomePersonalController extends React.Component {
               path={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${PASSWORD.path}`}
               exact
               component={PasswordController}
+            />
+            <Route
+              path={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${MY_VOLUNTARY.path}`}
+              exact
+              component={MyVoluntaryController}
             />
           </Switch>
         </div>
