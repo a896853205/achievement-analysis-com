@@ -19,7 +19,15 @@ import { launchRequest } from '../util/request';
 import * as APIS from '../constants/api-constants';
 
 // 路由
-import { PERSONAL, VOLUNTARY, BCG_ROOT_NAME, QUESTIONNAIRE, LOGIN, INDEX } from '../constants/route-constants';
+import { 
+	PERSONAL,
+	VOLUNTARY,
+	BCG_ROOT_NAME,
+	QUESTIONNAIRE,
+	LOGIN,
+	INDEX,
+	REGISTER
+} from '../constants/route-constants';
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
@@ -109,13 +117,23 @@ class HeaderController extends React.Component {
 							</span>
 						</Dropdown>
 					) : (
-						<Link
-							to={{
-								pathname: `/${LOGIN.path}`
-							}}
-						>
-							登录
-						</Link>
+						<div>
+							<Link
+								to={{
+									pathname: `/${REGISTER.path}`
+								}}
+							>
+								注册
+							</Link>
+							|
+							<Link
+								to={{
+									pathname: `/${LOGIN.path}`
+								}}
+							>
+								登录
+							</Link>
+						</div>
 					)}
 				</Col>
 			</Header>
@@ -141,7 +159,10 @@ class HeaderController extends React.Component {
 				if (data) {
 					this.props.recordUser(data);
 				} else {
-					this.props.history.push(`/${LOGIN.path}`);
+					// 如果在首页就不跳转了
+					if (pathArr[0]) {
+						this.props.history.push(`/${LOGIN.path}`);
+					}					
 				}
 			});
 		}
