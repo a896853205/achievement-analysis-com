@@ -6,14 +6,16 @@ import * as APIS from '../../../constants/api-constants';
 
 import '../../../style/questionnaire/result.css';
 
+import { Skeleton } from 'antd';
+
 const maxRank = 10;
 class ResultController extends React.Component {
 	state = {
-		loading: false,
-		result: []
+		loading: true,
+		result: [],
+		maxDescribe: []
 	};
 	getOption = (result) => {
-		console.log('depened on this', result);
 		const option = {
 			tooltip: {},
 			radar: {
@@ -53,34 +55,57 @@ class ResultController extends React.Component {
 			option.radar.indicator.push({ name: item.typeName, max: maxRank });
 			option.series[0].data[0].value.push(item.rank);
 		});
-		console.log('rador', result);
+
 		return option;
 	};
 	render() {
 		return (
-			<div>
-				{this.state.loading ? (
-					'加载中...'
-				) : (
-					<ReactEcharts
-						option={this.getOption(this.state.result)}
-						style={{ height: '350px', width: '1000px' }}
-						className='questionnaire-chart'
-					/>
-				)}
+			<div className='result-box'>
+				<div className='result-content-box'>
+					{this.state.loading ? (
+						<Skeleton />
+					) : (
+						<div className='result-content'>
+							<ReactEcharts
+								option={this.getOption(this.state.result)}
+								style={{ height: '350px' }}
+								className='questionnaire-chart'
+							/>
+							<div className='max-describe'>
+								{this.state.maxDescribe.map((item) => (
+									<div key={item.typeCode}>
+										<h5>{item.typeName}</h5>
+										<p>职业类型: {item.typicalCarrer}</p>
+										<p>匹配专业: {item.matchMajor}</p>
+									</div>
+								))}
+							</div>
+						</div>
+					)}
+				</div>
 			</div>
 		);
 	}
 	componentDidMount = async () => {
-		await this.setState({
-			loading: true
+		let { returnResult } = await launchRequest(APIS.GET_QUESTIONNAIRE_RANK);
+
+		let maxScorce = 0,
+			maxDescribe = [];
+
+		returnResult.forEach((item) => {
+			if (item.rank > maxScorce) {
+				maxScorce = item.rank;
+			}
 		});
 
-		let { returnResult } = await launchRequest(APIS.GET_QUESTIONNAIRE_RANK);
+		maxDescribe = returnResult.filter((item) => {
+			return item.rank === maxScorce;
+		});
 
 		await this.setState({
 			loading: false,
-			result: returnResult
+			result: returnResult,
+			maxDescribe
 		});
 	};
 }

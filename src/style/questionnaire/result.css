@@ -1,3 +1,21 @@
 .questionnaire-chart {
-  margin: 0 auto;
+  width: 48%;
+}
+
+.max-describe {
+  width: 48%;
+}
+
+.result-box {
+  padding: 20px;
+}
+
+.result-content-box {
+  padding: 20px;
+  background: #fff;
+}
+
+.result-content {
+  display: flex;
+  justify-content: space-between;
 }
