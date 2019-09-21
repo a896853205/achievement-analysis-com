@@ -29,7 +29,7 @@ class App extends Component {
 							<Route path={`/${INDEX.path}`} exact component={IndexController} />
 							<Route path={`/${LOGIN.path}`} exact component={LoginController} />
 							<Route path={`/${REGISTER.path}`} exact component={RegisterController} />
-							<Route path={`/${BCG_ROOT_NAME.path}`} component={BackgroundController} />
+							<Route path={`/${BCG_ROOT_NAME}`} component={BackgroundController} />
 							<Route component={NoMatch} />
 						</Switch>
 					</div>
