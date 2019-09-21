@@ -1,0 +1,17 @@
+.register-title {
+  margin: auto;
+  font-size: 2em;
+}
+
+.register-sub-title {
+  margin-bottom: 15px;
+}
+
+.register-input {
+  margin: 15px 0;
+}
+
+.register-button {
+  width: 250px;
+  margin: 15px 0;
+}
