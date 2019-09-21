@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 
 // UI组件
 import { Layout, Menu, Col, Dropdown, Icon } from 'antd';
@@ -12,11 +12,11 @@ import '../style/header.css';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
-import { actions as userActions } from "../redux/user-model";
+import { actions as userActions } from '../redux/user-model';
 
 // 请求文件
-import { launchRequest } from "../util/request";
-import * as APIS from "../constants/api-constants";
+import { launchRequest } from '../util/request';
+import * as APIS from '../constants/api-constants';
 
 // 路由
 import { PERSONAL, VOLUNTARY, BCG_ROOT_NAME, QUESTIONNAIRE, LOGIN, INDEX } from '../constants/route-constants';
@@ -91,7 +91,9 @@ class HeaderController extends React.Component {
 								</Link>
 							</Menu.Item>
 							<Menu.Item key='5'>
-								<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : '/login'}>About</Link>
+								<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : '/login'}>
+									About
+								</Link>
 							</Menu.Item>
 						</SubMenu>
 					</Menu>
@@ -120,26 +122,37 @@ class HeaderController extends React.Component {
 		);
 	}
 
-	componentDidMount () {
+	componentDidMount() {
+		let pathArr = this.props.location.pathname.split('/'),
+			token = 'token';
 
-    if (!this.props.user.uuid) {
-      launchRequest(APIS.GET_USER_INFO, {})
-      .then(data => {
+		// 需要将第一位pop掉 例:'/login' => '['login']'
+		pathArr.pop();
 
-        if (data) {
-          this.props.recordUser(data);
-        } else {
-          this.props.history.push(`/${LOGIN.path}`);
-        }
-      });
-    }
-  }
+		// 非后台页页需要再判断location中是否有TOKEN
+		if (pathArr[0] !== 'background') {
+			// 其他页需要再判断location中是否有TOKEN,有token就请求,没token就什么都不干
+			token = window.localStorage.getItem('token');
+		}
+
+		// 如果是后台的才需要进行判断
+		if (!this.props.user.uuid && token) {
+			launchRequest(APIS.GET_USER_INFO, {}).then((data) => {
+				if (data) {
+					this.props.recordUser(data);
+				} else {
+					this.props.history.push(`/${LOGIN.path}`);
+				}
+			});
+		}
+	}
 
 	// 注销函数
-	handleSignOut() {
+	handleSignOut = () => {
 		localStorage.clear();
+		this.props.recordUser({});
 		this.props.history.push(`/${LOGIN.path}`);
-	}
+	};
 }
 
 // 从store接收state数据
@@ -155,9 +168,9 @@ const mapStateToProps = (store) => {
 // 向store dispatch action
 const mapDispatchToProps = (dispatch) => {
 	return {
-		recordUser: params => {
-      dispatch(userActions.recordUser(params));
-    }
+		recordUser: (params) => {
+			dispatch(userActions.recordUser(params));
+		}
 	};
 };
 
