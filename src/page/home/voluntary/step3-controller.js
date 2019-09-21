@@ -153,9 +153,19 @@ class Step3Controller extends React.Component {
 		// 右侧志愿表的删除UI
 		const genExtra = (voluntaryItem) => (
 			<Icon
-				type='stop'
+				type='delete'
 				onClick={(event) => {
-					this.props.deleteVoluntary(voluntaryItem.five_volunteer_id);
+					confirm({
+						title: '删除志愿信息',
+						content: '您确定删除该志愿的信息吗?',
+						okType: 'danger',
+						okText: '确认',
+						cancelText: '取消',
+						onOk: () => {
+							this.props.deleteVoluntary(voluntaryItem.five_volunteer_id);
+						},
+						onCancel() {}
+					});
 					event.stopPropagation();
 				}}
 			/>
@@ -275,7 +285,7 @@ class Step3Controller extends React.Component {
 								</Panel>
 							))}
 						</Collapse>
-						<Button onClick={this.handleClickCheckVoluntary}>查看志愿表</Button>
+						<Button style={{width: '100%'}} type='primary' onClick={this.handleClickCheckVoluntary}>查看志愿表</Button>
 					</div>
 				</div>
 				<Drawer
@@ -356,8 +366,7 @@ class Step3Controller extends React.Component {
 					loading: false
 				});
 			},
-			onCancel() {
-			}
+			onCancel() {}
 		});
 	};
 
