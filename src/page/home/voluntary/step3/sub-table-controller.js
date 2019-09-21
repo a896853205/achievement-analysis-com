@@ -13,7 +13,8 @@ import { actions as voluntaryActions } from '../../../../redux/voluntary-model';
 
 class SubTableController extends React.Component {
 	state = {
-		majorList: []
+		majorList: [],
+		loading: false,
 	};
 
 	render() {
@@ -100,19 +101,22 @@ class SubTableController extends React.Component {
 			}
 		];
 
-		return <Table pagination={false} rowKey={(record) => record.major_id} columns={columns} dataSource={this.state.majorList} />;
+		return <Table loading={this.state.loading} pagination={false} rowKey={(record) => record.major_id} columns={columns} dataSource={this.state.majorList} />;
 	}
 
 	componentDidMount = async () => {
+		await this.setState({
+			loading: true,
+		});
+
 		let { majorList } = await launchRequest(APIS.GET_MAJOR, {
 			schoolId: this.props.schoolId,
 			lotId: this.props.lotId
 		});
 
-		console.table(majorList);
-
 		this.setState({
-			majorList
+			majorList,
+			loading: false,
 		});
 	};
 
@@ -130,20 +134,9 @@ const mapStateToProps = (store) => {
 	const voluntaryStore = store['voluntaryStore'];
 	let { lot_id, voluntary } = voluntaryStore;
 
-	// let voluntaryObj = voluntary.find((voluntaryItem) => {
-	// 	return voluntaryItem.schoolId === this.props.schoolId;
-	// });
-
-	// let majorList = [];
-
-	// if (voluntaryObj) {
-	// 	majorList = voluntaryObj.major;
-	// }
-
 	return {
 		lotId: lot_id,
 		voluntary: [ ...voluntary ]
-		// majorList: [ ...majorList ]
 	};
 };
 

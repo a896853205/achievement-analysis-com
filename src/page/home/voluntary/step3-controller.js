@@ -13,16 +13,7 @@ import SchoolDetailController from '../school/school-detail';
 import '../../../style/voluntary/step3.css';
 
 // UI组件
-import { 
-	Checkbox,
-	Table,
-	Select,
-	Icon, 
-	Collapse, 
-	Radio, 
-	Button,
-	Drawer
-} from 'antd';
+import { Checkbox, Table, Select, Icon, Collapse, Radio, Button, Drawer, Modal } from 'antd';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
@@ -31,6 +22,7 @@ import { actions as schoolActions } from '../../../redux/school-model';
 
 const { Option } = Select;
 const { Panel } = Collapse;
+const { confirm } = Modal;
 
 class Step3Controller extends React.Component {
 	state = {
@@ -51,7 +43,7 @@ class Step3Controller extends React.Component {
 		areaFeatureValues: [],
 
 		// 抽屉显示
-		schoolDrawerVisible: false,
+		schoolDrawerVisible: false
 	};
 
 	render() {
@@ -96,7 +88,15 @@ class Step3Controller extends React.Component {
 				dataIndex: 'schoolDetail',
 				key: 'schoolDetail',
 				align: 'center',
-				render: (text, record) => <Button onClick={() => {this.showSchoolDetail(record)}}>查看详细信息</Button>
+				render: (text, record) => (
+					<Button
+						onClick={() => {
+							this.showSchoolDetail(record);
+						}}
+					>
+						查看详细信息
+					</Button>
+				)
 			},
 			{
 				title: '填报',
@@ -228,11 +228,21 @@ class Step3Controller extends React.Component {
 				<div className='content'>
 					<div className='content-left'>
 						<Radio.Group className='btn-group' onChange={this.handleGatherChange}>
-							<Radio.Button className='btn' value='a'>集合A</Radio.Button>
-							<Radio.Button className='btn' value='b'>集合B</Radio.Button>
-							<Radio.Button className='btn' value='c'>集合C</Radio.Button>
-							<Radio.Button className='btn' value='d'>集合D</Radio.Button>
-							<Radio.Button className='btn' value='e'>集合E</Radio.Button>
+							<Radio.Button className='btn' value='a'>
+								集合A
+							</Radio.Button>
+							<Radio.Button className='btn' value='b'>
+								集合B
+							</Radio.Button>
+							<Radio.Button className='btn' value='c'>
+								集合C
+							</Radio.Button>
+							<Radio.Button className='btn' value='d'>
+								集合D
+							</Radio.Button>
+							<Radio.Button className='btn' value='e'>
+								集合E
+							</Radio.Button>
 						</Radio.Group>
 						<Table
 							rowKey={(record) => record.school_id}
@@ -265,20 +275,20 @@ class Step3Controller extends React.Component {
 								</Panel>
 							))}
 						</Collapse>
-						<Button onClick={this.handleClickCheckVoluntary}>
-							查看志愿表
-						</Button>
+						<Button onClick={this.handleClickCheckVoluntary}>查看志愿表</Button>
 					</div>
 				</div>
 				<Drawer
-          width={640}
-          placement="right"
-          closable={false}
-          onClose={() => {this.setState({schoolDrawerVisible: false})}}
-          visible={this.state.schoolDrawerVisible}
-        >
+					width={640}
+					placement='right'
+					closable={false}
+					onClose={() => {
+						this.setState({ schoolDrawerVisible: false });
+					}}
+					visible={this.state.schoolDrawerVisible}
+				>
 					<SchoolDetailController />
-        </Drawer>
+				</Drawer>
 			</div>
 		);
 	}
@@ -300,7 +310,10 @@ class Step3Controller extends React.Component {
 			launchRequest(APIS.GET_LOTS_OPTION, {}, DominConfigs.REQUEST_TYPE.GET)
 		]);
 
-		this.props.initVoluntary(voluntaryOptionList);
+		// 如果有志愿表就不初始化了
+		if (!this.props.voluntary.length) {
+			this.props.initVoluntary(voluntaryOptionList);
+		}
 
 		await this.setState({
 			schoolNature,
@@ -315,29 +328,37 @@ class Step3Controller extends React.Component {
 	};
 
 	// 学校批次改变
-	handleLotsChange = async (e) => {
-		await this.setState({
-			loading: true
-		});
+	handleLotsChange = (e) => {
+		confirm({
+			title: '修改批次',
+			content: '您确定修改批次吗,修改批次会使志愿表清空?',
+			okText: '确认',
+			cancelText: '取消',
+			onOk: async () => {
+				await this.setState({
+					loading: true
+				});
 
-		this.props.setLotId(e.target.value);
+				this.props.setLotId(e.target.value);
 
-		// 调用查询表格数据函数
-		let [
-			{ schoolList },
-			{ voluntaryOptionList }
-		] = await Promise.all([
-			this.getSchool(),
-			launchRequest(APIS.GET_SCHOOL_OPTION, {
-				lotId: this.props.lotId
-			})
-		]);
+				// 调用查询表格数据函数
+				let [ { schoolList }, { voluntaryOptionList } ] = await Promise.all([
+					this.getSchool(),
+					launchRequest(APIS.GET_SCHOOL_OPTION, {
+						lotId: this.props.lotId
+					})
+				]);
 
-		this.props.initVoluntary(voluntaryOptionList);
+				this.props.initVoluntary(voluntaryOptionList);
 
-		this.setState({
-			schoolList,
-			loading: false
+				await this.setState({
+					schoolList,
+					loading: false
+				});
+			},
+			onCancel() {
+				console.log('Cancel');
+			}
 		});
 	};
 
@@ -419,20 +440,24 @@ class Step3Controller extends React.Component {
 			schoolList,
 			loading: false
 		});
-	}
+	};
 
 	getSchool = async () => {
 		// 获取学校配置项
 		let { natureValues, propertyValues, typeValues, areaFeatureValues, gatherValue } = this.state;
 
-		return await launchRequest(APIS.GET_SCHOOL, {
-			lotId: this.props.lotId,
-			natureValues,
-			propertyValues,
-			typeValues,
-			areaFeatureValues,
-			gatherValue
-		});
+		if (this.props.lotId) {
+			return await launchRequest(APIS.GET_SCHOOL, {
+				lotId: this.props.lotId,
+				natureValues,
+				propertyValues,
+				typeValues,
+				areaFeatureValues,
+				gatherValue
+			});
+		} else {
+			return { schoolList: [] };
+		}
 	};
 
 	handleSchoolChange = (value, record) => {
@@ -449,8 +474,8 @@ class Step3Controller extends React.Component {
 
 	showSchoolDetail = (record) => {
 		this.props.showSchoolDetail(record.school_id);
-		this.setState({schoolDrawerVisible: true});
-	}
+		this.setState({ schoolDrawerVisible: true });
+	};
 }
 
 // 从store接收state数据

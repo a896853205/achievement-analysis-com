@@ -1,10 +1,7 @@
 import React from 'react';
 
 // UI组件
-import { 
-  Steps,
-  Divider
-} from 'antd';
+import { Steps, Divider, Button } from 'antd';
 
 // css
 import '../../style/home-voluntary.css';
@@ -16,74 +13,62 @@ import Step3 from './voluntary/step3-controller';
 import Step4 from './voluntary/step4-controller';
 
 // 关于数据模块交互
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { actions as voluntaryActions } from '../../redux/voluntary-model';
-
 
 const { Step } = Steps;
 
 class HomeVoluntaryController extends React.Component {
+	render() {
+		const steps = [
+			{
+				title: '填报个人基本信息',
+				content: <Step1 />
+			},
+			{
+				title: '选择报考批次',
+				content: <Step2 />
+			},
+			{
+				title: '填报具体学校(专业)',
+				content: <Step3 />
+			},
+			{
+				title: '确认志愿表',
+				content: <Step4 />
+			}
+		];
+		return (
+			<div className='home-voluntary-box'>
+				<Steps current={this.props.step} className='steps-box'>
+					{steps.map((item) => <Step key={item.title} title={item.title} />)}
+				</Steps>
+				<Divider>{steps[this.props.step].title}</Divider>
+				<div className='steps-content'>{steps[this.props.step].content}</div>
+				{this.props.step ? <Button onClick={this.props.prevStep}>上一步</Button> : undefined}
+			</div>
+		);
+	}
 
-  render() {
-    const steps = [
-      {
-        title: '填报个人基本信息',
-        content: (<Step1 />)
-      },
-      {
-        title: '选择报考批次',
-        content: (<Step2 />)
-      },
-      {
-        title: '填报具体学校(专业)',
-        content: (<Step3 />)
-      },
-      {
-        title: '确认志愿表',
-        content: (<Step4 />)
-      }
-    ];
-    return (
-      <div className='home-voluntary-box'>
-        <Steps current={this.props.step} className='steps-box' onChange={this.handleStepChange}>
-          {steps.map(item => (
-            <Step key={item.title} title={item.title} />
-          ))}
-        </Steps>
-        <Divider >{steps[this.props.step].title}</Divider>
-        <div className="steps-content">
-          {steps[this.props.step].content}
-        </div>
-      </div>
-    );
-  }
-
-  handleStepChange = (current) => {
-    // redux改变current
-    this.props.setStep(current);
-  }
 }
 
 // 从store接收state数据
-const mapStateToProps = store => {
-  const voluntaryStore = store['voluntaryStore'];
-  let { step } = voluntaryStore;
+const mapStateToProps = (store) => {
+	const voluntaryStore = store['voluntaryStore'];
+	let { step } = voluntaryStore;
 
-  return {
-    step,
-  }
+	return {
+		step
+	};
 };
 
 // 向store dispatch action
-const mapDispatchToProps = dispatch => {
-  return {
-    setStep: (params) => {
-			dispatch(voluntaryActions.setStep(params));
+const mapDispatchToProps = (dispatch) => {
+	return {
+		prevStep: () => {
+			dispatch(voluntaryActions.prevStep());
 		}
-  };
+	};
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HomeVoluntaryController);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeVoluntaryController);
