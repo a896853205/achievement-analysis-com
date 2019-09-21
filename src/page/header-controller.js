@@ -27,7 +27,9 @@ import {
 	LOGIN,
 	INDEX,
 	REGISTER,
-	BASIC
+	BASIC,
+	PASSWORD,
+	MY_VOLUNTARY
 } from '../constants/route-constants';
 
 const { Header } = Layout;
@@ -44,6 +46,24 @@ class HeaderController extends React.Component {
 						}}
 					>
 						修改个人
+					</Link>
+				</Menu.Item>
+				<Menu.Item>
+					<Link
+						to={{
+							pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${PASSWORD.path}`
+						}}
+					>
+						修改密码
+					</Link>
+				</Menu.Item>
+				<Menu.Item>
+					<Link
+						to={{
+							pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${MY_VOLUNTARY.path}`
+						}}
+					>
+						我的志愿
 					</Link>
 				</Menu.Item>
 				<Menu.Item onClick={this.handleSignOut}>注销</Menu.Item>
@@ -63,7 +83,7 @@ class HeaderController extends React.Component {
 							</Link>
 						</Menu.Item>
 						<Menu.Item key='1'>
-							<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}` : '/login'}>
+							<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}` : `/${LOGIN.path}`}>
 								专业测评
 							</Link>
 						</Menu.Item>
@@ -72,7 +92,7 @@ class HeaderController extends React.Component {
 							title={
 								<span>
 									<Link
-										to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}` : '/login'}
+										to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}` : `/${LOGIN.path}`}
 									>
 										志愿填报 <Icon type='down' />
 									</Link>
@@ -80,7 +100,7 @@ class HeaderController extends React.Component {
 							}
 						>
 							<Menu.Item key='2'>
-								<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : '/login'}>
+								<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : `/${LOGIN.path}`}>
 									模拟填报
 								</Link>
 							</Menu.Item>
@@ -95,12 +115,12 @@ class HeaderController extends React.Component {
 							}
 						>
 							<Menu.Item key='4'>
-								<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : '/login'}>
+								<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : `/${LOGIN.path}`}>
 									高考政策
 								</Link>
 							</Menu.Item>
 							<Menu.Item key='5'>
-								<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : '/login'}>
+								<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : `/${LOGIN.path}`}>
 									About
 								</Link>
 							</Menu.Item>
