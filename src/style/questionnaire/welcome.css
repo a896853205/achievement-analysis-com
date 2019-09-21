@@ -9,10 +9,8 @@
   padding-top: 30px;
 }
 
-.typo {
+.typo1 {
   text-align: left;
   margin-left: 70px;
-  position: absolute;
-  top: 50%;
-  margin-top: -25%;
+  margin-top: 60px;
 }
