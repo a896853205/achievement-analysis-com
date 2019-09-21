@@ -12,8 +12,8 @@ export const actions = {
 	recordSchoolId: createAction('recordSchoolId')
 };
 const recordSchoolDetail = createAction('recordSchoolDetail');
-// 异步函数
 
+// 异步函数
 const effects = {
   recordSchoolDetailSaga: function*({ payload }) {
     const data = yield call(launchRequest, APIS.GET_SCHOOL_DETAIL, { schoolId: payload });

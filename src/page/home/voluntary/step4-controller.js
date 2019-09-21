@@ -44,7 +44,7 @@ class Step4Controller extends React.Component {
 
 		if (voluntaryId) {
 			// 将uuid存入redux
-			this.props.recordVoluntaryId(voluntaryId);
+			this.props.recordVoluntaryIdGetResult(voluntaryId);
 
 			// 结束loading
 			await this.setState({ btnLoading: false });
@@ -73,8 +73,8 @@ const mapStateToProps = (store) => {
 // 向store dispatch action
 const mapDispatchToProps = (dispatch) => {
 	return {
-		recordVoluntaryId: (params) => {
-			dispatch(voluntaryActions.recordVoluntaryId(params));
+		recordVoluntaryIdGetResult: (params) => {
+			dispatch(voluntaryActions.recordVoluntaryIdGetResult(params));
 		}
 	};
 };

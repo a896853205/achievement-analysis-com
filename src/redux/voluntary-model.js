@@ -1,5 +1,13 @@
 import { handleActions, createAction } from 'redux-actions';
 
+// saga
+import { call, put, takeLatest, select } from 'redux-saga/effects';
+
+// 请求文件
+import { launchRequest } from '../util/request';
+import * as APIS from '../constants/api-constants';
+import { create } from 'istanbul-reports';
+
 export const actions = {
 	nextStep: createAction('nextStep'),
 	setStep: createAction('setStep'),
@@ -9,7 +17,20 @@ export const actions = {
 	deleteVoluntary: createAction('deleteVoluntary'),
 	recordMajor: createAction('recordMajor'),
 	recordVoluntaryDetail: createAction('recordVoluntaryDetail'),
-	recordVoluntaryId: createAction('recordVoluntaryId')
+	recordVoluntaryIdGetResult: createAction('recordVoluntaryIdGetResult')
+};
+const recordVoluntaryResult = createAction('recordVoluntaryResult');
+
+// 异步函数
+const effects = {
+	recordVoluntaryResultSaga: function*({ payload }) {
+		const data = yield call(launchRequest, APIS.GET_VOLUNTARY_RESULT, { voluntaryUuid: payload });
+		yield put(recordVoluntaryResult(data));
+	}
+};
+
+export const voluntarySaga = function*() {
+	yield takeLatest(actions.recordVoluntaryIdGetResult, effects.recordVoluntaryResultSaga);
 };
 
 export const voluntaryReducer = handleActions(
@@ -23,8 +44,8 @@ export const voluntaryReducer = handleActions(
 		setStep(state, { payload: result }) {
 			return {
 				...state,
-				step: result,
-			}
+				step: result
+			};
 		},
 		setLotId(state, { payload: result }) {
 			return {
@@ -194,14 +215,14 @@ export const voluntaryReducer = handleActions(
 		recordMajor(state, { payload: result }) {
 			let { voluntary } = state,
 				{ majorData, schoolId, changeMajorIndex } = result;
-			
+
 			// 找学校的志愿
 			let schoolIndex = voluntary.findIndex((item) => {
 				return item.schoolId === schoolId;
 			});
 
 			// 找专业的位置
-			let majorIndex = voluntary[schoolIndex].major.findIndex(item => {
+			let majorIndex = voluntary[schoolIndex].major.findIndex((item) => {
 				return item.majorId === majorData.major_id;
 			});
 
@@ -225,14 +246,14 @@ export const voluntaryReducer = handleActions(
 		recordVoluntaryDetail(state, { payload: result }) {
 			return {
 				...state,
-				voluntaryDetail: result,
+				voluntaryDetail: result
 			};
 		},
 
-		recordVoluntaryId(state, { payload: result }) {
+		recordVoluntaryResult(state, { payload: result }) {
 			return {
 				...state,
-				voluntaryId: result,
+				voluntaryResult: result
 			};
 		}
 	},
@@ -242,7 +263,8 @@ export const voluntaryReducer = handleActions(
 		// 设置志愿用的数据
 		voluntary: [],
 		// 查看志愿用的数据
-		voluntaryId: '',
 		voluntaryDetail: [],
+		// 查看数据结果用的数据
+		voluntaryResult: {}
 	}
 );

@@ -1,7 +1,28 @@
 import React from 'react';
+
+// 关于数据模块交互
+import { connect } from 'react-redux';
+
 class VoluntaryResultController extends React.Component {
   render() {
-    return (<div>结果页调用showResult saga,使用props中的uuid查询出result存入redux, 结果页再显示出来</div>);
+    return (<div>{this.props.voluntaryResult ? this.props.voluntaryResult.content : '1'}</div>);
   }
 }
-export default VoluntaryResultController;
+// 从store接收state数据
+const mapStateToProps = (store) => {
+	const voluntaryStore = store['voluntaryStore'];
+	let { voluntaryResult } = voluntaryStore;
+
+	return {
+		voluntaryResult
+	};
+};
+
+// 向store dispatch action
+const mapDispatchToProps = (dispatch) => {
+	return {
+	};
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(VoluntaryResultController);
