@@ -1,5 +1,8 @@
-.basic-info {
-  width: 1000px;
-  margin: 0 auto;
+.basic-info-box {
   padding: 20px;
+}
+
+.basic-info-content {
+  padding: 20px;
+  background: #fff;
 }

@@ -26,7 +26,8 @@ import {
 	QUESTIONNAIRE,
 	LOGIN,
 	INDEX,
-	REGISTER
+	REGISTER,
+	BASIC
 } from '../constants/route-constants';
 
 const { Header } = Layout;
@@ -39,7 +40,7 @@ class HeaderController extends React.Component {
 				<Menu.Item>
 					<Link
 						to={{
-							pathname: `${PERSONAL.path}`
+							pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${BASIC.path}`
 						}}
 					>
 						修改个人

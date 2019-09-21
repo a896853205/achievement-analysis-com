@@ -1,0 +1,8 @@
+.voluntary-detail-box {
+  display: flex;
+}
+
+.voluntary-card {
+  margin-left: 10px;
+  margin-right: 10px;
+}
