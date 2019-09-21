@@ -300,8 +300,11 @@ class Step3Controller extends React.Component {
 			launchRequest(APIS.GET_LOTS_OPTION, {}, DominConfigs.REQUEST_TYPE.GET)
 		]);
 
-		this.props.initVoluntary(voluntaryOptionList);
-
+		// 如果有志愿表就不初始化了
+		if (!this.props.voluntary.length) {
+			this.props.initVoluntary(voluntaryOptionList);
+		}
+	
 		await this.setState({
 			schoolNature,
 			schoolProperty,

@@ -1,16 +1,15 @@
 import { handleActions, createAction } from 'redux-actions';
 
 // saga
-import { call, put, takeLatest, select } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 
 // 请求文件
 import { launchRequest } from '../util/request';
 import * as APIS from '../constants/api-constants';
-import { create } from 'istanbul-reports';
 
 export const actions = {
+	prevStep: createAction('prevStep'),
 	nextStep: createAction('nextStep'),
-	setStep: createAction('setStep'),
 	setLotId: createAction('setLotId'),
 	initVoluntary: createAction('initVoluntary'),
 	recordSchool: createAction('recordSchool'),
@@ -35,6 +34,12 @@ export const voluntarySaga = function*() {
 
 export const voluntaryReducer = handleActions(
 	{
+		prevStep(state) {
+			return {
+				...state,
+				step: state.step - 1
+			};
+		},
 		nextStep(state) {
 			return {
 				...state,
@@ -55,34 +60,7 @@ export const voluntaryReducer = handleActions(
 		},
 		initVoluntary(state, { payload: result }) {
 			result.forEach((item, index, arr) => {
-				arr[index].schoolName = '';
-				arr[index].schoolId = undefined;
-				arr[index].major = [
-					{
-						majorId: '',
-						majorName: ''
-					},
-					{
-						majorId: '',
-						majorName: ''
-					},
-					{
-						majorId: '',
-						majorName: ''
-					},
-					{
-						majorId: '',
-						majorName: ''
-					},
-					{
-						majorId: '',
-						majorName: ''
-					},
-					{
-						majorId: '',
-						majorName: ''
-					}
-				];
+				initSchoolObj(arr[index]);
 			});
 
 			return {
@@ -97,34 +75,7 @@ export const voluntaryReducer = handleActions(
 				});
 
 			if (oldIndex !== -1) {
-				voluntary[oldIndex].schoolName = '';
-				voluntary[oldIndex].schoolId = undefined;
-				voluntary[oldIndex].major = [
-					{
-						majorId: '',
-						majorName: ''
-					},
-					{
-						majorId: '',
-						majorName: ''
-					},
-					{
-						majorId: '',
-						majorName: ''
-					},
-					{
-						majorId: '',
-						majorName: ''
-					},
-					{
-						majorId: '',
-						majorName: ''
-					},
-					{
-						majorId: '',
-						majorName: ''
-					}
-				];
+				initSchoolObj(voluntary[oldIndex]);
 			}
 
 			return {
@@ -142,35 +93,7 @@ export const voluntaryReducer = handleActions(
 			});
 
 			if (oldIndex !== -1) {
-				voluntary[oldIndex].schoolName = '';
-				voluntary[oldIndex].schoolId = undefined;
-				// 这里还需要清除专业数组
-				voluntary[oldIndex].major = [
-					{
-						majorId: '',
-						majorName: ''
-					},
-					{
-						majorId: '',
-						majorName: ''
-					},
-					{
-						majorId: '',
-						majorName: ''
-					},
-					{
-						majorId: '',
-						majorName: ''
-					},
-					{
-						majorId: '',
-						majorName: ''
-					},
-					{
-						majorId: '',
-						majorName: ''
-					}
-				];
+				initSchoolObj(voluntary[oldIndex]);
 			}
 
 			// 新位置修改
@@ -178,34 +101,12 @@ export const voluntaryReducer = handleActions(
 				return item.five_volunteer_id === changeVolunteerId;
 			});
 
-			voluntary[changeIndex].schoolName = schoolData.school_name;
-			voluntary[changeIndex].schoolId = schoolData.school_id;
-			voluntary[changeIndex].major = [
-				{
-					majorId: '',
-					majorName: ''
-				},
-				{
-					majorId: '',
-					majorName: ''
-				},
-				{
-					majorId: '',
-					majorName: ''
-				},
-				{
-					majorId: '',
-					majorName: ''
-				},
-				{
-					majorId: '',
-					majorName: ''
-				},
-				{
-					majorId: '',
-					majorName: ''
-				}
-			];
+			setSchool({
+				school: voluntary[changeIndex],
+				schoolName: schoolData.school_name,
+				schoolId: schoolData.school_id,
+				major: initMajorArr(),
+			})
 
 			return {
 				...state,
@@ -228,14 +129,14 @@ export const voluntaryReducer = handleActions(
 
 			// 这里还需要清除专业
 			if (majorIndex !== -1) {
-				voluntary[schoolIndex].major[majorIndex] = {
-					majorId: '',
-					majorName: ''
-				};
+				voluntary[schoolIndex].major[majorIndex] = initMajorObj();
 			}
 
-			voluntary[schoolIndex].major[changeMajorIndex].majorId = majorData.major_id;
-			voluntary[schoolIndex].major[changeMajorIndex].majorName = majorData.major_name;
+			setMajor({
+				major: voluntary[schoolIndex].major[changeMajorIndex],
+				majorId: majorData.major_id,
+				majorName: majorData.major_name,
+			});
 
 			return {
 				...state,
@@ -268,3 +169,38 @@ export const voluntaryReducer = handleActions(
 		voluntaryResult: {}
 	}
 );
+
+function initSchoolObj(school) {
+	school.schoolName = '';
+	school.schoolId = undefined;
+	// 这里还需要清除专业数组
+	school.major = initMajorArr();
+}
+
+function setSchool({school, schoolName, schoolId, major}) {
+	school.schoolName = schoolName;
+	school.schoolId = schoolId;
+	school.major = major;
+}
+
+function initMajorArr() {
+	let arr = [];
+
+	for (let i = 0; i < 5; i++) {
+		arr.push(initMajorObj());
+	}
+
+	return arr;
+}
+
+function initMajorObj() {
+	return {
+		majorId: '',
+		majorName: ''
+	}
+}
+
+function setMajor({major, majorId, majorName}) {
+	major.majorId = majorId;
+	major.majorName = majorName;
+}
