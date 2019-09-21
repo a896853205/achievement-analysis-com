@@ -1,6 +1,10 @@
 .home-voluntary-box {
-  background: #fff;
   padding: 20px;
+}
+
+.home-voluntary-content {
+  padding: 20px;
+  background: #fff;
 }
 
 .steps-box {

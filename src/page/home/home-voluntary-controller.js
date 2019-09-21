@@ -40,16 +40,17 @@ class HomeVoluntaryController extends React.Component {
 		];
 		return (
 			<div className='home-voluntary-box'>
-				<Steps current={this.props.step} className='steps-box'>
-					{steps.map((item) => <Step key={item.title} title={item.title} />)}
-				</Steps>
-				<Divider>{steps[this.props.step].title}</Divider>
-				<div className='steps-content'>{steps[this.props.step].content}</div>
-				{this.props.step ? <Button onClick={this.props.prevStep}>上一步</Button> : undefined}
+				<div className='home-voluntary-content'>
+					<Steps current={this.props.step} className='steps-box'>
+						{steps.map((item) => <Step key={item.title} title={item.title} />)}
+					</Steps>
+					<Divider>{steps[this.props.step].title}</Divider>
+					<div className='steps-content'>{steps[this.props.step].content}</div>
+					{this.props.step ? <Button onClick={this.props.prevStep}>上一步</Button> : undefined}
+				</div>
 			</div>
 		);
 	}
-
 }
 
 // 从store接收state数据

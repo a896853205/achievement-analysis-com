@@ -2,14 +2,22 @@ import React from 'react';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
-// import { actions as schoolActions } from '../../../redux/school-model';
+
+import { Spin } from 'antd';
+
 
 class SchoolDetailController extends React.Component {
 	render() {
     let schoolDetail = this.props.schoolDetail;
 
     // 这里应该改成判断loading是否为true然后显示loading
-		if (Object.keys(schoolDetail).length !== 0) {
+		if (this.props.detailLoading) {
+			return (
+			<div style={{width: '100%', textAlign: 'center'}}>
+				<Spin style={{ marginTop: '64px'}} />
+			</div>
+			)
+    } else {
       return (
 				<div>
 					<h3>{schoolDetail.school_name}</h3>
@@ -40,8 +48,6 @@ class SchoolDetailController extends React.Component {
           <p>特殊要求: {schoolDetail.special_requirements}</p>   
 				</div>
 			);
-    } else {
-      return (<span>等待</span>)
     }
 	}
 }
@@ -49,10 +55,11 @@ class SchoolDetailController extends React.Component {
 // 从store接收state数据
 const mapStateToProps = (store) => {
 	const schoolStore = store['schoolStore'];
-	let { schoolDetail } = schoolStore;
+	let { schoolDetail, detailLoading } = schoolStore;
 
 	return {
-		schoolDetail
+		schoolDetail,
+		detailLoading
 	};
 };
 

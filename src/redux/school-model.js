@@ -9,15 +9,18 @@ import * as APIS from '../constants/api-constants';
 
 export const actions = {
 	showSchoolDetail: createAction('showSchoolDetail'),
-	recordSchoolId: createAction('recordSchoolId')
+	recordSchoolId: createAction('recordSchoolId'),
+	
 };
 const recordSchoolDetail = createAction('recordSchoolDetail');
-
+const switchLoading = createAction('switchLoading');
 // 异步函数
 const effects = {
   recordSchoolDetailSaga: function*({ payload }) {
+		yield put(switchLoading());
     const data = yield call(launchRequest, APIS.GET_SCHOOL_DETAIL, { schoolId: payload });
-    yield put(recordSchoolDetail(data));
+		yield put(recordSchoolDetail(data));
+		yield put(switchLoading());
   }
 }
 
@@ -33,9 +36,16 @@ export const schoolReducer = handleActions(
 				...state,
 				schoolDetail: result
 			};
+		},
+		switchLoading(state) {
+			return {
+				...state,
+				detailLoading: !state.detailLoading
+			}
 		}
 	},
 	{
-		schoolDetail: {}
+		schoolDetail: {},
+		detailLoading: false,
 	}
 );
