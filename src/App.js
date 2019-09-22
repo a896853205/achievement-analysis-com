@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 
 // 组件
 import HeaderController from './page/header-controller';
@@ -10,7 +10,7 @@ import IndexController from './page/index-controller';
 import BackgroundController from './page/home-controller';
 
 // UI组件
-import { Layout } from 'antd';
+import { Layout, Result, Button } from 'antd';
 
 import { INDEX, LOGIN, BCG_ROOT_NAME, REGISTER } from './constants/route-constants';
 
@@ -18,8 +18,6 @@ const { Content } = Layout;
 
 class App extends Component {
 	render() {
-		const NoMatch = () => <div>4 0 4 NOT FOUND</div>;
-
 		return (
 			<Layout className='layout'>
 				<HeaderController />
@@ -30,7 +28,20 @@ class App extends Component {
 							<Route path={`/${LOGIN.path}`} exact component={LoginController} />
 							<Route path={`/${REGISTER.path}`} exact component={RegisterController} />
 							<Route path={`/${BCG_ROOT_NAME}`} component={BackgroundController} />
-							<Route component={NoMatch} />
+							<Route
+								component={() => (
+									<Result
+										status='404'
+										title='404'
+										subTitle='对不起,您访问的页面不存在'
+										extra={
+											<Button type='primary'>
+												<Link to={'/'}>回到首页</Link>
+											</Button>
+										}
+									/>
+								)}
+							/>
 						</Switch>
 					</div>
 				</Content>

@@ -125,6 +125,26 @@ class HeaderController extends React.Component {
 								</Link>
 							</Menu.Item>
 						</SubMenu>
+
+						<SubMenu
+							key='sub3'
+							title={
+								<span>
+									资讯查询 <Icon type='down' />
+								</span>
+							}
+						>
+							<Menu.Item key='6'>
+								<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : `/${LOGIN.path}`}>
+									学校查询
+								</Link>
+							</Menu.Item>
+							<Menu.Item key='7'>
+								<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : `/${LOGIN.path}`}>
+									功能查询
+								</Link>
+							</Menu.Item>
+						</SubMenu>
 					</Menu>
 				</Col>
 				<Col span={2} className='logo-box'>
