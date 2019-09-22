@@ -8,11 +8,14 @@ import LoginController from './page/login-controller';
 import RegisterController from './page/register-controller';
 import IndexController from './page/index-controller';
 import BackgroundController from './page/home-controller';
+// search 组件
+import SchoolSearchController from './page/search/school-search-controller';
+import MajorSearchController from './page/search/major-search-controller';
 
 // UI组件
 import { Layout, Result, Button } from 'antd';
 
-import { INDEX, LOGIN, BCG_ROOT_NAME, REGISTER } from './constants/route-constants';
+import { INDEX, LOGIN, BCG_ROOT_NAME, REGISTER, SEARCH_SCHOOL, SEARCH_MAJOR } from './constants/route-constants';
 
 const { Content } = Layout;
 
@@ -27,6 +30,8 @@ class App extends Component {
 							<Route path={`/${INDEX.path}`} exact component={IndexController} />
 							<Route path={`/${LOGIN.path}`} exact component={LoginController} />
 							<Route path={`/${REGISTER.path}`} exact component={RegisterController} />
+							<Route path={`/${SEARCH_SCHOOL.path}`} exact component={SchoolSearchController} />
+							<Route path={`/${SEARCH_MAJOR.path}`} exact component={MajorSearchController} />
 							<Route path={`/${BCG_ROOT_NAME}`} component={BackgroundController} />
 							<Route
 								component={() => (

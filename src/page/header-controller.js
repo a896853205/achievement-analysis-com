@@ -29,7 +29,9 @@ import {
 	REGISTER,
 	BASIC,
 	PASSWORD,
-	MY_VOLUNTARY
+	MY_VOLUNTARY,
+	SEARCH_SCHOOL,
+	SEARCH_MAJOR
 } from '../constants/route-constants';
 
 const { Header } = Layout;
@@ -135,12 +137,12 @@ class HeaderController extends React.Component {
 							}
 						>
 							<Menu.Item key='6'>
-								<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : `/${LOGIN.path}`}>
+								<Link to={this.props.user.uuid ? `/${SEARCH_SCHOOL.path}` : `/${LOGIN.path}`}>
 									学校查询
 								</Link>
 							</Menu.Item>
 							<Menu.Item key='7'>
-								<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : `/${LOGIN.path}`}>
+								<Link to={this.props.user.uuid ? `/${SEARCH_MAJOR.path}` : `/${LOGIN.path}`}>
 									功能查询
 								</Link>
 							</Menu.Item>
