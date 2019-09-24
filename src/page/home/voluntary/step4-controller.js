@@ -59,6 +59,7 @@ class Step4Controller extends React.Component {
 
 					// 跳转页面
 					this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY_RESULT.path}`);
+					this.props.nextStep();
 				} else {
 					// 结束loading
 					await this.setState({ btnLoading: false });
@@ -86,7 +87,10 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		recordVoluntaryIdGetResult: (params) => {
 			dispatch(voluntaryActions.recordVoluntaryIdGetResult(params));
-		}
+		},
+		nextStep: () => {
+			dispatch(voluntaryActions.nextStep());
+		},
 	};
 };
 

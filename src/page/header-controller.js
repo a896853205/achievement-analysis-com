@@ -19,7 +19,7 @@ import { launchRequest } from '../util/request';
 import * as APIS from '../constants/api-constants';
 
 // 路由
-import { 
+import {
 	PERSONAL,
 	VOLUNTARY,
 	BCG_ROOT_NAME,
@@ -85,7 +85,9 @@ class HeaderController extends React.Component {
 							</Link>
 						</Menu.Item>
 						<Menu.Item key='1'>
-							<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}` : `/${LOGIN.path}`}>
+							<Link
+								to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}` : `/${LOGIN.path}`}
+							>
 								专业测评
 							</Link>
 						</Menu.Item>
@@ -94,7 +96,13 @@ class HeaderController extends React.Component {
 							title={
 								<span>
 									<Link
-										to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}` : `/${LOGIN.path}`}
+										to={
+											this.props.user.uuid ? (
+												`/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}`
+											) : (
+												`/${LOGIN.path}`
+											)
+										}
 									>
 										志愿填报 <Icon type='down' />
 									</Link>
@@ -102,7 +110,9 @@ class HeaderController extends React.Component {
 							}
 						>
 							<Menu.Item key='2'>
-								<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : `/${LOGIN.path}`}>
+								<Link
+									to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : `/${LOGIN.path}`}
+								>
 									模拟填报
 								</Link>
 							</Menu.Item>
@@ -117,12 +127,16 @@ class HeaderController extends React.Component {
 							}
 						>
 							<Menu.Item key='4'>
-								<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : `/${LOGIN.path}`}>
+								<Link
+									to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : `/${LOGIN.path}`}
+								>
 									高考政策
 								</Link>
 							</Menu.Item>
 							<Menu.Item key='5'>
-								<Link to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : `/${LOGIN.path}`}>
+								<Link
+									to={this.props.user.uuid ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` : `/${LOGIN.path}`}
+								>
 									About
 								</Link>
 							</Menu.Item>
@@ -137,14 +151,10 @@ class HeaderController extends React.Component {
 							}
 						>
 							<Menu.Item key='6'>
-								<Link to={this.props.user.uuid ? `/${SEARCH_SCHOOL.path}` : `/${LOGIN.path}`}>
-									学校查询
-								</Link>
+								<Link to={`/${SEARCH_SCHOOL.path}`}>学校查询</Link>
 							</Menu.Item>
 							<Menu.Item key='7'>
-								<Link to={this.props.user.uuid ? `/${SEARCH_MAJOR.path}` : `/${LOGIN.path}`}>
-									功能查询
-								</Link>
+								<Link to={`/${SEARCH_MAJOR.path}`}>专业查询</Link>
 							</Menu.Item>
 						</SubMenu>
 					</Menu>
@@ -205,7 +215,7 @@ class HeaderController extends React.Component {
 					// 如果在首页就不跳转了
 					if (pathArr[0]) {
 						this.props.history.push(`/${LOGIN.path}`);
-					}					
+					}
 				}
 			});
 		}
