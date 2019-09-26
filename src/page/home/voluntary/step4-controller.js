@@ -14,84 +14,99 @@ import * as APIS from '../../../constants/api-constants';
 // UI组件
 import { Button, Modal } from 'antd';
 
-import { BCG_ROOT_NAME, VOLUNTARY_RESULT } from '../../../constants/route-constants';
+import {
+  BCG_ROOT_NAME,
+  VOLUNTARY_RESULT
+} from '../../../constants/route-constants';
 
 const { confirm } = Modal;
 
 class Step4Controller extends React.Component {
-	state = {
-		btnLoading: false
-	};
-	render() {
-		return (
-			<div>
-				{/* 在这里显示批次之类的重要其他信息 */}
-				<VoluntaryDetailController />
-				<Button loading={this.state.btnLoading} onClick={this.handleClickSubmit}>
-					确认生成报表
-				</Button>
-			</div>
-		);
-	}
+  state = {
+    btnLoading: false
+  };
+  render() {
+    return (
+      <div>
+        {/* 在这里显示批次之类的重要其他信息 */}
+        <VoluntaryDetailController />
+        <Button.Group>
+          <Button
+            loading={this.state.btnLoading}
+            onClick={this.handleClickSubmit}
+          >
+            确认生成报表
+          </Button>
+          <Button>生成深度分析报告</Button>
+          <Button>预约一对一专家资源</Button>
+        </Button.Group>
+      </div>
+    );
+  }
 
-	handleClickSubmit = async () => {
-		confirm({
-			title: '生成报表',
-			content: '您确定生成报表吗? 生成报表会使用一次填报机会.',
-			okText: '确认',
-			cancelText: '取消',
-			onOk: async () => {
-				// loading
-				await this.setState({ btnLoading: true });
+  handleClickSubmit = async () => {
+    confirm({
+      title: '生成报表',
+      content: '您确定生成报表吗? 生成报表会使用一次填报机会.',
+      okText: '确认',
+      cancelText: '取消',
+      onOk: async () => {
+        // loading
+        await this.setState({ btnLoading: true });
 
-				// 提交到后台后返回uuid
-				let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
-					lotId: this.props.lotId,
-					voluntary: this.props.voluntary
-				});
+        // 提交到后台后返回uuid
+        let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
+          lotId: this.props.lotId,
+          voluntary: this.props.voluntary
+        });
 
-				if (voluntaryId) {
-					// 将uuid存入redux
-					this.props.recordVoluntaryIdGetResult(voluntaryId);
+        if (voluntaryId) {
+          // 将uuid存入redux
+          this.props.recordVoluntaryIdGetResult(voluntaryId);
 
-					// 结束loading
-					await this.setState({ btnLoading: false });
+          // 结束loading
+          await this.setState({ btnLoading: false });
 
-					// 跳转页面
-					this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY_RESULT.path}`);
-					this.props.nextStep();
-				} else {
-					// 结束loading
-					await this.setState({ btnLoading: false });
-					// 跳转到充值VIP页
-				}
-			},
-			onCancel() {}
-		});
-	};
+          // 跳转页面
+          this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY_RESULT.path}`);
+          this.props.nextStep();
+        } else {
+          // 结束loading
+          await this.setState({ btnLoading: false });
+          // 跳转到充值VIP页
+        }
+      },
+      onCancel() {}
+    });
+  };
 }
 
 // 从store接收state数据
-const mapStateToProps = (store) => {
-	const voluntaryStore = store['voluntaryStore'];
-	let { lot_id, voluntary } = voluntaryStore;
+const mapStateToProps = store => {
+  const voluntaryStore = store['voluntaryStore'];
+  let { lot_id, voluntary } = voluntaryStore;
 
-	return {
-		lotId: lot_id,
-		voluntary: [ ...voluntary ]
-	};
+  return {
+    lotId: lot_id,
+    voluntary: [...voluntary]
+  };
 };
 
 // 向store dispatch action
-const mapDispatchToProps = (dispatch) => {
-	return {
-		recordVoluntaryIdGetResult: (params) => {
-			dispatch(voluntaryActions.recordVoluntaryIdGetResult(params));
-		},
-		nextStep: () => {
-			dispatch(voluntaryActions.nextStep());
-		},
-	};
+const mapDispatchToProps = dispatch => {
+  return {
+    recordVoluntaryIdGetResult: params => {
+      dispatch(voluntaryActions.recordVoluntaryIdGetResult(params));
+    },
+    nextStep: () => {
+      dispatch(voluntaryActions.nextStep());
+    }
+  };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Step4Controller));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Step4Controller)
+);

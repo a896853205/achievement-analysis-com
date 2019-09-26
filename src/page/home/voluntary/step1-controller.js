@@ -18,10 +18,7 @@ class Step1Controller extends React.Component {
   state = {
     loading: false,
     // 查询分数位次的按钮和展示数据的地方
-    Scoreloading: false,
     provinceList: [],
-    fitCurrent: null,
-    fitOld: null
   };
   render() {
     const { getFieldDecorator } = this.props.form,
@@ -130,27 +127,27 @@ class Step1Controller extends React.Component {
             <Button
               type='primary'
               onClick={this.handleClickGetScore}
-              loading={this.state.Scoreloading}
+              loading={this.props.meLoading}
             >
               查询位次/线差
             </Button>
             <div>
-              {this.state.fitCurrent ? (
+              {this.props.me ? (
                 <div>
-                  <span>{this.state.fitCurrent.year}年</span>
-                  <span> 分数: {this.state.fitCurrent.score}</span>
-                  <span> 位次: {this.state.fitCurrent.rank}</span>
+                  <span>{this.props.me.fitCurrent.year}年</span>
+                  <span> 分数: {this.props.me.fitCurrent.score}</span>
+                  <span> 位次: {this.props.me.fitCurrent.rank}</span>
                 </div>
               ) : (
                 undefined
               )}
             </div>
             <div>
-              {this.state.fitOld ? (
+              {this.props.me ? (
                 <div>
-                  <span>{this.state.fitOld.year}年</span>
-                  <span> 分数: {this.state.fitOld.score}</span>
-                  <span> 位次: {this.state.fitOld.rank}</span>
+                  <span>{this.props.me.fitOld.year}年</span>
+                  <span> 分数: {this.props.me.fitOld.score}</span>
+                  <span> 位次: {this.props.me.fitOld.rank}</span>
                 </div>
               ) : (
                 undefined
@@ -185,22 +182,9 @@ class Step1Controller extends React.Component {
 
   // 查询当年位次和去年的分数和位次
   handleClickGetScore = e => {
-    this.setState({
-      Scoreloading: true
-    });
-
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
-        // 提交表单
-        let { fitCurrent, fitOld } = await launchRequest(
-          APIS.GET_SCORE_RANK,
-          values
-        );
-        await this.setState({
-          Scoreloading: false,
-          fitCurrent,
-          fitOld
-        });
+        this.props.getMeScoreRank(values);
       } else {
         this.setState({
           Scoreloading: false
@@ -221,6 +205,7 @@ class Step1Controller extends React.Component {
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
         // 提交表单
+        this.props.getMeScoreRank(values);
         await launchRequest(APIS.SET_USER_INFO, values);
         await this.setState({
           loading: false
@@ -238,11 +223,16 @@ class Step1Controller extends React.Component {
 
 // 从store接收state数据
 const mapStateToProps = store => {
-  const userStore = store['userStore'];
-  let { user } = userStore;
+  const userStore = store['userStore'],
+    voluntaryStore = store['voluntaryStore'];
+
+  let { user } = userStore,
+    { me, meLoading } = voluntaryStore;
 
   return {
-    user
+    user,
+    me,
+    meLoading
   };
 };
 
@@ -251,6 +241,9 @@ const mapDispatchToProps = dispatch => {
   return {
     nextStep: () => {
       dispatch(voluntaryActions.nextStep());
+    },
+    getMeScoreRank: (params) => {
+      dispatch(voluntaryActions.getMeScoreRank(params));
     }
   };
 };

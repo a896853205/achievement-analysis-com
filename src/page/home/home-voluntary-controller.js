@@ -19,57 +19,104 @@ import { actions as voluntaryActions } from '../../redux/voluntary-model';
 const { Step } = Steps;
 
 class HomeVoluntaryController extends React.Component {
-	render() {
-		const steps = [
-			{
-				title: '填报个人基本信息',
-				content: <Step1 />
-			},
-			{
-				title: '选择报考批次',
-				content: <Step2 />
-			},
-			{
-				title: '填报具体学校(专业)',
-				content: <Step3 />
-			},
-			{
-				title: '确认志愿表',
-				content: <Step4 />
-			}
-		];
-		return (
-			<div className='home-voluntary-box'>
-				<div className='home-voluntary-content'>
-					<Steps current={this.props.step} className='steps-box'>
-						{steps.map((item) => <Step key={item.title} title={item.title} />)}
-					</Steps>
-					<Divider>{steps[this.props.step].title}</Divider>
-					<div className='steps-content'>{steps[this.props.step].content}</div>
-					{this.props.step ? <Button onClick={this.props.prevStep}>上一步</Button> : undefined}
-				</div>
-			</div>
-		);
-	}
+  render() {
+    const steps = [
+      {
+        title: '填报个人基本信息',
+        content: <Step1 />
+      },
+      {
+        title: '选择报考批次',
+        content: <Step2 />
+      },
+      {
+        title: '填报具体学校(专业)',
+        content: <Step3 />
+      },
+      {
+        title: '确认志愿表',
+        content: <Step4 />
+      }
+    ];
+    return (
+      <div className='home-voluntary-box'>
+        {this.props.step ? (
+          <div className='home-voluntary-me'>
+            <div className='voluntarty-me-box'>
+              个人信息
+              <div>
+                {this.props.me ? (
+                  <div>
+                    <span>{this.props.me.fitCurrent.year}年</span>
+                    <span> 分数: {this.props.me.fitCurrent.score}</span>
+                    <span> 位次: {this.props.me.fitCurrent.rank}</span>
+                  </div>
+                ) : (
+                  undefined
+                )}
+              </div>
+              <div>
+                {this.props.me ? (
+                  <div>
+                    <span>{this.props.me.fitOld.year}年</span>
+                    <span> 分数: {this.props.me.fitOld.score}</span>
+                    <span> 位次: {this.props.me.fitOld.rank}</span>
+                  </div>
+                ) : (
+                  undefined
+                )}
+              </div>
+            </div>
+          </div>
+        ) : (
+          undefined
+        )}
+        <div className='home-voluntary-content'>
+          <div className='voluntary-main-box'>
+            <Steps current={this.props.step} className='steps-box'>
+              {steps.map(item => (
+                <Step key={item.title} title={item.title} />
+              ))}
+            </Steps>
+            <Divider>{steps[this.props.step].title}</Divider>
+            <div className='steps-content'>
+              {steps[this.props.step].content}
+            </div>
+            {this.props.step ? (
+              <Button onClick={this.props.prevStep}>上一步</Button>
+            ) : (
+              undefined
+            )}
+          </div>
+          <div></div>
+        </div>
+      </div>
+    );
+  }
 }
 
 // 从store接收state数据
-const mapStateToProps = (store) => {
-	const voluntaryStore = store['voluntaryStore'];
-	let { step } = voluntaryStore;
+const mapStateToProps = store => {
+  const voluntaryStore = store['voluntaryStore'];
+  let { step, me, meLoading } = voluntaryStore;
 
-	return {
-		step
-	};
+  return {
+    step,
+    me,
+    meLoading
+  };
 };
 
 // 向store dispatch action
-const mapDispatchToProps = (dispatch) => {
-	return {
-		prevStep: () => {
-			dispatch(voluntaryActions.prevStep());
-		}
-	};
+const mapDispatchToProps = dispatch => {
+  return {
+    prevStep: () => {
+      dispatch(voluntaryActions.prevStep());
+    }
+  };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeVoluntaryController);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomeVoluntaryController);
