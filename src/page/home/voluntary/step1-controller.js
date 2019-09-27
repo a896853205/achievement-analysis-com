@@ -11,6 +11,7 @@ import * as DominConfigs from '../../../constants/domin-constants';
 // 关于数据模块交互
 import { connect } from 'react-redux';
 import { actions as voluntaryActions } from '../../../redux/voluntary-model';
+import { actions as userActions } from '../../../redux/user-model';
 
 const { Option } = Select;
 
@@ -148,6 +149,7 @@ class Step1Controller extends React.Component {
                   <span>{this.props.me.fitOld.year}年</span>
                   <span> 分数: {this.props.me.fitOld.score}</span>
                   <span> 位次: {this.props.me.fitOld.rank}</span>
+                  <span> {this.props.me.lotsScoreDifferMsg}</span>
                 </div>
               ) : (
                 undefined
@@ -206,7 +208,6 @@ class Step1Controller extends React.Component {
       if (!err) {
         // 提交表单
         this.props.getMeScoreRank(values);
-        await launchRequest(APIS.SET_USER_INFO, values);
         await this.setState({
           loading: false
         });
@@ -244,6 +245,9 @@ const mapDispatchToProps = dispatch => {
     },
     getMeScoreRank: (params) => {
       dispatch(voluntaryActions.getMeScoreRank(params));
+    },
+    recordUser: (params) => {
+      dispatch(userActions.recordUser(params));
     }
   };
 };
@@ -264,16 +268,16 @@ export default connect(
           value: user.gender
         }),
         accountCategory: Form.createFormField({
-          value: user.account_category
+          value: user.accountCategory
         }),
         score: Form.createFormField({
           value: user.score
         }),
         addressProvince: Form.createFormField({
-          value: user.address_province
+          value: user.addressProvince
         }),
         examYear: Form.createFormField({
-          value: user.exam_year
+          value: user.examYear
         })
       };
     }

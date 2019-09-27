@@ -66,6 +66,7 @@ class HomeVoluntaryController extends React.Component {
                   undefined
                 )}
               </div>
+              <div>{this.props.me ? this.props.me.lotsScoreDifferMsg: undefined}</div>
             </div>
           </div>
         ) : (
@@ -88,7 +89,6 @@ class HomeVoluntaryController extends React.Component {
               undefined
             )}
           </div>
-          <div></div>
         </div>
       </div>
     );

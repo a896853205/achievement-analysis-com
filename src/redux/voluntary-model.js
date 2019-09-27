@@ -7,6 +7,9 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { launchRequest } from '../util/request';
 import * as APIS from '../constants/api-constants';
 
+// user Action
+import { effects as userEffects, actions as userActions } from './user-model';
+
 export const actions = {
   prevStep: createAction('prevStep'),
   nextStep: createAction('nextStep'),
@@ -31,15 +34,18 @@ const effects = {
     yield put(recordVoluntaryResult(data));
   },
   recordMeScoreRankSaga: function*({ payload }) {
+    yield put(userActions._recordUser(payload));
+    
     yield put(switchMeLoading());
 
-    const { fitCurrent, fitOld } = yield call(
+    const { fitCurrent, fitOld, lotsScoreDifferMsg } = yield call(
       launchRequest,
       APIS.GET_SCORE_RANK,
       payload
     );
 
-    yield put(setMeScoreRank({ fitCurrent, fitOld }));
+    yield call(userEffects.recordUserSaga, { payload });
+    yield put(setMeScoreRank({ fitCurrent, fitOld, lotsScoreDifferMsg }));
     yield put(switchMeLoading());
   }
 };
