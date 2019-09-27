@@ -66,6 +66,26 @@ class Step1Controller extends React.Component {
               ]
             })(<Input placeholder='请输入姓名' />)}
           </Form.Item>
+          <Form.Item label='电话'>
+            {getFieldDecorator('phone', {
+              rules: [
+                {
+                  required: true,
+                  message: '请输入手机号'
+                }
+              ]
+            })(<Input />)}
+          </Form.Item>
+          <Form.Item label='电子邮箱'>
+            {getFieldDecorator('email', {
+              rules: [
+                {
+                  type: 'email',
+                  message: '请输入正确的邮箱',
+                }
+              ]
+            })(<Input />)}
+          </Form.Item>
           <Form.Item label='地区'>
             {getFieldDecorator('addressProvince', {
               rules: [
@@ -266,6 +286,12 @@ export default connect(
         }),
         gender: Form.createFormField({
           value: user.gender
+        }),
+        phone: Form.createFormField({
+          value: user.phone
+        }),
+        email: Form.createFormField({
+          value: user.email
         }),
         accountCategory: Form.createFormField({
           value: user.accountCategory
