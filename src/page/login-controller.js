@@ -101,7 +101,7 @@ class LoginController extends React.Component {
           passWord: md5(passWord)
         });
         if (data) {
-          this.props.recordUser(data.user);
+          this.props._recordUser(data.user);
           // 需要放到token中
           this.setState({
             loading: false
@@ -129,8 +129,8 @@ const mapStateToProps = store => {
 // 向store dispatch action
 const mapDispatchToProps = dispatch => {
   return {
-    recordUser: params => {
-      dispatch(userActions.recordUser(params));
+    _recordUser: params => {
+      dispatch(userActions._recordUser(params));
     }
   };
 };

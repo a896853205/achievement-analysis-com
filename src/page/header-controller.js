@@ -233,6 +233,7 @@ class HeaderController extends React.Component {
   // 注销函数
   handleSignOut = () => {
     localStorage.clear();
+    this.props.clearUser();
     this.props.history.push(`/${LOGIN.path}`);
   };
 }
@@ -252,6 +253,9 @@ const mapDispatchToProps = dispatch => {
   return {
     getUser: () => {
       dispatch(userActions.getUser());
+    },
+    clearUser: () => {
+      dispatch(userActions.clearUser());
     }
   };
 };

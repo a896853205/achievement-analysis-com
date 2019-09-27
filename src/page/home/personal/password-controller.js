@@ -71,6 +71,9 @@ class PasswordController extends React.Component {
 
 		if (this.state.confirmPassword !== this.state.newPassword) {
 			message.error('新密码和确认密码需要一致');
+
+			await this.setState({ loading: false });
+
 			return;
 		} else {
 			// 发起修改密码的请求
@@ -78,8 +81,6 @@ class PasswordController extends React.Component {
 				oldPassword: md5(this.state.oldPassword),
 				newPassword: md5(this.state.newPassword)
 			});
-
-			this.props.history.push(`/login`);
 		}
 
 		await this.setState({ loading: false });

@@ -11,6 +11,7 @@ export const actions = {
   recordUser: createAction('recordUser'),
   _recordUser: createAction('_recordUser'),
   getUser: createAction('getUser'),
+  clearUser: createAction('clearUser'),
 };
 const _switchUserLoading = createAction('_switchUserLoading');
 
@@ -57,6 +58,12 @@ export const userReducer = handleActions({
       userLoading: !state.userLoading
     };
   },
+  clearUser(state) {
+    return {
+      ...state,
+      user: {}
+    }
+  }
 }, {
   user: {},
   userLoading: false,
