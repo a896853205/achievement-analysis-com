@@ -137,7 +137,8 @@ export const voluntaryReducer = handleActions(
         school: voluntary[changeIndex],
         schoolName: schoolData.school_name,
         schoolId: schoolData.school_id,
-        major: initMajorArr()
+        major: initMajorArr(),
+        gather: schoolData.gather,
       });
 
       return {
@@ -209,12 +210,14 @@ function initSchoolObj(school) {
   school.schoolId = undefined;
   // 这里还需要清除专业数组
   school.major = initMajorArr();
+  school.gather = '';
 }
 
-function setSchool({ school, schoolName, schoolId, major }) {
+function setSchool({ school, schoolName, schoolId, major, gather }) {
   school.schoolName = schoolName;
   school.schoolId = schoolId;
   school.major = major;
+  school.gather = gather;
 }
 
 function initMajorArr() {

@@ -13,7 +13,7 @@ import SchoolDetailController from '../school/school-detail';
 import '../../../style/voluntary/step3.css';
 
 // UI组件
-import { Checkbox, Table, Select, Icon, Collapse, Radio, Button, Drawer, Modal } from 'antd';
+import { Checkbox, Table, Select, Icon, Collapse, Radio, Button, Drawer, Modal, Alert } from 'antd';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
@@ -171,6 +171,34 @@ class Step3Controller extends React.Component {
 			/>
 		);
 
+		const schoolGather = [
+			{
+				value: 'a',
+				radioName: '高风险型',
+				describe: '高风险风险高,需要进行谨慎填写'
+			},
+			{
+				value: 'b',
+				radioName: '中风险型',
+				describe: '中风险风险中,需要进行看看再填写'
+			},
+			{
+				value: 'c',
+				radioName: '低风险型',
+				describe: '低风险风险低,需要进行顺眼就填写'
+			},
+			{
+				value: 'd',
+				radioName: '微风险型',
+				describe: '微风险就如同微风一般别瞎选就行'
+			},
+			{
+				value: 'e',
+				radioName: '稳妥型',
+				describe: '随便添一添吧,反正都能上'
+			}
+		]
+
 		return (
 			<div className='step3-box'>
 				<div className='school-option-box'>
@@ -237,23 +265,14 @@ class Step3Controller extends React.Component {
 				</div>
 				<div className='content'>
 					<div className='content-left'>
-						<Radio.Group className='btn-group' onChange={this.handleGatherChange}>
-							<Radio.Button className='btn' value='a'>
-								集合A
-							</Radio.Button>
-							<Radio.Button className='btn' value='b'>
-								集合B
-							</Radio.Button>
-							<Radio.Button className='btn' value='c'>
-								集合C
-							</Radio.Button>
-							<Radio.Button className='btn' value='d'>
-								集合D
-							</Radio.Button>
-							<Radio.Button className='btn' value='e'>
-								集合E
-							</Radio.Button>
+						<Radio.Group className='btn-group' value={this.state.gatherValue} onChange={this.handleGatherChange}>
+							{ schoolGather.map(item => (
+								<Radio.Button key={item.value} className='btn' value={item.value}>
+									{item.radioName}
+								</Radio.Button>
+							)) }
 						</Radio.Group>
+						<Alert message={schoolGather.find(gather =>  (gather.value === this.state.gatherValue)).describe} type="warning" showIcon />
 						<Table
 							rowKey={(record) => record.school_id}
 							columns={columns}
