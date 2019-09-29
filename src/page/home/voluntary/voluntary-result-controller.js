@@ -4,58 +4,88 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // UI组件
-import { Divider, Skeleton } from 'antd';
+import { Divider, Skeleton, Tag } from 'antd';
 
 // css
 import '../../../style/voluntary/result.css';
 
 class VoluntaryResultController extends React.Component {
-	render() {
-		return (
-			<div className='voluntary-result-box'>
-				<div className='voluntary-result-content'>
-					<h1>志愿分析评测报告</h1>
-					<Divider />
-					<div>名称: 志愿分析评测报告 位次: 9466 批次: 一批A</div>
-					<div>
-						<h5>志愿选择完备性</h5>
-						<Skeleton />
-					</div>
-					<div>
-						<h5>梯度选择合理性</h5>
-						<Skeleton />
-					</div>
-					<div>
-						<h5>志愿排序合理性</h5>
-						<Skeleton />
-					</div>
-					<div>
-						<h5>志愿数量合理性</h5>
-						<Skeleton />
-					</div>
-					<div>
-						<h5>大计划选择合理性</h5>
-						<Skeleton />
-					</div>
-					{this.props.voluntaryResult ? this.props.voluntaryResult.content : '1'}
-				</div>
-			</div>
-		);
-	}
+  render() {
+    return (
+      <div className='voluntary-result-box'>
+        <div className='voluntary-result-content'>
+          <h1>志愿分析评测报告</h1>
+          <Divider />
+          <div>
+            名称: 志愿分析评测报告 批次: {this.props.voluntaryResult.lotsName}
+          </div>
+          <div className='voluntary-result-detail-box'>
+            <div>
+              
+              {this.props.voluntaryResult.completeResult ? (
+                <div>
+                  <h3 className='voluntary-result-title'>
+                    <span>志愿选择完备性</span> 
+                    {this.props.voluntaryResult.completeResult.reasonable ? (
+                      <Tag color='#87d068'>合理</Tag>
+                    ) : (
+                      <Tag color='#f50'>不合理</Tag>
+                    )}
+                  </h3>
+									<Divider />
+                  <h5>{this.props.voluntaryResult.completeResult.describe}</h5>
+                  {this.props.voluntaryResult.completeResult.unWriteDetailArr.map(
+                    item => (
+                      <p key={item}>{item}</p>
+                    )
+                  )}
+                </div>
+              ) : (
+                <Skeleton />
+              )}
+            </div>
+            <div>
+              <h3 className='voluntary-result-title'>梯度选择合理性</h3>
+              <Divider />
+              <Skeleton />
+            </div>
+            <div>
+              <h3 className='voluntary-result-title'>志愿排序合理性</h3>
+              <Divider />
+              <Skeleton />
+            </div>
+            <div>
+              <h3 className='voluntary-result-title'>志愿数量合理性</h3>
+              <Divider />
+              <Skeleton />
+            </div>
+            <div>
+              <h3 className='voluntary-result-title'>大计划选择合理性</h3>
+              <Divider />
+              <Skeleton />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 // 从store接收state数据
-const mapStateToProps = (store) => {
-	const voluntaryStore = store['voluntaryStore'];
-	let { voluntaryResult } = voluntaryStore;
+const mapStateToProps = store => {
+  const voluntaryStore = store['voluntaryStore'];
+  let { voluntaryResult } = voluntaryStore;
 
-	return {
-		voluntaryResult
-	};
+  return {
+    voluntaryResult
+  };
 };
 
 // 向store dispatch action
-const mapDispatchToProps = (dispatch) => {
-	return {};
+const mapDispatchToProps = dispatch => {
+  return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(VoluntaryResultController);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(VoluntaryResultController);
