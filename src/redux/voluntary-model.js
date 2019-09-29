@@ -139,6 +139,8 @@ export const voluntaryReducer = handleActions(
         schoolId: schoolData.school_id,
         major: initMajorArr(),
         gather: schoolData.gather,
+        gender: schoolData.gender,
+        year: schoolData.year,
       });
 
       return {
@@ -164,6 +166,9 @@ export const voluntaryReducer = handleActions(
       if (majorIndex !== -1) {
         voluntary[schoolIndex].major[majorIndex] = initMajorObj();
       }
+
+      console.log(voluntary[schoolIndex].major[changeMajorIndex]);
+      console.log(voluntary[schoolIndex].major);
 
       setMajor({
         major: voluntary[schoolIndex].major[changeMajorIndex],
@@ -210,20 +215,24 @@ function initSchoolObj(school) {
   school.schoolId = undefined;
   // 这里还需要清除专业数组
   school.major = initMajorArr();
-  school.gather = '';
+  school.gather = undefined;
+  school.gender = undefined;
+  school.year = undefined;
 }
 
-function setSchool({ school, schoolName, schoolId, major, gather }) {
+function setSchool({ school, schoolName, schoolId, major, gather, gender, year }) {
   school.schoolName = schoolName;
   school.schoolId = schoolId;
   school.major = major;
   school.gather = gather;
+  school.gender = gender;
+  school.year = year;
 }
 
 function initMajorArr() {
   let arr = [];
 
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i <= 5; i++) {
     arr.push(initMajorObj());
   }
 

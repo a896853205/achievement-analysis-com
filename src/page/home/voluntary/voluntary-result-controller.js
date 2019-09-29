@@ -21,9 +21,9 @@ class VoluntaryResultController extends React.Component {
           </div>
           <div className='voluntary-result-detail-box'>
             <div>
-              
               {this.props.voluntaryResult.completeResult ? (
                 <div>
+                  <Divider />
                   <h3 className='voluntary-result-title'>
                     <span>志愿选择完备性</span> 
                     {this.props.voluntaryResult.completeResult.reasonable ? (
@@ -33,7 +33,7 @@ class VoluntaryResultController extends React.Component {
                     )}
                   </h3>
 									<Divider />
-                  <h5>{this.props.voluntaryResult.completeResult.describe}</h5>
+                  <h5 className='result-describe'>{this.props.voluntaryResult.completeResult.describe}</h5>
                   {this.props.voluntaryResult.completeResult.unWriteDetailArr.map(
                     item => (
                       <p key={item}>{item}</p>
@@ -45,21 +45,46 @@ class VoluntaryResultController extends React.Component {
               )}
             </div>
             <div>
-              <h3 className='voluntary-result-title'>梯度选择合理性</h3>
+              <h3 className='voluntary-result-title'>
+              {this.props.voluntaryResult.gradedResult ? (
+                <div>
+                  <Divider />
+                  <h3 className='voluntary-result-title'>
+                    <span>梯度选择合理性</span> 
+                    {this.props.voluntaryResult.gradedResult.reasonable ? (
+                      <Tag color='#87d068'>合理</Tag>
+                    ) : (
+                      <Tag color='#f50'>不合理</Tag>
+                    )}
+                  </h3>
+									<Divider />
+                  <h5 className='result-describe'>{this.props.voluntaryResult.gradedResult.describe}</h5>
+                  {this.props.voluntaryResult.gradedResult.gradedDetailArr.map(
+                    item => (
+                      <p key={item}>{item}</p>
+                    )
+                  )}
+                </div>
+              ) : (
+                <Skeleton />
+              )}
+                </h3>
               <Divider />
-              <Skeleton />
             </div>
             <div>
+              <Divider />
               <h3 className='voluntary-result-title'>志愿排序合理性</h3>
               <Divider />
               <Skeleton />
             </div>
             <div>
+              <Divider />
               <h3 className='voluntary-result-title'>志愿数量合理性</h3>
               <Divider />
               <Skeleton />
             </div>
             <div>
+              <Divider />
               <h3 className='voluntary-result-title'>大计划选择合理性</h3>
               <Divider />
               <Skeleton />
