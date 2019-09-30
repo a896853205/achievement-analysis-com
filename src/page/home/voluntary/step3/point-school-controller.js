@@ -33,11 +33,10 @@ class PointSchoolController extends React.Component {
 
   // 搜索学校名
   handleSearchSchool = () => {
-    // 根据学校名批次,科系,
     this.props.recordSchoolList(3);
   }
   handleChangeName = (e) => {
-    this.props.recordschoolName(e.target.value);
+    this.props.recordSchoolName(e.target.value);
   }
 }
 
@@ -54,8 +53,8 @@ const mapStateToProps = store => {
 // 向store dispatch action
 const mapDispatchToProps = dispatch => {
   return {
-    recordschoolName: params => {
-      dispatch(voluntaryActions.recordschoolName(params));
+    recordSchoolName: params => {
+      dispatch(voluntaryActions.recordSchoolName(params));
     },
     recordSchoolList: type =>{
       dispatch(voluntaryActions.recordSchoolList(type));

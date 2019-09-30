@@ -24,7 +24,8 @@ export const actions = {
   recordVoluntaryIdGetResult: createAction('recordVoluntaryIdGetResult'),
   getMeScoreRank: createAction('getMeScoreRank'),
   recordSchoolOption: createAction('recordSchoolOption'),
-  recordschoolName: createAction('recordschoolName'),
+  recordSchoolName: createAction('recordSchoolName'),
+  recordMajorName: createAction('recordMajorName')
 };
 const recordVoluntaryResult = createAction('recordVoluntaryResult');
 const setMeScoreRank = createAction('setMeScoreRank');
@@ -64,19 +65,16 @@ const effects = {
     // 这里需要做一下type判断,如果是1就按照学校优先来处理
     // 如果是3就按照查学校名来处理
     if (payload === 1) {
-      let {
-        schoolOption,
-        lot_id
-      } = voluntaryStore;
-  
+      let { schoolOption, lot_id } = voluntaryStore;
+
       let {
         natureValues,
         propertyValues,
         typeValues,
         areaFeatureValues,
-        gatherValue,
+        gatherValue
       } = schoolOption;
-  
+
       if (lot_id) {
         let data = yield call(launchRequest, APIS.GET_SCHOOL, {
           lotId: lot_id,
@@ -87,19 +85,26 @@ const effects = {
           gatherValue,
           type: payload
         });
-  
+
         schoolList = data.schoolList;
       } else {
         schoolList = [];
       }
     } else if (payload === 2) {
+      let { lot_id, majorName } = voluntaryStore;
 
+      if (lot_id) {
+        let data = yield call(launchRequest, APIS.GET_SCHOOL, {
+          lotId: lot_id,
+          majorName,
+          type: payload
+        });
+
+        schoolList = data.schoolList;
+      }
     } else if (payload === 3) {
       // 指定院校
-      let {
-        lot_id,
-        schoolName
-      } = voluntaryStore;
+      let { lot_id, schoolName } = voluntaryStore;
 
       if (lot_id) {
         let data = yield call(launchRequest, APIS.GET_SCHOOL, {
@@ -107,7 +112,7 @@ const effects = {
           schoolName,
           type: payload
         });
-  
+
         schoolList = data.schoolList;
       }
     }
@@ -166,7 +171,7 @@ export const voluntaryReducer = handleActions(
       };
     },
     // 志愿部分
-    recordSchoolOption(state, { payload: result }){
+    recordSchoolOption(state, { payload: result }) {
       // 学校筛选条件
       // 学校选项
       // schoolOption: {
@@ -179,10 +184,10 @@ export const voluntaryReducer = handleActions(
       return {
         ...state,
         schoolOption: {
-          ...(state.schoolOption),
-          [Object.keys(result)[0]]: Object.values(result)[0],
+          ...state.schoolOption,
+          [Object.keys(result)[0]]: Object.values(result)[0]
         }
-      }
+      };
     },
     initVoluntary(state, { payload: result }) {
       result.forEach((item, index, arr) => {
@@ -293,10 +298,16 @@ export const voluntaryReducer = handleActions(
       };
     },
     // 记录修改搜索学校输入框
-    recordschoolName(state, {payload: result}) {
+    recordSchoolName(state, { payload: result }) {
       return {
         ...state,
-        schoolName: result,
+        schoolName: result
+      };
+    },
+    recordMajorName(state, { payload: result }) {
+      return {
+        ...state,
+        majorName: result
       }
     }
   },
@@ -317,6 +328,7 @@ export const voluntaryReducer = handleActions(
       gatherValue: 'a'
     },
     schoolName: '',
+    majorName: '',
     schoolList: [],
     schoolTableLoading: false,
     // 设置志愿用的数据
