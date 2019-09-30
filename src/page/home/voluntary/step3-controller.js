@@ -89,11 +89,7 @@ class Step3Controller extends React.Component {
   }
 
   handleChangeTabsKey = (key) => {
-    if (key === '1') {
-      this.props.recordSchoolList();
-    } else {
-      this.props._recordSchoolList([]);
-    }
+    this.props.recordSchoolList(parseInt(key));
   }
 
   handleClickCheckVoluntary = () => {
@@ -127,10 +123,6 @@ const mapDispatchToProps = dispatch => {
     // 查数据库
     recordSchoolList: params => {
       dispatch(voluntaryActions.recordSchoolList(params));
-    },
-    // 不需要查数据库
-    _recordSchoolList: params => {
-      dispatch(voluntaryActions._recordSchoolList(params));
     }
   };
 };

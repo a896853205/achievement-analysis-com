@@ -248,7 +248,7 @@ const mapDispatchToProps = dispatch => {
   return {
     recordSchoolOption: params => {
       dispatch(voluntaryActions.recordSchoolOption(params));
-      dispatch(voluntaryActions.recordSchoolList());
+      dispatch(voluntaryActions.recordSchoolList(1));
     },
     setLotId: lotId => {
       dispatch(voluntaryActions.setLotId(lotId));
@@ -257,7 +257,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(voluntaryActions.initVoluntary(params));
     },
     recordSchoolList: () => {
-      dispatch(voluntaryActions.recordSchoolList());
+      dispatch(voluntaryActions.recordSchoolList(1));
     }
   };
 };

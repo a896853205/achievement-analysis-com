@@ -24,6 +24,7 @@ export const actions = {
   recordVoluntaryIdGetResult: createAction('recordVoluntaryIdGetResult'),
   getMeScoreRank: createAction('getMeScoreRank'),
   recordSchoolOption: createAction('recordSchoolOption'),
+  recordschoolName: createAction('recordschoolName'),
 };
 const recordVoluntaryResult = createAction('recordVoluntaryResult');
 const setMeScoreRank = createAction('setMeScoreRank');
@@ -52,40 +53,63 @@ const effects = {
     yield put(setMeScoreRank({ fitCurrent, fitOld, lotsScoreDifferMsg }));
     yield put(switchMeLoading(false));
   },
-  recordSchoolListSaga: function*() {
+  recordSchoolListSaga: function*({ payload }) {
     yield put(switchSchoolTableLoading(true));
 
-    // 获取当前redux学校的配置项
     let schoolList = [];
     const state = yield select();
     const voluntaryStore = state['voluntaryStore'];
 
-    let {
-      schoolOption,
-      lot_id
-    } = voluntaryStore;
-
-    let {
-      natureValues,
-      propertyValues,
-      typeValues,
-      areaFeatureValues,
-      gatherValue,
-    } = schoolOption;
-
-    if (lot_id) {
-      let data = yield call(launchRequest, APIS.GET_SCHOOL, {
-        lotId: lot_id,
+    // 获取当前redux学校的配置项
+    // 这里需要做一下type判断,如果是1就按照学校优先来处理
+    // 如果是3就按照查学校名来处理
+    if (payload === 1) {
+      let {
+        schoolOption,
+        lot_id
+      } = voluntaryStore;
+  
+      let {
         natureValues,
         propertyValues,
         typeValues,
         areaFeatureValues,
-        gatherValue
-      });
+        gatherValue,
+      } = schoolOption;
+  
+      if (lot_id) {
+        let data = yield call(launchRequest, APIS.GET_SCHOOL, {
+          lotId: lot_id,
+          natureValues,
+          propertyValues,
+          typeValues,
+          areaFeatureValues,
+          gatherValue,
+          type: payload
+        });
+  
+        schoolList = data.schoolList;
+      } else {
+        schoolList = [];
+      }
+    } else if (payload === 2) {
 
-      schoolList = data.schoolList;
-    } else {
-      schoolList = [];
+    } else if (payload === 3) {
+      // 指定院校
+      let {
+        lot_id,
+        schoolName
+      } = voluntaryStore;
+
+      if (lot_id) {
+        let data = yield call(launchRequest, APIS.GET_SCHOOL, {
+          lotId: lot_id,
+          schoolName,
+          type: payload
+        });
+  
+        schoolList = data.schoolList;
+      }
     }
 
     yield put(actions._recordSchoolList(schoolList));
@@ -170,7 +194,6 @@ export const voluntaryReducer = handleActions(
         voluntary: result
       };
     },
-
     deleteVoluntary(state, { payload: result }) {
       let { voluntary } = state,
         oldIndex = voluntary.findIndex(item => {
@@ -186,7 +209,6 @@ export const voluntaryReducer = handleActions(
         voluntary
       };
     },
-
     recordSchool(state, { payload: result }) {
       let { voluntary } = state;
       let { changeVolunteerId, schoolData } = result;
@@ -220,7 +242,6 @@ export const voluntaryReducer = handleActions(
         voluntary
       };
     },
-
     recordMajor(state, { payload: result }) {
       let { voluntary } = state,
         { majorData, schoolId, changeMajorIndex } = result;
@@ -251,7 +272,6 @@ export const voluntaryReducer = handleActions(
         voluntary
       };
     },
-
     // 志愿结果部分
     recordVoluntaryDetail(state, { payload: result }) {
       return {
@@ -259,22 +279,26 @@ export const voluntaryReducer = handleActions(
         voluntaryDetail: result
       };
     },
-
     recordVoluntaryResult(state, { payload: result }) {
       return {
         ...state,
         voluntaryResult: result
       };
     },
-
     // 记录学校列表
     _recordSchoolList(state, { payload: result }) {
       return {
         ...state,
         schoolList: result
       };
+    },
+    // 记录修改搜索学校输入框
+    recordschoolName(state, {payload: result}) {
+      return {
+        ...state,
+        schoolName: result,
+      }
     }
-
   },
   {
     step: 0,
@@ -292,6 +316,7 @@ export const voluntaryReducer = handleActions(
       areaFeatureValues: [],
       gatherValue: 'a'
     },
+    schoolName: '',
     schoolList: [],
     schoolTableLoading: false,
     // 设置志愿用的数据
