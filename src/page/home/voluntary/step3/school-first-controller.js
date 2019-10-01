@@ -25,43 +25,9 @@ class SchoolFirstController extends React.Component {
     schoolProperty: [],
     schoolType: [],
     areaFeature: [],
-
-    // option选择的数组
-    natureValues: [],
-    propertyValues: [],
-    typeValues: [],
-    areaFeatureValues: [],
-    gatherValue: 'a',
+    gatherOptionList: []
   };
   render() {
-    const schoolGather = [
-      {
-        value: 'a',
-        radioName: '高风险型',
-        describe: '高风险风险高,需要进行谨慎填写'
-      },
-      {
-        value: 'b',
-        radioName: '中风险型',
-        describe: '中风险风险中,需要进行看看再填写'
-      },
-      {
-        value: 'c',
-        radioName: '微风险型',
-        describe: '低风险风险低,需要进行顺眼就填写'
-      },
-      {
-        value: 'd',
-        radioName: '最佳匹配型',
-        describe: '微风险就如同微风一般别瞎选就行'
-      },
-      {
-        value: 'e',
-        radioName: '完美专业型',
-        describe: '随便添一添吧,反正都能上'
-      }
-    ];
-
     return (
       <div>
         <div className='school-option-box'>
@@ -134,16 +100,21 @@ class SchoolFirstController extends React.Component {
           value={this.props.gatherValue}
           onChange={this.handleGatherChange}
         >
-          {schoolGather.map(item => (
+          {this.state.gatherOptionList.map(item => (
             <Radio.Button key={item.value} className='btn' value={item.value}>
-              {item.radioName}
+              {item.name}
             </Radio.Button>
           ))}
         </Radio.Group>
         <Alert
           message={
-            schoolGather.find(gather => gather.value === this.props.gatherValue)
-              .describe
+            this.state.gatherOptionList.find(
+              gather => gather.value === this.props.gatherValue
+            )
+              ? this.state.gatherOptionList.find(
+                  gather => gather.value === this.props.gatherValue
+                ).describe
+              : undefined
           }
           type='warning'
           showIcon
@@ -161,7 +132,8 @@ class SchoolFirstController extends React.Component {
         schoolProperty,
         schoolType,
         areaFeature,
-        voluntaryOptionList
+        voluntaryOptionList,
+        gatherOptionList
       },
       { lotsOption }
     ] = await Promise.all([
@@ -182,6 +154,7 @@ class SchoolFirstController extends React.Component {
       schoolType,
       areaFeature,
       voluntaryOptionList,
+      gatherOptionList,
       lotsOption
     });
   };
@@ -221,27 +194,27 @@ class SchoolFirstController extends React.Component {
 
   // 办学性质改变
   handleNatureChange = async checkedValues => {
-    this.props.recordSchoolOption({natureValues: checkedValues})
+    this.props.recordSchoolOption({ natureValues: checkedValues });
   };
 
   // 学校属性改变
   handlePropertyChange = async checkedValues => {
-    this.props.recordSchoolOption({propertyValues: checkedValues});
+    this.props.recordSchoolOption({ propertyValues: checkedValues });
   };
 
   // 高校类别改变
   handleTypeChange = async checkedValues => {
-    this.props.recordSchoolOption({typeValues: checkedValues})
+    this.props.recordSchoolOption({ typeValues: checkedValues });
   };
 
   // 地域特色改变
   handleAreaFeatureChange = async checkedValues => {
-    this.props.recordSchoolOption({areaFeatureValues: checkedValues})
+    this.props.recordSchoolOption({ areaFeatureValues: checkedValues });
   };
 
   // 改变集合
   handleGatherChange = async e => {
-    this.props.recordSchoolOption({gatherValue: e.target.value})
+    this.props.recordSchoolOption({ gatherValue: e.target.value });
   };
 }
 const mapDispatchToProps = dispatch => {
