@@ -1,7 +1,7 @@
 import React from 'react';
 
 // UI组件
-import { Select, Button, Icon, Table, Drawer } from 'antd';
+import { Select, Button, Icon, Table, Drawer, Tag } from 'antd';
 
 // 自定义组件
 import SubTableController from './sub-table-controller';
@@ -43,10 +43,17 @@ class TableController extends React.Component {
       },
       {
         title: '投档概率',
-        dataIndex: 'archives',
-        key: 'archives',
+        dataIndex: 'enrollRate',
+        key: 'enrollRate',
         align: 'center',
-        render: () => <span>-</span>
+        render: (text) => {
+          switch (text) {
+            case 1: return (<Tag color="red">低</Tag>);
+            case 2: return (<Tag color="blue">中</Tag>);
+            case 3: return (<Tag color="green">高</Tag>);
+            default: return (<Tag color="purple">未知</Tag>);
+          }
+        }
       },
       {
         title: '风险系数',
