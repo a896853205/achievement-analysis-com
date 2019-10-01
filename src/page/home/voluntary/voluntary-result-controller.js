@@ -104,10 +104,8 @@ class VoluntaryResultController extends React.Component {
                   <Skeleton />
                 )}
               </h3>
-              <Divider />
             </div>
             <div>
-              <Divider />
               {this.props.voluntaryResult.planResult ? (
                 <div>
                   <Divider />
@@ -132,8 +130,6 @@ class VoluntaryResultController extends React.Component {
               ) : (
                 <Skeleton />
               )}
-              <Divider />
-              <Skeleton />
             </div>
           </div>
         </div>
