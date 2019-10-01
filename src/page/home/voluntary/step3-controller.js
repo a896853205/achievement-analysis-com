@@ -4,7 +4,7 @@ import React from 'react';
 import '../../../style/voluntary/step3.css';
 
 // UI组件
-import { Collapse, Button, Icon, Modal, Tabs } from 'antd';
+import { Collapse, Button, Icon, Modal, Tabs, Spin } from 'antd';
 
 // 自定义组件
 import SchoolFirstController from './step3/school-first-controller';
@@ -48,17 +48,26 @@ class Step3Controller extends React.Component {
       <div className='step3-box'>
         <div className='content'>
           <div className='content-left'>
-            <Tabs defaultActiveKey='1' onChange={this.handleChangeTabsKey}>
-              <TabPane tab='院校优先' key='1'>
-								<SchoolFirstController />
-              </TabPane>
-              <TabPane tab='专业优先' key='2'>
-                <MajorFirstController />
-              </TabPane>
-              <TabPane tab='指定院校' key='3'>
-                <PointSchoolController />
-              </TabPane>
-            </Tabs>
+            <Spin
+              tip="数据量较大,请耐心等待"
+              delay={200}
+              spinning={this.props.schoolTableLoading}>
+              <Tabs
+                className='content-box'
+                defaultActiveKey='1'
+                onChange={this.handleChangeTabsKey}
+              >
+                <TabPane tab='院校优先' key='1'>
+                  <SchoolFirstController />
+                </TabPane>
+                <TabPane tab='专业优先' key='2'>
+                  <MajorFirstController />
+                </TabPane>
+                <TabPane tab='指定院校' key='3'>
+                  <PointSchoolController />
+                </TabPane>
+              </Tabs>
+            </Spin>
           </div>
           <div className='content-right'>
             <Collapse bordered={false}>
@@ -88,9 +97,9 @@ class Step3Controller extends React.Component {
     );
   }
 
-  handleChangeTabsKey = (key) => {
+  handleChangeTabsKey = key => {
     this.props.recordSchoolList(parseInt(key));
-  }
+  };
 
   handleClickCheckVoluntary = () => {
     this.props.recordVoluntaryDetail(this.props.voluntary);
@@ -101,10 +110,11 @@ class Step3Controller extends React.Component {
 // 从store接收state数据
 const mapStateToProps = store => {
   const voluntaryStore = store['voluntaryStore'];
-  let { voluntary } = voluntaryStore;
+  let { voluntary, schoolTableLoading } = voluntaryStore;
 
   return {
-    voluntary: [...voluntary]
+    voluntary: [...voluntary],
+    schoolTableLoading
   };
 };
 

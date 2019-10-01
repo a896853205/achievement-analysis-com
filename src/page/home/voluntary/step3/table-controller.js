@@ -146,7 +146,6 @@ class TableController extends React.Component {
               style={{ margin: 0 }}
             />
           )}
-          loading={this.props.schoolTableLoading}
         />
         <Drawer
           width={640}
