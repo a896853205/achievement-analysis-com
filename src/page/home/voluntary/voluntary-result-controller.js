@@ -93,7 +93,9 @@ class VoluntaryResultController extends React.Component {
                       )
                     )}
                     <ReactEcharts
-                      option={this.getOption(this.props.voluntaryResult.gradedResult.schoolScoreArr)}
+                      option={this.getOption(
+                        this.props.voluntaryResult.gradedResult.schoolScoreArr
+                      )}
                       style={{ height: '350px' }}
                       className='questionnaire-chart'
                     />
@@ -106,19 +108,30 @@ class VoluntaryResultController extends React.Component {
             </div>
             <div>
               <Divider />
-              <h3 className='voluntary-result-title'>志愿排序合理性</h3>
-              <Divider />
-              <Skeleton />
-            </div>
-            <div>
-              <Divider />
-              <h3 className='voluntary-result-title'>志愿数量合理性</h3>
-              <Divider />
-              <Skeleton />
-            </div>
-            <div>
-              <Divider />
-              <h3 className='voluntary-result-title'>大计划选择合理性</h3>
+              {this.props.voluntaryResult.planResult ? (
+                <div>
+                  <Divider />
+                  <h3 className='voluntary-result-title'>
+                    <span>大计划选择合理性</span>
+                    {this.props.voluntaryResult.planResult.reasonable ? (
+                      <Tag color='#87d068'>合理</Tag>
+                    ) : (
+                      <Tag color='#f50'>不合理</Tag>
+                    )}
+                  </h3>
+                  <Divider />
+                  <h5 className='result-describe'>
+                    {this.props.voluntaryResult.planResult.describe}
+                  </h5>
+                  {this.props.voluntaryResult.planResult.planDetailArr.map(
+                    item => (
+                      <p key={item}>{item}</p>
+                    )
+                  )}
+                </div>
+              ) : (
+                <Skeleton />
+              )}
               <Divider />
               <Skeleton />
             </div>
