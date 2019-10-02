@@ -80,12 +80,12 @@ class SubTableController extends React.Component {
 						}
 						value={
 							majorList.findIndex((majorItem) => {
-								return majorItem.majorId === record.major_id;
+								return majorItem.majorId === record.enrollment_id;
 							}) === -1 ? (
 								undefined
 							) : (
 								majorList.findIndex((majorItem) => {
-									return majorItem.majorId === record.major_id;
+									return majorItem.majorId === record.enrollment_id;
 								})
 							)
 						}
@@ -101,7 +101,7 @@ class SubTableController extends React.Component {
 			}
 		];
 
-		return <Table loading={this.state.loading} pagination={false} rowKey={(record) => record.major_id} columns={columns} dataSource={this.state.majorList} />;
+		return <Table loading={this.state.loading} pagination={false} rowKey={(record) => record.enrollment_id} columns={columns} dataSource={this.state.majorList} />;
 	}
 
 	componentDidMount = async () => {

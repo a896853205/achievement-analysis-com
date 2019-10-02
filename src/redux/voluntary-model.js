@@ -258,7 +258,7 @@ export const voluntaryReducer = handleActions(
 
       // 找专业的位置
       let majorIndex = voluntary[schoolIndex].major.findIndex(item => {
-        return item.majorId === majorData.major_id;
+        return item.majorId === majorData.enrollment_id;
       });
 
       // 这里还需要清除专业
@@ -268,7 +268,7 @@ export const voluntaryReducer = handleActions(
 
       setMajor({
         major: voluntary[schoolIndex].major[changeMajorIndex],
-        majorId: majorData.major_id,
+        majorId: majorData.enrollment_id,
         majorName: majorData.major_name
       });
 
