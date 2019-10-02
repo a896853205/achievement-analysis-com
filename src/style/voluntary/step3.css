@@ -32,14 +32,14 @@
 }
 
 .content-left {
-  width: 70%;
+  width: 80%;
   border-left: 1px solid #d9d9d9;
   border-right: 1px solid #d9d9d9;
   border-bottom: 1px solid #d9d9d9;
 }
 
 .content-right {
-  width: 25%;
+  width: 15%;
   border: 1px solid #d9d9d9;
 }
 

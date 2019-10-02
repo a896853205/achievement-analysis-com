@@ -34,13 +34,13 @@ class TableController extends React.Component {
         key: 'province_name',
         align: 'center'
       },
-      {
-        title: '招生计划',
-        dataIndex: 'plan',
-        key: 'plan',
-        align: 'center',
-        render: () => <span>-</span>
-      },
+      // {
+      //   title: '招生计划',
+      //   dataIndex: 'plan',
+      //   key: 'plan',
+      //   align: 'center',
+      //   render: () => <span>-</span>
+      // },
       {
         title: '投档概率',
         dataIndex: 'enrollRate',
@@ -76,6 +76,50 @@ class TableController extends React.Component {
             查看详细信息
           </Button>
         )
+      },
+      {
+        title: '历年分数',
+        children: [
+          {
+            title: this.props.user.examYear - 1,
+            key: 'oldOneScore',
+            width: 80,
+            render: (record) => {
+              let cerrctObj = record.school_score.find(item => (item.year === this.props.user.examYear - 1))
+              if (cerrctObj) {
+                return (<span>{cerrctObj.score}</span>)
+              } else {
+                return (<span>-</span>)
+              }
+            }
+          },
+          {
+            title: this.props.user.examYear - 2,
+            key: 'oldTwoScore',
+            width: 80,
+            render: (record) => {
+              let cerrctObj = record.school_score.find(item => (item.year === this.props.user.examYear - 2))
+              if (cerrctObj) {
+                return (<span>{cerrctObj.score}</span>)
+              } else {
+                return (<span>-</span>)
+              }
+            }
+          },
+          {
+            title: this.props.user.examYear - 3,
+            key: 'oldThreeScore',
+            width: 80,
+            render: (record) => {
+              let cerrctObj = record.school_score.find(item => (item.year === this.props.user.examYear - 3))
+              if (cerrctObj) {
+                return (<span>{cerrctObj.score}</span>)
+              } else {
+                return (<span>-</span>)
+              }
+            }
+          }
+        ]
       },
       {
         title: '填报',
@@ -146,6 +190,7 @@ class TableController extends React.Component {
           dataSource={this.props.schoolList}
           onExpand={this.onExpand}
           expandIcon={CustomExpandIcon}
+          bordered
           expandedRowRender={record => (
             <SubTableController
               key={record.school_id}
@@ -185,12 +230,14 @@ class TableController extends React.Component {
 // 从store接收state数据
 const mapStateToProps = store => {
   const voluntaryStore = store['voluntaryStore'];
+  const userStore = store['userStore'];
   let { schoolList, schoolTableLoading, voluntary } = voluntaryStore;
-
+  let { user } = userStore;
   return {
     schoolList,
     schoolTableLoading,
-    voluntary: [...voluntary]
+    voluntary: [...voluntary],
+    user
   };
 };
 
