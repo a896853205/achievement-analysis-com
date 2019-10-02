@@ -17,7 +17,7 @@ class TableController extends React.Component {
   state = {
     // 抽屉显示
     schoolDrawerVisible: false
-  }
+  };
   render() {
     // 表格表头
     const columns = [
@@ -46,21 +46,43 @@ class TableController extends React.Component {
         dataIndex: 'enrollRate',
         key: 'enrollRate',
         align: 'center',
-        render: (text) => {
+        render: text => {
           switch (text) {
-            case 1: return (<Tag color="red">低</Tag>);
-            case 2: return (<Tag color="blue">中</Tag>);
-            case 3: return (<Tag color="green">高</Tag>);
-            default: return (<Tag color="purple">未知</Tag>);
+            case 1:
+              return <Tag color='red'>低</Tag>;
+            case 2:
+              return <Tag color='blue'>中</Tag>;
+            case 3:
+              return <Tag color='green'>高</Tag>;
+            default:
+              return <Tag color='purple'>未知</Tag>;
           }
         }
       },
       {
         title: '风险系数',
-        dataIndex: 'risk',
-        key: 'risk',
+        dataIndex: 'riskRate',
+        key: 'riskRate',
         align: 'center',
-        render: () => <span>-</span>
+        render: text => {
+          switch (text) {
+            case 1:
+              return <Tag color='green'>低</Tag>;
+            case 2:
+              return <Tag color='blue'>中</Tag>;
+            case 3:
+              return <Tag color='red'>高</Tag>;
+            default:
+              return <Tag color='purple'>未知</Tag>;
+          }
+        }
+      },
+      {
+        title: '招生人数',
+        dataIndex: 'enrollment',
+        key: 'enrollment',
+        align: 'center',
+        render: text => (text ? <span>{text}</span> : <span>-</span>)
       },
       {
         title: '详细信息',
@@ -83,39 +105,45 @@ class TableController extends React.Component {
           {
             title: this.props.user.examYear - 1,
             key: 'oldOneScore',
-            width: 80,
-            render: (record) => {
-              let cerrctObj = record.school_score.find(item => (item.year === this.props.user.examYear - 1))
+            width: 50,
+            render: record => {
+              let cerrctObj = record.school_score.find(
+                item => item.year === this.props.user.examYear - 1
+              );
               if (cerrctObj) {
-                return (<span>{cerrctObj.score}</span>)
+                return <span>{cerrctObj.score}</span>;
               } else {
-                return (<span>-</span>)
+                return <span>-</span>;
               }
             }
           },
           {
             title: this.props.user.examYear - 2,
             key: 'oldTwoScore',
-            width: 80,
-            render: (record) => {
-              let cerrctObj = record.school_score.find(item => (item.year === this.props.user.examYear - 2))
+            width: 50,
+            render: record => {
+              let cerrctObj = record.school_score.find(
+                item => item.year === this.props.user.examYear - 2
+              );
               if (cerrctObj) {
-                return (<span>{cerrctObj.score}</span>)
+                return <span>{cerrctObj.score}</span>;
               } else {
-                return (<span>-</span>)
+                return <span>-</span>;
               }
             }
           },
           {
             title: this.props.user.examYear - 3,
             key: 'oldThreeScore',
-            width: 80,
-            render: (record) => {
-              let cerrctObj = record.school_score.find(item => (item.year === this.props.user.examYear - 3))
+            width: 50,
+            render: record => {
+              let cerrctObj = record.school_score.find(
+                item => item.year === this.props.user.examYear - 3
+              );
               if (cerrctObj) {
-                return (<span>{cerrctObj.score}</span>)
+                return <span>{cerrctObj.score}</span>;
               } else {
-                return (<span>-</span>)
+                return <span>-</span>;
               }
             }
           }
@@ -252,7 +280,7 @@ const mapDispatchToProps = dispatch => {
     },
     showSchoolDetail: params => {
       dispatch(schoolActions.showSchoolDetail(params));
-    },
+    }
   };
 };
 
