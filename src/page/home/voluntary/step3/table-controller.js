@@ -107,7 +107,7 @@ class TableController extends React.Component {
             key: 'oldOneScore',
             width: 50,
             render: record => {
-              let cerrctObj = record.school_score.find(
+              let cerrctObj = record.scoreAndRank.find(
                 item => item.year === this.props.user.examYear - 1
               );
               if (cerrctObj) {
@@ -122,7 +122,7 @@ class TableController extends React.Component {
             key: 'oldTwoScore',
             width: 50,
             render: record => {
-              let cerrctObj = record.school_score.find(
+              let cerrctObj = record.scoreAndRank.find(
                 item => item.year === this.props.user.examYear - 2
               );
               if (cerrctObj) {
@@ -137,7 +137,7 @@ class TableController extends React.Component {
             key: 'oldThreeScore',
             width: 50,
             render: record => {
-              let cerrctObj = record.school_score.find(
+              let cerrctObj = record.scoreAndRank.find(
                 item => item.year === this.props.user.examYear - 3
               );
               if (cerrctObj) {
