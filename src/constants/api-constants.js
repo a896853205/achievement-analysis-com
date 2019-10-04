@@ -43,7 +43,8 @@ export const GET_QUESTIONNAIRE_RANK = `${DominConfigs.DOMAIN}${DominConfigs.PART
  * optvoluntary
  **************************/
 export const SAVE_VOLUNTARY = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_VOLUNTARY}/saveVoluntary`;
-export const GET_VOLUNTARY_RESULT = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_VOLUNTARY}/getVoluntaryResult`
+export const GET_VOLUNTARY_RESULT = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_VOLUNTARY}/getVoluntaryResult`;
+export const GET_MY_VOLUNTARY = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_VOLUNTARY}/getMyVoluntary`;
 
 // 获取上传Token
 export const GetUploadToken = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_UPLOAD}/getuploadtoken`;
