@@ -35,9 +35,8 @@ class Step4Controller extends React.Component {
             loading={this.state.btnLoading}
             onClick={this.handleClickSubmit}
           >
-            确认生成报表
+            确认生成报表和生成深度分析报告
           </Button>
-          <Button>生成深度分析报告</Button>
           <Button>预约一对一专家资源</Button>
         </Button.Group>
       </div>
