@@ -1,7 +1,7 @@
 import React from 'react';
 
 // UI组件
-import { Select, Button, Icon, Table, Drawer, Tag } from 'antd';
+import { Select, Button, Icon, Table, Drawer, Tag, Tooltip } from 'antd';
 
 // 自定义组件
 import SubTableController from './sub-table-controller';
@@ -116,7 +116,14 @@ class TableController extends React.Component {
         ]
       },
       {
-        title: '投档概率',
+        title: () => (
+          <Tooltip title='提档概率的解释'>
+            <span>
+              投档概率
+              <Icon type='question-circle' />
+            </span>
+          </Tooltip>
+        ),
         dataIndex: 'enrollRate',
         key: 'enrollRate',
         align: 'center',
@@ -134,7 +141,14 @@ class TableController extends React.Component {
         }
       },
       {
-        title: '风险系数',
+        title: () => (
+          <Tooltip title='风险系数的解释'>
+            <span>
+              风险系数
+              <Icon type='question-circle' />
+            </span>
+          </Tooltip>
+        ),
         dataIndex: 'riskRate',
         key: 'riskRate',
         align: 'center',
