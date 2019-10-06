@@ -2,7 +2,10 @@ const {
   override,
   fixBabelImports,
   addDecoratorsLegacy,
-  addWebpackAlias
+  addWebpackAlias,
+  addBabelPresets,
+  addExternalBabelPlugins,
+  addBabelPlugins
 } = require('customize-cra');
 const path = require('path');
 
@@ -50,7 +53,7 @@ const addCustomize = () => config => {
         vendors: {
           test: /node_modules/,
           name: 'vendors',
-          priority: -10,
+          priority: -10
         },
         common: {
           name: 'common',
@@ -59,10 +62,36 @@ const addCustomize = () => config => {
           chunks: 'all'
         }
       }
-    })
+    });
   }
   return config;
 };
+
+/**
+ * babel配置项
+ */
+const babelPresetsOptions = [
+  '@babel/preset-react',
+  [
+    '@babel/preset-env',
+    {
+      useBuiltIns: 'entry',
+      targets: {
+        ie: '11'
+      }
+    }
+  ]
+];
+
+/**
+ * babel插件
+ */
+const babelPluginOptions = [
+  'transform-class-properties',
+  '@babel/plugin-transform-arrow-functions',
+  '@babel/plugin-transform-for-of',
+  "@babel/plugin-transform-object-super"
+];
 
 module.exports = override(
   fixBabelImports('import', {
@@ -73,5 +102,8 @@ module.exports = override(
     '@': path.resolve(__dirname, 'src')
   }),
   addDecoratorsLegacy(),
-  addCustomize()
+  addCustomize(),
+  // ...addExternalBabelPlugins(...babelPluginOptions),
+  // ...addBabelPlugins(...babelPluginOptions),
+  // ...addBabelPresets(...babelPresetsOptions)
 );

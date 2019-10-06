@@ -3,7 +3,7 @@ import React from 'react';
 import { Carousel, Row, Col, Card, Icon } from 'antd';
 
 // 路由
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { SEARCH_SCHOOL, SEARCH_MAJOR } from '../constants/route-constants';
 
