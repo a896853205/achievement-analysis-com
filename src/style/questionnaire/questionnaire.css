@@ -41,3 +41,13 @@
 .ques-title {
   text-align: center;
 }
+
+.redo {
+  position: relative;
+  left: 30px;
+  top: -80px;
+}
+
+.redoButton {
+  margin: 10px;
+}
