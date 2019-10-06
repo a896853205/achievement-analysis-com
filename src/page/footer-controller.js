@@ -90,7 +90,7 @@ class FooterController extends React.Component {
                   RSS
                 </a>
               </div>
-              <div>
+              {/* <div>
                 <p> 增值电信业务经营许可证 京B2 - 20191060 </p>
                 <p> 京ICP备17068232号 - 1 </p>
                 <p>
@@ -109,7 +109,7 @@ class FooterController extends React.Component {
                   />
                   <span> 京公网安备 11010502036937 号 </span>
                 </p>
-              </div>
+              </div> */}
             </Col>
           </Row>
           <Row type="flex" className="footer-btm">

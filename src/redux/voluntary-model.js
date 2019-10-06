@@ -44,14 +44,14 @@ const effects = {
 
     yield put(switchMeLoading(true));
 
-    const { fitCurrent, fitOld, lotsScoreDifferMsg } = yield call(
+    const { fitCurrent, fitOld, lotsScoreDifferMsg, currentLotsScoreDifferMsg } = yield call(
       launchRequest,
       APIS.GET_SCORE_RANK,
       payload
     );
 
     yield call(userEffects.recordUserSaga, { payload });
-    yield put(setMeScoreRank({ fitCurrent, fitOld, lotsScoreDifferMsg }));
+    yield put(setMeScoreRank({ fitCurrent, fitOld, lotsScoreDifferMsg, currentLotsScoreDifferMsg }));
     yield put(switchMeLoading(false));
   },
   recordSchoolListSaga: function*({ payload }) {

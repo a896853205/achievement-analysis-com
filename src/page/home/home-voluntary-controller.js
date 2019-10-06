@@ -47,9 +47,18 @@ class HomeVoluntaryController extends React.Component {
               <div>
                 {this.props.me ? (
                   <div>
-                    <span>{this.props.me.fitCurrent.year}年</span>
-                    <span> 分数: {this.props.me.fitCurrent.score}</span>
-                    <span> 位次: {this.props.me.fitCurrent.rank}</span>
+                    <span>
+                      {this.props.me.fitCurrent.year}年实际分数:
+                      {this.props.user.score}{' '}
+                    </span>
+                    <span>
+                      {this.props.me.fitCurrent.year}年位次:
+                      {this.props.me.fitCurrent.rank}{' '}
+                    </span>
+                    <span>
+                      {this.props.me.fitCurrent.year}年
+                      {this.props.me.currentLotsScoreDifferMsg}
+                    </span>
                   </div>
                 ) : (
                   undefined
@@ -58,15 +67,23 @@ class HomeVoluntaryController extends React.Component {
               <div>
                 {this.props.me ? (
                   <div>
-                    <span>{this.props.me.fitOld.year}年</span>
-                    <span> 分数: {this.props.me.fitOld.score}</span>
-                    <span> 位次: {this.props.me.fitOld.rank}</span>
+                    <span>
+                      {this.props.me.fitOld.year}年映射分数:
+                      {this.props.me.fitOld.score}{' '}
+                    </span>
+                    <span>
+                      {this.props.me.fitOld.year}年映射位次:
+                      {this.props.me.fitOld.rank}{' '}
+                    </span>
+                    <span>
+                      {this.props.me.fitOld.year}年
+                      {this.props.me.lotsScoreDifferMsg}
+                    </span>
                   </div>
                 ) : (
                   undefined
                 )}
               </div>
-              <div>{this.props.me ? this.props.me.lotsScoreDifferMsg: undefined}</div>
             </div>
           </div>
         ) : (
@@ -98,12 +115,15 @@ class HomeVoluntaryController extends React.Component {
 // 从store接收state数据
 const mapStateToProps = store => {
   const voluntaryStore = store['voluntaryStore'];
+  const userStore = store['userStore'];
   let { step, me, meLoading } = voluntaryStore;
+  let { user } = userStore;
 
   return {
     step,
     me,
-    meLoading
+    meLoading,
+    user
   };
 };
 

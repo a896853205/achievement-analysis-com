@@ -25,57 +25,23 @@ class TableController extends React.Component {
         title: '院校名称',
         dataIndex: 'school_name',
         key: 'schoolName',
-        align: 'center'
-        // render: text => <a>{text}</a>,
+        align: 'center',
+        render: (text, record) => (
+          <span
+            onClick={() => {
+              this.showSchoolDetail(record);
+            }}
+            style={{ cursor: 'pointer' }}
+          >
+            {text}
+          </span>
+        )
       },
       {
         title: '地区',
         dataIndex: 'province_name',
         key: 'province_name',
         align: 'center'
-      },
-      // {
-      //   title: '招生计划',
-      //   dataIndex: 'plan',
-      //   key: 'plan',
-      //   align: 'center',
-      //   render: () => <span>-</span>
-      // },
-      {
-        title: '投档概率',
-        dataIndex: 'enrollRate',
-        key: 'enrollRate',
-        align: 'center',
-        render: text => {
-          switch (text) {
-            case 1:
-              return <Tag color='red'>低</Tag>;
-            case 2:
-              return <Tag color='blue'>中</Tag>;
-            case 3:
-              return <Tag color='green'>高</Tag>;
-            default:
-              return <Tag color='purple'>未知</Tag>;
-          }
-        }
-      },
-      {
-        title: '风险系数',
-        dataIndex: 'riskRate',
-        key: 'riskRate',
-        align: 'center',
-        render: text => {
-          switch (text) {
-            case 1:
-              return <Tag color='green'>低</Tag>;
-            case 2:
-              return <Tag color='blue'>中</Tag>;
-            case 3:
-              return <Tag color='red'>高</Tag>;
-            default:
-              return <Tag color='purple'>未知</Tag>;
-          }
-        }
       },
       {
         title: '招生人数',
@@ -95,7 +61,7 @@ class TableController extends React.Component {
               this.showSchoolDetail(record);
             }}
           >
-            查看详细信息
+            查看
           </Button>
         )
       },
@@ -148,6 +114,44 @@ class TableController extends React.Component {
             }
           }
         ]
+      },
+      {
+        title: '投档概率',
+        dataIndex: 'enrollRate',
+        key: 'enrollRate',
+        align: 'center',
+        render: text => {
+          switch (text) {
+            case 1:
+              return <Tag color='red'>低</Tag>;
+            case 2:
+              return <Tag color='blue'>中</Tag>;
+            case 3:
+              return <Tag color='green'>高</Tag>;
+            default:
+              return <Tag color='purple'>未知</Tag>;
+          }
+        }
+      },
+      {
+        title: '风险系数',
+        dataIndex: 'riskRate',
+        key: 'riskRate',
+        align: 'center',
+        render: text => {
+          switch (text) {
+            case 1:
+              return <Tag color='green'>低</Tag>;
+            case 2:
+              return <Tag color='blue'>中</Tag>;
+            case 3:
+              return <Tag color='red'>高</Tag>;
+            default:
+              return <Tag color='purple'>未知</Tag>;
+          }
+        },
+        defaultSortOrder: 'descend',
+        sorter: (a, b) => a.riskRate - b.riskRate
       },
       {
         title: '填报',

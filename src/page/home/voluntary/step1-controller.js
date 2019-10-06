@@ -19,7 +19,7 @@ class Step1Controller extends React.Component {
   state = {
     loading: false,
     // 查询分数位次的按钮和展示数据的地方
-    provinceList: [],
+    provinceList: []
   };
   render() {
     const { getFieldDecorator } = this.props.form,
@@ -81,7 +81,7 @@ class Step1Controller extends React.Component {
               rules: [
                 {
                   type: 'email',
-                  message: '请输入正确的邮箱',
+                  message: '请输入正确的邮箱'
                 }
               ]
             })(<Input />)}
@@ -142,6 +142,10 @@ class Step1Controller extends React.Component {
                 {
                   required: true,
                   message: '请输入分数'
+                },
+                {
+                  message: '请输入正确的分数',
+                  validator: (rule, value) => value >= 0 && value <= 750
                 }
               ]
             })(<InputNumber />)}
@@ -155,9 +159,18 @@ class Step1Controller extends React.Component {
             <div>
               {this.props.me ? (
                 <div>
-                  <span>{this.props.me.fitCurrent.year}年</span>
-                  <span> 分数: {this.props.me.fitCurrent.score}</span>
-                  <span> 位次: {this.props.me.fitCurrent.rank}</span>
+                  <span>
+                    {this.props.me.fitCurrent.year}年实际分数:
+                    {this.props.user.score}{' '}
+                  </span>
+                  <span>
+                    {this.props.me.fitCurrent.year}年位次:
+                    {this.props.me.fitCurrent.rank}{' '}
+                  </span>
+                  <span>
+                    {this.props.me.fitCurrent.year}年
+                    {this.props.me.currentLotsScoreDifferMsg}
+                  </span>
                 </div>
               ) : (
                 undefined
@@ -166,10 +179,18 @@ class Step1Controller extends React.Component {
             <div>
               {this.props.me ? (
                 <div>
-                  <span>{this.props.me.fitOld.year}年</span>
-                  <span> 分数: {this.props.me.fitOld.score}</span>
-                  <span> 位次: {this.props.me.fitOld.rank}</span>
-                  <span> {this.props.me.lotsScoreDifferMsg}</span>
+                  <span>
+                    {this.props.me.fitOld.year}年映射分数:
+                    {this.props.me.fitOld.score}{' '}
+                  </span>
+                  <span>
+                    {this.props.me.fitOld.year}年映射位次:
+                    {this.props.me.fitOld.rank}{' '}
+                  </span>
+                  <span>
+                    {this.props.me.fitOld.year}年
+                    {this.props.me.lotsScoreDifferMsg}
+                  </span>
                 </div>
               ) : (
                 undefined
@@ -263,10 +284,10 @@ const mapDispatchToProps = dispatch => {
     nextStep: () => {
       dispatch(voluntaryActions.nextStep());
     },
-    getMeScoreRank: (params) => {
+    getMeScoreRank: params => {
       dispatch(voluntaryActions.getMeScoreRank(params));
     },
-    recordUser: (params) => {
+    recordUser: params => {
       dispatch(userActions.recordUser(params));
     }
   };

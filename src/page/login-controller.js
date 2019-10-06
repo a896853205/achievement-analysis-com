@@ -31,8 +31,8 @@ class LoginController extends React.Component {
     return (
       <div className="back">
         <Card className="test" style={{ width: 300 }}>
-          <div className="login-title">智赢</div>
-          <div className="login-sub-title">祝你智取未来</div>
+          <div className="login-title">智赢学业规划网</div>
+          <div className="login-sub-title">以智取胜 赢得未来</div>
           <Form onSubmit={this.handleSubmit}>
             <Form.Item className="form-item">
               {getFieldDecorator("userName", {
@@ -47,7 +47,7 @@ class LoginController extends React.Component {
                   className="login-input"
                   onChange={e => this.setState({ userName: e.target.value })}
                   size="large"
-                  placeholder="手机号或卡号"
+                  placeholder="卡号"
                 />
               )}
             </Form.Item>
