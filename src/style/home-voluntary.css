@@ -2,9 +2,25 @@
   padding: 20px;
 }
 
+.home-voluntary-me {
+  padding: 20px;
+  background: #fff;
+  margin-bottom: 10px;
+}
+
+.voluntarty-me-box {
+  padding: 20px;
+  border: 1px solid #d9d9d9;
+}
+
 .home-voluntary-content {
   padding: 20px;
   background: #fff;
+}
+
+.voluntary-main-box {
+  padding: 20px;
+  border: 1px solid #d9d9d9;
 }
 
 .steps-box {

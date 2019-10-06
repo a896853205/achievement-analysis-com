@@ -134,7 +134,7 @@ async function _fetch(url, params = {}, requestType, fetchParams = {}) {
 
 			return responseData.data;
 		} else if (responseData.status === DominConfigs.SERVICE_CODE.OutTimeToken) {
-			message.error(responseData.msg);
+			message.warning(responseData.msg);
 
 			// token过期
 			// 没法使用history

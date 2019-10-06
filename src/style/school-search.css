@@ -36,3 +36,13 @@
 .ant-checkbox-wrapper {
   margin-left: 10px;
 }
+
+.school-title {
+  cursor: pointer;
+  transition: .2s;
+  font-size: 18px;
+}
+
+.school-title:hover {
+  color: rgb(16, 142, 233);
+}

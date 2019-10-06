@@ -19,7 +19,6 @@ const { Option } = Select;
 
 class BasicController extends React.Component {
 	state = {
-		loading: false,
 		provinceList: []
 	};
 	render() {
@@ -127,7 +126,7 @@ class BasicController extends React.Component {
 							})(<InputNumber />)}
 						</Form.Item>
 						<Form.Item wrapperCol={{ span: 12, offset: 2 }}>
-							<Button type='primary' htmlType='submit' shape='round' loading={this.state.loading}>
+							<Button type='primary' htmlType='submit' shape='round' loading={this.props.userLoading}>
 								保存
 							</Button>
 						</Form.Item>
@@ -149,23 +148,11 @@ class BasicController extends React.Component {
 	handleSubmit = (e) => {
 		e.preventDefault(); //阻止button submit的默认行为
 
-		this.setState({
-			loading: true
-		});
-
 		// 表单验证
 		this.props.form.validateFields(async (err, values) => {
 			if (!err) {
 				// 提交表单
-				let user = await launchRequest(APIS.SET_USER_INFO, values);
-				this.props.recordUser(user);
-				await this.setState({
-					loading: false
-				});
-			} else {
-				this.setState({
-					loading: false
-				});
+				this.props.recordUser(values);
 			}
 		});
 	};
@@ -174,10 +161,11 @@ class BasicController extends React.Component {
 // 从store接收state数据
 const mapStateToProps = (store) => {
 	const userStore = store['userStore'];
-	let { user } = userStore;
+	let { user, userLoading } = userStore;
 
 	return {
-		user
+		user,
+		userLoading
 	};
 };
 
@@ -203,16 +191,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 					value: user.gender
 				}),
 				accountCategory: Form.createFormField({
-					value: user.account_category
+					value: user.accountCategory
 				}),
 				score: Form.createFormField({
 					value: user.score
 				}),
 				addressProvince: Form.createFormField({
-					value: user.address_province
+					value: user.addressProvince
 				}),
 				examYear: Form.createFormField({
-					value: user.exam_year
+					value: user.examYear
 				})
 			};
 		}

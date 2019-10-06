@@ -5,7 +5,7 @@ import { launchRequest } from '../../../../util/request';
 import * as APIS from '../../../../constants/api-constants';
 
 // UI组件
-import { Table, Select } from 'antd';
+import { Table, Select, Tag } from 'antd';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
@@ -50,17 +50,46 @@ class SubTableController extends React.Component {
 				)
 			},
 			{
-				title: '投档概率',
-				dataIndex: '',
-				key: '',
-				render: (record) => <span>-</span>
-			},
+        title: '投档概率',
+        dataIndex: 'enrollRate',
+        key: 'enrollRate',
+        align: 'center',
+        render: text => {
+          switch (text) {
+            case 1:
+              return <Tag color='red'>低</Tag>;
+            case 2:
+              return <Tag color='blue'>中</Tag>;
+            case 3:
+              return <Tag color='green'>高</Tag>;
+            default:
+              return <Tag color='purple'>未知</Tag>;
+          }
+        }
+      },
+      {
+        title: '风险系数',
+        dataIndex: 'riskRate',
+        key: 'riskRate',
+        align: 'center',
+        render: text => {
+          switch (text) {
+            case 1:
+              return <Tag color='green'>低</Tag>;
+            case 2:
+              return <Tag color='blue'>中</Tag>;
+            case 3:
+              return <Tag color='red'>高</Tag>;
+            default:
+              return <Tag color='purple'>未知</Tag>;
+          }
+        }
+      },
 			{
-				title: '风险系数',
-				dataIndex: 'risk',
-				key: 'risk',
+				title: '备注',
+				dataIndex: 'comment',
+				key: 'comment',
 				align: 'center',
-				render: () => <span>-</span>
 			},
 			{
 				title: '填报',
@@ -80,12 +109,12 @@ class SubTableController extends React.Component {
 						}
 						value={
 							majorList.findIndex((majorItem) => {
-								return majorItem.majorId === record.major_id;
+								return majorItem.majorId === record.enrollment_id;
 							}) === -1 ? (
 								undefined
 							) : (
 								majorList.findIndex((majorItem) => {
-									return majorItem.majorId === record.major_id;
+									return majorItem.majorId === record.enrollment_id;
 								})
 							)
 						}
@@ -101,7 +130,7 @@ class SubTableController extends React.Component {
 			}
 		];
 
-		return <Table loading={this.state.loading} pagination={false} rowKey={(record) => record.major_id} columns={columns} dataSource={this.state.majorList} />;
+		return <Table loading={this.state.loading} pagination={false} rowKey={(record) => record.enrollment_id} columns={columns} dataSource={this.state.majorList} />;
 	}
 
 	componentDidMount = async () => {

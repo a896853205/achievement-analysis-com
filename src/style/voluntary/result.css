@@ -7,3 +7,14 @@
   background: #fff;
   padding: 20px;
 }
+
+.voluntary-result-title {
+  font-size: 25px;
+}
+.voluntary-result-detail-box {
+  text-align: left;
+}
+
+.result-describe {
+  font-size: 14px;
+}

@@ -42,10 +42,35 @@ export const schoolReducer = handleActions(
 				...state,
 				detailLoading: !state.detailLoading
 			}
-		}
+		},
+		recordSchoolOption(state, { payload: result }) {
+      // 学校筛选条件
+      // 学校选项
+      // schoolOption: {
+      //   natureValues: [],
+      //   propertyValues: [],
+      //   typeValues: [],
+      //   areaFeatureValues: [],
+      // }
+      return {
+        ...state,
+        schoolOption: {
+          ...state.schoolOption,
+          [Object.keys(result)[0]]: Object.values(result)[0]
+        }
+      };
+    },
 	},
 	{
+		// 学校细节
 		schoolDetail: {},
 		detailLoading: false,
+		// 学校选项
+    schoolOption: {
+      natureValues: [],
+      propertyValues: [],
+      typeValues: [],
+      areaFeatureValues: [],
+    }
 	}
 );

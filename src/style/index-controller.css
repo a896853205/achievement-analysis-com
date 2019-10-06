@@ -27,6 +27,11 @@
   max-width: 1140px;
 }
 
+.inner-box {
+  margin: 0 auto;
+  max-width: 1140px;
+}
+
 .outter-row-dark {
   text-align: center;
   background: #f6f6f7;
@@ -120,4 +125,53 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/** 
+* search板块
+*/
+.search-row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.school-background {
+  background: url('../assets/images/index/school-search.png');
+}
+
+.major-background {
+  background: url('../assets/images/index/major-search.png');
+}
+
+.search-outter-box {
+  width: calc( 50% - 5px );
+  height: 72px;
+  text-align: center;
+  color: #fff;
+  position: relative;
+  cursor: pointer;
+}
+
+.search-text-box {
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+  left: 0;
+  font-size: 24px;
+  line-height: 72px;
+}
+
+.search-title {
+  margin-left: 8px;
+}
+
+.search-shadow-box {
+  background:rgba(0,0,0,1);
+  opacity: 0.4;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
