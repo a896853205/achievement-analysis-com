@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Carousel, Row, Col, Card, Icon } from 'antd';
+import { Carousel, Row, Col, Icon } from 'antd';
 
 // 路由
 import { withRouter } from 'react-router-dom';
@@ -35,42 +35,27 @@ class IndexController extends React.Component {
   render() {
     return (
       <div className='index-container page-min-width'>
-        <div className='outter-row-dark'>
-          <Row className='black-row'>
-            <Col span={15}>
-              <Carousel className='carou' autoplay>
-                <div>
-                  <img
-                    className='carou-img'
-                    src='https://cdn.dribbble.com/users/418188/screenshots/6665427/design_for_education_illustration_tubik_2x.png'
-                    alt='banner1'
-                  />
-                </div>
-                <div>
-                  <img
-                    className='carou-img'
-                    src='https://cdn.dribbble.com/users/1355613/screenshots/6424710/communication.jpg'
-                    alt='banner2'
-                  />
-                </div>
-                <div>
-                  <img
-                    className='carou-img'
-                    src='https://cdn.dribbble.com/users/2155177/screenshots/7080887/media/47a6904ef718d59a3900394bad12f867.png'
-                    alt='banner3'
-                  />
-                </div>
-              </Carousel>
-            </Col>
-            <Col span={8}>
-              <Card className='card'>
-                <p>2019志愿模拟填报</p>
-                <p>Card content</p>
-                <p>Card content</p>
-              </Card>
-            </Col>
-          </Row>
-        </div>
+        <Carousel className='carou' autoplay>
+          <div>
+            <img
+              className='carou-img'
+              src='http://img3.youzy.cn/content/media/thumbs/p00191258.jpeg'
+              alt='banner1'
+            />
+          </div>
+          <div>
+            <img
+              className='carou-img'
+              src='http://img3.youzy.cn/content/media/thumbs/p00191467.jpeg'
+              alt='banner2'
+            />
+          </div>
+        </Carousel>
+        {/* <Card className='card'>
+            <p>2019志愿模拟填报</p>
+            <p>Card content</p>
+            <p>Card content</p>
+          </Card> */}
         <div className='outter-row-light'>
           <div className='search-row inner-box'>
             <div

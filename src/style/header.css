@@ -7,10 +7,14 @@
 }
 
 .header {
-  background: #ffffff;
+  background: #EEEEEE;
   height: 66px;
   min-width: 1100px;
   border-bottom:1px solid #e8e8e8;
+}
+
+.header .ant-menu {
+  background: #EEEEEE;
 }
 
 .user-menu-span {

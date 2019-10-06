@@ -81,6 +81,9 @@ class LoginController extends React.Component {
             </Form.Item>
           </Form>
         </Card>
+        <img src='/images/background/background-bottom.png' className='left-background-bottom' alt='页面下角蓝色图片' />
+        <img src='/images/background/background-bottom.png' className='right-background-bottom' alt='页面下角蓝色图片' />
+        {/* <image /> */}
       </div>
     );
   }
