@@ -17,8 +17,9 @@ a:hover {
 .footer {
   padding: 63px 0;
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.65);
+  color: #ffffff;
   text-align: left;
+  background: #0E407B;
 }
 
 .container {
@@ -43,16 +44,13 @@ a:hover {
 
 .footer-title {
   margin-bottom: 20px;
-  border-bottom: 1px solid #ced4da;
 }
 
 .footer-intro {
-  color: #5a5a5a;
   line-height: 2.1;
 }
 
 .footer-links {
-  color: #323232;
   font-size: 14px;
 }
 

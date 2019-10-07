@@ -49,9 +49,10 @@ class Step3Controller extends React.Component {
         <div className='content'>
           <div className='content-left'>
             <Spin
-              tip="数据量较大,请耐心等待"
+              tip='数据量较大,请耐心等待'
               delay={200}
-              spinning={this.props.schoolTableLoading}>
+              spinning={this.props.schoolTableLoading}
+            >
               <Tabs
                 className='content-box'
                 defaultActiveKey='1'
@@ -84,14 +85,18 @@ class Step3Controller extends React.Component {
                 </Panel>
               ))}
             </Collapse>
-            <Button
-              style={{ width: '100%' }}
-              type='primary'
-              onClick={this.handleClickCheckVoluntary}
-            >
-              查看志愿表
-            </Button>
           </div>
+        </div>
+        <div className='voluntarty-button-box'>
+          <Button
+            className='btn-large'
+            style={{marginTop: '20px'}}
+            size='large'
+            type='primary'
+            onClick={this.handleClickCheckVoluntary}
+          >
+            查看志愿表
+          </Button>
         </div>
       </div>
     );

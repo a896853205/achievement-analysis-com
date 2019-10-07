@@ -30,15 +30,18 @@ class Step4Controller extends React.Component {
       <div>
         {/* 在这里显示批次之类的重要其他信息 */}
         <VoluntaryDetailController />
-        <Button.Group>
+        <div className='voluntarty-button-box'>
           <Button
+            className='btn-large'
             loading={this.state.btnLoading}
             onClick={this.handleClickSubmit}
+            size='large'
+            type='primary'
+            style={{'marginTop': '20px', 'marginBottom': '20px'}}
           >
-            确认生成报表和生成深度分析报告
+            确认生成报表
           </Button>
-          <Button>预约一对一专家资源</Button>
-        </Button.Group>
+        </div>
       </div>
     );
   }
@@ -68,7 +71,7 @@ class Step4Controller extends React.Component {
 
           // 跳转页面
           this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY_RESULT.path}`);
-          this.props.nextStep();
+          this.props.setStep(1)
         } else {
           // 结束loading
           await this.setState({ btnLoading: false });
@@ -99,6 +102,9 @@ const mapDispatchToProps = dispatch => {
     },
     nextStep: () => {
       dispatch(voluntaryActions.nextStep());
+    },
+    setStep: step => {
+      dispatch(voluntaryActions.setStep(step));
     }
   };
 };

@@ -1,5 +1,6 @@
 .home-voluntary-box {
-  padding: 20px;
+  position: relative;
+  background: #fff;
 }
 
 .home-voluntary-me {
@@ -15,16 +16,21 @@
 
 .home-voluntary-content {
   padding: 20px;
-  background: #fff;
+  background: rgba(0,0,0,0);
+  position: relative;
+  z-index: 6;
 }
 
 .voluntary-main-box {
-  padding: 20px;
-  border: 1px solid #d9d9d9;
+  padding: 0 70px;
+}
+
+.voluntarty-button-box {
+  text-align: center;
 }
 
 .steps-box {
-  margin-bottom: 20px;
+  margin-bottom: 105px;
 }
 
 .steps-content {

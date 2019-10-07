@@ -231,6 +231,7 @@ class TableController extends React.Component {
     return (
       <div>
         <Table
+          style={{ background: '#fff' }}
           rowKey={record => record.school_id}
           columns={columns}
           dataSource={this.props.schoolList}

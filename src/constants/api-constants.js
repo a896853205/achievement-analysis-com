@@ -11,6 +11,8 @@ export const SET_USER_INFO = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER
 export const ALTER_USER_PASSWORD = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/alterPassword` // 修改用户密码
 export const USER_REGISTER = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/register`;  // 注册
 export const GET_SCORE_RANK = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/getScoreRank`;  // 获取当年批次和去年的分数和批次
+export const SET_USER_BASIC_INFO = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/setUserBasicInfo`; // 设置用户基本信息
+export const SET_USER_IMPORT_INFO = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/setUserImportInfo`; // 设置用户的重要信息
 
 /**
  * optsystem
@@ -31,6 +33,7 @@ export const GET_SCHOOL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SCHOOL}
 export const GET_MAJOR = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SCHOOL}/getMajor`;
 export const GET_SCHOOL_DETAIL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SCHOOL}/getSchoolDetail`;
 export const SEARCH_SCHOOL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SCHOOL}/searchSchool`
+
 /**
  * optquestionnaire
  **************************/

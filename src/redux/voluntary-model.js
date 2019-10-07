@@ -8,11 +8,12 @@ import { launchRequest } from '../util/request';
 import * as APIS from '../constants/api-constants';
 
 // user Action
-import { effects as userEffects, actions as userActions } from './user-model';
+import { actions as userActions } from './user-model';
 
 export const actions = {
   prevStep: createAction('prevStep'),
   nextStep: createAction('nextStep'),
+  setStep: createAction('setStep'),
   setLotId: createAction('setLotId'),
   initVoluntary: createAction('initVoluntary'),
   recordSchool: createAction('recordSchool'),
@@ -44,14 +45,22 @@ const effects = {
 
     yield put(switchMeLoading(true));
 
-    const { fitCurrent, fitOld, lotsScoreDifferMsg, currentLotsScoreDifferMsg } = yield call(
-      launchRequest,
-      APIS.GET_SCORE_RANK,
-      payload
-    );
+    const {
+      fitCurrent,
+      fitOld,
+      lotsScoreDifferMsg,
+      currentLotsScoreDifferMsg
+    } = yield call(launchRequest, APIS.GET_SCORE_RANK, payload);
 
-    yield call(userEffects.recordUserSaga, { payload });
-    yield put(setMeScoreRank({ fitCurrent, fitOld, lotsScoreDifferMsg, currentLotsScoreDifferMsg }));
+    // yield call(userEffects.recordUserSaga, { payload });
+    yield put(
+      setMeScoreRank({
+        fitCurrent,
+        fitOld,
+        lotsScoreDifferMsg,
+        currentLotsScoreDifferMsg
+      })
+    );
     yield put(switchMeLoading(false));
   },
   recordSchoolListSaga: function*({ payload }) {
@@ -143,6 +152,12 @@ export const voluntaryReducer = handleActions(
       return {
         ...state,
         step: (state.step + 1) % 4
+      };
+    },
+    setStep(state, { payload }) {
+      return {
+        ...state,
+        step: payload
       };
     },
     // 自己的分数信息
@@ -308,7 +323,7 @@ export const voluntaryReducer = handleActions(
       return {
         ...state,
         majorName: result
-      }
+      };
     }
   },
   {

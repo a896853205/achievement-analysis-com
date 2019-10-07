@@ -100,13 +100,31 @@ class HomeVoluntaryController extends React.Component {
             <div className='steps-content'>
               {steps[this.props.step].content}
             </div>
-            {this.props.step ? (
-              <Button onClick={this.props.prevStep}>上一步</Button>
-            ) : (
-              undefined
-            )}
+            <div className='voluntarty-button-box'>
+              {this.props.step ? (
+                <Button
+                  size='large'
+                  className='btn-large'
+                  onClick={this.props.prevStep}
+                >
+                  上一步
+                </Button>
+              ) : (
+                undefined
+              )}
+            </div>
           </div>
         </div>
+        <img
+          src='/images/background/background-bottom.png'
+          className='left-background-bottom'
+          alt='页面下角蓝色图片'
+        />
+        <img
+          src='/images/background/background-bottom.png'
+          className='right-background-bottom'
+          alt='页面下角蓝色图片'
+        />
       </div>
     );
   }
@@ -132,7 +150,7 @@ const mapDispatchToProps = dispatch => {
   return {
     prevStep: () => {
       dispatch(voluntaryActions.prevStep());
-    }
+    },
   };
 };
 

@@ -1,0 +1,29 @@
+.step2-box {
+  width: calc( (253px + 13px) * 4 );
+  height: 550px;
+  margin: 0 auto;
+}
+
+.step2-card-box {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.step2-card-item {
+  width: 253px;
+  height: 253px;
+  font-size: 24px;
+  background: #eee;
+  color: #3C3C3C;
+  text-align: center;
+  line-height: 253px;
+  cursor: pointer;
+  margin-top: 13px;
+  transition: .2s;
+}
+
+.step2-card-item:hover {
+  background: #0E407B;
+  color: #fff;
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 
 // UI组件
-import { Card } from 'antd';
+import { Icon } from 'antd';
 
 // 请求文件
 import { launchRequest } from '../../../util/request';
@@ -12,36 +12,35 @@ import * as DominConfigs from '../../../constants/domin-constants';
 import { connect } from 'react-redux';
 import { actions as voluntaryActions } from '../../../redux/voluntary-model';
 
+import '@/style/voluntary/step2.css';
+
 class Step2Controller extends React.Component {
 	state = {
 		entryScoreList: [],
 		loading: false
 	};
 	render() {
-		const gridStyle = {
-			width: '25%',
-			textAlign: 'center',
-			cursor: 'pointer'
-		};
 		let entryScoreList = this.state.entryScoreList.map((entryScoreItem) => {
 			return (
-				<Card.Grid
-					style={gridStyle}
+				<div
 					key={entryScoreItem.id}
 					onClick={() => {
 						this.handleClickCard(entryScoreItem.id);
 					}}
+					className='step2-card-item'
 				>
 					{entryScoreItem.lots_name}
-				</Card.Grid>
+				</div>
 			);
 		});
 
+		entryScoreList.push(<div className='step2-card-item' key='help'><Icon type='question-circle' />帮助</div>)
+
 		return (
-			<div>
-				<Card loading={this.state.loading} title='批次目录'>
+			<div className='step2-box'>
+				<div className='step2-card-box'>
 					{entryScoreList}
-				</Card>
+				</div>
 			</div>
 		);
 	}

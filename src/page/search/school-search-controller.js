@@ -63,59 +63,6 @@ class SchoolSearchController extends React.Component {
               }}
             />
           </div>
-          <div className='school-list-box'>
-            <List
-              itemLayout='vertical'
-              size='large'
-              loading={this.state.loading}
-              pagination={{
-                onChange: page => {
-                  console.log(page);
-                },
-                pageSize: 5
-              }}
-              dataSource={this.state.schoolList}
-              renderItem={item => (
-                <List.Item
-                  key={item.school_id}
-                  actions={[
-                    <IconText
-                      type='star-o'
-                      text='156'
-                      key='list-vertical-star-o'
-                    />,
-                    <IconText
-                      type='like-o'
-                      text='156'
-                      key='list-vertical-like-o'
-                    />,
-                    <IconText
-                      type='message'
-                      text='2'
-                      key='list-vertical-message'
-                    />
-                  ]}
-                >
-                  <h5
-                    className='school-title'
-                    onClick={() => {
-                      this.handleClickSchoolName(item.school_id);
-                    }}
-                  >
-                    {item.school_name}
-                  </h5>
-                  <p>{item.school_nature_name}</p>
-                  <p>
-                    {item.school_property_name.map(property => (
-                      <Tag key={property} color='#108ee9'>
-                        {property}
-                      </Tag>
-                    ))}
-                  </p>
-                </List.Item>
-              )}
-            />
-          </div>
           <div className='school-list-option-box'>
             <div className='option-box'>
               <span className='option-name'>办学性质</span>
@@ -169,6 +116,61 @@ class SchoolSearchController extends React.Component {
               </Checkbox.Group>
             </div>
           </div>
+          <div className='school-list-box'>
+            <List
+              grid={{ gutter: 17, column: 2 }}
+              itemLayout='vertical'
+              size='large'
+              loading={this.state.loading}
+              pagination={{
+                onChange: page => {
+                  console.log(page);
+                },
+                pageSize: 6
+              }}
+              dataSource={this.state.schoolList}
+              renderItem={item => (
+                <List.Item
+                  className='search-school-list-item'
+                  key={item.school_id}
+                  actions={[
+                    <IconText
+                      type='star-o'
+                      text='156'
+                      key='list-vertical-star-o'
+                    />,
+                    <IconText
+                      type='like-o'
+                      text='156'
+                      key='list-vertical-like-o'
+                    />,
+                    <IconText
+                      type='message'
+                      text='2'
+                      key='list-vertical-message'
+                    />
+                  ]}
+                >
+                  <h5
+                    className='school-title'
+                    onClick={() => {
+                      this.handleClickSchoolName(item.school_id);
+                    }}
+                  >
+                    {item.school_name}
+                  </h5>
+                  <p>{item.school_nature_name}</p>
+                  <p>
+                    {item.school_property_name.map(property => (
+                      <Tag key={property} color='#108ee9'>
+                        {property}
+                      </Tag>
+                    ))}
+                  </p>
+                </List.Item>
+              )}
+            />
+          </div>
         </div>
         <Drawer
           width={640}
@@ -209,7 +211,7 @@ class SchoolSearchController extends React.Component {
   };
 
   searchSchool = async () => {
-		await this.setState({
+    await this.setState({
       loading: true
     });
 
@@ -220,7 +222,7 @@ class SchoolSearchController extends React.Component {
       schoolList,
       loading: false
     });
-	};
+  };
 
   // 办学性质改变
   handleNatureChange = async checkedValues => {
@@ -304,8 +306,8 @@ class SchoolSearchController extends React.Component {
       natureValues,
       propertyValues,
       typeValues,
-			areaFeatureValues,
-			schoolName: this.state.schoolNameValue
+      areaFeatureValues,
+      schoolName: this.state.schoolNameValue
     });
 
     return schoolList || [];

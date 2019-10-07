@@ -1,7 +1,15 @@
 import React from 'react';
 
 // UI组件
-import { Form, Input, Radio, InputNumber, Button, Select } from 'antd';
+import {
+  Form,
+  Input,
+  Radio,
+  InputNumber,
+  Button,
+  Select,
+  Cascader
+} from 'antd';
 
 // 请求文件
 import { launchRequest } from '../../../util/request';
@@ -19,27 +27,27 @@ class Step1Controller extends React.Component {
   state = {
     loading: false,
     // 查询分数位次的按钮和展示数据的地方
-    provinceList: []
+    optionList: []
   };
   render() {
     const { getFieldDecorator } = this.props.form,
       formItemLayout = {
         labelCol: {
           xs: { span: 24 },
-          sm: { span: 4 }
+          sm: { span: 2, offset: 8 }
         },
         wrapperCol: {
           xs: { span: 24 },
-          sm: { span: 8 }
+          sm: { span: 6 }
         }
-      },
-      optionList = this.state.provinceList.map(provinceItem => {
-        return (
-          <Option key={provinceItem.id} value={provinceItem.id}>
-            {provinceItem.province_name}
-          </Option>
-        );
-      }); // 地区的list
+      };
+    // optionList = this.state.provinceList.map(provinceItem => {
+    //   return (
+    //     <Option key={provinceItem.code} value={provinceItem.code}>
+    //       {provinceItem.name}
+    //     </Option>
+    //   );
+    // }); // 地区的list
 
     let yearsList = [];
     for (let i = 0; i < 3; i++) {
@@ -87,14 +95,20 @@ class Step1Controller extends React.Component {
             })(<Input />)}
           </Form.Item>
           <Form.Item label='地区'>
-            {getFieldDecorator('addressProvince', {
+            {getFieldDecorator('address', {
               rules: [
                 {
                   required: true,
                   message: '请选择地区'
                 }
               ]
-            })(<Select>{optionList}</Select>)}
+            })(
+              <Cascader
+                loadData={this.loadAddress}
+                options={this.state.optionList}
+                changeOnSelect
+              />
+            )}
           </Form.Item>
           <Form.Item label='考试年份'>
             {getFieldDecorator('examYear', {
@@ -145,7 +159,7 @@ class Step1Controller extends React.Component {
                 },
                 {
                   message: '请输入正确的分数',
-                  validator: (rule, value) => value >= 0 && value <= 750
+                  validator: (rule, value) => value > 0 && value <= 750
                 }
               ]
             })(<InputNumber />)}
@@ -197,7 +211,7 @@ class Step1Controller extends React.Component {
               )}
             </div>
           </Form.Item>
-          <Form.Item wrapperCol={{ span: 12, offset: 4 }}>
+          <Form.Item wrapperCol={{ span: 12, offset: 10 }}>
             <Button
               type='primary'
               htmlType='submit'
@@ -212,14 +226,72 @@ class Step1Controller extends React.Component {
   }
 
   componentDidMount = async () => {
-    let data = await launchRequest(
+    let optionList = await this.getAddress();
+
+    await this.setState({
+      optionList
+    });
+  };
+
+  componentWillUnmount = () => {
+    this.setState = (state, callback) => {
+      return;
+    };
+  };
+
+  getAddress = async (addressType = 'province', code) => {
+    let { provinceList, cityList, areaList } = await launchRequest(
       APIS.GET_ADDRESS_OPTION,
-      {},
+      { addressType, code },
       DominConfigs.REQUEST_TYPE.GET
     );
 
-    this.setState({
-      provinceList: data.provinceList
+    if (addressType === 'province') {
+      return provinceList.map(item => {
+        return {
+          value: item.code,
+          label: item.name,
+          isLeaf: false
+        };
+      });
+    } else if (addressType === 'city') {
+      return cityList.map(item => {
+        return {
+          value: item.code,
+          label: item.name,
+          isLeaf: false
+        };
+      });
+    } else if (addressType === 'area') {
+      return areaList.map(item => {
+        return {
+          value: item.code,
+          label: item.name
+        };
+      });
+    }
+  };
+
+  loadAddress = async selectedOptions => {
+    const targetOption = selectedOptions[selectedOptions.length - 1];
+    targetOption.loading = true;
+
+    await this.setState({
+      optionList: [...this.state.optionList]
+    });
+
+    if (selectedOptions.length === 1) {
+      // 查询city
+      targetOption.children = await this.getAddress('city', targetOption.value);
+      targetOption.loading = false;
+    } else if (selectedOptions.length === 2) {
+      // 查询县
+      targetOption.children = await this.getAddress('area', targetOption.value);
+      targetOption.loading = false;
+    }
+
+    await this.setState({
+      optionList: [...this.state.optionList]
     });
   };
 
@@ -248,7 +320,7 @@ class Step1Controller extends React.Component {
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
         // 提交表单
-        this.props.getMeScoreRank(values);
+        this.props.recordUser(values);
         await this.setState({
           loading: false
         });
@@ -298,35 +370,6 @@ export default connect(
   mapDispatchToProps
 )(
   Form.create({
-    name: 'saveBasicInfo',
-    mapPropsToFields(props) {
-      let user = props.user;
-      return {
-        nickname: Form.createFormField({
-          value: user.nickname
-        }),
-        gender: Form.createFormField({
-          value: user.gender
-        }),
-        phone: Form.createFormField({
-          value: user.phone
-        }),
-        email: Form.createFormField({
-          value: user.email
-        }),
-        accountCategory: Form.createFormField({
-          value: user.accountCategory
-        }),
-        score: Form.createFormField({
-          value: user.score
-        }),
-        addressProvince: Form.createFormField({
-          value: user.addressProvince
-        }),
-        examYear: Form.createFormField({
-          value: user.examYear
-        })
-      };
-    }
+    name: 'saveBasicInfo'
   })(Step1Controller)
 );

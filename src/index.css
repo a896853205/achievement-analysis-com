@@ -102,3 +102,7 @@ html { overflow-y: scroll; }
 .bg-light {
   background: #ffffff;
 }
+
+.btn-large {
+  width: 355px;
+}

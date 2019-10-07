@@ -30,7 +30,7 @@ class LoginController extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div className="back">
-        <Card className="test" style={{ width: 300 }}>
+        <Card className="login-box" style={{ width: 300 }}>
           <div className="login-title">智赢学业规划网</div>
           <div className="login-sub-title">以智取胜 赢得未来</div>
           <Form onSubmit={this.handleSubmit}>
@@ -81,9 +81,10 @@ class LoginController extends React.Component {
             </Form.Item>
           </Form>
         </Card>
+        <img src='/images/background/background-top.png' className='left-background-top' alt='页面上角蓝色图片' />
+        <img src='/images/background/background-top.png' className='right-background-top' alt='页面上角蓝色图片' />
         <img src='/images/background/background-bottom.png' className='left-background-bottom' alt='页面下角蓝色图片' />
         <img src='/images/background/background-bottom.png' className='right-background-bottom' alt='页面下角蓝色图片' />
-        {/* <image /> */}
       </div>
     );
   }

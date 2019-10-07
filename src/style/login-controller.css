@@ -1,13 +1,14 @@
-.test {
+.login-box {
   margin: 0 auto;
   text-align: center;
 }
 
 .back {
-  height: 700px;
-  padding: 100px;
+  box-sizing: border-box;
+  padding-top: 150px;
   background: rgb(255, 255, 255);
   position: relative;
+  padding-bottom: 490px;
 }
 
 .form-item{
@@ -45,5 +46,22 @@
   position: absolute;
   right: 0;
   bottom: 0;
+  transform: rotateY(180deg);
+}
+
+.left-background-top {
+  width: 30%;
+  max-width: 372px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.right-background-top {
+  width: 30%;
+  max-width: 372px;
+  position: absolute;
+  right: 0;
+  top: 0;
   transform: rotateY(180deg);
 }
