@@ -165,7 +165,7 @@ class TableController extends React.Component {
           }
         },
         defaultSortOrder: 'descend',
-        sorter: (a, b) => a.riskRate - b.riskRate
+        sorter: (a, b) => b.riskRate - a.riskRate
       },
       {
         title: '填报',
