@@ -1,10 +1,10 @@
 import React from 'react';
-import VoluntaryResultController from './voluntary/voluntary-result-controller';
+import ResultReportController from '@/page/home/voluntary/result/result-report-controller';
 class HomeVoluntaryResultController extends React.Component {
 	render() {
 		return (
 			<div>
-				<VoluntaryResultController />
+				<ResultReportController />
 			</div>
 		);
 	}

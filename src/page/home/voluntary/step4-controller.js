@@ -14,11 +14,6 @@ import * as APIS from '../../../constants/api-constants';
 // UI组件
 import { Button, Modal } from 'antd';
 
-import {
-  BCG_ROOT_NAME,
-  VOLUNTARY_RESULT
-} from '../../../constants/route-constants';
-
 const { confirm } = Modal;
 
 class Step4Controller extends React.Component {
@@ -37,7 +32,7 @@ class Step4Controller extends React.Component {
             onClick={this.handleClickSubmit}
             size='large'
             type='primary'
-            style={{'marginTop': '20px', 'marginBottom': '20px'}}
+            style={{ marginTop: '20px', marginBottom: '20px' }}
           >
             确认生成报表
           </Button>
@@ -70,8 +65,7 @@ class Step4Controller extends React.Component {
           await this.setState({ btnLoading: false });
 
           // 跳转页面
-          this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY_RESULT.path}`);
-          this.props.setStep(1)
+          this.props.nextStep();
         } else {
           // 结束loading
           await this.setState({ btnLoading: false });
@@ -102,16 +96,11 @@ const mapDispatchToProps = dispatch => {
     },
     nextStep: () => {
       dispatch(voluntaryActions.nextStep());
-    },
-    setStep: step => {
-      dispatch(voluntaryActions.setStep(step));
     }
   };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Step4Controller)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Step4Controller);

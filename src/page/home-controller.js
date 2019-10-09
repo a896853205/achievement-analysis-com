@@ -9,7 +9,7 @@ import HomeIndexController from './home/home-index-controller';
 import HomeVoluntaryController from './home/home-voluntary-controller';
 import HomeQuestionnaireController from './home/home-questionnaire-controller';
 import HomePersonalController from './home/home-personal-controller';
-import HomeVoluntaryResultController from './home/home-voluntary-result-controller';
+import HomeVoluntaryReportResultController from '@/page/home/home-voluntary-report-result-controller';
 
 // 路由
 import { BCG_ROOT_NAME, VOLUNTARY, VOLUNTARY_RESULT, QUESTIONNAIRE, PERSONAL } from '../constants/route-constants';
@@ -27,8 +27,14 @@ class HomeController extends React.Component {
 					<Route
 						path={`/${BCG_ROOT_NAME}/${VOLUNTARY_RESULT.path}`}
 						exact
-						component={HomeVoluntaryResultController}
+						component={HomeVoluntaryReportResultController}
 					/>
+					{/* 深度体验的路由 */}
+					{/* <Route
+						path={`/${BCG_ROOT_NAME}/${VOLUNTARY_RESULT.path}`}
+						exact
+						component={HomeVoluntaryResultController}
+					/> */}
 					<Route
 						path={`/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}`}
 						exact

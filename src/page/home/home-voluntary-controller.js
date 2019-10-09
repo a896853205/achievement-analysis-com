@@ -11,6 +11,7 @@ import Step1 from './voluntary/step1-controller';
 import Step2 from './voluntary/step2-controller';
 import Step3 from './voluntary/step3-controller';
 import Step4 from './voluntary/step4-controller';
+import Step5 from './voluntary/step5-controller';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
@@ -36,6 +37,10 @@ class HomeVoluntaryController extends React.Component {
       {
         title: '确认志愿表',
         content: <Step4 />
+      },
+      {
+        title: '结果',
+        content: <Step5 />
       }
     ];
     return (

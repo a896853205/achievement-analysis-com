@@ -145,13 +145,13 @@ export const voluntaryReducer = handleActions(
     prevStep(state) {
       return {
         ...state,
-        step: (state.step - 1) % 4
+        step: (state.step - 1) % 5
       };
     },
     nextStep(state) {
       return {
         ...state,
-        step: (state.step + 1) % 4
+        step: (state.step + 1) % 5
       };
     },
     setStep(state, { payload }) {
