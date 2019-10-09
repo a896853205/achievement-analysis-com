@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 
 import VoluntaryDetailController from './voluntary-detail-controller';
 
@@ -12,7 +11,7 @@ import { launchRequest } from '../../../util/request';
 import * as APIS from '../../../constants/api-constants';
 
 // UI组件
-import { Button, Modal } from 'antd';
+import { Button, Modal, Alert } from 'antd';
 
 const { confirm } = Modal;
 
@@ -26,16 +25,40 @@ class Step4Controller extends React.Component {
         {/* 在这里显示批次之类的重要其他信息 */}
         <VoluntaryDetailController />
         <div className='voluntarty-button-box'>
-          <Button
-            className='btn-large'
-            loading={this.state.btnLoading}
-            onClick={this.handleClickSubmit}
-            size='large'
-            type='primary'
-            style={{ marginTop: '20px', marginBottom: '20px' }}
-          >
-            确认生成报表
-          </Button>
+          <div>
+            <Alert
+              message={`剩余生成报表次数${this.props.user.reportAlterTime}次`}
+              type='info'
+              showIcon
+            />
+            <Button
+              className='btn-large'
+              loading={this.state.btnLoading}
+              onClick={this.handleClickSubmit}
+              size='large'
+              type='primary'
+              style={{ marginTop: '20px', marginBottom: '20px' }}
+            >
+              确认生成报表
+            </Button>
+          </div>
+          <div>
+            <Alert
+              message={`剩余生成深度体验次数${this.props.user.deepAlterTime}次`}
+              type='info'
+              showIcon
+            />
+            <Button
+              className='btn-large'
+              loading={this.state.btnLoading}
+              onClick={this.handleClickSubmit}
+              size='large'
+              type='primary'
+              style={{ marginTop: '20px', marginBottom: '20px' }}
+            >
+              确认深度体验表
+            </Button>
+          </div>
         </div>
       </div>
     );
@@ -79,12 +102,15 @@ class Step4Controller extends React.Component {
 
 // 从store接收state数据
 const mapStateToProps = store => {
-  const voluntaryStore = store['voluntaryStore'];
-  let { lot_id, voluntary } = voluntaryStore;
+  const userStore = store['userStore'],
+    voluntaryStore = store['voluntaryStore'];
+  let { lot_id, voluntary } = voluntaryStore,
+    { user } = userStore;
 
   return {
     lotId: lot_id,
-    voluntary: [...voluntary]
+    voluntary: [...voluntary],
+    user
   };
 };
 

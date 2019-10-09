@@ -10,7 +10,8 @@ import {
   Button,
   Select,
   Cascader,
-  Descriptions
+  Descriptions,
+  Alert
 } from 'antd';
 
 // 请求文件
@@ -116,7 +117,6 @@ class BasicController extends React.Component {
                   <Button
                     type='primary'
                     htmlType='submit'
-                    shape='round'
                     loading={this.props.userLoading}
                   >
                     保存
@@ -258,14 +258,24 @@ class BasicController extends React.Component {
                 </div>
               </Form.Item>
               <Form.Item wrapperCol={{ span: 12, offset: 2 }}>
-                <Button
-                  type='primary'
-                  htmlType='submit'
-                  shape='round'
-                  loading={this.props.userLoading}
-                >
-                  保存
-                </Button>
+                {this.props.user.scoreAlterTime ? (
+                  <div>
+                    <Alert
+                      message={`剩余修改次数${this.props.user.scoreAlterTime}次`}
+                      type='info'
+                      showIcon
+                    />
+                    <Button
+                      type='primary'
+                      htmlType='submit'
+                      loading={this.props.userLoading}
+                    >
+                      保存
+                    </Button>
+                  </div>
+                ) : (
+                  <Button type='primary'>获得更多修改次数</Button>
+                )}
               </Form.Item>
             </Form>
           ) : (
@@ -278,7 +288,7 @@ class BasicController extends React.Component {
                   {this.props.user.gender === '1' ? '男' : '女'}
                 </Descriptions.Item>
                 <Descriptions.Item label='科系'>
-									{this.props.user.accountCategory === '1' ? '理科' : '文科'}
+                  {this.props.user.accountCategory === '1' ? '理科' : '文科'}
                 </Descriptions.Item>
                 <Descriptions.Item label='考试年份'>
                   {this.props.user.examYear}
@@ -307,21 +317,21 @@ class BasicController extends React.Component {
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
         // 提交表单
-				this.props.recordUserBasic(values);
-				this.setState({ isAlert: false });
+        this.props.recordUserBasic(values);
+        this.setState({ isAlert: false });
       }
     });
-	};
-	
-	handleImportSubmit = e => {
+  };
+
+  handleImportSubmit = e => {
     e.preventDefault(); //阻止button submit的默认行为
 
     // 表单验证
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
         // 提交表单
-				this.props.recordUserImport(values);
-				this.setState({ isImportAlert: false });
+        this.props.recordUserImport(values);
+        this.setState({ isImportAlert: false });
       }
     });
   };
@@ -439,13 +449,13 @@ const mapDispatchToProps = dispatch => {
     },
     getMeScoreRank: params => {
       dispatch(voluntaryActions.getMeScoreRank(params));
-		},
-		recordUserBasic: params => {
-			dispatch(userActions.recordUserBasic(params));
-		},
-		recordUserImport: params => {
-			dispatch(userActions.recordUserImport(params));
-		}
+    },
+    recordUserBasic: params => {
+      dispatch(userActions.recordUserBasic(params));
+    },
+    recordUserImport: params => {
+      dispatch(userActions.recordUserImport(params));
+    }
   };
 };
 
