@@ -26,7 +26,6 @@ export const effects = {
     let data = yield call(launchRequest, APIS.SET_USER_INFO, payload);
     yield put(_switchUserLoading());
     yield put(actions._recordUser(data));
-    // 将来set完需要后台返回最新的user然后_recordUser.!-----------------
   },
   getUserSaga: function*() {
     yield put(_switchUserLoading());

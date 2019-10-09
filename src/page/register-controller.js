@@ -25,9 +25,9 @@ class RegisterController extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div className="back">
-        <Card style={{ width: 300 }} className="test">
-          <div className="register-title">智赢</div>
-          <div className="register-sub-title">祝你智取未来</div>
+        <Card style={{ width: 300 }} className="login-box">
+          <div className="register-title">智赢学业规划网</div>
+          <div className="register-sub-title">以智取胜 赢得未来</div>
           <Form onSubmit={this.handleSubmit}>
             <Form.Item className="form-item">
               {getFieldDecorator("username", {
@@ -93,6 +93,10 @@ class RegisterController extends React.Component {
             </Form.Item>
           </Form>
         </Card>
+        <img src='/images/background/background-top.png' className='left-background-top' alt='页面上角蓝色图片' />
+        <img src='/images/background/background-top.png' className='right-background-top' alt='页面上角蓝色图片' />
+        <img src='/images/background/background-bottom.png' className='left-background-bottom' alt='页面下角蓝色图片' />
+        <img src='/images/background/background-bottom.png' className='right-background-bottom' alt='页面下角蓝色图片' />
       </div>
     );
   }
