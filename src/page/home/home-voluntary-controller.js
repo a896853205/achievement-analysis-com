@@ -106,7 +106,9 @@ class HomeVoluntaryController extends React.Component {
               {steps[this.props.step].content}
             </div>
             <div className='voluntarty-button-box'>
-              {this.props.step ? (
+              {this.props.step === 0 || this.props.step === 1 ? (
+                undefined
+              ) : (
                 <Button
                   size='large'
                   className='btn-large'
@@ -114,8 +116,6 @@ class HomeVoluntaryController extends React.Component {
                 >
                   上一步
                 </Button>
-              ) : (
-                undefined
               )}
             </div>
           </div>
@@ -155,7 +155,7 @@ const mapDispatchToProps = dispatch => {
   return {
     prevStep: () => {
       dispatch(voluntaryActions.prevStep());
-    },
+    }
   };
 };
 
