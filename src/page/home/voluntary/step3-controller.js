@@ -72,7 +72,7 @@ class Step3Controller extends React.Component {
           </div>
           <div className='content-right'>
             <Affix offsetTop={10}>
-              <Collapse bordered={false}>
+              <Collapse bordered={true}>
                 {this.props.voluntary.map(voluntaryItem => (
                   <Panel
                     header={`${voluntaryItem.volunteer_name} ${voluntaryItem.schoolName}`}

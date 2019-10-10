@@ -56,6 +56,7 @@ class ResultReportController extends React.Component {
                 <h5 className='result-describe'>
                   {this.props.voluntaryResult.completeResult.describe}
                 </h5>
+                <p>智赢建议:不要放弃任何一个机会</p>
                 {this.props.voluntaryResult.completeResult.unWriteDetailArr.map(
                   item => (
                     <p key={item}>{item}</p>
@@ -83,6 +84,7 @@ class ResultReportController extends React.Component {
                   <h5 className='result-describe'>
                     {this.props.voluntaryResult.gradedResult.describe}
                   </h5>
+                  <p>智赢建议:填报志愿应拉开一定的层次,建议按照院校录取不同集合由高到低顺序选择.高风险、中风险、低风险和最佳匹配各个类别集合志愿不能倒置.</p>
                   {this.props.voluntaryResult.gradedResult.gradedDetailArr.map(
                     item => (
                       <p key={item}>{item}</p>
