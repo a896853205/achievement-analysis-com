@@ -4,7 +4,7 @@ import React from 'react';
 import '../../../style/voluntary/step3.css';
 
 // UI组件
-import { Collapse, Button, Icon, Modal, Tabs, Spin } from 'antd';
+import { Collapse, Button, Icon, Modal, Tabs, Spin, Affix } from 'antd';
 
 // 自定义组件
 import SchoolFirstController from './step3/school-first-controller';
@@ -71,20 +71,22 @@ class Step3Controller extends React.Component {
             </Spin>
           </div>
           <div className='content-right'>
-            <Collapse bordered={false}>
-              {this.props.voluntary.map(voluntaryItem => (
-                <Panel
-                  header={`${voluntaryItem.volunteer_name} ${voluntaryItem.schoolName}`}
-                  key={voluntaryItem.five_volunteer_id}
-                  extra={genExtra(voluntaryItem)}
-                >
-                  {voluntaryItem.major.map((majorItem, index) => (
-                    <div key={index} style={{ paddingLeft: 24 }}>{`专业${index +
-                      1} ${majorItem.majorName}`}</div>
-                  ))}
-                </Panel>
-              ))}
-            </Collapse>
+            <Affix offsetTop={10}>
+              <Collapse bordered={false}>
+                {this.props.voluntary.map(voluntaryItem => (
+                  <Panel
+                    header={`${voluntaryItem.volunteer_name} ${voluntaryItem.schoolName}`}
+                    key={voluntaryItem.five_volunteer_id}
+                    extra={genExtra(voluntaryItem)}
+                  >
+                    {voluntaryItem.major.map((majorItem, index) => (
+                      <div key={index} style={{ paddingLeft: 24 }}>{`专业${index +
+                        1} ${majorItem.majorName}`}</div>
+                    ))}
+                  </Panel>
+                ))}
+              </Collapse>
+            </Affix>
           </div>
         </div>
         <div className='voluntarty-button-box'>
