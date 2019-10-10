@@ -11,7 +11,8 @@ import {
   Select,
   Cascader,
   Descriptions,
-  Alert
+  Alert,
+  Modal
 } from 'antd';
 
 // 请求文件
@@ -28,6 +29,7 @@ import { actions as userActions } from '../../../redux/user-model';
 import { actions as voluntaryActions } from '../../../redux/voluntary-model';
 
 const { Option } = Select;
+const { confirm } = Modal;
 
 class BasicController extends React.Component {
   state = {
@@ -330,8 +332,17 @@ class BasicController extends React.Component {
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
         // 提交表单
-        this.props.recordUserImport(values);
-        this.setState({ isImportAlert: false });
+        confirm({
+          title: '您确定使用一次修改分数的机会吗?',
+          content: `剩余修改次数${this.props.user.scoreAlterTime}次`,
+          onOk: () => {
+            this.props.recordUserImport(values);
+            this.setState({ isImportAlert: false });
+          },
+          onCancel: () => {},
+          okText: '确认',
+          cancelText: '取消'
+        });
       }
     });
   };
