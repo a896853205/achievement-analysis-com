@@ -34,7 +34,7 @@ class IndexController extends React.Component {
   }
   render() {
     return (
-      <div className='index-container page-min-width'>
+      <div className='index-box'>
         <Carousel className='carou' autoplay>
           <div>
             <img

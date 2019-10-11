@@ -1,6 +1,5 @@
 .index-box {
-  background: #fff;
-  min-height: 380px;
+  margin: 0 auto;
 }
 
 /** 
@@ -17,10 +16,6 @@
 .carou-img {
   height: 360px;
   background: #fff;
-  margin: 0 auto;
-}
-
-.index-container {
   margin: 0 auto;
 }
 
@@ -175,4 +170,11 @@
   top: 0;
   left: 0;
   z-index: 1;
+}
+
+/* 首页全局样式 */
+.page-inner-width-box {
+  max-width: 1200px;
+  min-width: 1200px;
+  margin: 0 auto;
 }

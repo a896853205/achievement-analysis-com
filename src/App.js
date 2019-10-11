@@ -22,7 +22,7 @@ const { Content } = Layout;
 class App extends Component {
 	render() {
 		return (
-			<Layout className='layout'>
+			<div className='layout'>
 				<HeaderController />
 				<Content>
 					<div>
@@ -51,7 +51,7 @@ class App extends Component {
 					</div>
 				</Content>
 				<FooterController />
-			</Layout>
+			</div>
 		);
 	}
 }

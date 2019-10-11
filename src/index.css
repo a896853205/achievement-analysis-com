@@ -106,3 +106,7 @@ html { overflow-y: scroll; }
 .btn-large {
   width: 355px;
 }
+
+.gray-background {
+  background: #EEEEEE;
+}
