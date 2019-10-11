@@ -95,21 +95,23 @@ class HeaderController extends React.Component {
               alt='文字logo'
             />
           </div>
-          <div>
+          <div className='index-search-box'>
             <input className='index-search-input' type='text' />
             <button className='index-search-button'>
-              搜索
-              <Icon type="search" />
+              <span className='search-bottom-top-text'>搜索</span>
+              <Icon className='search-bottom-bottom-text' style={{fontSize:'25px', marginTop: '3px'}} type='search' />
             </button>
-            <button className='index-search-button'>开通VIP</button>
+            <button className='index-search-button'>
+              <span className='search-bottom-top-text'>开通</span>
+              <span className='search-bottom-bottom-text'>VIP</span>
+            </button>
           </div>
         </div>
-        <Row>
-          <Col span={11}>
+        <Row className='page-inner-width-box'>
+          <Col span={22}>
             <Menu
               theme='light'
               mode='horizontal'
-              defaultSelectedKeys={['0']}
               style={{ lineHeight: '64px' }}
             >
               <Menu.Item key='0'>
@@ -210,10 +212,7 @@ class HeaderController extends React.Component {
               </SubMenu>
             </Menu>
           </Col>
-          <Col span={2} className='logo-box'>
-            <div>这里是LOGO</div>
-          </Col>
-          <Col span={2} offset={9} className='header-personal-box'>
+          <Col span={2} className='header-personal-box'>
             {this.props.user.uuid ? (
               <Dropdown overlay={userMenu}>
                 <span className='user-menu-span'>
