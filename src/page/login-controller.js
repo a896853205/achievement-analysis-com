@@ -1,90 +1,110 @@
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 //样式文件
-import "../style/login-controller.css";
+import '../style/login-controller.css';
 
 // 路由
 // import { BCG_ROOT_NAME } from "../constants/route-constants";
 
 // 请求文件
-import { launchRequest } from "../util/request";
-import * as APIS from "../constants/api-constants";
+import { launchRequest } from '../util/request';
+import * as APIS from '../constants/api-constants';
 
 // UI组件
-import { Button, Input, Form, Card } from "antd";
+import { Button, Input, Form, Card } from 'antd';
 
 // 关于数据模块交互
-import { connect } from "react-redux";
-import { actions as userActions } from "../redux/user-model";
+import { connect } from 'react-redux';
+import { actions as userActions } from '../redux/user-model';
 
 // 密码加密
-import md5 from "md5";
+import md5 from 'md5';
 
 class LoginController extends React.Component {
   state = {
-    userName: "",
-    passWord: "",
+    userName: '',
+    passWord: '',
     loading: false
   };
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div className="back">
-        <Card className="login-box" style={{ width: 300 }}>
-          <div className="login-title">智赢学业规划网</div>
-          <div className="login-sub-title">以智取胜 赢得未来</div>
+      <div className='back'>
+        <Card className='login-box' style={{ width: 300 }}>
+          <div className='login-title'>智赢学业规划网</div>
+          <div className='login-sub-title'>以智取胜 赢得未来</div>
           <Form onSubmit={this.handleSubmit}>
-            <Form.Item className="form-item">
-              {getFieldDecorator("userName", {
+            <Form.Item className='form-item'>
+              {getFieldDecorator('userName', {
                 rules: [
                   {
                     required: true,
-                    message: "请输入用户名"
+                    message: '请输入用户名'
                   }
                 ]
               })(
                 <Input
-                  className="login-input"
+                  className='login-input'
                   onChange={e => this.setState({ userName: e.target.value })}
-                  size="large"
-                  placeholder="卡号"
+                  size='large'
+                  placeholder='卡号'
                 />
               )}
             </Form.Item>
-            <Form.Item className="form-item">
-              {getFieldDecorator("passWord", {
+            <Form.Item className='form-item'>
+              {getFieldDecorator('passWord', {
                 rules: [
                   {
                     required: true,
-                    message: "请输入密码"
+                    message: '请输入密码'
                   }
                 ]
               })(
                 <Input.Password
-                  className="login-input"
+                  className='login-input'
                   onChange={e => this.setState({ passWord: e.target.value })}
-                  size="large"
-                  placeholder="请输入密码"
+                  size='large'
+                  placeholder='请输入密码'
                 />
               )}
             </Form.Item>
             <Form.Item>
               <Button
-                className="login-button"
-                htmlType="submit"
-                type="primary"
-                size="large"
+                className='login-button'
+                htmlType='submit'
+                type='primary'
+                size='large'
                 loading={this.state.loading}
               >
                 登录
               </Button>
+              <div className='login-to-register-box'>
+                或者<Link to={'/register'}>现在注册!</Link>
+              </div>
             </Form.Item>
           </Form>
         </Card>
-        <img src='/images/background/background-top.png' className='left-background-top' alt='页面上角蓝色图片' />
-        <img src='/images/background/background-top.png' className='right-background-top' alt='页面上角蓝色图片' />
-        <img src='/images/background/background-bottom.png' className='left-background-bottom' alt='页面下角蓝色图片' />
-        <img src='/images/background/background-bottom.png' className='right-background-bottom' alt='页面下角蓝色图片' />
+        <img
+          src='/images/background/background-top.png'
+          className='left-background-top'
+          alt='页面上角蓝色图片'
+        />
+        <img
+          src='/images/background/background-top.png'
+          className='right-background-top'
+          alt='页面上角蓝色图片'
+        />
+        <img
+          src='/images/background/background-bottom.png'
+          className='left-background-bottom'
+          alt='页面下角蓝色图片'
+        />
+        <img
+          src='/images/background/background-bottom.png'
+          className='right-background-bottom'
+          alt='页面下角蓝色图片'
+        />
       </div>
     );
   }
