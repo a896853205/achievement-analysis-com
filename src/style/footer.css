@@ -1,80 +1,94 @@
-p {
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  font-size: 12px;
-}
-
-a,
-a:hover {
-  text-decoration: none;
-  color: inherit;
-  background-color: transparent;
-}
-
-.footer {
-  padding: 63px 0;
-  font-size: 14px;
+.footer-box {
+  padding: 95px 0 60px;
   color: #ffffff;
-  text-align: left;
-  background: #0E407B;
+  background: #0e407b;
 }
 
-.container {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 1300px;
+/* 底部第一行 start */
+.footer-first-list-box {
+  display: flex;
+  justify-content: space-between;
 }
 
 .footer-logo {
-  margin-bottom: 30px;
-  max-height: 26px;
-  vertical-align: middle;
+  width: 170px;
+  height: 85px;
 }
 
-.footer-body-right {
+.footer-list-item {
+  width: 160px;
+}
+
+.footer-list-item > ul > li {
+  margin: 8px 0;
+  font-size: 4px;
+}
+
+.footer-list-title {
+  color: #fff;
+  font-size: 23px;
+  border-bottom: 1px solid #fff;
   text-align: right;
+  padding-bottom: 8px;
+}
+/* 底部第一行 end */
+
+/* 底部第二行 start */
+.footer-second-list-box {
+  padding-top: 75px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
-.footer-body-left {
-  padding-right: 30px;
+.footer-title-logo {
+  width: 325px;
+  height: 70px;
 }
 
-.footer-title {
-  margin-bottom: 20px;
+.footer-link-list-box h5 {
+  color: #fff;
+  font-size: 23px;
 }
 
-.footer-intro {
-  line-height: 2.1;
+.footer-link-list-box ul {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 0;
 }
 
-.footer-links {
-  font-size: 14px;
+.footer-link-list-box ul li {
+  height: 18px;
+  line-height: 18px;
+  padding: 0 2px;
+  border-left: 1px solid #fff;
 }
 
-.footer-thirdPlatforms {
-  margin-bottom: 30px;
+.footer-link-list-box ul li:first-child {
+  border: 0;
 }
 
-.footer-body-right .footer-inlineblock {
-  margin: 0 0 0 18px;
+.footer-link-list-box ul li a {
+  color: #fff;
+  font-size: 13px;
 }
 
-.footer-btm {
-  margin-top: 50px;
-}
-.footer-btm-left .footer-inlineblock {
-  margin: 0 18px 0 0;
-}
-
-.footer-btm-left {
-  text-align: left;
+.footer-icon-list {
+  display: flex;
+  width: 120px;
+  height: 65px;
 }
 
-.footer-btm-right {
-  text-align: right;
+.footer-icon-list p {
+  margin-bottom: 0;
 }
 
+.footer-icon-box {
+  margin-right: 15px;
+  line-height: 80px;
+}
 
+.footer-icon {
+  font-size: 40px;
+}
+/* 底部第二行 end */
