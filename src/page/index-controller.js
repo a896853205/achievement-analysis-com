@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Carousel, Row, Col, Icon } from 'antd';
+import { Carousel, Icon } from 'antd';
 
 // 路由
 import { withRouter } from 'react-router-dom';
@@ -10,28 +10,6 @@ import { SEARCH_SCHOOL, SEARCH_MAJOR } from '../constants/route-constants';
 import '../style/index-controller.css';
 
 class IndexController extends React.Component {
-  examInfo() {
-    let res = [];
-    for (let i = 0; i < 5; i++) {
-      res.push(
-        <Col key={i} span={4}>
-          <div className='news-img'>
-            <img
-              className='news-img'
-              height='100%'
-              width='100%'
-              alt=''
-              src='http://img3.youzy.cn/content/media/thumbs/p00190135.jpeg'
-            />
-            <div className='news_content'>
-              <h3>中国大学排名汇总</h3>
-            </div>
-          </div>
-        </Col>
-      );
-    }
-    return res;
-  }
   render() {
     return (
       <div className='index-box'>
@@ -51,111 +29,344 @@ class IndexController extends React.Component {
             />
           </div>
         </Carousel>
-        {/* <Card className='card'>
-            <p>2019志愿模拟填报</p>
-            <p>Card content</p>
-            <p>Card content</p>
-          </Card> */}
-        <div className='outter-row-light'>
-          <div className='search-row inner-box'>
-            <div
-              onClick={() => {
-                this.props.history.push(`/${SEARCH_SCHOOL.path}`);
-              }}
-              className='search-outter-box school-background'
-            >
-              <div className='search-text-box'>
-                <Icon type='bank' />
-                <span className='search-title'>学校查询</span>
-              </div>
-              <div className='search-shadow-box' />
+        {/* 智赢快讯 */}
+        <div className='page-inner-width-box'>
+          <div className='fast-information-box'>
+            <Icon className='fast-information-icon' type='sound' />
+            <h2 className='fast-information-title index-h2-title'>智赢快讯</h2>
+            <Carousel className='carousel-information-box' autoplay>
+              <p>黑龙江已开启高考版，输入高考分模拟填报更精准</p>
+              <p>模拟填报后，请至省考试院正式填报，完成报考！</p>
+              <p>
+                率先发布黑龙江2018年专业录取数据，2019年招生计划与考试院同步更新！
+              </p>
+            </Carousel>
+          </div>
+        </div>
+        <div className='search-row page-inner-width-box'>
+          <div
+            onClick={() => {
+              this.props.history.push(`/${SEARCH_SCHOOL.path}`);
+            }}
+            className='search-outter-box school-background'
+          >
+            <div className='search-text-box'>
+              <Icon type='bank' />
+              <span className='search-title'>学校查询</span>
             </div>
-            <div
-              onClick={() => {
-                this.props.history.push(`/${SEARCH_MAJOR.path}`);
-              }}
-              className='search-outter-box major-background'
-            >
-              <div className='search-text-box'>
-                <Icon type='book' />
-                <span className='search-title'>专业查询</span>
-              </div>
-              <div className='search-shadow-box' />
+            <div className='search-shadow-box' />
+          </div>
+          <div
+            onClick={() => {
+              this.props.history.push(`/${SEARCH_MAJOR.path}`);
+            }}
+            className='search-outter-box major-background'
+          >
+            <div className='search-text-box'>
+              <Icon type='book' />
+              <span className='search-title'>专业查询</span>
+            </div>
+            <div className='search-shadow-box' />
+          </div>
+        </div>
+        <div className='page-inner-width-box'>
+        <div className='index-school-major-box'>
+          {/* 左侧的智课堂和院校咨询和专业百科 */}
+          <div className='page-inner-left-box'>
+            {/* 智课堂 */}
+            <div className='intelligent-course-box'>
+              <h2 className='h2-title-box'>
+                <span className='index-h2-title'>
+                  <Icon type='book' /> 智课堂
+                </span>
+                <span className='index-more'>
+                  更多 <Icon type='right' />
+                </span>
+              </h2>
+              <ul>
+                <li>
+                  <img
+                    src='https://cdn.dribbble.com/users/992274/screenshots/7440971/media/2405976c7c1485050e78fcf54ca4bfe4.jpg'
+                    alt=''
+                  />
+                  <h5>高考志愿早准备</h5>
+                  <p>
+                    <Icon type='eye' /> 874
+                  </p>
+                </li>
+                <li>
+                  <img
+                    src='https://cdn.dribbble.com/users/278549/screenshots/7448782/media/87fe1bff113e26825d8f58e3b1bbb785.png'
+                    alt=''
+                  />
+                  <h5>高考填志愿怎样选专业？</h5>
+                  <p>
+                    <Icon type='eye' /> 2134
+                  </p>
+                </li>
+                <li>
+                  <img
+                    src='https://cdn.dribbble.com/users/371094/screenshots/6793394/_bbb-dribble.jpg'
+                    alt=''
+                  />
+                  <h5>优志愿系统电脑端使用教程</h5>
+                  <p>
+                    <Icon type='eye' /> 63245
+                  </p>
+                </li>
+                <li>
+                  <img
+                    src='https://cdn.dribbble.com/users/503590/screenshots/6292998/thestudy05.jpg'
+                    alt=''
+                  />
+                  <h5>优志愿系统电脑端使用教程</h5>
+                  <p>
+                    <Icon type='eye' /> 23423
+                  </p>
+                </li>
+                <li>
+                  <img
+                    src='https://cdn.dribbble.com/users/503590/screenshots/6293010/thestudy01.jpg'
+                    alt=''
+                  />
+                  <h5>会计学专业解读</h5>
+                  <p>
+                    <Icon type='eye' /> 234
+                  </p>
+                </li>
+              </ul>
+            </div>
+            {/* 院校咨询 */}
+            <div className='school-information-box'>
+              <h2 className='h2-title-box'>
+                <span className='index-h2-title'>院校咨询</span>
+                <span className='index-more'>
+                  更多 <Icon type='right' />
+                </span>
+              </h2>
+              <ul>
+                <li>
+                  <div>
+                    <h5>
+                      哈尔滨工业大学高考课堂哈尔学高考fsdfs哈尔滨工业大学高考课堂哈尔学高考fsdfs
+                    </h5>
+                    <span className='school-information-time-box'>
+                      <Icon type='clock-circle' /> 2019-09-10
+                    </span>
+                    <span className='school-information-see-box'>
+                      <Icon type='eye' /> 5699
+                    </span>
+                  </div>
+                  <div className='school-information-tags'>
+                    <span>NEW</span>
+                    <span>HOT</span>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <h5>
+                      哈尔滨工业大学高考课堂哈尔学高考fsdfs哈尔滨工业大学高考课堂哈尔学高考fsdfs
+                    </h5>
+                    <span className='school-information-time-box'>
+                      <Icon type='clock-circle' /> 2019-09-10
+                    </span>
+                    <span className='school-information-see-box'>
+                      <Icon type='eye' /> 5699
+                    </span>
+                  </div>
+                  <div className='school-information-tags'>
+                    <span>NEW</span>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <h5>
+                      哈尔滨工业大学高考课堂哈尔学高考fsdfs哈尔滨工业大学高考课堂哈尔学高考fsdfs
+                    </h5>
+                    <span className='school-information-time-box'>
+                      <Icon type='clock-circle' /> 2019-09-10
+                    </span>
+                    <span className='school-information-see-box'>
+                      <Icon type='eye' /> 5699
+                    </span>
+                  </div>
+                  <div className='school-information-tags'>
+                    <span>NEW</span>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <h5>
+                      哈尔滨工业大学高考课堂哈尔学高考fsdfs哈尔滨工业大学高考课堂哈尔学高考fsdfs
+                    </h5>
+                    <span className='school-information-time-box'>
+                      <Icon type='clock-circle' /> 2019-09-10
+                    </span>
+                    <span className='school-information-see-box'>
+                      <Icon type='eye' /> 5699
+                    </span>
+                  </div>
+                  <div className='school-information-tags'>
+                    <span>NEW</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div className='upright-line'></div>
+            {/* 专业百科 */}
+            <div className='major-information-box'>
+              <h2 className='h2-title-box'>
+                <span className='index-h2-title'>院校咨询</span>
+                <span className='index-more'>
+                  更多 <Icon type='right' />
+                </span>
+              </h2>
+              <ul>
+                <li>
+                  <div>
+                    <h5>
+                      哈尔滨工业大学高考课堂哈尔学高考fsdfs哈尔滨工业大学高考课堂哈尔学高考fsdfs
+                    </h5>
+                    <span className='major-information-time-box'>
+                      <Icon type='clock-circle' /> 2019-09-10
+                    </span>
+                    <span className='major-information-see-box'>
+                      <Icon type='eye' /> 5699
+                    </span>
+                  </div>
+                  <div className='major-information-tags'>
+                    <span>NEW</span>
+                    <span>HOT</span>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <h5>
+                      哈尔滨工业大学高考课堂哈尔学高考fsdfs哈尔滨工业大学高考课堂哈尔学高考fsdfs
+                    </h5>
+                    <span className='major-information-time-box'>
+                      <Icon type='clock-circle' /> 2019-09-10
+                    </span>
+                    <span className='major-information-see-box'>
+                      <Icon type='eye' /> 5699
+                    </span>
+                  </div>
+                  <div className='major-information-tags'>
+                    <span>NEW</span>
+                    <span>HOT</span>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <h5>
+                      哈尔滨工业大学高考课堂哈尔学高考fsdfs哈尔滨工业大学高考课堂哈尔学高考fsdfs
+                    </h5>
+                    <span className='major-information-time-box'>
+                      <Icon type='clock-circle' /> 2019-09-10
+                    </span>
+                    <span className='major-information-see-box'>
+                      <Icon type='eye' /> 5699
+                    </span>
+                  </div>
+                  <div className='major-information-tags'>
+                    <span>NEW</span>
+                    <span>HOT</span>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <h5>
+                      哈尔滨工业大学高考课堂哈尔学高考fsdfs哈尔滨工业大学高考课堂哈尔学高考fsdfs
+                    </h5>
+                    <span className='major-information-time-box'>
+                      <Icon type='clock-circle' /> 2019-09-10
+                    </span>
+                    <span className='major-information-see-box'>
+                      <Icon type='eye' /> 5699
+                    </span>
+                  </div>
+                  <div className='major-information-tags'>
+                    <span>NEW</span>
+                    <span>HOT</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          {/* 右侧高考百问和排名集锦 */}
+          <div>
+            {/* 高考百问 */}
+            <div>
+              <h2>
+                高考百问 <span>更多</span>
+              </h2>
+              <ul>
+                <li>高考百问信息</li>
+                <li>高考百问信息</li>
+                <li>高考百问信息</li>
+                <li>高考百问信息</li>
+              </ul>
+            </div>
+            {/* 排名集锦 */}
+            <div>
+              <h2>
+                排名集锦 <span>更多</span>
+              </h2>
+              <ul>
+                <li>
+                  <img src='' alt='' />
+                  <h5></h5>
+                  <span></span>
+                  <span></span>
+                </li>
+                <li>
+                  <img src='' alt='' />
+                  <h5></h5>
+                  <span></span>
+                  <span></span>
+                </li>
+                <li>
+                  <img src='' alt='' />
+                  <h5></h5>
+                  <span></span>
+                  <span></span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
-        <div className='outter-row-light'>
-          <Row className='title'>
-            <Col span={2}>
-              <h2 className='ah_title'>
-                <a href='/news' target='_blank'>
-                  高考资讯
-                  <span className='pl-3 ah-title-arrow'>
-                    <svg
-                      aria-hidden='true'
-                      focusable='false'
-                      data-prefix='gfas'
-                      data-icon='angle-right'
-                      className='svg-inline--fa fa-sm'
-                      role='img'
-                      xmlns='http://www.w3.org/2000/svg'
-                      viewBox='0 0 8 12'
-                    >
-                      <path
-                        fill='currentColor'
-                        d='M5.22168604,6 L0.859497044,10.0506041 C0.404197905,10.4733818 0.377834128,11.1852038 0.8006119,11.640503 C1.22338967,12.0958021 1.93521165,12.1221659 2.39051079,11.6993881 L7.64050657,6.82439202 C8.11982954,6.3793064 8.11982954,5.6206936 7.64050657,5.17560798 L2.39051079,0.3006119 C1.93521165,-0.122165872 1.22338967,-0.0958020947 0.8006119,0.359497044 C0.377834128,0.814796182 0.404197905,1.52661816 0.859497044,1.94939593 L5.22168604,6 Z'
-                      />
-                    </svg>
-                  </span>
-                </a>
-              </h2>
-            </Col>
-          </Row>
-          <Row type='flex' justify='space-between' className='news-row'>
-            {this.examInfo()}
-          </Row>
         </div>
-        <div className='outter-row dark'>
-          <Row className='title'>
-            <Col span={2}>
-              <h2 className='ah_title'>
-                <a href='/news' target='_blank'>
-                  名校推荐
-                  <span className='pl-3 ah-title-arrow'>
-                    <svg
-                      aria-hidden='true'
-                      focusable='false'
-                      data-prefix='gfas'
-                      data-icon='angle-right'
-                      className='svg-inline--fa fa-sm'
-                      role='img'
-                      xmlns='http://www.w3.org/2000/svg'
-                      viewBox='0 0 8 12'
-                    >
-                      <path
-                        fill='currentColor'
-                        d='M5.22168604,6 L0.859497044,10.0506041 C0.404197905,10.4733818 0.377834128,11.1852038 0.8006119,11.640503 C1.22338967,12.0958021 1.93521165,12.1221659 2.39051079,11.6993881 L7.64050657,6.82439202 C8.11982954,6.3793064 8.11982954,5.6206936 7.64050657,5.17560798 L2.39051079,0.3006119 C1.93521165,-0.122165872 1.22338967,-0.0958020947 0.8006119,0.359497044 C0.377834128,0.814796182 0.404197905,1.52661816 0.859497044,1.94939593 L5.22168604,6 Z'
-                      />
-                    </svg>
-                  </span>
-                </a>
-              </h2>
-            </Col>
-          </Row>
-          <Row type='flex' justify='space-between' className='news-row'>
-            <Col span={4}>
-              <div className='news-img' />
-            </Col>
-            <Col span={4}>
-              <div className='news-img' />
-            </Col>
-            <Col span={4}>
-              <div className='news-img' />
-            </Col>
-            <Col span={4}>
-              <div className='news-img' />
-            </Col>
-          </Row>
+        <div className='page-inner-width-box'>
+          {/* 特色院校推荐 */}
+          <div>
+            <h2>
+              <span className='index-h2-title'>特色院校推荐</span>{' '}
+              <span className='index-more'>更多</span>
+            </h2>
+            <ul>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+          {/* 考生必读 */}
+          <div>
+            <h2>
+              考生必读 <span>更多</span>
+            </h2>
+            <ul>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
         </div>
       </div>
     );

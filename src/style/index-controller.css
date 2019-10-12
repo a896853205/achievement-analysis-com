@@ -1,10 +1,34 @@
 .index-box {
-  margin: 0 auto;
+  background: #eeeeee;
 }
 
+/* 智赢快讯 start */
+.fast-information-box {
+  display: flex;
+  background: #fff;
+  padding: 17px 13px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  align-items: center;
+}
+
+.fast-information-icon {
+  font-size: 22px;
+  color: #0e407b;
+}
+
+.fast-information-title {
+  margin: 0 40px 0 14px;
+}
+
+.carousel-information-box {
+  width: 1000px;
+}
+/* 智赢快讯 end */
+
 /** 
-* 轮播图
-*/
+ * 轮播图 start
+ */
 
 .carou {
   width: 100%;
@@ -25,110 +49,16 @@
   height: 350px;
 }
 
-.black-row {
-  margin: 0 auto;
-  max-width: 1140px;
-}
-
-.inner-box {
-  margin: 0 auto;
-  max-width: 1140px;
-}
-
-.outter-row-dark {
-  text-align: center;
-  background: #f6f6f7;
-  padding: 20px 0;
-}
-
-.outter-row-light {
-  text-align: center;
-  background: #ffffff;
-  padding: 20px 0;
-}
-
-.outter-row {
-  text-align: center;
-  padding: 20px 0;
-}
-
-.dark {
-  background: #f6f6f7;
-}
-
-.title {
-  margin: 0 auto;
-  max-width: 1140px;
-  font-size: 20px;
-  text-align: left;
-}
-
-.news-row {
-  margin: 0 auto;
-  max-width: 1140px;
-  text-align: center;
-  height: 180px;
-}
-
-.ah-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 1.125rem;
-  font-weight: 600;
-  line-height: 1;
-  margin: 0 0 1.875rem;
-  color: #323232;
-}
-
-.pl-3,
-.px-3 {
-  padding-left: 1rem !important;
-}
-
-.ah-title-arrow {
-  color: #adb5bd;
-}
-
-.svg-inline--fa {
-  display: inline-block;
-  font-size: inherit;
-  height: 1em;
-  vertical-align: -0.125em;
-}
-.fa-sm {
-  font-size: 0.875em;
-}
-
-.news-img {
-  width: 190px;
-  height: 130px;
-  background: #000;
-  border-radius: 5px;
-  margin: 0 auto;
-}
-
-.news_content h3 {
-  text-align: left;
-  margin: 14px 0 0;
-  padding: 0;
-  color: #323232;
-  font-size: 13px;
-  line-height: 1.4em;
-  height: 2.8em;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+/** 
+ * 轮播图 end
+ */
 
 /** 
-* search板块
+* search板块 start
 */
 .search-row {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .school-background {
@@ -140,7 +70,7 @@
 }
 
 .search-outter-box {
-  width: calc( 50% - 5px );
+  width: calc(50% - 5px);
   height: 72px;
   text-align: center;
   color: #fff;
@@ -162,7 +92,7 @@
 }
 
 .search-shadow-box {
-  background:rgba(0,0,0,1);
+  background: rgba(0, 0, 0, 1);
   opacity: 0.4;
   position: absolute;
   width: 100%;
@@ -172,9 +102,205 @@
   z-index: 1;
 }
 
+/** 
+* search板块 end
+*/
+
+/* 智课堂模块 start */
+.index-school-major-box {
+  margin-top: 7px;
+}
+.intelligent-course-box {
+  width: 100%;
+  margin-bottom: 11px;
+}
+
+.intelligent-course-box ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+.intelligent-course-box ul li {
+  width: calc(20% - 8px);
+  padding: 10px;
+  background: #eeeeee;
+}
+
+.intelligent-course-box ul li img {
+  width: 100%;
+  height: 120px;
+}
+
+.intelligent-course-box ul li h5 {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #3c3c3c;
+}
+
+.intelligent-course-box ul li p {
+  text-align: right;
+  color: #aaaaaa;
+  font-size: 13px;
+}
+
+/* 智课堂模块 end */
+/* 院校咨询 start */
+.school-information-box {
+  width: calc(50% - 1px);
+  padding: 0 12px 0 8px;
+}
+
+.school-information-box ul {
+  height: calc(323px - 9px);
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.school-information-box ul li {
+  display: flex;
+  justify-content: space-between;
+  height: 44px;
+}
+
+.school-information-box ul li .school-information-tags {
+  align-self: flex-start;
+  font-size: 15px;
+}
+
+.school-information-box ul li .school-information-tags span {
+  display: inline-block;
+  width: 34px;
+  height: 17px;
+  line-height: 17px;
+  font-size: 13px;
+  color: #fff;
+  background: #10417C;
+  text-align: center;
+  margin-right: 5px;
+}
+
+.school-information-box ul li .school-information-tags span:last-child {
+  margin-right: 0;
+}
+.school-information-box ul li h5 {
+  width: 275px;
+  color: #0e407b;
+  font-size: 15px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.school-information-box .school-information-time-box {
+  color: #A4A4A4;
+  font-size: 13px;
+}
+
+.school-information-box .school-information-see-box {
+  color: #A4A4A4;
+  font-size: 13px;
+  margin-left: 28px;
+}
+
+/* 院校咨询 end */
+/* 专业百科 start */
+.major-information-box {
+  width: calc(50% - 1px);
+  padding: 0 12px 0 8px;
+}
+
+.major-information-box ul {
+  height: calc(323px - 9px);
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.major-information-box ul li {
+  display: flex;
+  justify-content: space-between;
+  height: 44px;
+}
+
+.major-information-box ul li .major-information-tags {
+  align-self: flex-start;
+  font-size: 15px;
+}
+
+.major-information-box ul li .major-information-tags span {
+  display: inline-block;
+  width: 34px;
+  height: 17px;
+  line-height: 17px;
+  font-size: 13px;
+  color: #fff;
+  background: #10417C;
+  text-align: center;
+  margin-right: 5px;
+}
+
+.major-information-box ul li .major-information-tags span:last-child {
+  margin-right: 0;
+}
+.major-information-box ul li h5 {
+  width: 275px;
+  color: #0e407b;
+  font-size: 15px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.major-information-box .major-information-time-box {
+  color: #A4A4A4;
+  font-size: 13px;
+}
+
+.major-information-box .major-information-see-box {
+  color: #A4A4A4;
+  font-size: 13px;
+  margin-left: 28px;
+}
+/* 专业百科 end */
 /* 首页全局样式 */
 .page-inner-width-box {
   max-width: 1200px;
   min-width: 1200px;
   margin: 0 auto;
+}
+
+.page-inner-left-box {
+  width: 870px;
+  background: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 21px 15px 9px;
+}
+
+.h2-title-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #bfbfbf;
+  margin-bottom: 7px;
+}
+
+.index-h2-title {
+  color: #0e407b;
+  font-size: 18px;
+}
+
+.index-more {
+  color: #898989;
+  font-size: 15px;
+}
+
+.upright-line {
+  height: calc(323px - 9px);
+  width: 2px;
+  background: #E5E5E5;
+  align-self: flex-end;
 }
