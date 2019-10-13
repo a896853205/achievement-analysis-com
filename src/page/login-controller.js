@@ -17,7 +17,7 @@ import { Button, Input, Form, Card } from 'antd';
 // 关于数据模块交互
 import { connect } from 'react-redux';
 import { actions as userActions } from '../redux/user-model';
-
+import { actions as voluntaryActions } from '../redux/voluntary-model';
 // 密码加密
 import md5 from 'md5';
 
@@ -125,6 +125,10 @@ class LoginController extends React.Component {
           passWord: md5(passWord)
         });
         if (data) {
+          if (data.user && +data.user.score > 0) {
+            this.props.setStep(1);
+            this.props.getMeScoreRank(data.user);
+          }
           this.props._recordUser(data.user);
           // 需要放到token中
           this.setState({
@@ -155,6 +159,12 @@ const mapDispatchToProps = dispatch => {
   return {
     _recordUser: params => {
       dispatch(userActions._recordUser(params));
+    },
+    setStep: params => {
+      dispatch(voluntaryActions.setStep(params));
+    },
+    getMeScoreRank: params => {
+      dispatch(voluntaryActions.getMeScoreRank(params));
     }
   };
 };
