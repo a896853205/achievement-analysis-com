@@ -15,23 +15,26 @@ import { actions as voluntaryActions } from '../../../redux/voluntary-model';
 // 路由
 import {
   BCG_ROOT_NAME,
-  VOLUNTARY_RESULT
+  VOLUNTARY_RESULT,
+  VOLUNTARY_DEEP_RESULT
 } from '../../../constants/route-constants';
 
 const { Column } = Table;
 class MyVoluntaryController extends React.Component {
   state = {
-    myVoluntary: []
+    reportVoluntary: [],
+    deepVoluntary: []
   };
   render() {
     return (
-      <div>
+      <div style={{display: 'flex'}}>
         <Table
-          dataSource={this.state.myVoluntary}
+          dataSource={this.state.reportVoluntary}
           rowKey={record => record.uuid}
+          style={{width: '50%'}}
         >
           <Column
-            title='志愿提交时间'
+            title='报表志愿提交时间'
             dataIndex='submit_time'
             key='submit_time'
           />
@@ -52,6 +55,33 @@ class MyVoluntaryController extends React.Component {
             )}
           />
         </Table>
+        <Table
+          dataSource={this.state.deepVoluntary}
+          rowKey={record => record.uuid}
+          style={{width: '50%'}}
+        >
+          <Column
+            title='深度体验提交时间'
+            dataIndex='submit_time'
+            key='submit_time'
+          />
+          <Column title='志愿批次' dataIndex='lots_name' />
+          <Column title='志愿考试年份' dataIndex='year' />
+          <Column
+            title='操作'
+            dataIndex='showResult'
+            render={(text, record) => (
+              <Button
+                color='blue'
+                onClick={() => {
+                  this.handleClickDeepResut(record.uuid);
+                }}
+              >
+                查看深度体验
+              </Button>
+            )}
+          />
+        </Table>
       </div>
     );
   }
@@ -59,9 +89,13 @@ class MyVoluntaryController extends React.Component {
   // 查询自己的所有志愿
   componentDidMount = async () => {
     let myVoluntary = await launchRequest(GET_MY_VOLUNTARY);
+    
+    let reportVoluntary = myVoluntary.filter(item => item.reportType === 1);
+    let deepVoluntary = myVoluntary.filter(item => item.reportType === 2);
 
     this.setState({
-      myVoluntary
+      reportVoluntary,
+      deepVoluntary
     });
   };
 
@@ -71,6 +105,12 @@ class MyVoluntaryController extends React.Component {
     // 跳转页面
     this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY_RESULT.path}`);
   };
+
+  handleClickDeepResut = voluntaryId => {
+    this.props.recordVoluntaryListOption(voluntaryId);
+    this.props.recordVoluntaryDeepUuid(voluntaryId);
+    this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY_DEEP_RESULT.path}`);
+  }
 }
 
 // 从store接收state数据
@@ -89,6 +129,12 @@ const mapDispatchToProps = dispatch => {
   return {
     recordVoluntaryIdGetResult: params => {
       dispatch(voluntaryActions.recordVoluntaryIdGetResult(params));
+    },
+    recordVoluntaryDeepUuid: params => {
+      dispatch(voluntaryActions.recordVoluntaryDeepUuid(params));
+    },
+    recordVoluntaryListOption: params => {
+      dispatch(voluntaryActions.recordVoluntaryListOption(params));
     }
   };
 };

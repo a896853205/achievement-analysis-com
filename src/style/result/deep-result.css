@@ -1,0 +1,13 @@
+.deep-charts-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.deep-charts-item {
+  width: 48%;
+  box-shadow: 0 0 4px;
+  padding: 5px;
+  margin-top: 10px;
+  border-radius: 3px;
+}

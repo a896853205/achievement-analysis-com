@@ -9,6 +9,7 @@ export const SEARCH_MAJOR = { path: 'searchMajor', name: '专业搜索页' }
 
 export const VOLUNTARY = { path: 'voluntary', name: '填报志愿页' }
 export const VOLUNTARY_RESULT = { path: 'voluntaryResult', name: '填报志愿结果页' }
+export const VOLUNTARY_DEEP_RESULT = { path: 'voluntaryDeepResult', name: '填报志愿深度体验结果页' }
 export const QUESTIONNAIRE = { path: 'questionnaire', name: '问卷页' }
 export const PERSONAL = { path: 'personal', name: '问卷页' }
 

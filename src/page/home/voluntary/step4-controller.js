@@ -51,7 +51,7 @@ class Step4Controller extends React.Component {
             <Button
               className='btn-large'
               loading={this.state.btnLoading}
-              onClick={this.handleClickSubmit}
+              onClick={this.handleClickDeepSubmit}
               size='large'
               type='primary'
               style={{ marginTop: '20px', marginBottom: '20px' }}
@@ -67,7 +67,7 @@ class Step4Controller extends React.Component {
   handleClickSubmit = async () => {
     confirm({
       title: '生成报表',
-      content: '您确定生成报表吗? 生成报表会使用一次填报机会.',
+      content: '您确定生成报表吗? 生成报表会使用一次机会.',
       okText: '确认',
       cancelText: '取消',
       onOk: async () => {
@@ -77,12 +77,52 @@ class Step4Controller extends React.Component {
         // 提交到后台后返回uuid
         let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
           lotId: this.props.lotId,
-          voluntary: this.props.voluntary
+          voluntary: this.props.voluntary,
+          reportType: 1
         });
 
         if (voluntaryId) {
           // 将uuid存入redux
+          this.props.recordVoluntaryResultType('report');
           this.props.recordVoluntaryIdGetResult(voluntaryId);
+
+          // 结束loading
+          await this.setState({ btnLoading: false });
+
+          // 跳转页面
+          this.props.nextStep();
+        } else {
+          // 结束loading
+          await this.setState({ btnLoading: false });
+          // 跳转到充值VIP页
+        }
+      },
+      onCancel() {}
+    });
+  };
+
+  handleClickDeepSubmit = async () => {
+    confirm({
+      title: '生成深度体验表',
+      content: '您确定生成深度体验表吗? 生成深度体验表会使用一次机会.',
+      okText: '确认',
+      cancelText: '取消',
+      onOk: async () => {
+        // loading
+        await this.setState({ btnLoading: true });
+
+        // 提交到后台后返回uuid
+        let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
+          lotId: this.props.lotId,
+          voluntary: this.props.voluntary,
+          reportType: 2
+        });
+
+        if (voluntaryId) {
+          // 将uuid存入redux
+          this.props.recordVoluntaryResultType('deepReport');
+          this.props.recordVoluntaryListOption(voluntaryId);
+          this.props.recordVoluntaryDeepUuid(voluntaryId);
 
           // 结束loading
           await this.setState({ btnLoading: false });
@@ -122,6 +162,15 @@ const mapDispatchToProps = dispatch => {
     },
     nextStep: () => {
       dispatch(voluntaryActions.nextStep());
+    },
+    recordVoluntaryResultType: type => {
+      dispatch(voluntaryActions.recordVoluntaryResultType(type));
+    },
+    recordVoluntaryListOption: params => {
+      dispatch(voluntaryActions.recordVoluntaryListOption(params));
+    },
+    recordVoluntaryDeepUuid: params => {
+      dispatch(voluntaryActions.recordVoluntaryDeepUuid(params));
     }
   };
 };

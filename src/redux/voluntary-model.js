@@ -26,12 +26,16 @@ export const actions = {
   getMeScoreRank: createAction('getMeScoreRank'),
   recordSchoolOption: createAction('recordSchoolOption'),
   recordSchoolName: createAction('recordSchoolName'),
-  recordMajorName: createAction('recordMajorName')
+  recordMajorName: createAction('recordMajorName'),
+  recordVoluntaryResultType: createAction('recordVoluntaryResultType'),
+  recordVoluntaryListOption: createAction('recordVoluntaryListOption'),
+  recordVoluntaryDeepUuid: createAction('recordVoluntaryDeepUuid')
 };
 const recordVoluntaryResult = createAction('recordVoluntaryResult');
 const setMeScoreRank = createAction('setMeScoreRank');
 const switchMeLoading = createAction('switchMeLoading');
 const switchSchoolTableLoading = createAction('switchSchoolTableLoading');
+const _recordVoluntaryListOption = createAction('_recordVoluntaryListOption')
 // 异步函数
 const effects = {
   recordVoluntaryResultSaga: function*({ payload }) {
@@ -39,6 +43,13 @@ const effects = {
       voluntaryUuid: payload
     });
     yield put(recordVoluntaryResult(data));
+  },
+  // 记录志愿表的二级菜单联动
+  recordVoluntaryListOptionSaga: function* ({ payload }) {
+    const data = yield call(launchRequest, APIS.GET_VOLUNTARY_LIST_OPTION, {
+      voluntaryUuid: payload
+    });
+    yield put(_recordVoluntaryListOption(data));
   },
   recordMeScoreRankSaga: function*({ payload }) {
     yield put(userActions._recordUser(payload));
@@ -138,6 +149,7 @@ export const voluntarySaga = function*() {
   );
   yield takeLatest(actions.getMeScoreRank, effects.recordMeScoreRankSaga);
   yield takeLatest(actions.recordSchoolList, effects.recordSchoolListSaga);
+  yield takeLatest(actions.recordVoluntaryListOption, effects.recordVoluntaryListOptionSaga);
 };
 
 export const voluntaryReducer = handleActions(
@@ -292,6 +304,20 @@ export const voluntaryReducer = handleActions(
         voluntary
       };
     },
+    // 记录step5的类型(普通报表还是,深度体验报告)
+    recordVoluntaryResultType(state, { payload: result }) {
+      return {
+        ...state,
+        voluntaryResultType: result
+      }
+    },
+    // step5的二级联动选项
+    _recordVoluntaryListOption(state, { payload: result }) {
+      return {
+        ...state,
+        voluntaryListOption: result
+      }
+    },
     // 志愿结果部分
     recordVoluntaryDetail(state, { payload: result }) {
       return {
@@ -324,7 +350,13 @@ export const voluntaryReducer = handleActions(
         ...state,
         majorName: result
       };
-    }
+    },
+    recordVoluntaryDeepUuid(state, { payload: result }) {
+      return {
+        ...state,
+        voluntaryDeepUuid: result
+      };
+    },
   },
   {
     step: 0,
@@ -350,6 +382,12 @@ export const voluntaryReducer = handleActions(
     voluntary: [],
     // 查看志愿用的数据
     voluntaryDetail: [],
+    // 深度体验报表的id
+    voluntaryDeepUuid: '',
+    // step5 展示结果的类型
+    voluntaryResultType: '',
+    // step5 二级联动选项
+    voluntaryListOption: [],
     // 查看数据结果用的数据
     voluntaryResult: {}
   }
