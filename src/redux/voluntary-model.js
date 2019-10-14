@@ -1,7 +1,7 @@
 import { handleActions, createAction } from 'redux-actions';
 
 // saga
-import { call, put, takeLatest, select } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 // 请求文件
 import { launchRequest } from '../util/request';
@@ -35,7 +35,7 @@ const recordVoluntaryResult = createAction('recordVoluntaryResult');
 const setMeScoreRank = createAction('setMeScoreRank');
 const switchMeLoading = createAction('switchMeLoading');
 const switchSchoolTableLoading = createAction('switchSchoolTableLoading');
-const _recordVoluntaryListOption = createAction('_recordVoluntaryListOption')
+const _recordVoluntaryListOption = createAction('_recordVoluntaryListOption');
 // 异步函数
 const effects = {
   recordVoluntaryResultSaga: function*({ payload }) {
@@ -45,7 +45,7 @@ const effects = {
     yield put(recordVoluntaryResult(data));
   },
   // 记录志愿表的二级菜单联动
-  recordVoluntaryListOptionSaga: function* ({ payload }) {
+  recordVoluntaryListOptionSaga: function*({ payload }) {
     const data = yield call(launchRequest, APIS.GET_VOLUNTARY_LIST_OPTION, {
       voluntaryUuid: payload
     });
@@ -64,6 +64,13 @@ const effects = {
     } = yield call(launchRequest, APIS.GET_SCORE_RANK, payload);
 
     // yield call(userEffects.recordUserSaga, { payload });
+
+    console.log(
+      fitCurrent,
+      fitOld,
+      lotsScoreDifferMsg,
+      currentLotsScoreDifferMsg
+    );
     yield put(
       setMeScoreRank({
         fitCurrent,
@@ -143,13 +150,16 @@ const effects = {
 };
 
 export const voluntarySaga = function*() {
-  yield takeLatest(
+  yield takeEvery(
     actions.recordVoluntaryIdGetResult,
     effects.recordVoluntaryResultSaga
   );
-  yield takeLatest(actions.getMeScoreRank, effects.recordMeScoreRankSaga);
-  yield takeLatest(actions.recordSchoolList, effects.recordSchoolListSaga);
-  yield takeLatest(actions.recordVoluntaryListOption, effects.recordVoluntaryListOptionSaga);
+  yield takeEvery(actions.getMeScoreRank, effects.recordMeScoreRankSaga);
+  yield takeEvery(actions.recordSchoolList, effects.recordSchoolListSaga);
+  yield takeEvery(
+    actions.recordVoluntaryListOption,
+    effects.recordVoluntaryListOptionSaga
+  );
 };
 
 export const voluntaryReducer = handleActions(
@@ -309,14 +319,14 @@ export const voluntaryReducer = handleActions(
       return {
         ...state,
         voluntaryResultType: result
-      }
+      };
     },
     // step5的二级联动选项
     _recordVoluntaryListOption(state, { payload: result }) {
       return {
         ...state,
         voluntaryListOption: result
-      }
+      };
     },
     // 志愿结果部分
     recordVoluntaryDetail(state, { payload: result }) {
@@ -356,7 +366,7 @@ export const voluntaryReducer = handleActions(
         ...state,
         voluntaryDeepUuid: result
       };
-    },
+    }
   },
   {
     step: 0,

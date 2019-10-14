@@ -320,6 +320,7 @@ class Step1Controller extends React.Component {
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
         // 提交表单
+        this.props.getMeScoreRank(values);
         this.props.recordUser(values);
         await this.setState({
           loading: false
