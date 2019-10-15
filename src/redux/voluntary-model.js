@@ -120,7 +120,7 @@ const effects = {
     } else if (payload === 2) {
       let { lot_id, majorName } = voluntaryStore;
 
-      if (lot_id) {
+      if (lot_id && majorName !== '') {
         let data = yield call(launchRequest, APIS.GET_SCHOOL, {
           lotId: lot_id,
           majorName,
@@ -128,12 +128,14 @@ const effects = {
         });
 
         schoolList = data.schoolList;
+      } else {
+        schoolList = [];
       }
     } else if (payload === 3) {
       // 指定院校
       let { lot_id, schoolName } = voluntaryStore;
 
-      if (lot_id) {
+      if (lot_id && schoolName !== '') {
         let data = yield call(launchRequest, APIS.GET_SCHOOL, {
           lotId: lot_id,
           schoolName,
@@ -141,6 +143,8 @@ const effects = {
         });
 
         schoolList = data.schoolList;
+      } else {
+        schoolList = [];
       }
     }
 

@@ -50,7 +50,7 @@ class Step1Controller extends React.Component {
     // }); // 地区的list
 
     let yearsList = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 1; i++) {
       yearsList.push(
         <Option
           key={new Date().getFullYear() - i}
