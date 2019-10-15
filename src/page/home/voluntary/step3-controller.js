@@ -49,7 +49,7 @@ class Step3Controller extends React.Component {
         <div className='content'>
           <div className='content-left'>
             <Spin
-              tip='数据量较大,请耐心等待大概20s'
+              tip='数据量较大,请耐心等待'
               delay={200}
               spinning={this.props.schoolTableLoading}
             >
