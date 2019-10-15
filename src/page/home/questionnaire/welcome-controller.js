@@ -9,20 +9,20 @@ import { launchRequest } from '../../../util/request';
 import * as APIS from '../../../constants/api-constants';
 
 import '../../../style/questionnaire/welcome.css';
-import { Row, Col, Typography, Button } from 'antd';
+import { Typography, Button } from 'antd';
 const { Title, Paragraph, Text } = Typography;
 
 class WelcomeController extends React.Component {
   state = {
     loading: true,
-    questionnaireDone: false,
+    questionnaireDone: false
   };
   render() {
     return (
-      <div className="cont">
-        <Row type="flex" justify="space-between" className="news-row">
-          <Col span={12}>
-            <Typography className="typo1">
+      <div className='cont'>
+        <div className='question-welcome-box'>
+          <div className='question-welcome-describe-box'>
+            <Typography className='typo1'>
               <Title>专业测评系统</Title>
               <Paragraph>
                 请务必诚实、独立地回答问题，只有如此，才能得到有效的结果。
@@ -38,10 +38,10 @@ class WelcomeController extends React.Component {
                 只要你认真、真实地填写了测试问卷，那么通常情况下你都能得到一个确实和你的性格相匹配地类型，从而我们可以得知您所适合报考的专业。
               </Paragraph>
               <Button
-                type="primary"
-                htmlType="submit"
-                shape="round"
-                size="large"
+                type='primary'
+                htmlType='submit'
+                shape='round'
+                size='large'
                 disabled={this.state.loading}
                 onClick={() => {
                   this.handleStart();
@@ -54,15 +54,15 @@ class WelcomeController extends React.Component {
                   : '开始测试'}
               </Button>
             </Typography>
-          </Col>
-          <Col span={9}>
+          </div>
+          <div className='question-welcome-img-box'>
             <img
-              src={require('../../../assets/images/questionnaire-welcome/draw.png')}
-              className="main-img"
-              alt=""
+              src='/images/questionnaire-welcome/draw.png'
+              className='questionnaire-main-img'
+              alt=''
             />
-          </Col>
-        </Row>
+          </div>
+        </div>
       </div>
     );
   }
@@ -83,7 +83,7 @@ class WelcomeController extends React.Component {
     console.log('status', status);
     await this.setState({
       loading: false,
-      questionnaireDone: status ? true : false,
+      questionnaireDone: status ? true : false
     });
   };
 }
@@ -93,7 +93,7 @@ const mapStateToProps = store => {
   let { status } = questionnaireStore;
 
   return {
-    status,
+    status
   };
 };
 
@@ -101,11 +101,11 @@ const mapDispatchToProps = dispatch => {
   return {
     setQuesStatus: pageIndex => {
       dispatch(questionnaireActions.setQuesStatus(pageIndex));
-    },
+    }
   };
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(WelcomeController);

@@ -1,11 +1,12 @@
-.main-img {
+.qeustionnaire-box {
   width: 100%;
+  background: #fff;
 }
 
 .cont {
   height: 500px;
   min-width: 1250px;
-  padding-top: 30px;
+  padding: 30px;
 }
 
 .ques-top {
@@ -14,10 +15,6 @@
 
 .bg-light {
   background: #ffffff;
-}
-
-.bg-dark {
-  background: #f6f6f7;
 }
 
 .typo {

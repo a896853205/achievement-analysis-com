@@ -4,7 +4,7 @@
 
 .cont {
   background: #f6f6f7;
-  height: 500px;
+  min-height: 500px;
   min-width: 1250px;
   padding-top: 30px;
 }
@@ -13,4 +13,21 @@
   text-align: left;
   margin-left: 70px;
   margin-top: 60px;
+}
+
+.question-welcome-box {
+  display: flex;
+  justify-content: space-around;
+}
+
+.questionnaire-main-img {
+  height: 600px;
+}
+
+.question-welcome-describe-box {
+  width: 45%;
+}
+
+.question-welcome-img-box {
+  width: 45%;
 }

@@ -5,6 +5,9 @@ import WelcomeController from "./questionnaire/welcome-controller";
 import QuestionnaireController from "./questionnaire/questionnaire-controller";
 import ResultController from "./questionnaire/result-controller";
 
+// 问卷css
+import '@/style/questionnaire/questionnaire.css';
+
 //数据模块交互
 import { connect } from "react-redux";
 import { actions as questionnaireActions } from "../../redux/questionnaire-model";
@@ -25,7 +28,7 @@ class HomeQuestionnaireController extends React.Component {
         content: <ResultController />
       }
     ];
-    return <div>{status[this.props.status].content}</div>;
+    return <div className='qeustionnaire-box'>{status[this.props.status].content}</div>;
   }
 
   componentWillUnmount() {
