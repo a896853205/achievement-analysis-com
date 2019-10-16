@@ -1,18 +1,18 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 // UI组件
-import { Row, Menu, Col, Dropdown, Icon } from "antd";
+import { Row, Menu, Col, Dropdown, Icon } from 'antd';
 
 // 路由
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 // css
-import "../style/header.css";
+import '../style/header.css';
 
 // 关于数据模块交互
-import { connect } from "react-redux";
-import { actions as userActions } from "../redux/user-model";
+import { connect } from 'react-redux';
+import { actions as userActions } from '../redux/user-model';
 
 // 路由
 import {
@@ -28,7 +28,7 @@ import {
   MY_VOLUNTARY,
   SEARCH_SCHOOL,
   SEARCH_MAJOR
-} from "../constants/route-constants";
+} from '../constants/route-constants';
 
 const { SubMenu } = Menu;
 
@@ -101,7 +101,7 @@ class HeaderController extends React.Component {
               <span className="search-bottom-top-text">搜索</span>
               <Icon
                 className="search-bottom-bottom-text"
-                style={{ fontSize: "25px", marginTop: "3px" }}
+                style={{ fontSize: '25px', marginTop: '3px' }}
                 type="search"
               />
             </button>
@@ -116,7 +116,7 @@ class HeaderController extends React.Component {
             <Menu
               theme="light"
               mode="horizontal"
-              style={{ lineHeight: "64px" }}
+              style={{ lineHeight: '64px' }}
             >
               <Menu.Item key="0">
                 <Link
@@ -136,27 +136,19 @@ class HeaderController extends React.Component {
                 }
               >
                 <Menu.Item key="1">
-                  <Link
-                    to={
-                      this.props.user.uuid
-                        ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
-                        : `/${LOGIN.path}`
-                    }
-                  >
-                    高考资讯
-                  </Link>
+                  <Link to={'/'}>高考资讯</Link>
                 </Menu.Item>
                 <Menu.Item key="2">
-                  <Link to={"/"}>智能选择</Link>
+                  <Link to={'/'}>智能选择</Link>
                 </Menu.Item>
                 <Menu.Item key="3">
-                  <Link to={"/"}>按专业选科目</Link>
+                  <Link to={'/'}>按专业选科目</Link>
                 </Menu.Item>
                 <Menu.Item key="4">
-                  <Link to={"/"}>按科目选专业</Link>
+                  <Link to={'/'}>按科目选专业</Link>
                 </Menu.Item>
                 <Menu.Item key="5">
-                  <Link to={"/"}>按大学选专业</Link>
+                  <Link to={'/'}>按大学选专业</Link>
                 </Menu.Item>
               </SubMenu>
               <Menu.Item key="6">
@@ -191,16 +183,16 @@ class HeaderController extends React.Component {
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="8">
-                  <Link to={"/"}>正式填报</Link>
+                  <Link to={'/'}>正式填报</Link>
                 </Menu.Item>
                 <Menu.Item key="9">
-                  <Link to={"/"}>院校优先</Link>
+                  <Link to={'/'}>院校优先</Link>
                 </Menu.Item>
                 <Menu.Item key="10">
-                  <Link to={"/"}>专业优先</Link>
+                  <Link to={'/'}>专业优先</Link>
                 </Menu.Item>
                 <Menu.Item key="11">
-                  <Link to={"/"}>指定院校</Link>
+                  <Link to={'/'}>指定院校</Link>
                 </Menu.Item>
               </SubMenu>
 
@@ -213,13 +205,13 @@ class HeaderController extends React.Component {
                 }
               >
                 <Menu.Item key="12">
-                  <Link to={"/"}>志愿讲堂</Link>
+                  <Link to={'/'}>志愿讲堂</Link>
                 </Menu.Item>
                 <Menu.Item key="13">
-                  <Link to={"/"}>高考提分</Link>
+                  <Link to={'/'}>高考提分</Link>
                 </Menu.Item>
                 <Menu.Item key="14">
-                  <Link to={"/"}>大学展播</Link>
+                  <Link to={'/'}>大学展播</Link>
                 </Menu.Item>
               </SubMenu>
 
@@ -238,17 +230,17 @@ class HeaderController extends React.Component {
                   <Link to={`/${SEARCH_MAJOR.path}`}>专业百科</Link>
                 </Menu.Item>
                 <Menu.Item key="17">
-                  <Link to={"/"}>排名集锦</Link>
+                  <Link to={'/'}>排名集锦</Link>
                 </Menu.Item>
                 <Menu.Item key="18">
-                  <Link to={"/"}>高考百科</Link>
+                  <Link to={'/'}>高考百科</Link>
                 </Menu.Item>
               </SubMenu>
               <Menu.Item key="19">
-                <Link to={"/"}>专家资讯</Link>
+                <Link to={'/'}>专家资讯</Link>
               </Menu.Item>
               <Menu.Item key="20">
-                <Link to={"/"}>社区</Link>
+                <Link to={'/'}>社区</Link>
               </Menu.Item>
             </Menu>
           </Col>
@@ -285,16 +277,16 @@ class HeaderController extends React.Component {
   }
 
   componentDidMount() {
-    let pathArr = this.props.location.pathname.split("/"),
-      token = "token";
+    let pathArr = this.props.location.pathname.split('/'),
+      token = 'token';
 
     // 需要将第一位pop掉 例:'/login' => '['login']'
     pathArr.pop();
 
     // 非后台页页需要再判断location中是否有TOKEN
-    if (pathArr[0] !== "background") {
+    if (pathArr[0] !== 'background') {
       // 其他页需要再判断location中是否有TOKEN,有token就请求,没token就什么都不干
-      token = window.localStorage.getItem("token");
+      token = window.localStorage.getItem('token');
     }
 
     // 如果是后台的才需要进行判断
@@ -316,7 +308,7 @@ class HeaderController extends React.Component {
 
 // 从store接收state数据
 const mapStateToProps = store => {
-  const userStore = store["userStore"];
+  const userStore = store['userStore'];
   let { user } = userStore;
 
   return {
