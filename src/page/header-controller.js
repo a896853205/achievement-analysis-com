@@ -135,7 +135,7 @@ class HeaderController extends React.Component {
                   </span>
                 }
               >
-                <Menu.Item key="4">
+                <Menu.Item key="1">
                   <Link
                     to={
                       this.props.user.uuid
@@ -146,20 +146,20 @@ class HeaderController extends React.Component {
                     高考资讯
                   </Link>
                 </Menu.Item>
-                <Menu.Item key="5">
+                <Menu.Item key="2">
                   <Link to={"/"}>智能选择</Link>
                 </Menu.Item>
-                <Menu.Item key="8">
+                <Menu.Item key="3">
                   <Link to={"/"}>按专业选科目</Link>
                 </Menu.Item>
-                <Menu.Item key="9">
+                <Menu.Item key="4">
                   <Link to={"/"}>按科目选专业</Link>
                 </Menu.Item>
-                <Menu.Item key="10">
+                <Menu.Item key="5">
                   <Link to={"/"}>按大学选专业</Link>
                 </Menu.Item>
               </SubMenu>
-              <Menu.Item key="1">
+              <Menu.Item key="6">
                 <Link
                   to={
                     this.props.user.uuid
@@ -179,7 +179,7 @@ class HeaderController extends React.Component {
                   </span>
                 }
               >
-                <Menu.Item key="11">
+                <Menu.Item key="7">
                   <Link
                     to={
                       this.props.user.uuid
@@ -190,16 +190,16 @@ class HeaderController extends React.Component {
                     模拟填报
                   </Link>
                 </Menu.Item>
-                <Menu.Item key="12">
+                <Menu.Item key="8">
                   <Link to={"/"}>正式填报</Link>
                 </Menu.Item>
-                <Menu.Item key="13">
+                <Menu.Item key="9">
                   <Link to={"/"}>院校优先</Link>
                 </Menu.Item>
-                <Menu.Item key="14">
+                <Menu.Item key="10">
                   <Link to={"/"}>专业优先</Link>
                 </Menu.Item>
-                <Menu.Item key="15">
+                <Menu.Item key="11">
                   <Link to={"/"}>指定院校</Link>
                 </Menu.Item>
               </SubMenu>
@@ -212,13 +212,13 @@ class HeaderController extends React.Component {
                   </span>
                 }
               >
-                <Menu.Item key="16">
+                <Menu.Item key="12">
                   <Link to={"/"}>志愿讲堂</Link>
                 </Menu.Item>
-                <Menu.Item key="17">
+                <Menu.Item key="13">
                   <Link to={"/"}>高考提分</Link>
                 </Menu.Item>
-                <Menu.Item key="18">
+                <Menu.Item key="14">
                   <Link to={"/"}>大学展播</Link>
                 </Menu.Item>
               </SubMenu>
@@ -231,23 +231,23 @@ class HeaderController extends React.Component {
                   </span>
                 }
               >
-                <Menu.Item key="6">
+                <Menu.Item key="15">
                   <Link to={`/${SEARCH_SCHOOL.path}`}>院校资讯</Link>
                 </Menu.Item>
-                <Menu.Item key="7">
+                <Menu.Item key="16">
                   <Link to={`/${SEARCH_MAJOR.path}`}>专业百科</Link>
                 </Menu.Item>
-                <Menu.Item key="19">
+                <Menu.Item key="17">
                   <Link to={"/"}>排名集锦</Link>
                 </Menu.Item>
-                <Menu.Item key="20">
+                <Menu.Item key="18">
                   <Link to={"/"}>高考百科</Link>
                 </Menu.Item>
               </SubMenu>
-              <Menu.Item key="21">
+              <Menu.Item key="19">
                 <Link to={"/"}>专家资讯</Link>
               </Menu.Item>
-              <Menu.Item key="22">
+              <Menu.Item key="20">
                 <Link to={"/"}>社区</Link>
               </Menu.Item>
             </Menu>
