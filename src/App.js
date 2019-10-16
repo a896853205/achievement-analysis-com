@@ -8,6 +8,8 @@ import LoginController from './page/login-controller';
 import RegisterController from './page/register-controller';
 import IndexController from './page/index-controller';
 import BackgroundController from './page/home-controller';
+import NewsController from '@/page/news/news-controller';
+
 // search 组件
 import SchoolSearchController from './page/search/school-search-controller';
 import MajorSearchController from './page/search/major-search-controller';
@@ -15,45 +17,77 @@ import MajorSearchController from './page/search/major-search-controller';
 // UI组件
 import { Layout, Result, Button } from 'antd';
 
-import { INDEX, LOGIN, BCG_ROOT_NAME, REGISTER, SEARCH_SCHOOL, SEARCH_MAJOR } from './constants/route-constants';
+import {
+  INDEX,
+  LOGIN,
+  BCG_ROOT_NAME,
+  REGISTER,
+  SEARCH_SCHOOL,
+  SEARCH_MAJOR,
+  NEWS
+} from './constants/route-constants';
 
 const { Content } = Layout;
 
 class App extends Component {
-	render() {
-		return (
-			<div className='layout'>
-				<HeaderController />
-				<Content>
-					<div>
-						<Switch>
-							<Route path={`/${INDEX.path}`} exact component={IndexController} />
-							<Route path={`/${LOGIN.path}`} exact component={LoginController} />
-							<Route path={`/${REGISTER.path}`} exact component={RegisterController} />
-							<Route path={`/${SEARCH_SCHOOL.path}`} exact component={SchoolSearchController} />
-							<Route path={`/${SEARCH_MAJOR.path}`} exact component={MajorSearchController} />
-							<Route path={`/${BCG_ROOT_NAME}`} component={BackgroundController} />
-							<Route
-								component={() => (
-									<Result
-										status='404'
-										title='404'
-										subTitle='对不起,您访问的页面不存在'
-										extra={
-											<Button type='primary'>
-												<Link to={'/'}>回到首页</Link>
-											</Button>
-										}
-									/>
-								)}
-							/>
-						</Switch>
-					</div>
-				</Content>
-				<FooterController />
-			</div>
-		);
-	}
+  render() {
+    return (
+      <div className='layout'>
+        <HeaderController />
+        <Content>
+          <div>
+            <Switch>
+              <Route
+                path={`/${INDEX.path}`}
+                exact
+                component={IndexController}
+              />
+              <Route
+                path={`/${LOGIN.path}`}
+                exact
+                component={LoginController}
+              />
+              <Route
+                path={`/${REGISTER.path}`}
+                exact
+                component={RegisterController}
+              />
+              <Route
+                path={`/${SEARCH_SCHOOL.path}`}
+                exact
+                component={SchoolSearchController}
+              />
+              <Route
+                path={`/${SEARCH_MAJOR.path}`}
+                exact
+                component={MajorSearchController}
+              />
+              <Route path={`/${NEWS.path}/:uuid&:type`} component={NewsController} />
+              <Route
+                path={`/${BCG_ROOT_NAME}`}
+                component={BackgroundController}
+              />
+              <Route
+                component={() => (
+                  <Result
+                    status='404'
+                    title='404'
+                    subTitle='对不起,您访问的页面不存在'
+                    extra={
+                      <Button type='primary'>
+                        <Link to={'/'}>回到首页</Link>
+                      </Button>
+                    }
+                  />
+                )}
+              />
+            </Switch>
+          </div>
+        </Content>
+        <FooterController />
+      </div>
+    );
+  }
 }
 
 export default App;

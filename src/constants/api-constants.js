@@ -51,5 +51,11 @@ export const GET_MY_VOLUNTARY = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_V
 export const GET_VOLUNTARY_LIST_OPTION = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_VOLUNTARY}/getVoluntaryListOption`;
 export const GET_VOLUNTARY_DEEP_RESULT = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_VOLUNTARY}/getVoluntaryDeepResult`;
 
+/**
+ * optnews
+ *************************/
+export const GET_NEWS_PROFILE = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_NEWS}/getNewsProfile`; // 获取新闻概况
+export const GET_NEWS_DETAIL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_NEWS}/getNewsDetail`; // 获取新闻详细内容
+
 // 获取上传Token
 export const GetUploadToken = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_UPLOAD}/getuploadtoken`;
