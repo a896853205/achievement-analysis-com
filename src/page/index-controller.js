@@ -64,14 +64,14 @@ class IndexController extends React.Component {
           >
             <div className='search-text-box'>
               <Icon type='book' />
-              <span className='search-title'>专业查询</span>
+              <span className='search-title'>专业百科</span>
             </div>
             <div className='search-shadow-box' />
           </div>
         </div>
         <div className='page-inner-width-box'>
           <div className='index-left-right-box'>
-            {/* 左侧的智课堂和院校咨询和专业百科 */}
+            {/* 左侧的智课堂和院校资讯和专业百科 */}
             <div className='page-inner-left-box'>
               {/* 智课堂 */}
               <div className='intelligent-course-box'>
@@ -136,10 +136,10 @@ class IndexController extends React.Component {
                   </li>
                 </ul>
               </div>
-              {/* 院校咨询 */}
+              {/* 院校资讯 */}
               <div className='school-information-box'>
                 <h2 className='h2-title-box'>
-                  <span className='index-h2-title'>院校咨询</span>
+                  <span className='index-h2-title'>院校资讯</span>
                   <span className='index-more'>
                     更多 <Icon type='right' />
                   </span>
@@ -216,7 +216,7 @@ class IndexController extends React.Component {
               {/* 专业百科 */}
               <div className='major-information-box'>
                 <h2 className='h2-title-box'>
-                  <span className='index-h2-title'>院校咨询</span>
+                  <span className='index-h2-title'>院校资讯</span>
                   <span className='index-more'>
                     更多 <Icon type='right' />
                   </span>
@@ -391,7 +391,7 @@ class IndexController extends React.Component {
             <div className='page-inner-left-box index-good-school-box'>
               <h2 className='h2-title-box'>
                 <span className='index-h2-title'>
-                  <Icon type='book' /> 特色院校推荐
+                  <Icon type='book' /> 院校推荐
                 </span>
                 <span className='index-more'>
                   更多 <Icon type='right' />
