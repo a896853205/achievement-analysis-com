@@ -8,7 +8,7 @@ import { actions as questionnaireActions } from '../../../redux/questionnaire-mo
 import { launchRequest } from '../../../util/request';
 import * as APIS from '../../../constants/api-constants';
 
-import '../../../style/questionnaire/welcome.css';
+import '@/style/questionnaire/welcome.css';
 import { Typography, Button } from 'antd';
 const { Title, Paragraph, Text } = Typography;
 
@@ -19,7 +19,7 @@ class WelcomeController extends React.Component {
   };
   render() {
     return (
-      <div className='cont'>
+      <div className='question-box'>
         <div className='question-welcome-box'>
           <div className='question-welcome-describe-box'>
             <Typography className='typo1'>
