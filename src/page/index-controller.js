@@ -9,7 +9,21 @@ import { SEARCH_SCHOOL, SEARCH_MAJOR } from '../constants/route-constants';
 
 import '../style/index-controller.css';
 
+// 请求文件
+import { launchRequest } from '@/util/request';
+import * as APIS from '@/constants/api-constants';
+
+// 子组件
+import SchoolNewsList from '@/page/index/index-schoolNewsList.jsx';
+
 class IndexController extends React.Component {
+  state = {
+    schoolNewsList: [],
+    majorNewsList: [],
+    studentReadNewsList: [],
+    rankNewsList: [],
+  };
+
   render() {
     return (
       <div className='index-box'>
@@ -137,86 +151,12 @@ class IndexController extends React.Component {
                 </ul>
               </div>
               {/* 院校资讯 */}
-              <div className='school-information-box'>
-                <h2 className='h2-title-box'>
-                  <span className='index-h2-title'>院校资讯</span>
-                  <span className='index-more'>
-                    更多 <Icon type='right' />
-                  </span>
-                </h2>
-                <ul>
-                  <li>
-                    <div>
-                      <h5>
-                        哈尔滨工业大学高考课堂哈尔学高考fsdfs哈尔滨工业大学高考课堂哈尔学高考fsdfs
-                      </h5>
-                      <span className='school-information-time-box'>
-                        <Icon type='clock-circle' /> 2019-09-10
-                      </span>
-                      <span className='school-information-see-box'>
-                        <Icon type='eye' /> 5699
-                      </span>
-                    </div>
-                    <div className='school-information-tags'>
-                      <span>NEW</span>
-                      <span>HOT</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <h5>
-                        哈尔滨工业大学高考课堂哈尔学高考fsdfs哈尔滨工业大学高考课堂哈尔学高考fsdfs
-                      </h5>
-                      <span className='school-information-time-box'>
-                        <Icon type='clock-circle' /> 2019-09-10
-                      </span>
-                      <span className='school-information-see-box'>
-                        <Icon type='eye' /> 5699
-                      </span>
-                    </div>
-                    <div className='school-information-tags'>
-                      <span>NEW</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <h5>
-                        哈尔滨工业大学高考课堂哈尔学高考fsdfs哈尔滨工业大学高考课堂哈尔学高考fsdfs
-                      </h5>
-                      <span className='school-information-time-box'>
-                        <Icon type='clock-circle' /> 2019-09-10
-                      </span>
-                      <span className='school-information-see-box'>
-                        <Icon type='eye' /> 5699
-                      </span>
-                    </div>
-                    <div className='school-information-tags'>
-                      <span>NEW</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <h5>
-                        哈尔滨工业大学高考课堂哈尔学高考fsdfs哈尔滨工业大学高考课堂哈尔学高考fsdfs
-                      </h5>
-                      <span className='school-information-time-box'>
-                        <Icon type='clock-circle' /> 2019-09-10
-                      </span>
-                      <span className='school-information-see-box'>
-                        <Icon type='eye' /> 5699
-                      </span>
-                    </div>
-                    <div className='school-information-tags'>
-                      <span>NEW</span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+              <SchoolNewsList newsList={this.state.schoolNewsList} />
               <div className='upright-line'></div>
               {/* 专业百科 */}
               <div className='major-information-box'>
                 <h2 className='h2-title-box'>
-                  <span className='index-h2-title'>院校资讯</span>
+                  <span className='index-h2-title'>专业百科</span>
                   <span className='index-more'>
                     更多 <Icon type='right' />
                   </span>
@@ -461,19 +401,44 @@ class IndexController extends React.Component {
                 </h2>
                 <ul>
                   <li>
-                  <Icon type="right-square" theme="filled" className='student-must-read-icon' />高考课堂哈堂哈堂尔学高考堂考高考课堂哈堂哈堂尔学高考堂考
+                    <Icon
+                      type='right-square'
+                      theme='filled'
+                      className='student-must-read-icon'
+                    />
+                    高考课堂哈堂哈堂尔学高考堂考高考课堂哈堂哈堂尔学高考堂考
                   </li>
                   <li>
-                  <Icon type="right-square" theme="filled" className='student-must-read-icon' />高考课堂哈堂哈堂尔学高考堂考高考课堂哈堂哈堂尔学高考堂考
+                    <Icon
+                      type='right-square'
+                      theme='filled'
+                      className='student-must-read-icon'
+                    />
+                    高考课堂哈堂哈堂尔学高考堂考高考课堂哈堂哈堂尔学高考堂考
                   </li>
                   <li>
-                  <Icon type="right-square" theme="filled" className='student-must-read-icon' />高考课堂哈堂哈堂尔学高考堂考高考课堂哈堂哈堂尔学高考堂考
+                    <Icon
+                      type='right-square'
+                      theme='filled'
+                      className='student-must-read-icon'
+                    />
+                    高考课堂哈堂哈堂尔学高考堂考高考课堂哈堂哈堂尔学高考堂考
                   </li>
                   <li>
-                  <Icon type="right-square" theme="filled" className='student-must-read-icon' />高考课堂哈堂哈堂尔学高考堂考高考课堂哈堂哈堂尔学高考堂考
+                    <Icon
+                      type='right-square'
+                      theme='filled'
+                      className='student-must-read-icon'
+                    />
+                    高考课堂哈堂哈堂尔学高考堂考高考课堂哈堂哈堂尔学高考堂考
                   </li>
                   <li>
-                  <Icon type="right-square" theme="filled" className='student-must-read-icon' />高考课堂哈堂哈堂尔学高考堂考高考课堂哈堂哈堂尔学高考堂考
+                    <Icon
+                      type='right-square'
+                      theme='filled'
+                      className='student-must-read-icon'
+                    />
+                    高考课堂哈堂哈堂尔学高考堂考高考课堂哈堂哈堂尔学高考堂考
                   </li>
                 </ul>
               </div>
@@ -483,5 +448,42 @@ class IndexController extends React.Component {
       </div>
     );
   }
+
+  componentDidMount = async () => {
+    let [
+      schoolNewsList,
+      majorNewsList,
+      studentReadNewsList,
+      rankNewsList
+    ] = await Promise.all([
+      // 学校资讯
+      launchRequest(APIS.GET_NEWS_PROFILE_LIST, {
+        type: 1,
+        count: 4
+      }),
+      // 专业资讯
+      launchRequest(APIS.GET_NEWS_PROFILE_LIST, {
+        type: 2,
+        count: 4
+      }),
+      // 考生必读
+      launchRequest(APIS.GET_NEWS_PROFILE_LIST, {
+        type: 3,
+        count: 5
+      }),
+      // 排名集锦
+      launchRequest(APIS.GET_NEWS_PROFILE_LIST, {
+        type: 4,
+        count: 3
+      })
+    ]);
+
+    this.setState({
+      schoolNewsList,
+      majorNewsList,
+      studentReadNewsList,
+      rankNewsList
+    });
+  };
 }
 export default withRouter(IndexController);
