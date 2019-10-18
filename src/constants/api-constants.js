@@ -54,7 +54,7 @@ export const GET_VOLUNTARY_DEEP_RESULT = `${DominConfigs.DOMAIN}${DominConfigs.P
 /**
  * optnews
  *************************/
-export const GET_NEWS_PROFILE = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_NEWS}/getNewsProfile`; // 获取新闻概况
+export const GET_NEWS_PROFILE_LIST = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_NEWS}/getNewsProfileList`; // 获取新闻概况列表
 export const GET_NEWS_DETAIL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_NEWS}/getNewsDetail`; // 获取新闻详细内容
 
 // 获取上传Token
