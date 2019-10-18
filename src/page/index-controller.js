@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Carousel, Icon } from 'antd';
+import { Carousel, Icon, Skeleton } from 'antd';
 
 // 路由
 import { withRouter } from 'react-router-dom';
@@ -24,7 +24,8 @@ class IndexController extends React.Component {
     schoolNewsList: [],
     majorNewsList: [],
     studentReadNewsList: [],
-    rankNewsList: []
+    rankNewsList: [],
+    loading: false
   };
 
   render() {
@@ -89,12 +90,115 @@ class IndexController extends React.Component {
         <div className='page-inner-width-box'>
           <div className='index-left-right-box'>
             {/* 左侧的智课堂和院校资讯和专业百科 */}
+
             <div className='page-inner-left-box'>
-              {/* 智课堂 */}
-              <div className='intelligent-course-box'>
+              <Skeleton active loading={this.state.loading}>
+                {/* 智课堂 */}
+                <div className='intelligent-course-box'>
+                  <h2 className='h2-title-box'>
+                    <span className='index-h2-title'>
+                      <Icon type='book' /> 智课堂
+                    </span>
+                    <span className='index-more'>
+                      更多 <Icon type='right' />
+                    </span>
+                  </h2>
+                  <ul>
+                    <li>
+                      <img
+                        src='https://cdn.dribbble.com/users/992274/screenshots/7440971/media/2405976c7c1485050e78fcf54ca4bfe4.jpg'
+                        alt=''
+                      />
+                      <h5>高考志愿早准备</h5>
+                      <p>
+                        <Icon type='eye' /> 874
+                      </p>
+                    </li>
+                    <li>
+                      <img
+                        src='https://cdn.dribbble.com/users/278549/screenshots/7448782/media/87fe1bff113e26825d8f58e3b1bbb785.png'
+                        alt=''
+                      />
+                      <h5>高考填志愿怎样选专业？</h5>
+                      <p>
+                        <Icon type='eye' /> 2134
+                      </p>
+                    </li>
+                    <li>
+                      <img
+                        src='https://cdn.dribbble.com/users/371094/screenshots/6793394/_bbb-dribble.jpg'
+                        alt=''
+                      />
+                      <h5>优志愿系统电脑端使用教程</h5>
+                      <p>
+                        <Icon type='eye' /> 63245
+                      </p>
+                    </li>
+                    <li>
+                      <img
+                        src='https://cdn.dribbble.com/users/503590/screenshots/6292998/thestudy05.jpg'
+                        alt=''
+                      />
+                      <h5>优志愿系统电脑端使用教程</h5>
+                      <p>
+                        <Icon type='eye' /> 23423
+                      </p>
+                    </li>
+                    <li>
+                      <img
+                        src='https://cdn.dribbble.com/users/503590/screenshots/6293010/thestudy01.jpg'
+                        alt=''
+                      />
+                      <h5>会计学专业解读</h5>
+                      <p>
+                        <Icon type='eye' /> 234
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+                {/* 院校资讯 */}
+                <SchoolNewsList newsList={this.state.schoolNewsList} />
+                <div className='upright-line'></div>
+                {/* 专业百科 */}
+                <MajorNewsList newsList={this.state.majorNewsList} />
+              </Skeleton>
+            </div>
+
+            {/* 右侧高考百问和排名集锦 */}
+
+            <div className='page-inner-right-box'>
+              <Skeleton active loading={this.state.loading}>
+                {/* 高考百问 */}
+                <div>
+                  <h2 className='h2-title-box'>
+                    <span className='index-h2-title'>
+                      <Icon type='book' /> 高考百问
+                    </span>
+                    <span className='index-more'>
+                      更多 <Icon type='right' />
+                    </span>
+                  </h2>
+                  <ul className='index-question-ul-box'>
+                    <li>高考百问信息高考百问信息高考百问信息</li>
+                    <li>高考百问信息高考百问信息高考百问信息</li>
+                    <li>高考百问信息高考百问信息高考百问信息</li>
+                    <li>高考百问信息高考百问信息高考百问信息</li>
+                  </ul>
+                </div>
+                {/* 排名集锦 */}
+                <RankShowNewsList newsList={this.state.rankNewsList} />
+              </Skeleton>
+            </div>
+          </div>
+        </div>
+        <div className='page-inner-width-box'>
+          <div className='index-left-right-box'>
+            {/* 特色院校推荐 */}
+            <div className='page-inner-left-box index-good-school-box'>
+              <Skeleton active loading={this.state.loading}>
                 <h2 className='h2-title-box'>
                   <span className='index-h2-title'>
-                    <Icon type='book' /> 智课堂
+                    <Icon type='book' /> 院校推荐
                   </span>
                   <span className='index-more'>
                     更多 <Icon type='right' />
@@ -103,152 +207,61 @@ class IndexController extends React.Component {
                 <ul>
                   <li>
                     <img
-                      src='https://cdn.dribbble.com/users/992274/screenshots/7440971/media/2405976c7c1485050e78fcf54ca4bfe4.jpg'
+                      src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
                       alt=''
                     />
-                    <h5>高考志愿早准备</h5>
-                    <p>
-                      <Icon type='eye' /> 874
-                    </p>
                   </li>
                   <li>
                     <img
-                      src='https://cdn.dribbble.com/users/278549/screenshots/7448782/media/87fe1bff113e26825d8f58e3b1bbb785.png'
+                      src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
                       alt=''
                     />
-                    <h5>高考填志愿怎样选专业？</h5>
-                    <p>
-                      <Icon type='eye' /> 2134
-                    </p>
                   </li>
                   <li>
                     <img
-                      src='https://cdn.dribbble.com/users/371094/screenshots/6793394/_bbb-dribble.jpg'
+                      src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
                       alt=''
                     />
-                    <h5>优志愿系统电脑端使用教程</h5>
-                    <p>
-                      <Icon type='eye' /> 63245
-                    </p>
                   </li>
                   <li>
                     <img
-                      src='https://cdn.dribbble.com/users/503590/screenshots/6292998/thestudy05.jpg'
+                      src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
                       alt=''
                     />
-                    <h5>优志愿系统电脑端使用教程</h5>
-                    <p>
-                      <Icon type='eye' /> 23423
-                    </p>
                   </li>
                   <li>
                     <img
-                      src='https://cdn.dribbble.com/users/503590/screenshots/6293010/thestudy01.jpg'
+                      src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
                       alt=''
                     />
-                    <h5>会计学专业解读</h5>
-                    <p>
-                      <Icon type='eye' /> 234
-                    </p>
+                  </li>
+                  <li>
+                    <img
+                      src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
+                      alt=''
+                    />
+                  </li>
+                  <li>
+                    <img
+                      src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
+                      alt=''
+                    />
+                  </li>
+                  <li>
+                    <img
+                      src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
+                      alt=''
+                    />
                   </li>
                 </ul>
-              </div>
-              {/* 院校资讯 */}
-              <SchoolNewsList newsList={this.state.schoolNewsList} />
-              <div className='upright-line'></div>
-              {/* 专业百科 */}
-              <MajorNewsList newsList={this.state.majorNewsList} />
-            </div>
-            {/* 右侧高考百问和排名集锦 */}
-            <div className='page-inner-right-box'>
-              {/* 高考百问 */}
-              <div>
-                <h2 className='h2-title-box'>
-                  <span className='index-h2-title'>
-                    <Icon type='book' /> 高考百问
-                  </span>
-                  <span className='index-more'>
-                    更多 <Icon type='right' />
-                  </span>
-                </h2>
-                <ul className='index-question-ul-box'>
-                  <li>高考百问信息高考百问信息高考百问信息</li>
-                  <li>高考百问信息高考百问信息高考百问信息</li>
-                  <li>高考百问信息高考百问信息高考百问信息</li>
-                  <li>高考百问信息高考百问信息高考百问信息</li>
-                </ul>
-              </div>
-              {/* 排名集锦 */}
-              <RankShowNewsList newsList={this.state.rankNewsList} />
-            </div>
-          </div>
-        </div>
-        <div className='page-inner-width-box'>
-          <div className='index-left-right-box'>
-            {/* 特色院校推荐 */}
-            <div className='page-inner-left-box index-good-school-box'>
-              <h2 className='h2-title-box'>
-                <span className='index-h2-title'>
-                  <Icon type='book' /> 院校推荐
-                </span>
-                <span className='index-more'>
-                  更多 <Icon type='right' />
-                </span>
-              </h2>
-              <ul>
-                <li>
-                  <img
-                    src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
-                    alt=''
-                  />
-                </li>
-                <li>
-                  <img
-                    src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
-                    alt=''
-                  />
-                </li>
-                <li>
-                  <img
-                    src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
-                    alt=''
-                  />
-                </li>
-                <li>
-                  <img
-                    src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
-                    alt=''
-                  />
-                </li>
-                <li>
-                  <img
-                    src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
-                    alt=''
-                  />
-                </li>
-                <li>
-                  <img
-                    src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
-                    alt=''
-                  />
-                </li>
-                <li>
-                  <img
-                    src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
-                    alt=''
-                  />
-                </li>
-                <li>
-                  <img
-                    src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
-                    alt=''
-                  />
-                </li>
-              </ul>
+              </Skeleton>
             </div>
             {/* 考生必读 */}
+
             <div className='page-inner-right-box'>
-              <StudentReadList newsList={this.state.studentReadNewsList} />
+              <Skeleton active loading={this.state.loading}>
+                <StudentReadList newsList={this.state.studentReadNewsList} />
+              </Skeleton>
             </div>
           </div>
         </div>
@@ -257,40 +270,30 @@ class IndexController extends React.Component {
   }
 
   componentDidMount = async () => {
-    let [
+    await this.setState({
+      loading: true
+    });
+
+    let {
       schoolNewsList,
       majorNewsList,
       studentReadNewsList,
       rankNewsList
-    ] = await Promise.all([
-      // 学校资讯
-      launchRequest(APIS.GET_NEWS_PROFILE_LIST, {
-        type: 1,
-        count: 4
-      }),
-      // 专业资讯
-      launchRequest(APIS.GET_NEWS_PROFILE_LIST, {
-        type: 2,
-        count: 4
-      }),
-      // 考生必读
-      launchRequest(APIS.GET_NEWS_PROFILE_LIST, {
-        type: 3,
-        count: 5
-      }),
-      // 排名集锦
-      launchRequest(APIS.GET_NEWS_PROFILE_LIST, {
-        type: 4,
-        count: 3
-      })
-    ]);
+    } = await launchRequest(APIS.GET_HOME_DATA);
 
-    this.setState({
+    await this.setState({
       schoolNewsList,
       majorNewsList,
       studentReadNewsList,
       rankNewsList
     });
+
+    // 防闪烁
+    setTimeout(() => {
+      this.setState({
+        loading: false
+      });
+    }, 500);
   };
 }
 export default withRouter(IndexController);

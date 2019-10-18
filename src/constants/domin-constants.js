@@ -25,6 +25,7 @@ export const PART = {
   OPT_QUESTIONNAIRE: '/questionnaire',
   OPT_VOLUNTARY: '/voluntary',
   OPT_NEWS: '/news',
+  OPT_INDEX: '/index',
 };
 
 // 请求类型
