@@ -126,7 +126,7 @@ class SchoolSearchController extends React.Component {
                 onChange: page => {
                   console.log(page);
                 },
-                pageSize: 6
+                pageSize: 12
               }}
               dataSource={this.state.schoolList}
               renderItem={item => (

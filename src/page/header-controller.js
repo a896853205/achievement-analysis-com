@@ -42,7 +42,7 @@ class HeaderController extends React.Component {
               pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${BASIC.path}`
             }}
           >
-            修改个人
+            修改信息
           </Link>
         </Menu.Item>
         <Menu.Item>
