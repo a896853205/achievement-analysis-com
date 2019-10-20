@@ -9,6 +9,7 @@ import RegisterController from './page/register-controller';
 import IndexController from './page/index-controller';
 import BackgroundController from './page/home-controller';
 import NewsDetailController from '@/page/news/news-detail-controller';
+import NewsMoreController from '@/page/news/news-more-controller.jsx';
 
 // search 组件
 import SchoolSearchController from './page/search/school-search-controller';
@@ -24,8 +25,9 @@ import {
   REGISTER,
   SEARCH_SCHOOL,
   SEARCH_MAJOR,
-  NEWS_DETAIL
-} from './constants/route-constants';
+  NEWS_DETAIL,
+  NEWS_MORE
+} from '@/constants/route-constants';
 
 const { Content } = Layout;
 
@@ -63,6 +65,7 @@ class App extends Component {
                 component={MajorSearchController}
               />
               <Route path={`/${NEWS_DETAIL.path}/:uuid&:type`} component={NewsDetailController} />
+              <Route path={`/${NEWS_MORE.path}/:type`} component={NewsMoreController} />
               <Route
                 path={`/${BCG_ROOT_NAME}`}
                 component={BackgroundController}
