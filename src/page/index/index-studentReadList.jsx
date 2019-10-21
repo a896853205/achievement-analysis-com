@@ -6,7 +6,7 @@ import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
 
 // 路由
-import { NEWS_DETAIL } from '@/constants/route-constants';
+import { NEWS_DETAIL, NEWS_MORE } from '@/constants/route-constants';
 
 export default props => {
   const [newsList, setNewsList] = useState([]);
@@ -41,9 +41,15 @@ export default props => {
         <span className='index-h2-title'>
           <Icon type='book' /> 考生必读
         </span>
-        <span className='index-more'>
-          更多 <Icon type='right' />
-        </span>
+        <Link
+          to={{
+            pathname: `/${NEWS_MORE.path}/3`
+          }}
+        >
+          <span className='index-more'>
+            更多 <Icon type='right' />
+          </span>
+        </Link>
       </h2>
       <ul>{newsList}</ul>
     </div>

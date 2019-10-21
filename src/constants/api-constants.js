@@ -17,7 +17,7 @@ export const SET_USER_IMPORT_INFO = `${DominConfigs.DOMAIN}${DominConfigs.PART.O
 /**
  * optindex
  ***************************/
-export const GET_HOME_DATA = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_INDEX}/getIndexData`
+export const GET_HOME_DATA = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_INDEX}/getIndexData`;
 
 /**
  * optsystem
@@ -63,6 +63,7 @@ export const GET_VOLUNTARY_DEEP_RESULT = `${DominConfigs.DOMAIN}${DominConfigs.P
 export const GET_NEWS_DETAIL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_NEWS}/getNewsDetail`; // 获取新闻详细内容
 export const GET_RECOMMEND_NEWS = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_NEWS}/getRecommendNews`;
 export const GET_HOT_NEWS = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_NEWS}/getHotNews`;
+export const GET_MORE_NEWS = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_NEWS}/getMoreNews`;
 
 // 获取上传Token
 export const GetUploadToken = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_UPLOAD}/getuploadtoken`;

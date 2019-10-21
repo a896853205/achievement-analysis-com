@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 
 // 路由
 import { NEWS_DETAIL } from '@/constants/route-constants';
+import { NEWS_MORE } from 'constants/route-constants';
 
 export default props => {
   const [newsList, setNewsList] = useState([]);
@@ -18,7 +19,7 @@ export default props => {
       return (
         <Link
           to={{
-            pathname: `/${NEWS_DETAIL.path}/${item.uuid}&${item.type}`,
+            pathname: `/${NEWS_DETAIL.path}/${item.uuid}&${item.type}`
           }}
           key={item.uuid}
         >
@@ -49,9 +50,15 @@ export default props => {
     <div className='school-information-box'>
       <h2 className='h2-title-box'>
         <span className='index-h2-title'>院校资讯</span>
-        <span className='index-more'>
-          更多 <Icon type='right' />
-        </span>
+        <Link
+          to={{
+            pathname: `/${NEWS_MORE.path}/1`
+          }}
+        >
+          <span className='index-more'>
+            更多 <Icon type='right' />
+          </span>
+        </Link>
       </h2>
       <ul>{newsList}</ul>
     </div>
