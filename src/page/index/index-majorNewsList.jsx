@@ -8,7 +8,7 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 // 路由
-import { NEWS_DETAIL } from '@/constants/route-constants';
+import { NEWS_DETAIL, NEWS_MORE } from '@/constants/route-constants';
 
 export default props => {
   const [newsList, setNewsList] = useState([]);
@@ -49,9 +49,15 @@ export default props => {
     <div className='major-information-box'>
       <h2 className='h2-title-box'>
         <span className='index-h2-title'>专业百科</span>
-        <span className='index-more'>
-          更多 <Icon type='right' />
-        </span>
+        <Link
+          to={{
+            pathname: `/${NEWS_MORE.path}/2`
+          }}
+        >
+          <span className='index-more'>
+            更多 <Icon type='right' />
+          </span>
+        </Link>
       </h2>
       <ul>{newsList}</ul>
     </div>
