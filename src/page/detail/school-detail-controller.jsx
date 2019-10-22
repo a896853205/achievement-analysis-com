@@ -11,7 +11,7 @@ export default () => {
   return (
     <div className='school-detail-box page-inner-width-box'>
       {/* 学校详情头部数据 */}
-      <div>
+      <div className='school-detail-top-box'>
         <div className='school-detail-title-box'>
           <h2 className='school-detail-title'>清华大学</h2>
           <span className='shool-detail-property-tag'>985</span>
@@ -86,11 +86,10 @@ export default () => {
         </div>
       </div>
       {/* 学校详情左边数据 */}
-      <div>
-        {/* 大学详情左边数据 */}
+      <div className='school-detail-left-box'>
         {/* 招生简章 */}
-        <div>
-          <h3>招生简章</h3>
+        <div className='school-detail-item-box'>
+          <h3 className='school-detail-item-title'>招生简章</h3>
           <ul>
             <li>
               <h5>复旦大学2019年招生章程</h5>
@@ -106,37 +105,37 @@ export default () => {
           </ul>
         </div>
         {/* 院校分数线 */}
-        <div>
-          <h3>院校分数线</h3>
+        <div className='school-detail-item-box'>
+          <h3 className='school-detail-item-title'>院校分数线</h3>
           {/* Select */}
           {/* Table */}
         </div>
       </div>
       {/* 学校详情右边数据 */}
-      <div>
+      <div className='school-detail-right-box'>
         {/* 大学详情右边数据 */}
-        <div>
-          <h3>大学排名</h3>
-          <div>
-            <div>
-              <span>7</span>
-              <span>武书连</span>
+        <div className='school-detail-item-box'>
+          <h3 className='school-detail-item-title'>大学排名</h3>
+          <div className='school-detail-rank-box'>
+            <div className='rank-item'>
+              <span className='rank-num'>7</span>
+              <span className='rank-name'>武书连</span>
             </div>
-            <div>
-              <span>5</span>
-              <span>软科</span>
+            <div className='rank-item'>
+              <span className='rank-num'>5</span>
+              <span className='rank-name'>软科</span>
             </div>
-            <div>
-              <span>4</span>
-              <span>校友会</span>
+            <div className='rank-item'>
+              <span className='rank-num'>4</span>
+              <span className='rank-name'>校友会</span>
             </div>
-            <div>
-              <span>3</span>
-              <span>QS</span>
+            <div className='rank-item'>
+              <span className='rank-num'>3</span>
+              <span className='rank-name'>QS</span>
             </div>
-            <div>
-              <span>5</span>
-              <span>USNews</span>
+            <div className='rank-item'>
+              <span className='rank-num'>5</span>
+              <span className='rank-name'>USNews</span>
             </div>
           </div>
         </div>

@@ -1,7 +1,13 @@
 .school-detail-box {
   padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 /* 学校细节头部 start */
+.school-detail-top-box {
+  width: 100%;
+}
 .school-detail-title-box {
   display: flex;
   align-items: center;
@@ -64,3 +70,52 @@
   color: #e84c33;
 }
 /* 学校细节头部 end */
+/* 学校细节下部 start */
+.school-detail-item-box {
+  padding: 20px;
+  border: 1px solid #ddd;
+  margin-top: 20px;
+}
+.school-detail-item-title {
+  padding-left: 15px;
+  margin-bottom: 15px;
+  border-left: 5px solid #f66;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* 学校细节左边部分 start */
+.school-detail-left-box {
+  width: 750px;
+}
+/* 学校细节左边部分 end */
+.school-detail-right-box {
+  width: 400px;
+}
+
+/* 大学排名 start */
+.school-detail-rank-box {
+  display: flex;
+  justify-content: space-between;
+}
+.school-detail-rank-box .rank-item {
+  width: 65px;
+  display: flex;
+  flex-direction: column;
+}
+.school-detail-rank-box .rank-item .rank-num {
+  padding: 10px;
+  border: 1px dashed #ddd;
+  border-bottom: 0;
+  text-align: center;
+  font-weight: 700;
+}
+.school-detail-rank-box .rank-item .rank-name {
+  color: #f66666;
+  background: #FFF1F0;
+  font-size: 12px;
+  padding: 3px 0;
+  text-align: center;
+}
+/* 大学排名 end */
+/* 学校细节下部 end */
