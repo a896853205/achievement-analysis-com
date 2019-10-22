@@ -1,5 +1,6 @@
 export const BCG_ROOT_NAME = 'background';
 
+// 一级路由
 export const INDEX = { path: '', name: '首页' };
 export const LOGIN = { path: 'login', name: '登录页' };
 export const HOME = { path: 'home', name: '登录成功页' };
@@ -19,7 +20,9 @@ export const VOLUNTARY_DEEP_RESULT = {
 };
 export const QUESTIONNAIRE = { path: 'questionnaire', name: '问卷页' };
 export const PERSONAL = { path: 'personal', name: '问卷页' };
+export const SCHOOL_DETAIL = { path: 'schoolDetail', name: '学校详情页' };
 
+// 二级路由
 export const BASIC = { path: 'basic', name: '基本修改页' };
 export const PASSWORD = { path: 'password', name: '修改密码页' };
 export const MY_VOLUNTARY = { path: 'myVoluntary', name: '我的志愿页' };

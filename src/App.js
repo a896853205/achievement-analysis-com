@@ -15,6 +15,8 @@ import NewsMoreController from '@/page/news/news-more-controller.jsx';
 import SchoolSearchController from './page/search/school-search-controller';
 import MajorSearchController from './page/search/major-search-controller';
 
+// 详情 组件
+import SchoolDetailController from '@/page/detail/school-detail-controller.jsx';
 // UI组件
 import { Layout, Result, Button } from 'antd';
 
@@ -26,7 +28,8 @@ import {
   SEARCH_SCHOOL,
   SEARCH_MAJOR,
   NEWS_DETAIL,
-  NEWS_MORE
+  NEWS_MORE,
+  SCHOOL_DETAIL
 } from '@/constants/route-constants';
 
 const { Content } = Layout;
@@ -64,8 +67,18 @@ class App extends Component {
                 exact
                 component={MajorSearchController}
               />
-              <Route path={`/${NEWS_DETAIL.path}/:uuid&:type`} component={NewsDetailController} />
-              <Route path={`/${NEWS_MORE.path}/:type`} component={NewsMoreController} />
+              <Route
+                path={`/${NEWS_DETAIL.path}/:uuid&:type`}
+                component={NewsDetailController}
+              />
+              <Route
+                path={`/${NEWS_MORE.path}/:type`}
+                component={NewsMoreController}
+              />
+              <Route
+                path={`/${SCHOOL_DETAIL.path}/:id`}
+                component={SchoolDetailController}
+              />
               <Route
                 path={`/${BCG_ROOT_NAME}`}
                 component={BackgroundController}
