@@ -92,7 +92,30 @@
 .school-detail-right-box {
   width: 400px;
 }
-
+/* 学校招生简章 start */
+.school-detail-enrollment-item-box {
+  display: flex;
+  justify-content: space-between;
+  color: #333;
+  border-top:1px solid rgb(245, 245, 245);
+  padding: 20px 0;
+}
+.school-detail-enrollment-item-box h5 {
+  font-size: 14px;
+}
+.school-detail-enrollment-item-box span {
+  font-size: 14px;
+}
+.school-detail-enrollment-item-box .enrollment-view {
+  margin-left: 12px;
+}
+/* 学校招生简章 end */
+/* 院校分数线 start */
+.school-score-title-box {
+  display: flex;
+  justify-content: space-between;
+}
+/* 院校分数线 end */
 /* 大学排名 start */
 .school-detail-rank-box {
   display: flex;
@@ -112,7 +135,7 @@
 }
 .school-detail-rank-box .rank-item .rank-name {
   color: #f66666;
-  background: #FFF1F0;
+  background: #fff1f0;
   font-size: 12px;
   padding: 3px 0;
   text-align: center;

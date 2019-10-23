@@ -1,115 +1,74 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // 路由
 import { Link } from 'react-router-dom';
 
 // UI样式
 import '@/style/detail/school-detail.css';
-import { Icon } from 'antd';
+import { Icon, Table, Select, Skeleton } from 'antd';
 
-export default () => {
+// 请求
+import { launchRequest } from '@/util/request';
+import * as APIS from '@/constants/api-constants';
+
+// 自定义函数
+import wait from '@/util/wait-helper';
+
+const { Option } = Select;
+const { Column } = Table;
+
+export default props => {
+  const schoolId = props.match.params.id;
+
   return (
     <div className='school-detail-box page-inner-width-box'>
       {/* 学校详情头部数据 */}
-      <div className='school-detail-top-box'>
-        <div className='school-detail-title-box'>
-          <h2 className='school-detail-title'>清华大学</h2>
-          <span className='shool-detail-property-tag'>985</span>
-          <span className='shool-detail-property-tag'>双一流</span>
-          <span className='shool-detail-property-tag'>211</span>
-        </div>
-        <div className='school-detail-describe-box'>
-          <img
-            src='https://cdn.dribbble.com/users/1207383/screenshots/6711883/college-night.png'
-            alt=''
-          />
-          <div className='describe-right-box'>
-            <ul>
-              <li>
-                <Icon
-                  className='describe-icon'
-                  type='clock-circle'
-                  theme='twoTone'
-                  twoToneColor='#ff6666'
-                />
-                <span>1911</span>
-              </li>
-              <li>
-                <Icon className='describe-icon' type='bank' theme='twoTone' />
-                <span>公立</span>
-              </li>
-              <li>
-                <Icon
-                  className='describe-icon'
-                  type='appstore'
-                  theme='twoTone'
-                  twoToneColor='#52c41a'
-                />
-                <span>综合</span>
-              </li>
-              <li>
-                <Icon
-                  className='describe-icon'
-                  type='schedule'
-                  theme='twoTone'
-                  twoToneColor='#ffA02C'
-                />
-                <span>教育部</span>
-              </li>
-              <li>
-                <Icon
-                  className='describe-icon'
-                  type='bulb'
-                  theme='twoTone'
-                  twoToneColor='#9988ff'
-                />
-                <span>本科</span>
-              </li>
-              <li>
-                <Icon
-                  className='describe-icon'
-                  type='environment'
-                  theme='twoTone'
-                  twoToneColor='#ffA02C'
-                />
-                <span>北京</span>
-              </li>
-            </ul>
-            <p className='describe-profile-box'>
-              北京大学创办于1898年，初名京师大学堂，是中国第一所国立综合性大学，也是当时中国最高教育行政机关。辛亥革命后，于1912年改为现名。　　
-              作为新文化运动的中心和“五四”运动的策源地，作为中国最早传播马克思主义和民主科学思想的发祥地，作为中国共产党最早的活动基地，北京大学为民族的振兴和解放、...
-              <Link>
-                <span className='describe-profile-more'>全部</span>
-              </Link>
-            </p>
-          </div>
-        </div>
-      </div>
+      <SchoolDetailProfile schoolId={schoolId} />
       {/* 学校详情左边数据 */}
       <div className='school-detail-left-box'>
         {/* 招生简章 */}
         <div className='school-detail-item-box'>
           <h3 className='school-detail-item-title'>招生简章</h3>
-          <ul>
-            <li>
+          <ul className='school-detail-enrollment-box'>
+            <li className='school-detail-enrollment-item-box'>
               <h5>复旦大学2019年招生章程</h5>
               <span>
                 <span>2019/06/15</span>
-                <span>浏览 367</span>
+                <span className='enrollment-view'>浏览 367</span>
               </span>
             </li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li className='school-detail-enrollment-item-box'>
+              <h5>复旦大学2019年招生章程</h5>
+              <span>
+                <span>2019/06/15</span>
+                <span className='enrollment-view'>浏览 367</span>
+              </span>
+            </li>
+            <li className='school-detail-enrollment-item-box'>
+              <h5>复旦大学2019年招生章程</h5>
+              <span>
+                <span>2019/06/15</span>
+                <span className='enrollment-view'>浏览 367</span>
+              </span>
+            </li>
+            <li className='school-detail-enrollment-item-box'>
+              <h5>复旦大学2019年招生章程</h5>
+              <span>
+                <span>2019/06/15</span>
+                <span className='enrollment-view'>浏览 367</span>
+              </span>
+            </li>
+            <li className='school-detail-enrollment-item-box'>
+              <h5>复旦大学2019年招生章程</h5>
+              <span>
+                <span>2019/06/15</span>
+                <span className='enrollment-view'>浏览 367</span>
+              </span>
+            </li>
           </ul>
         </div>
         {/* 院校分数线 */}
-        <div className='school-detail-item-box'>
-          <h3 className='school-detail-item-title'>院校分数线</h3>
-          {/* Select */}
-          {/* Table */}
-        </div>
+        <SchoolScoreList schoolId={schoolId} />
       </div>
       {/* 学校详情右边数据 */}
       <div className='school-detail-right-box'>
@@ -140,6 +99,187 @@ export default () => {
           </div>
         </div>
       </div>
+    </div>
+  );
+};
+
+// 学校简介模块
+const SchoolDetailProfile = props => {
+  const [schoolName, setschoolName] = useState('');
+  const [schoolPropertyName, setSchoolPropertyName] = useState([]);
+  const [schoolNatureName, setSchoolNatureName] = useState([]);
+  const [schoolTypeName, setSchoolTypeName] = useState([]);
+  const [provinceName, setProvinceName] = useState('');
+  const [schoolIntro, setSchoolIntro] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  let { schoolId } = props;
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+
+      let [
+        {
+          school_name: schoolName,
+          school_property_name: schoolPropertyName,
+          school_nature_name: schoolNatureName,
+          school_type_name: schoolTypeName,
+          province_name: provinceName,
+          school_intro: schoolIntro
+        }
+      ] = await Promise.all([
+        launchRequest(APIS.GET_SCHOOL_DETAIL, {
+          schoolId
+        }),
+        // 避免闪烁
+        wait(500)
+      ]);
+
+      setschoolName(schoolName);
+      setSchoolPropertyName(schoolPropertyName);
+      setSchoolNatureName(schoolNatureName);
+      setSchoolTypeName(schoolTypeName);
+      setProvinceName(provinceName);
+      setSchoolIntro(schoolIntro);
+      setLoading(false);
+    })();
+  }, [schoolId]);
+
+  return (
+    <div className='school-detail-top-box'>
+      <Skeleton loading={loading}>
+        <div className='school-detail-title-box'>
+          <h2 className='school-detail-title'>{schoolName}</h2>
+          {schoolPropertyName.map((item, index) => (
+            <span key={index} className='shool-detail-property-tag'>
+              {item}
+            </span>
+          ))}
+        </div>
+        <div className='school-detail-describe-box'>
+          <img
+            src='https://cdn.dribbble.com/users/1207383/screenshots/6711883/college-night.png'
+            alt=''
+          />
+          <div className='describe-right-box'>
+            <ul>
+              <li>
+                <Icon
+                  className='describe-icon'
+                  type='clock-circle'
+                  theme='twoTone'
+                  twoToneColor='#ff6666'
+                />
+                <span>-</span>
+              </li>
+              <li>
+                <Icon className='describe-icon' type='bank' theme='twoTone' />
+                <span>
+                  {schoolNatureName.map((item, index) => (
+                    <span key={index}>{item}</span>
+                  ))}
+                </span>
+              </li>
+              <li>
+                <Icon
+                  className='describe-icon'
+                  type='appstore'
+                  theme='twoTone'
+                  twoToneColor='#52c41a'
+                />
+                <span>
+                  {schoolTypeName.map((item, index) => (
+                    <span key={index}>{item}</span>
+                  ))}
+                </span>
+              </li>
+              <li>
+                <Icon
+                  className='describe-icon'
+                  type='environment'
+                  theme='twoTone'
+                  twoToneColor='#ffA02C'
+                />
+                <span>{provinceName}</span>
+              </li>
+              <li>
+                <Icon
+                  className='describe-icon'
+                  type='bulb'
+                  theme='twoTone'
+                  twoToneColor='#9988ff'
+                />
+                <span>-</span>
+              </li>
+            </ul>
+            <p className='describe-profile-box'>
+              {schoolIntro}...
+              <Link>
+                <span className='describe-profile-more'>全部</span>
+              </Link>
+            </p>
+          </div>
+        </div>
+      </Skeleton>
+    </div>
+  );
+};
+
+// 学校分数模块
+const SchoolScoreList = props => {
+  const [scoreList, setScoreList] = useState([]);
+  const [accountCategory, setAccountCategory] = useState(1);
+  const [loading, setLoading] = useState(true);
+
+  let { schoolId } = props;
+
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+
+      let [scoreList] = await Promise.all([
+        launchRequest(APIS.GET_SCHOOL_SCORE_LIST, {
+          schoolId,
+          accountCategory
+        }),
+        // 避免闪烁
+        wait(500)
+      ]);
+
+      setScoreList(scoreList);
+      setLoading(false);
+    })();
+  }, [schoolId, accountCategory]);
+
+  return (
+    <div className='school-detail-item-box'>
+      <h3 className='school-detail-item-title school-score-title-box'>
+        <span>院校分数线</span>
+        {/* Select */}
+        <Select
+          value={accountCategory}
+          onChange={value => setAccountCategory(value)}
+          style={{ width: 200 }}
+        >
+          <Option value={1}>理科</Option>
+          <Option value={2}>文科</Option>
+        </Select>
+      </h3>
+      {/* Table */}
+      <Table
+        rowKey={record =>
+          '' + record.year + record.lotsName + record.score + record.enrollment
+        }
+        dataSource={scoreList}
+        loading={loading}
+        pagination={false}
+      >
+        <Column title='年份' dataIndex='year' key='year' />
+        <Column title='招生批次	' dataIndex='lotsName' key='lotsName' />
+        <Column title='录取分数线' dataIndex='score' key='score' />
+        <Column title='录取数' dataIndex='enrollment' key='yeenrollmentar' />
+        <Column title='最低位次' dataIndex='lastRank' key='lastRank' />
+      </Table>
     </div>
   );
 };
