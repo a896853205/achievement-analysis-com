@@ -97,7 +97,7 @@
   display: flex;
   justify-content: space-between;
   color: #333;
-  border-top:1px solid rgb(245, 245, 245);
+  border-top: 1px solid rgb(245, 245, 245);
   padding: 20px 0;
 }
 .school-detail-enrollment-item-box h5 {
