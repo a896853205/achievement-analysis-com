@@ -13,7 +13,7 @@ import NewsMoreController from '@/page/news/news-more-controller.jsx';
 
 // search 组件
 import SchoolSearchController from './page/search/school-search-controller';
-import MajorSearchController from './page/search/major-search-controller';
+import MajorSearchController from './page/search/major-search-controller.jsx';
 
 // 详情 组件
 import SchoolDetailController from '@/page/detail/school-detail-controller.jsx';

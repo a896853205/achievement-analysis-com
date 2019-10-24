@@ -276,7 +276,8 @@ const SchoolScoreList = props => {
       >
         <Column title='年份' dataIndex='year' key='year' />
         <Column title='招生批次	' dataIndex='lotsName' key='lotsName' />
-        <Column title='录取分数线' dataIndex='score' key='score' />
+        <Column title='最高分' dataIndex='maxScore' key='maxScore' />
+        <Column title='最低分' dataIndex='score' key='score' />
         <Column title='录取数' dataIndex='enrollment' key='yeenrollmentar' />
         <Column title='最低位次' dataIndex='lastRank' key='lastRank' />
       </Table>
