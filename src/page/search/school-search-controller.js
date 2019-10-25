@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom';
 import { SCHOOL_DETAIL } from '@/constants/route-constants';
 
 // css
-import '../../style/school-search.css';
+import '@/style/search/school-search.css';
 
 const { Search } = Input;
 
@@ -182,17 +182,6 @@ class SchoolSearchController extends React.Component {
             />
           </div>
         </div>
-        {/* <Drawer
-          width={640}
-          placement='right'
-          closable={false}
-          onClose={() => {
-            this.setState({ schoolDrawerVisible: false });
-          }}
-          visible={this.state.schoolDrawerVisible}
-        >
-          <SchoolDetailController />
-        </Drawer> */}
       </div>
     );
   }

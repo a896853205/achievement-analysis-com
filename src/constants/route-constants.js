@@ -21,6 +21,7 @@ export const VOLUNTARY_DEEP_RESULT = {
 export const QUESTIONNAIRE = { path: 'questionnaire', name: '问卷页' };
 export const PERSONAL = { path: 'personal', name: '问卷页' };
 export const SCHOOL_DETAIL = { path: 'schoolDetail', name: '学校详情页' };
+export const MAJOR_DETAIL = {path: 'majorDetail', name: '专业细节页'}
 
 // 二级路由
 export const BASIC = { path: 'basic', name: '基本修改页' };
