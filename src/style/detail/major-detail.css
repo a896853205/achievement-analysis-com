@@ -1,0 +1,54 @@
+/* 专业细节 start */
+.major-detail-box {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+/* 专业细节左边 start */
+.major-detail-left-box {
+  width: 245px;
+}
+.major-detail-tree-box {
+  border: 1px solid #e6e6e6;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+}
+
+.major-detail-correlation-box {
+  border: 1px solid #e6e6e6;
+  padding: 10px 20px;
+}
+.major-detail-correlation-box h5 {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+.major-detail-correlation-box ul li {
+  border-top: 1px solid #f5f4f8;
+  padding: 10px 15px;
+}
+/* 专业细节左边 end */
+/* 专业细节右边 start */
+.major-detail-right-box {
+  width: 925px;
+}
+.major-detail-profile-box {
+  background: #fafafa;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.major-detail-profile-box h4 {
+  font-size: 36px;
+  font-weight: 500;
+  margin-bottom: 25px;
+}
+.major-detail-profile-box span {
+  font-size: 14px;
+  color: #666;
+  margin-top: 10px;
+}
+.major-detail-show-box {
+  margin-top: 30px;
+}
+/* 专业细节右边 end */
+/* 专业细节 end */

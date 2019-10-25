@@ -1,5 +1,9 @@
 import React from 'react';
 
+// 路由
+import { Link } from 'react-router-dom';
+import { MAJOR_DETAIL } from '@/constants/route-constants';
+
 // UI 样式
 import '@/style/search/major-search.css';
 export default props => {
@@ -20,7 +24,15 @@ export default props => {
               <span className='major-category-detail-span'>7个专业</span>
             </h5>
             <ul className='major-category-three-level-item-box'>
-              <li>知识产权</li>
+              <li>
+                <Link
+                  to={{
+                    pathname: `/${MAJOR_DETAIL.path}/1`
+                  }}
+                >
+                  知识产权
+                </Link>
+              </li>
               <li>法学</li>
               <li>监狱学</li>
               <li>信用风险管理与法律防控</li>

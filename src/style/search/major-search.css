@@ -49,6 +49,11 @@
   width: 25%;
   margin-top: 20px;
 }
+
+.major-category-three-level-item-box li a {
+  color: rgba(0, 0, 0, 0.65);
+}
+
 /* 专业搜索左边样式 end */
 /* 专业搜索右边样式 end */
 .major-search-right-box {
