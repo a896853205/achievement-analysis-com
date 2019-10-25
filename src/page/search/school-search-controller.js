@@ -5,14 +5,18 @@ import { launchRequest } from '../../util/request';
 import * as APIS from '../../constants/api-constants';
 
 // 自定义组件
-import SchoolDetailController from '../home/school/school-detail';
+// import SchoolDetailController from '../home/school/school-detail';
 
 // UI
-import { Checkbox, List, Icon, Tag, Input, Drawer } from 'antd';
+import { Checkbox, List, Icon, Tag, Input } from 'antd';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
 import { actions as schoolActions } from '@/redux/school-model';
+
+// 路由
+import { Link } from 'react-router-dom';
+import { SCHOOL_DETAIL } from '@/constants/route-constants';
 
 // css
 import '../../style/school-search.css';
@@ -151,14 +155,20 @@ class SchoolSearchController extends React.Component {
                     />
                   ]}
                 >
-                  <h5
-                    className='school-title'
-                    onClick={() => {
-                      this.handleClickSchoolName(item.school_id);
+                  <Link
+                    to={{
+                      pathname: `/${SCHOOL_DETAIL.path}/${item.school_id}`
                     }}
                   >
-                    {item.school_name}
-                  </h5>
+                    <h5
+                      className='school-title'
+                      // onClick={() => {
+                      //   this.handleClickSchoolName(item.school_id);
+                      // }}
+                    >
+                      {item.school_name}
+                    </h5>
+                  </Link>
                   <p>{item.school_nature_name}</p>
                   <p>
                     {item.school_property_name.map(property => (
@@ -172,7 +182,7 @@ class SchoolSearchController extends React.Component {
             />
           </div>
         </div>
-        <Drawer
+        {/* <Drawer
           width={640}
           placement='right'
           closable={false}
@@ -182,7 +192,7 @@ class SchoolSearchController extends React.Component {
           visible={this.state.schoolDrawerVisible}
         >
           <SchoolDetailController />
-        </Drawer>
+        </Drawer> */}
       </div>
     );
   }
@@ -288,10 +298,10 @@ class SchoolSearchController extends React.Component {
     });
   };
 
-  handleClickSchoolName = async schoolId => {
-    this.props.showSchoolDetail(schoolId);
-    this.setState({ schoolDrawerVisible: true });
-  };
+  // handleClickSchoolName = async schoolId => {
+  //   this.props.showSchoolDetail(schoolId);
+  //   this.setState({ schoolDrawerVisible: true });
+  // };
 
   getSchool = async () => {
     // 获取学校配置项

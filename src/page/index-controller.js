@@ -1,13 +1,12 @@
 import React from 'react';
 
+// UI样式
 import { Carousel, Icon, Skeleton } from 'antd';
+import '../style/index-controller.css';
 
 // 路由
 import { withRouter } from 'react-router-dom';
-
 import { SEARCH_SCHOOL, SEARCH_MAJOR } from '../constants/route-constants';
-
-import '../style/index-controller.css';
 
 // 请求文件
 import { launchRequest } from '@/util/request';
@@ -18,6 +17,9 @@ import SchoolNewsList from '@/page/index/index-schoolNewsList.jsx';
 import MajorNewsList from '@/page/index/index-majorNewsList.jsx';
 import StudentReadList from '@/page/index/index-studentReadList.jsx';
 import RankShowNewsList from '@/page/index/index-rankShowNewsList.jsx';
+
+// 工具类
+import wait from '@/util/wait-helper';
 
 class IndexController extends React.Component {
   state = {
@@ -274,26 +276,21 @@ class IndexController extends React.Component {
       loading: true
     });
 
-    let {
-      schoolNewsList,
-      majorNewsList,
-      studentReadNewsList,
-      rankNewsList
-    } = await launchRequest(APIS.GET_HOME_DATA);
+    let [
+      { schoolNewsList, majorNewsList, studentReadNewsList, rankNewsList }
+    ] = await Promise.all([
+      launchRequest(APIS.GET_HOME_DATA),
+      // 防闪烁
+      wait(500)
+    ]);
 
     await this.setState({
       schoolNewsList,
       majorNewsList,
       studentReadNewsList,
-      rankNewsList
+      rankNewsList,
+      loading: false
     });
-
-    // 防闪烁
-    setTimeout(() => {
-      this.setState({
-        loading: false
-      });
-    }, 500);
   };
 }
 export default withRouter(IndexController);

@@ -31,21 +31,21 @@ export default props => {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      let { moreNewsList, pageLength } = await launchRequest(
-        APIS.GET_MORE_NEWS,
-        {
+
+      let [{ moreNewsList, pageLength }] = await Promise.all([
+        launchRequest(APIS.GET_MORE_NEWS, {
           page,
           type: newsType
-        }
-      );
+        }),
+        // 避免闪烁
+        wait(500)
+      ]);
 
       let moreNewsListLi = moreNewsList.map(item => {
         return <NewsLi key={item.uuid} newsData={item} />;
       });
       setNewsList(moreNewsListLi);
       setPageLength(pageLength);
-      // 避免闪烁
-      await wait(500);
       setLoading(false);
     })();
   }, [page, newsType]);
@@ -54,11 +54,14 @@ export default props => {
   useEffect(() => {
     (async () => {
       setHotLoading(true);
-      let hotNews = await launchRequest(APIS.GET_HOT_NEWS);
+
+      let [hotNews] = await Promise.all([
+        launchRequest(APIS.GET_HOT_NEWS),
+        // 避免闪烁
+        wait(500)
+      ]);
 
       sethotNews(hotNews);
-      // 避免闪烁
-      await wait(500);
       setHotLoading(false);
     })();
   }, []);
