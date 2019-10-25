@@ -1,0 +1,129 @@
+/* 专业搜索样式 start */
+.major-search-box {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+/* 专业搜索左边样式 start */
+.major-search-left-box {
+  width: 860px;
+}
+
+.major-category-one-level-item-box {
+  margin-bottom: 40px;
+}
+
+.major-category-one-level-item-box h4 {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  color: #333;
+  font-size: 22px;
+  border-left: 4px solid #e84c33;
+  background: #f6f6f6;
+  justify-content: space-between;
+}
+
+.major-category-detail-span {
+  font-size: 14px;
+  color: #999;
+}
+
+.major-category-two-level-item-box h5 {
+  margin-top: 30px;
+  font-size: 18px;
+  color: #333;
+  border-bottom: 1px solid #dcdcdc;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.major-category-three-level-item-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.major-category-three-level-item-box li {
+  width: 25%;
+  margin-top: 20px;
+}
+/* 专业搜索左边样式 end */
+/* 专业搜索右边样式 end */
+.major-search-right-box {
+  width: 300px;
+}
+
+.people-selected-major-box {
+  border: 1px solid #e6e6e6;
+  margin-bottom: 10px;
+}
+
+.people-selected-major-box h4 {
+  height: 44px;
+  background: #f2f2f2;
+  padding: 0 15px;
+  border-left: 5px solid #e84c33;
+  font-size: 18px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+}
+
+.people-selected-major-box ul li {
+  padding: 0 10px;
+  height: 36px;
+  margin-bottom: 20px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.people-selected-major-box ul li:first-child {
+  margin-top: 20px;
+}
+
+.people-selected-major-box ul li .major-num {
+  color: #9b9b9b;
+  width: 50px;
+  text-align: center;
+}
+
+.employment-major-feature-box {
+  border: 1px solid #e6e6e6;
+}
+
+.employment-major-feature-box h4 {
+  height: 44px;
+  background: #f2f2f2;
+  padding: 0 15px;
+  border-left: 5px solid #e84c33;
+  font-size: 18px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+}
+
+.employment-major-feature-box ul li {
+  padding: 0 10px;
+  height: 36px;
+  margin-bottom: 20px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.employment-major-feature-box ul li:first-child {
+  margin-top: 20px;
+}
+
+.employment-major-feature-box ul li .major-num {
+  color: #9b9b9b;
+  width: 50px;
+  text-align: center;
+}
+/* 专业搜索右边样式 end */
+/* 专业搜索样式 end */

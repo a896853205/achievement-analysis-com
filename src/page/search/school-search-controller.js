@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom';
 import { SCHOOL_DETAIL } from '@/constants/route-constants';
 
 // css
-import '../../style/school-search.css';
+import '@/style/search/school-search.css';
 
 const { Search } = Input;
 
