@@ -29,7 +29,7 @@
 /* 专业细节左边 end */
 /* 专业细节右边 start */
 .major-detail-right-box {
-  width: 925px;
+  width: 900px;
 }
 .major-detail-profile-box {
   background: #fafafa;
@@ -50,5 +50,47 @@
 .major-detail-show-box {
   margin-top: 30px;
 }
+
+/* 专业概况 start */
+.major-detail-show-item-box {
+  margin-top: 30px;
+}
+.major-detail-show-item-box h5 {
+  border-left: 4px solid #e84c33;
+  margin-bottom: 20px;
+  font-size: 22px;
+  padding-left: 10px;
+  color: #212121;
+  font-weight: 500;
+}
+/* 专业预览 start */
+.major-detail-overview-box ul {
+  display: flex;
+}
+.major-detail-overview-box ul li {
+  width: calc(100% / 3);
+  margin-top: 20px;
+  display: flex;
+}
+.major-detail-overview-box ul li .overview-icon {
+  font-size: 50px;
+  margin-right: 10px;
+}
+.major-detail-overview-box ul li .overview-span-box {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+}
+.major-detail-overview-box ul li .overview-span-box span:first-child {
+  font-size: 18px;
+  color: #212121;
+}
+.major-detail-overview-box ul li .overview-span-box span {
+  font-size: 14px;
+  color: #9b9b9b;
+}
+/* 专业预览 end */
+/* 专业概况 end */
 /* 专业细节右边 end */
 /* 专业细节 end */
