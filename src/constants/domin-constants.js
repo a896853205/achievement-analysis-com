@@ -26,6 +26,7 @@ export const PART = {
   OPT_VOLUNTARY: '/voluntary',
   OPT_NEWS: '/news',
   OPT_INDEX: '/index',
+  OPT_MAJOR: '/major',
 };
 
 // 请求类型

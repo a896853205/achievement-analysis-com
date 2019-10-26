@@ -63,11 +63,15 @@ export const GET_VOLUNTARY_DEEP_RESULT = `${DominConfigs.DOMAIN}${DominConfigs.P
 /**
  * optnews
  *************************/
-// export const GET_NEWS_PROFILE_LIST = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_NEWS}/getNewsProfileList`; // 获取新闻概况列表
 export const GET_NEWS_DETAIL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_NEWS}/getNewsDetail`; // 获取新闻详细内容
 export const GET_RECOMMEND_NEWS = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_NEWS}/getRecommendNews`;
 export const GET_HOT_NEWS = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_NEWS}/getHotNews`;
 export const GET_MORE_NEWS = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_NEWS}/getMoreNews`;
+
+/**
+ * optmajor
+ ************************/
+export const GET_MAJOR_CATEGORY = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MAJOR}/getMajorCategory`;
 
 // 获取上传Token
 export const GetUploadToken = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_UPLOAD}/getuploadtoken`;
