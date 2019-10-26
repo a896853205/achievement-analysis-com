@@ -68,6 +68,7 @@
   .describe-profile-box
   .describe-profile-more {
   color: #e84c33;
+  cursor: pointer;
 }
 /* 学校细节头部 end */
 /* 学校细节下部 start */
