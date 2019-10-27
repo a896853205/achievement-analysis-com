@@ -16,6 +16,7 @@ import SchoolNewsList from '@/page/index/index-schoolNewsList.jsx';
 import MajorNewsList from '@/page/index/index-majorNewsList.jsx';
 import StudentReadList from '@/page/index/index-studentReadList.jsx';
 import RankShowNewsList from '@/page/index/index-rankShowNewsList.jsx';
+import Login from '@/page/index-components/login-components.jsx';
 
 // 工具类
 import wait from '@/util/wait-helper';
@@ -31,47 +32,36 @@ class IndexController extends React.Component {
 
   render() {
     return (
-      <div className='index-box'>
-        <div className='carou-box'>
-          <div className='carou-left-img' />
-          <div className='carou-inner-box'>
-            <Carousel className='carou' autoplay>
+      <div className="index-box">
+        <div className="carou-box">
+          <div className="carou-left-img" />
+          <div className="carou-inner-box">
+            <Carousel className="carou" autoplay>
               <div>
                 <img
-                  className='carou-img'
-                  src='http://img3.youzy.cn/content/media/thumbs/p00191258.jpeg'
-                  alt='banner1'
+                  className="carou-img"
+                  src="http://img3.youzy.cn/content/media/thumbs/p00191258.jpeg"
+                  alt="banner1"
                 />
               </div>
               <div>
                 <img
-                  className='carou-img'
-                  src='http://img3.youzy.cn/content/media/thumbs/p00191467.jpeg'
-                  alt='banner2'
+                  className="carou-img"
+                  src="http://img3.youzy.cn/content/media/thumbs/p00191467.jpeg"
+                  alt="banner2"
                 />
               </div>
             </Carousel>
-            <div className='index-login-box'>
-              <h5 className='index-login-h5'>2020志愿模拟填报登录</h5>
-              <Input className='index-login-input' placeholder='请输入用户名' />
-              <Input
-                className='index-login-input'
-                placeholder='请输入密码'
-                type='password'
-              />
-              <Button type='round' className='index-login-button'>
-                登录
-              </Button>
-            </div>
+            <Login></Login>
           </div>
-          <div className='carou-right-img' />
+          <div className="carou-right-img" />
         </div>
         {/* 智赢快讯 */}
-        <div className='page-inner-width-box'>
-          <div className='fast-information-box'>
-            <Icon className='fast-information-icon' type='sound' />
-            <h2 className='fast-information-title index-h2-title'>智赢快讯</h2>
-            <Carousel className='carousel-information-box' autoplay>
+        <div className="page-inner-width-box">
+          <div className="fast-information-box">
+            <Icon className="fast-information-icon" type="sound" />
+            <h2 className="fast-information-title index-h2-title">智赢快讯</h2>
+            <Carousel className="carousel-information-box" autoplay>
               <p>黑龙江已开启高考版，输入高考分模拟填报更精准</p>
               <p>模拟填报后，请至省考试院正式填报，完成报考！</p>
               <p>
@@ -80,104 +70,104 @@ class IndexController extends React.Component {
             </Carousel>
           </div>
         </div>
-        <div className='page-inner-width-box index-profile-box'>
-          <div className='index-profile-item'>
-            <img src='/index-icon/1.png' alt='' />
+        <div className="page-inner-width-box index-profile-box">
+          <div className="index-profile-item">
+            <img src="/index-icon/1.png" alt="" />
             <span>学业测评</span>
           </div>
-          <div className='index-profile-item'>
-            <img src='/index-icon/2.png' alt='' />
+          <div className="index-profile-item">
+            <img src="/index-icon/2.png" alt="" />
             <span>院校优先</span>
           </div>
-          <div className='index-profile-item'>
-            <img src='/index-icon/3.png' alt='' />
+          <div className="index-profile-item">
+            <img src="/index-icon/3.png" alt="" />
             <span>专业优先</span>
           </div>
-          <div className='index-profile-item'>
-            <img src='/index-icon/4.png' alt='' />
+          <div className="index-profile-item">
+            <img src="/index-icon/4.png" alt="" />
             <span>估测概率</span>
           </div>
-          <div className='index-profile-item'>
-            <img src='/index-icon/5.png' alt='' />
+          <div className="index-profile-item">
+            <img src="/index-icon/5.png" alt="" />
             <span>分析报告</span>
           </div>
-          <div className='index-profile-item'>
-            <img src='/index-icon/6.png' alt='' />
+          <div className="index-profile-item">
+            <img src="/index-icon/6.png" alt="" />
             <span>职业方向</span>
           </div>
         </div>
-        <div className='page-inner-width-box'>
-          <div className='index-left-right-box'>
+        <div className="page-inner-width-box">
+          <div className="index-left-right-box">
             {/* 左侧的智课堂和院校资讯和专业百科 */}
 
-            <div className='page-inner-left-box'>
+            <div className="page-inner-left-box">
               <Skeleton active loading={this.state.loading}>
                 {/* 智课堂 */}
-                <div className='intelligent-course-box'>
-                  <h2 className='h2-title-box'>
-                    <span className='index-h2-title'>
-                      <Icon type='book' /> 智课堂
+                <div className="intelligent-course-box">
+                  <h2 className="h2-title-box">
+                    <span className="index-h2-title">
+                      <Icon type="book" /> 智课堂
                     </span>
-                    <span className='index-more'>
-                      更多 <Icon type='right' />
+                    <span className="index-more">
+                      更多 <Icon type="right" />
                     </span>
                   </h2>
                   <ul>
                     <li>
                       <img
-                        src='https://cdn.dribbble.com/users/992274/screenshots/7440971/media/2405976c7c1485050e78fcf54ca4bfe4.jpg'
-                        alt=''
+                        src="https://cdn.dribbble.com/users/992274/screenshots/7440971/media/2405976c7c1485050e78fcf54ca4bfe4.jpg"
+                        alt=""
                       />
                       <h5>高考志愿早准备</h5>
                       <p>
-                        <Icon type='eye' /> 874
+                        <Icon type="eye" /> 874
                       </p>
                     </li>
                     <li>
                       <img
-                        src='https://cdn.dribbble.com/users/278549/screenshots/7448782/media/87fe1bff113e26825d8f58e3b1bbb785.png'
-                        alt=''
+                        src="https://cdn.dribbble.com/users/278549/screenshots/7448782/media/87fe1bff113e26825d8f58e3b1bbb785.png"
+                        alt=""
                       />
                       <h5>高考填志愿怎样选专业？</h5>
                       <p>
-                        <Icon type='eye' /> 2134
+                        <Icon type="eye" /> 2134
                       </p>
                     </li>
                     <li>
                       <img
-                        src='https://cdn.dribbble.com/users/371094/screenshots/6793394/_bbb-dribble.jpg'
-                        alt=''
+                        src="https://cdn.dribbble.com/users/371094/screenshots/6793394/_bbb-dribble.jpg"
+                        alt=""
                       />
                       <h5>优志愿系统电脑端使用教程</h5>
                       <p>
-                        <Icon type='eye' /> 63245
+                        <Icon type="eye" /> 63245
                       </p>
                     </li>
                     <li>
                       <img
-                        src='https://cdn.dribbble.com/users/503590/screenshots/6292998/thestudy05.jpg'
-                        alt=''
+                        src="https://cdn.dribbble.com/users/503590/screenshots/6292998/thestudy05.jpg"
+                        alt=""
                       />
                       <h5>优志愿系统电脑端使用教程</h5>
                       <p>
-                        <Icon type='eye' /> 23423
+                        <Icon type="eye" /> 23423
                       </p>
                     </li>
                     <li>
                       <img
-                        src='https://cdn.dribbble.com/users/503590/screenshots/6293010/thestudy01.jpg'
-                        alt=''
+                        src="https://cdn.dribbble.com/users/503590/screenshots/6293010/thestudy01.jpg"
+                        alt=""
                       />
                       <h5>会计学专业解读</h5>
                       <p>
-                        <Icon type='eye' /> 234
+                        <Icon type="eye" /> 234
                       </p>
                     </li>
                   </ul>
                 </div>
                 {/* 院校资讯 */}
                 <SchoolNewsList newsList={this.state.schoolNewsList} />
-                <div className='upright-line'></div>
+                <div className="upright-line"></div>
                 {/* 专业百科 */}
                 <MajorNewsList newsList={this.state.majorNewsList} />
               </Skeleton>
@@ -185,19 +175,19 @@ class IndexController extends React.Component {
 
             {/* 右侧高考百问和排名集锦 */}
 
-            <div className='page-inner-right-box'>
+            <div className="page-inner-right-box">
               <Skeleton active loading={this.state.loading}>
                 {/* 高考百问 */}
                 <div>
-                  <h2 className='h2-title-box'>
-                    <span className='index-h2-title'>
-                      <Icon type='book' /> 高考百问
+                  <h2 className="h2-title-box">
+                    <span className="index-h2-title">
+                      <Icon type="book" /> 高考百问
                     </span>
-                    <span className='index-more'>
-                      更多 <Icon type='right' />
+                    <span className="index-more">
+                      更多 <Icon type="right" />
                     </span>
                   </h2>
-                  <ul className='index-question-ul-box'>
+                  <ul className="index-question-ul-box">
                     <li>高考百问信息高考百问信息高考百问信息</li>
                     <li>高考百问信息高考百问信息高考百问信息</li>
                     <li>高考百问信息高考百问信息高考百问信息</li>
@@ -210,66 +200,66 @@ class IndexController extends React.Component {
             </div>
           </div>
         </div>
-        <div className='page-inner-width-box'>
-          <div className='index-left-right-box'>
+        <div className="page-inner-width-box">
+          <div className="index-left-right-box">
             {/* 特色院校推荐 */}
-            <div className='page-inner-left-box index-good-school-box'>
+            <div className="page-inner-left-box index-good-school-box">
               <Skeleton active loading={this.state.loading}>
-                <h2 className='h2-title-box'>
-                  <span className='index-h2-title'>
-                    <Icon type='book' /> 院校推荐
+                <h2 className="h2-title-box">
+                  <span className="index-h2-title">
+                    <Icon type="book" /> 院校推荐
                   </span>
-                  <span className='index-more'>
-                    更多 <Icon type='right' />
+                  <span className="index-more">
+                    更多 <Icon type="right" />
                   </span>
                 </h2>
                 <ul>
                   <li>
                     <img
-                      src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
-                      alt=''
+                      src="https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png"
+                      alt=""
                     />
                   </li>
                   <li>
                     <img
-                      src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
-                      alt=''
+                      src="https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png"
+                      alt=""
                     />
                   </li>
                   <li>
                     <img
-                      src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
-                      alt=''
+                      src="https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png"
+                      alt=""
                     />
                   </li>
                   <li>
                     <img
-                      src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
-                      alt=''
+                      src="https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png"
+                      alt=""
                     />
                   </li>
                   <li>
                     <img
-                      src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
-                      alt=''
+                      src="https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png"
+                      alt=""
                     />
                   </li>
                   <li>
                     <img
-                      src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
-                      alt=''
+                      src="https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png"
+                      alt=""
                     />
                   </li>
                   <li>
                     <img
-                      src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
-                      alt=''
+                      src="https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png"
+                      alt=""
                     />
                   </li>
                   <li>
                     <img
-                      src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
-                      alt=''
+                      src="https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png"
+                      alt=""
                     />
                   </li>
                 </ul>
@@ -277,7 +267,7 @@ class IndexController extends React.Component {
             </div>
             {/* 考生必读 */}
 
-            <div className='page-inner-right-box'>
+            <div className="page-inner-right-box">
               <Skeleton active loading={this.state.loading}>
                 <StudentReadList newsList={this.state.studentReadNewsList} />
               </Skeleton>
