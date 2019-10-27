@@ -72,6 +72,8 @@ export const GET_MORE_NEWS = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_NEWS
  * optmajor
  ************************/
 export const GET_MAJOR_CATEGORY = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MAJOR}/getMajorCategory`;
+export const GET_MAJOR_PROFILE = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MAJOR}/getMajorProfile`;
+export const GET_MARJO_DETAIL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MAJOR}/getMajorDetail`;
 
 // 获取上传Token
 export const GetUploadToken = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_UPLOAD}/getuploadtoken`;

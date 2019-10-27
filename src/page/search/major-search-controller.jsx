@@ -8,8 +8,14 @@ import { MAJOR_DETAIL } from '@/constants/route-constants';
 import { launchRequest } from '../../util/request';
 import * as APIS from '../../constants/api-constants';
 
+// 自定义函数
+import wait from '@/util/wait-helper';
+
+import { Skeleton } from 'antd';
+
 // UI 样式
 import '@/style/search/major-search.css';
+
 export default props => {
   return (
     <div className='page-inner-width-box major-search-box'>
@@ -92,67 +98,77 @@ export default props => {
 
 const MajorCategory = props => {
   const [majorCategory, setMajorCategory] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
-      const majorCategory = await launchRequest(APIS.GET_MAJOR_CATEGORY);
+      setLoading(true);
+
+      const [majorCategory] = await Promise.all([
+        launchRequest(APIS.GET_MAJOR_CATEGORY),
+        wait(500)
+      ]);
+
       setMajorCategory(majorCategory);
+      setLoading(false);
     })();
   }, []);
 
   return (
     <div>
-      {majorCategory.map(item => (
-        <div
-          key={item.major_category_code}
-          className='major-category-one-level-item-box'
-        >
-          <h4>
-            <span>
-              {item.name}({item.major_category_code})
-            </span>
-            <span className='major-category-detail-span'>
-              <span>{item.data.length} 个专业类，</span>
+      <Skeleton loading={loading}>
+        {majorCategory.map(item => (
+          <div
+            key={item.major_category_code}
+            className='major-category-one-level-item-box'
+          >
+            <h4>
               <span>
-                {(() => {
-                  let totalNum = 0;
-                  item.data.map(item => (totalNum += item.data.length));
-                  return totalNum;
-                })()}
-                个本科专业
+                {item.name}({item.major_category_code})
               </span>
-            </span>
-          </h4>
-          {item.data.map(oneLevelItem => (
-            <div
-              key={oneLevelItem.major_level_one_code}
-              className='major-category-two-level-item-box'
-            >
-              <h5>
+              <span className='major-category-detail-span'>
+                <span>{item.data.length} 个专业类，</span>
                 <span>
-                  {oneLevelItem.name}({oneLevelItem.major_level_one_code})
+                  {(() => {
+                    let totalNum = 0;
+                    item.data.map(item => (totalNum += item.data.length));
+                    return totalNum;
+                  })()}
+                  个本科专业
                 </span>
-                <span className='major-category-detail-span'>
-                  {oneLevelItem.data.length}个专业
-                </span>
-              </h5>
-              <ul className='major-category-three-level-item-box'>
-                {oneLevelItem.data.map(twoLevelItem => (
-                  <li key={twoLevelItem.major_level_two_code}>
-                    <Link
-                      to={{
-                        pathname: `/${MAJOR_DETAIL.path}/${twoLevelItem.major_level_two_code}`
-                      }}
-                    >
-                      {twoLevelItem.major_name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      ))}
+              </span>
+            </h4>
+            {item.data.map(oneLevelItem => (
+              <div
+                key={oneLevelItem.major_level_one_code}
+                className='major-category-two-level-item-box'
+              >
+                <h5>
+                  <span>
+                    {oneLevelItem.name}({oneLevelItem.major_level_one_code})
+                  </span>
+                  <span className='major-category-detail-span'>
+                    {oneLevelItem.data.length}个专业
+                  </span>
+                </h5>
+                <ul className='major-category-three-level-item-box'>
+                  {oneLevelItem.data.map(twoLevelItem => (
+                    <li key={twoLevelItem.major_level_two_code}>
+                      <Link
+                        to={{
+                          pathname: `/${MAJOR_DETAIL.path}/${twoLevelItem.major_level_two_code}`
+                        }}
+                      >
+                        {twoLevelItem.major_name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        ))}
+      </Skeleton>
     </div>
   );
 };
