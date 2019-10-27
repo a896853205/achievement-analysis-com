@@ -1,18 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 //样式文件
 import '../style/login-controller.css';
-
-// 路由
-// import { BCG_ROOT_NAME } from "../constants/route-constants";
 
 // 请求文件
 import { launchRequest } from '../util/request';
 import * as APIS from '../constants/api-constants';
 
 // UI组件
-import { Button, Input, Form, Card } from 'antd';
+import { Button, Input, Form } from 'antd';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
@@ -31,7 +27,7 @@ class LoginController extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div className='back'>
-        <Card className='login-box' style={{ width: 300 }}>
+        <div className='login-box'>
           <div className='login-title'>智赢学业规划网</div>
           <div className='login-sub-title'>以智取胜 赢得未来</div>
           <Form onSubmit={this.handleSubmit}>
@@ -79,31 +75,22 @@ class LoginController extends React.Component {
               >
                 登录
               </Button>
-              <div className='login-to-register-box'>
-                或者<Link to={'/register'}>现在注册!</Link>
-              </div>
+              {/* <Link to={'/register'}>
+                <Button className='login-to-register-button'
+                size='large'>注册</Button>
+              </Link> */}
             </Form.Item>
           </Form>
-        </Card>
+        </div>
         <img
-          src='/images/background/background-top.png'
-          className='left-background-top'
-          alt='页面上角蓝色图片'
+          src='/login-images/login-background-left.png'
+          className='left-background'
+          alt='左边蓝色图片'
         />
         <img
-          src='/images/background/background-top.png'
-          className='right-background-top'
-          alt='页面上角蓝色图片'
-        />
-        <img
-          src='/images/background/background-bottom.png'
-          className='left-background-bottom'
-          alt='页面下角蓝色图片'
-        />
-        <img
-          src='/images/background/background-bottom.png'
-          className='right-background-bottom'
-          alt='页面下角蓝色图片'
+          src='/login-images/login-background-left.png'
+          className='right-background'
+          alt='左边蓝色图片'
         />
       </div>
     );

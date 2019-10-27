@@ -5,7 +5,6 @@ import { Route, Switch, Link } from 'react-router-dom';
 import HeaderController from './page/header-controller';
 import FooterController from './page/footer-controller';
 import LoginController from './page/login-controller';
-import RegisterController from './page/register-controller';
 import IndexController from './page/index-controller';
 import BackgroundController from './page/home-controller';
 import NewsDetailController from '@/page/news/news-detail-controller';
@@ -26,7 +25,6 @@ import {
   INDEX,
   LOGIN,
   BCG_ROOT_NAME,
-  REGISTER,
   SEARCH_SCHOOL,
   SEARCH_MAJOR,
   NEWS_DETAIL,
@@ -54,11 +52,6 @@ class App extends Component {
                 path={`/${LOGIN.path}`}
                 exact
                 component={LoginController}
-              />
-              <Route
-                path={`/${REGISTER.path}`}
-                exact
-                component={RegisterController}
               />
               <Route
                 path={`/${SEARCH_SCHOOL.path}`}

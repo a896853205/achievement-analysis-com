@@ -22,7 +22,6 @@ import {
   QUESTIONNAIRE,
   LOGIN,
   INDEX,
-  REGISTER,
   BASIC,
   PASSWORD,
   MY_VOLUNTARY,
@@ -253,14 +252,14 @@ class HeaderController extends React.Component {
               </Dropdown>
             ) : (
               <div>
-                <Link
+                {/* <Link
                   to={{
                     pathname: `/${REGISTER.path}`
                   }}
                 >
                   注册
                 </Link>
-                |
+                | */}
                 <Link
                   to={{
                     pathname: `/${LOGIN.path}`

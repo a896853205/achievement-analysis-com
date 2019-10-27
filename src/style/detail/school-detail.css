@@ -12,6 +12,11 @@
   display: flex;
   align-items: center;
 }
+.school-detail-title-box img {
+  width: 70px;
+  height: 70px;
+  margin-right: 10px;
+}
 .school-detail-title {
   color: #333;
   font-size: 36px;

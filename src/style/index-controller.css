@@ -30,9 +30,27 @@
 /** 
  * 轮播图 start
  */
-
-.carou {
+.carou-box {
   width: 100%;
+  display: flex;
+  background-image: linear-gradient(#00d6ef, #0e407b);
+}
+.carou-left-img {
+  background-image: url('/index-icon/index-background-left.png');
+  width: calc((100% - 870px - 330px) / 2);
+  height: 360px;
+}
+.carou-right-img {
+  background-image: url('/index-icon/index-background-left.png');
+  width: calc((100% - 870px - 330px) / 2);
+  height: 360px;
+  transform: rotateY(180deg);
+}
+.carou-inner-box {
+  display: flex;
+}
+.carou {
+  width: 870px;
   height: 360px;
   line-height: 360px;
   overflow: hidden;
@@ -49,62 +67,62 @@
   width: 400px;
   height: 350px;
 }
+.index-login-box {
+  width: 330px;
+  height: 100%;
+  background: #0e407b;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 25px;
+}
+.index-login-h5 {
+  color: #ffffff;
+  font-size: 23px;
+  font-weight: 400;
+  align-self: flex-start;
+}
+.index-login-input {
+  width: 280px;
+  background: #0e407b;
+  color: #c5c5c5;
+  border: 1px solid #ffffff;
+  border-radius: 0;
+  text-align: center;
+}
+.index-login-button {
+  width: 200px;
+  background: #f06000;
+  color: #fff;
+  border: 0;
+}
 
 /** 
  * 轮播图 end
  */
 
 /** 
-* search板块 start
+* profile板块 start
 */
-.search-row {
+.index-profile-box {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  background: #fff;
+  padding: 20px;
 }
-
-.school-background {
-  background: url('../assets/images/index/school-search.png');
+.index-profile-box .index-profile-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
-.major-background {
-  background: url('../assets/images/index/major-search.png');
+.index-profile-box .index-profile-item img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 44px;
 }
-
-.search-outter-box {
-  width: calc(50% - 5px);
-  height: 72px;
-  text-align: center;
-  color: #fff;
-  position: relative;
-  cursor: pointer;
-}
-
-.search-text-box {
-  position: absolute;
-  width: 100%;
-  z-index: 2;
-  left: 0;
-  font-size: 24px;
-  line-height: 72px;
-}
-
-.search-title {
-  margin-left: 8px;
-}
-
-.search-shadow-box {
-  background: rgba(0, 0, 0, 1);
-  opacity: 0.4;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-
 /** 
-* search板块 end
+* profile板块 end
 */
 
 /* 智课堂模块 start */

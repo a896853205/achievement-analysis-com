@@ -1,7 +1,7 @@
 import React from 'react';
 
 // UI组件
-import { Steps, Divider, Button } from 'antd';
+import { Divider, Button } from 'antd';
 
 // css
 import '../../style/home-voluntary.css';
@@ -16,8 +16,6 @@ import Step5 from './voluntary/step5-controller';
 // 关于数据模块交互
 import { connect } from 'react-redux';
 import { actions as voluntaryActions } from '../../redux/voluntary-model';
-
-const { Step } = Steps;
 
 class HomeVoluntaryController extends React.Component {
   render() {
@@ -96,11 +94,11 @@ class HomeVoluntaryController extends React.Component {
         )}
         <div className='home-voluntary-content'>
           <div className='voluntary-main-box'>
-            <Steps current={this.props.step} className='steps-box'>
+            {/* <Steps current={this.props.step} className='steps-box'>
               {steps.map(item => (
                 <Step key={item.title} title={item.title} />
               ))}
-            </Steps>
+            </Steps> */}
             <Divider>{steps[this.props.step].title}</Divider>
             <div className='steps-content'>
               {steps[this.props.step].content}

@@ -1,12 +1,11 @@
 import React from 'react';
 
 // UI样式
-import { Carousel, Icon, Skeleton } from 'antd';
+import { Carousel, Icon, Skeleton, Input, Button } from 'antd';
 import '../style/index-controller.css';
 
 // 路由
 import { withRouter } from 'react-router-dom';
-import { SEARCH_SCHOOL, SEARCH_MAJOR } from '../constants/route-constants';
 
 // 请求文件
 import { launchRequest } from '@/util/request';
@@ -33,22 +32,40 @@ class IndexController extends React.Component {
   render() {
     return (
       <div className='index-box'>
-        <Carousel className='carou' autoplay>
-          <div>
-            <img
-              className='carou-img'
-              src='http://img3.youzy.cn/content/media/thumbs/p00191258.jpeg'
-              alt='banner1'
-            />
+        <div className='carou-box'>
+          <div className='carou-left-img' />
+          <div className='carou-inner-box'>
+            <Carousel className='carou' autoplay>
+              <div>
+                <img
+                  className='carou-img'
+                  src='http://img3.youzy.cn/content/media/thumbs/p00191258.jpeg'
+                  alt='banner1'
+                />
+              </div>
+              <div>
+                <img
+                  className='carou-img'
+                  src='http://img3.youzy.cn/content/media/thumbs/p00191467.jpeg'
+                  alt='banner2'
+                />
+              </div>
+            </Carousel>
+            <div className='index-login-box'>
+              <h5 className='index-login-h5'>2020志愿模拟填报登录</h5>
+              <Input className='index-login-input' placeholder='请输入用户名' />
+              <Input
+                className='index-login-input'
+                placeholder='请输入密码'
+                type='password'
+              />
+              <Button type='round' className='index-login-button'>
+                登录
+              </Button>
+            </div>
           </div>
-          <div>
-            <img
-              className='carou-img'
-              src='http://img3.youzy.cn/content/media/thumbs/p00191467.jpeg'
-              alt='banner2'
-            />
-          </div>
-        </Carousel>
+          <div className='carou-right-img' />
+        </div>
         {/* 智赢快讯 */}
         <div className='page-inner-width-box'>
           <div className='fast-information-box'>
@@ -63,30 +80,30 @@ class IndexController extends React.Component {
             </Carousel>
           </div>
         </div>
-        <div className='search-row page-inner-width-box'>
-          <div
-            onClick={() => {
-              this.props.history.push(`/${SEARCH_SCHOOL.path}`);
-            }}
-            className='search-outter-box school-background'
-          >
-            <div className='search-text-box'>
-              <Icon type='bank' />
-              <span className='search-title'>学校查询</span>
-            </div>
-            <div className='search-shadow-box' />
+        <div className='page-inner-width-box index-profile-box'>
+          <div className='index-profile-item'>
+            <img src='/index-icon/1.png' alt='' />
+            <span>学业测评</span>
           </div>
-          <div
-            onClick={() => {
-              this.props.history.push(`/${SEARCH_MAJOR.path}`);
-            }}
-            className='search-outter-box major-background'
-          >
-            <div className='search-text-box'>
-              <Icon type='book' />
-              <span className='search-title'>专业百科</span>
-            </div>
-            <div className='search-shadow-box' />
+          <div className='index-profile-item'>
+            <img src='/index-icon/2.png' alt='' />
+            <span>院校优先</span>
+          </div>
+          <div className='index-profile-item'>
+            <img src='/index-icon/3.png' alt='' />
+            <span>专业优先</span>
+          </div>
+          <div className='index-profile-item'>
+            <img src='/index-icon/4.png' alt='' />
+            <span>估测概率</span>
+          </div>
+          <div className='index-profile-item'>
+            <img src='/index-icon/5.png' alt='' />
+            <span>分析报告</span>
+          </div>
+          <div className='index-profile-item'>
+            <img src='/index-icon/6.png' alt='' />
+            <span>职业方向</span>
           </div>
         </div>
         <div className='page-inner-width-box'>

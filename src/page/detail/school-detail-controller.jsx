@@ -141,6 +141,7 @@ const SchoolDetailProfile = props => {
   const [provinceName, setProvinceName] = useState('');
   const [schoolIntro, setSchoolIntro] = useState('');
   const [schoolCompleteIntro, setSchoolCompleteIntro] = useState('');
+  const [schoolLogoName, setSchoolLogoName] = useState('no-logo.png');
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -159,7 +160,8 @@ const SchoolDetailProfile = props => {
           school_intro: schoolIntro,
           schoolCreateTime,
           masterNum,
-          doctorNum
+          doctorNum,
+          logoName
         }
       ] = await Promise.all([
         launchRequest(APIS.GET_SCHOOL_DETAIL, {
@@ -179,6 +181,7 @@ const SchoolDetailProfile = props => {
       setProvinceName(provinceName);
       setSchoolIntro(schoolIntro.substring(0, 100));
       setSchoolCompleteIntro(schoolIntro);
+      setSchoolLogoName(logoName || 'no-logo.png');
       setLoading(false);
     })();
   }, [schoolId]);
@@ -187,6 +190,7 @@ const SchoolDetailProfile = props => {
     <div className='school-detail-top-box'>
       <Skeleton loading={loading}>
         <div className='school-detail-title-box'>
+          <img src={`/school-logo/${schoolLogoName}`} alt='' />
           <h2 className='school-detail-title'>{schoolName}</h2>
           {schoolPropertyName.map((item, index) => (
             <span key={index} className='shool-detail-property-tag'>
