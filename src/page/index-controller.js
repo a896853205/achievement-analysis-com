@@ -1,7 +1,7 @@
 import React from 'react';
 
 // UI样式
-import { Carousel, Icon, Skeleton, Input, Button } from 'antd';
+import { Carousel, Icon, Skeleton } from 'antd';
 import '../style/index-controller.css';
 
 // 路由
@@ -52,7 +52,7 @@ class IndexController extends React.Component {
                 />
               </div>
             </Carousel>
-            <Login></Login>
+            <Login />
           </div>
           <div className="carou-right-img" />
         </div>

@@ -53,24 +53,24 @@ export default connect(
   };
 
   return (
-    <div className="index-login-box">
-      <h5 className="index-login-h5">2020志愿模拟填报登录</h5>
+    <div className='index-login-box'>
+      <h5 className='index-login-h5'>2020志愿模拟填报登录</h5>
       <Input
         onChange={e => {
           setUserName(e.target.value);
         }}
-        className="index-login-input"
-        placeholder="请输入用户名"
+        className='index-login-input'
+        placeholder='请输入用户名'
       />
       <Input
         onChange={e => {
           setPassWord(e.target.value);
         }}
-        className="index-login-input"
-        placeholder="请输入密码"
-        type="password"
+        className='index-login-input'
+        placeholder='请输入密码'
+        type='password'
       />
-      <Button type="round" className="index-login-button" onClick={onSubmit}>
+      <Button type='round' className='index-login-button' onClick={onSubmit}>
         登录
       </Button>
     </div>

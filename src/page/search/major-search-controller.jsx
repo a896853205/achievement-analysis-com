@@ -24,41 +24,9 @@ export default props => {
       </div>
       <div className='major-search-right-box'>
         {/* 大家都在报 */}
-        <div className='people-selected-major-box'>
-          <h4>大家都在报</h4>
-          <ul>
-            <li>
-              <span className='major-num'>1</span>
-              <span>电气工程与智能控制</span>
-            </li>
-            <li>
-              <span className='major-num'>1</span>
-              <span>电气工程与智能控制</span>
-            </li>
-            <li>
-              <span className='major-num'>1</span>
-              <span>电气工程与智能控制</span>
-            </li>
-            <li>
-              <span className='major-num'>1</span>
-              <span>电气工程与智能控制</span>
-            </li>
-            <li>
-              <span className='major-num'>1</span>
-              <span>电气工程与智能控制</span>
-            </li>
-            <li>
-              <span className='major-num'>1</span>
-              <span>电气工程与智能控制</span>
-            </li>
-            <li>
-              <span className='major-num'>1</span>
-              <span>电气工程与智能控制</span>
-            </li>
-          </ul>
-        </div>
+        <HotMajor />
         {/* 就业前景 */}
-        <div className='employment-major-feature-box'>
+        {/* <div className='employment-major-feature-box'>
           <h4>就业前景</h4>
           <ul>
             <li>
@@ -90,7 +58,7 @@ export default props => {
               <span>电气工程与智能控制</span>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </div>
   );
@@ -168,6 +136,48 @@ const MajorCategory = props => {
             ))}
           </div>
         ))}
+      </Skeleton>
+    </div>
+  );
+};
+
+const HotMajor = props => {
+  const [hotMajors, setHotMajors] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+
+      const [hotMajors] = await Promise.all([
+        launchRequest(APIS.GET_HOT_MAJORS),
+        wait(500)
+      ]);
+
+      setHotMajors(hotMajors);
+      setLoading(false);
+    })();
+  }, []);
+
+  return (
+    <div className='people-selected-major-box'>
+      <Skeleton loading={loading}>
+        <h4>大家都在报</h4>
+        <ul>
+          {hotMajors.map((item, index) => (
+            <Link
+              to={{
+                pathname: `/${MAJOR_DETAIL.path}/${item.major_level_two_code}`
+              }}
+              key={item.major_level_two_code}
+            >
+              <li>
+                <span className='major-num'>{index + 1}</span>
+                <span>{item.major_name}</span>
+              </li>
+            </Link>
+          ))}
+        </ul>
       </Skeleton>
     </div>
   );

@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { withRouter } from 'react-router-dom';
 
 // UI组件
 import { Tree, Tabs, Icon, Skeleton } from 'antd';
 
 // css
 import '@/style/detail/major-detail.css';
+
+// 路由
+import { Link } from 'react-router-dom';
+import { MAJOR_DETAIL } from '@/constants/route-constants';
 
 // 请求
 import { launchRequest } from '@/util/request';
@@ -22,32 +27,15 @@ export default props => {
   return (
     <div className='page-inner-width-box major-detail-box'>
       <div className='major-detail-left-box'>
-        <div className='major-detail-tree-box'>
-          <Tree showLine defaultExpandedKeys={['0-0-0']}>
-            <TreeNode title='parent 1' key='0-0'>
-              <TreeNode title='parent 1-0' key='0-0-0'>
-                <TreeNode title='leaf' key='0-0-0-0' />
-                <TreeNode title='leaf' key='0-0-0-1' />
-                <TreeNode title='leaf' key='0-0-0-2' />
-              </TreeNode>
-              <TreeNode title='parent 1-1' key='0-0-1'>
-                <TreeNode title='leaf' key='0-0-1-0' />
-              </TreeNode>
-              <TreeNode title='parent 1-2' key='0-0-2'>
-                <TreeNode title='leaf' key='0-0-2-0' />
-                <TreeNode title='leaf' key='0-0-2-1' />
-              </TreeNode>
-            </TreeNode>
-          </Tree>
-        </div>
-        <div className='major-detail-correlation-box'>
+        <MajorCategoryTree majorTwoCode={majorTwoCode} />
+        {/* <div className='major-detail-correlation-box'>
           <h5>相关专业</h5>
           <ul>
             <li>逻辑学</li>
             <li>宗教学</li>
             <li>伦理学</li>
           </ul>
-        </div>
+        </div> */}
       </div>
       <div className='major-detail-right-box'>
         <MajorProfile majorTwoCode={majorTwoCode} />
@@ -56,9 +44,9 @@ export default props => {
             <TabPane tab='专业概况' key='1'>
               <MajorDetail majorTwoCode={majorTwoCode} />
             </TabPane>
-            <TabPane tab='开设院校' key='2'>
+            {/* <TabPane tab='开设院校' key='2'>
               Content of Tab Pane 2
-            </TabPane>
+            </TabPane> */}
           </Tabs>
         </div>
       </div>
@@ -215,3 +203,60 @@ const MajorDetail = props => {
     </div>
   );
 };
+
+const MajorCategoryTree = withRouter(props => {
+  const majorTwoCode = props.majorTwoCode;
+  const [majorCategory, setMajorCategory] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+
+      const [majorCategory] = await Promise.all([
+        launchRequest(APIS.GET_MAJOR_CATEGORY),
+        wait(500)
+      ]);
+
+      setMajorCategory(majorCategory);
+      setLoading(false);
+    })();
+  }, []);
+
+  return (
+    <div className='major-detail-tree-box'>
+      <Skeleton loading={loading}>
+        <Tree
+          showLine
+          defaultExpandedKeys={[majorTwoCode]}
+          onSelect={selectKey => {
+            props.history.push(`/${MAJOR_DETAIL.path}/${selectKey}`);
+          }}
+        >
+          {majorCategory.map(item => (
+            <TreeNode
+              title={item.name}
+              selectable={false}
+              key={item.major_category_code}
+            >
+              {item.data.map(oneLevelItem => (
+                <TreeNode
+                  title={oneLevelItem.name}
+                  key={oneLevelItem.major_level_one_code}
+                  selectable={false}
+                >
+                  {oneLevelItem.data.map(twoLevelItem => (
+                    <TreeNode
+                      title={twoLevelItem.major_name}
+                      key={twoLevelItem.major_level_two_code}
+                    />
+                  ))}
+                </TreeNode>
+              ))}
+            </TreeNode>
+          ))}
+        </Tree>
+      </Skeleton>
+    </div>
+  );
+});
