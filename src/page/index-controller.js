@@ -12,10 +12,10 @@ import { launchRequest } from '@/util/request';
 import * as APIS from '@/constants/api-constants';
 
 // 子组件
-import SchoolNewsList from '@/page/index/index-schoolNewsList.jsx';
-import MajorNewsList from '@/page/index/index-majorNewsList.jsx';
-import StudentReadList from '@/page/index/index-studentReadList.jsx';
-import RankShowNewsList from '@/page/index/index-rankShowNewsList.jsx';
+import SchoolNewsList from '@/page/index/index-school-news-list.jsx';
+import MajorNewsList from '@/page/index/index-major-news-list.jsx';
+import StudentReadList from '@/page/index/index-student-read-list.jsx';
+import RankShowNewsList from '@/page/index/index-rank-show-news-list.jsx';
 import Login from '@/page/index-components/login-components.jsx';
 
 // 工具类
