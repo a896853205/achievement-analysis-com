@@ -15,11 +15,13 @@
 
 .fast-information-icon {
   font-size: 22px;
-  color: #0e407b;
+  color: #fc7332;
 }
 
 .fast-information-title {
   margin: 0 40px 0 14px;
+  color: #fc7332;
+  font-size: 18px;
 }
 
 .carousel-information-box {
@@ -121,6 +123,9 @@
   height: 100px;
   margin-bottom: 44px;
 }
+.index-popover-box {
+  width: 200px;
+}
 /** 
 * profile板块 end
 */
@@ -197,13 +202,14 @@
   line-height: 17px;
   font-size: 13px;
   color: #fff;
-  background: #10417c;
+  background: #f06000;
   text-align: center;
   margin-right: 5px;
 }
 
 .school-information-box ul li .school-information-tags span:last-child {
   margin-right: 0;
+  background: #10417c;
 }
 .school-information-box ul li h5 {
   width: 275px;
@@ -257,13 +263,14 @@
   line-height: 17px;
   font-size: 13px;
   color: #fff;
-  background: #10417c;
+  background: #f06000;
   text-align: center;
   margin-right: 5px;
 }
 
 .major-information-box ul li .major-information-tags span:last-child {
   margin-right: 0;
+  background: #10417c;
 }
 .major-information-box ul li h5 {
   width: 275px;

@@ -48,7 +48,13 @@ export default props => {
     <div className='index-rank-show-box'>
       <h2 className='h2-title-box'>
         <span className='index-h2-title'>
-          <Icon type='book' /> 排名集锦
+          <Icon
+            type='bar-chart'
+            style={{
+              color: '#3CC6FC'
+            }}
+          />
+          排名集锦
         </span>
         <Link
           to={{

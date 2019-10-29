@@ -37,6 +37,22 @@
   display: flex;
 }
 
+/* 首页导航栏 */
+.index-menu-box {
+  background: #F06000;
+  height: 54px;
+}
+.index-menu {
+  height: 54px;
+}
+.index-menu-box .ant-menu-item-selected {
+  background: #F06000!important;
+}
+
+.index-menu-box .ant-menu-submenu-active {
+  color: #fff!important;
+}
+
 /* logo部分 start */
 .index-logo-box {
   padding: 45px 0 40px;
@@ -111,7 +127,10 @@
 }
 
 .header-personal-box {
-  height: 66px;
-  line-height: 66px;
+  line-height: 54px;
   text-align: right;
+}
+
+.login-text {
+  color: #fff;
 }

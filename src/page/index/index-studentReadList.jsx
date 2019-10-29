@@ -20,11 +20,20 @@ export default props => {
           }}
           key={item.uuid}
         >
-          <li>
-            <Icon
-              type='right-square'
-              theme='filled'
-              className='student-must-read-icon'
+          <li
+            style={{
+              display: 'flex',
+              alignItems: 'center'
+            }}
+          >
+            <div
+              style={{
+                borderRadius: '50%',
+                width: '6px',
+                height: '6px',
+                background: '#F06000',
+                marginRight: '5px'
+              }}
             />
             {item.title}
           </li>
@@ -39,7 +48,13 @@ export default props => {
     <div className='student-must-read-box'>
       <h2 className='h2-title-box'>
         <span className='index-h2-title'>
-          <Icon type='book' /> 考生必读
+          <Icon
+            type='user'
+            style={{
+              color: '#767DFA'
+            }}
+          />{' '}
+          考生必读
         </span>
         <Link
           to={{

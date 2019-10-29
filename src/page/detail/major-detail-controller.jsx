@@ -8,7 +8,6 @@ import { Tree, Tabs, Icon, Skeleton } from 'antd';
 import '@/style/detail/major-detail.css';
 
 // 路由
-import { Link } from 'react-router-dom';
 import { MAJOR_DETAIL } from '@/constants/route-constants';
 
 // 请求

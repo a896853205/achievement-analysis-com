@@ -34,8 +34,8 @@ export default props => {
               </span>
             </div>
             <div className='major-information-tags'>
-              {!index ? <span>NEW</span> : undefined}
-              <span>HOT</span>
+              {!index ? <span>HOT</span> : undefined}
+              <span>NEW</span>              
             </div>
           </li>
         </Link>
@@ -48,7 +48,15 @@ export default props => {
   return (
     <div className='major-information-box'>
       <h2 className='h2-title-box'>
-        <span className='index-h2-title'>专业百科</span>
+        <span className='index-h2-title'>
+          <Icon
+            type='file-text'
+            style={{
+              color: '#ECB280'
+            }}
+          />
+          专业百科
+        </span>
         <Link
           to={{
             pathname: `/${NEWS_MORE.path}/2`

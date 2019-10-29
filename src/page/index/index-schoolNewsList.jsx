@@ -35,8 +35,8 @@ export default props => {
               </span>
             </div>
             <div className='school-information-tags'>
-              {!index ? <span>NEW</span> : undefined}
-              <span>HOT</span>
+              {!index ? <span>HOT</span> : undefined}
+              <span>NEW</span>
             </div>
           </li>
         </Link>
@@ -49,7 +49,16 @@ export default props => {
   return (
     <div className='school-information-box'>
       <h2 className='h2-title-box'>
-        <span className='index-h2-title'>院校资讯</span>
+        <span className='index-h2-title'>
+          <Icon
+            type='message'
+            theme='filled'
+            style={{
+              color: '#17BD9C'
+            }}
+          />
+          院校资讯
+        </span>
         <Link
           to={{
             pathname: `/${NEWS_MORE.path}/1`
