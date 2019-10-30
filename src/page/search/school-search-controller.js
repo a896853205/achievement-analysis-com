@@ -28,6 +28,10 @@ class SchoolSearchController extends React.Component {
     // 搜索输入
     schoolNameValue: '',
 
+    // 分页
+    page: 1,
+    totalSchool: 0,
+
     // option的数组
     schoolNature: [],
     schoolProperty: [],
@@ -128,9 +132,10 @@ class SchoolSearchController extends React.Component {
               loading={this.state.loading}
               pagination={{
                 onChange: page => {
-                  console.log(page);
+                  this.handlePageChange(page);
                 },
-                pageSize: 12
+                pageSize: 12,
+                total: this.state.totalSchool
               }}
               dataSource={this.state.schoolList}
               renderItem={item => (
@@ -193,7 +198,7 @@ class SchoolSearchController extends React.Component {
 
     let [
       { schoolNature, schoolProperty, schoolType, areaFeature },
-      { schoolList }
+      { schoolList, totalSchool }
     ] = await Promise.all([
       launchRequest(APIS.GET_SCHOOL_OPTION, {}),
       this.getSchool()
@@ -205,7 +210,8 @@ class SchoolSearchController extends React.Component {
       schoolType,
       areaFeature,
       loading: false,
-      schoolList
+      schoolList,
+      totalSchool
     });
   };
 
@@ -215,11 +221,12 @@ class SchoolSearchController extends React.Component {
     });
 
     // 调用查询表格数据函数
-    let { schoolList } = await this.getSchool();
+    let { schoolList, totalSchool } = await this.getSchool();
 
     this.setState({
       schoolList,
-      loading: false
+      loading: false,
+      totalSchool
     });
   };
 
@@ -231,11 +238,12 @@ class SchoolSearchController extends React.Component {
     });
 
     // 调用查询表格数据函数
-    let { schoolList } = await this.getSchool();
+    let { schoolList, totalSchool } = await this.getSchool();
 
     this.setState({
       schoolList,
-      loading: false
+      loading: false,
+      totalSchool
     });
   };
 
@@ -247,11 +255,12 @@ class SchoolSearchController extends React.Component {
     });
 
     // 调用查询表格数据函数
-    let { schoolList } = await this.getSchool();
+    let { schoolList, totalSchool } = await this.getSchool();
 
     this.setState({
       schoolList,
-      loading: false
+      loading: false,
+      totalSchool
     });
   };
 
@@ -263,11 +272,12 @@ class SchoolSearchController extends React.Component {
     });
 
     // 调用查询表格数据函数
-    let { schoolList } = await this.getSchool();
+    let { schoolList, totalSchool } = await this.getSchool();
 
     this.setState({
       schoolList,
-      loading: false
+      loading: false,
+      totalSchool
     });
   };
 
@@ -279,18 +289,14 @@ class SchoolSearchController extends React.Component {
     });
 
     // 调用查询表格数据函数
-    let { schoolList } = await this.getSchool();
+    let { schoolList, totalSchool } = await this.getSchool();
 
     this.setState({
       schoolList,
-      loading: false
+      loading: false,
+      totalSchool
     });
   };
-
-  // handleClickSchoolName = async schoolId => {
-  //   this.props.showSchoolDetail(schoolId);
-  //   this.setState({ schoolDrawerVisible: true });
-  // };
 
   getSchool = async () => {
     // 获取学校配置项
@@ -298,18 +304,36 @@ class SchoolSearchController extends React.Component {
       natureValues,
       propertyValues,
       typeValues,
-      areaFeatureValues
+      areaFeatureValues,
+      page
     } = this.state;
 
-    let schoolList = await launchRequest(APIS.SEARCH_SCHOOL, {
+    let schoolObj = await launchRequest(APIS.SEARCH_SCHOOL, {
       natureValues,
       propertyValues,
       typeValues,
       areaFeatureValues,
-      schoolName: this.state.schoolNameValue
+      schoolName: this.state.schoolNameValue,
+      page
     });
 
-    return schoolList || [];
+    return schoolObj;
+  };
+
+  // 换页修改学校列表
+  handlePageChange = async page => {
+    await this.setState({
+      page,
+      loading: true
+    });
+
+    // 调用查询表格数据函数
+    let { schoolList } = await this.getSchool();
+
+    this.setState({
+      schoolList,
+      loading: false
+    });
   };
 }
 
