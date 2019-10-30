@@ -2,17 +2,17 @@ import { ENVIRONMENT } from "./app-constants";
 import { SAP_CONTROL } from "../config/app-config";
 
 /** 域名 */
-export let DOMAIN = 'http://localhost:7500';
+export let DOMAIN = 'https://localhost:7500';
 
 if (SAP_CONTROL === ENVIRONMENT.DEV) {
   // 开发环境域名
-  DOMAIN = 'http://localhost:7500';
+  DOMAIN = 'https://localhost:7500';
 } else if (SAP_CONTROL === ENVIRONMENT.TEST) {
   // 测试环境域名
-  DOMAIN = 'http://39.106.96.7:7500';
+  DOMAIN = 'https://39.106.96.7:7500';
 } else {
   // 生产环境域名
-  DOMAIN = 'http://39.106.96.7:7500';
+  DOMAIN = 'https://39.106.96.7:7500';
 }
 
 // 模块
