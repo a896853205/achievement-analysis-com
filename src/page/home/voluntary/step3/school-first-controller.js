@@ -1,7 +1,7 @@
 import React from 'react';
 
 // UI组件
-import { Checkbox, Radio, Alert, Modal } from 'antd';
+import { Checkbox, Radio, Modal } from 'antd';
 
 // 自定义组件
 import TableController from './table-controller';
@@ -96,7 +96,7 @@ class SchoolFirstController extends React.Component {
           </div>
         </div>
         <Radio.Group
-          className='btn-group'
+          className='school-first-btn-group'
           value={this.props.gatherValue}
           onChange={this.handleGatherChange}
         >
@@ -106,19 +106,16 @@ class SchoolFirstController extends React.Component {
             </Radio.Button>
           ))}
         </Radio.Group>
-        <Alert
-          message={
-            this.state.gatherOptionList.find(
-              gather => gather.value === this.props.gatherValue
-            )
-              ? this.state.gatherOptionList.find(
-                  gather => gather.value === this.props.gatherValue
-                ).describe
-              : undefined
-          }
-          type='warning'
-          showIcon
-        />
+        <span className='school-first-alert-box'>
+          *
+          {this.state.gatherOptionList.find(
+            gather => gather.value === this.props.gatherValue
+          )
+            ? this.state.gatherOptionList.find(
+                gather => gather.value === this.props.gatherValue
+              ).describe
+            : undefined}
+        </span>
         <TableController />
       </div>
     );

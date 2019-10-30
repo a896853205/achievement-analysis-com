@@ -20,7 +20,9 @@ const { Panel } = Collapse;
 const { confirm } = Modal;
 
 class Step3Controller extends React.Component {
-  state = {};
+  state = {
+    isFold: false
+  };
 
   render() {
     // 右侧志愿表的删除UI
@@ -57,6 +59,7 @@ class Step3Controller extends React.Component {
                 className='content-box'
                 defaultActiveKey='1'
                 onChange={this.handleChangeTabsKey}
+                type='card'
               >
                 <TabPane tab='院校优先' key='1'>
                   <SchoolFirstController />
@@ -70,29 +73,58 @@ class Step3Controller extends React.Component {
               </Tabs>
             </Spin>
           </div>
-          <div className='content-right'>
+          <div
+            className='content-right'
+            style={{ right: this.state.isFold ? '0' : '-260px' }}
+          >
             <Affix offsetTop={10}>
-              <Collapse bordered={true}>
-                {this.props.voluntary.map(voluntaryItem => (
-                  <Panel
-                    header={`${voluntaryItem.volunteer_name} ${voluntaryItem.schoolName}`}
-                    key={voluntaryItem.five_volunteer_id}
-                    extra={genExtra(voluntaryItem)}
-                  >
-                    {voluntaryItem.major.map((majorItem, index) => (
-                      <div key={index} style={{ paddingLeft: 24 }}>{`专业${index +
-                        1} ${majorItem.majorName}`}</div>
-                    ))}
-                  </Panel>
-                ))}
-              </Collapse>
+              <div className='right-affix-box'>
+                <button
+                  onClick={() => {
+                    this.setState({
+                      isFold: !this.state.isFold
+                    });
+                  }}
+                  className='show-voluntary-btn btn-transition-blue-background'
+                >
+                  {this.state.isFold ? (
+                    <span>
+                      <Icon type='right' />
+                      收起志愿表
+                      <Icon type='right' />
+                    </span>
+                  ) : (
+                    <span>
+                      <Icon type='left' />
+                      查看志愿表
+                      <Icon type='left' />
+                    </span>
+                  )}
+                </button>
+                <Collapse bordered={true} className='affix-collapse-box'>
+                  {this.props.voluntary.map(voluntaryItem => (
+                    <Panel
+                      header={`${voluntaryItem.volunteer_name} ${voluntaryItem.schoolName}`}
+                      key={voluntaryItem.five_volunteer_id}
+                      extra={genExtra(voluntaryItem)}
+                    >
+                      {voluntaryItem.major.map((majorItem, index) => (
+                        <div
+                          key={index}
+                          style={{ paddingLeft: 24 }}
+                        >{`专业${index + 1} ${majorItem.majorName}`}</div>
+                      ))}
+                    </Panel>
+                  ))}
+                </Collapse>
+              </div>
             </Affix>
           </div>
         </div>
         <div className='voluntarty-button-box'>
           <Button
-            className='btn-large'
-            style={{marginTop: '20px'}}
+            className='btn-large btn-transition-blue-background'
+            style={{ marginTop: '20px' }}
             size='large'
             type='primary'
             onClick={this.handleClickCheckVoluntary}

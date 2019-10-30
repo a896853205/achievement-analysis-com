@@ -67,7 +67,7 @@ class LoginController extends React.Component {
             </Form.Item>
             <Form.Item>
               <Button
-                className='login-button'
+                className='btn-transition-blue-background login-button'
                 htmlType='submit'
                 type='primary'
                 size='large'

@@ -1,14 +1,14 @@
 import React from 'react';
 
-import VoluntaryDetailController from './voluntary-detail-controller';
+import VoluntaryDetailController from '@/page/home/voluntary/step4/voluntary-detail-controller';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
-import { actions as voluntaryActions } from '../../../redux/voluntary-model';
+import { actions as voluntaryActions } from '@/redux/voluntary-model';
 
 // 请求文件
-import { launchRequest } from '../../../util/request';
-import * as APIS from '../../../constants/api-constants';
+import { launchRequest } from '@/util/request';
+import * as APIS from '@/constants/api-constants';
 
 // UI组件
 import { Button, Modal, Alert } from 'antd';
@@ -32,7 +32,7 @@ class Step4Controller extends React.Component {
               showIcon
             />
             <Button
-              className='btn-large'
+              className='btn-large btn-transition-blue-background'
               loading={this.state.btnLoading}
               onClick={this.handleClickSubmit}
               size='large'
@@ -49,7 +49,7 @@ class Step4Controller extends React.Component {
               showIcon
             />
             <Button
-              className='btn-large'
+              className='btn-large btn-transition-blue-background'
               loading={this.state.btnLoading}
               onClick={this.handleClickDeepSubmit}
               size='large'
