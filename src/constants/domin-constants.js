@@ -9,10 +9,10 @@ if (SAP_CONTROL === ENVIRONMENT.DEV) {
   DOMAIN = 'http://localhost:1208';
 } else if (SAP_CONTROL === ENVIRONMENT.TEST) {
   // 测试环境域名
-  DOMAIN = 'http://39.106.96.7:7500';
+  DOMAIN = 'http://www.zhiyingguihua.com:7500';
 } else {
   // 生产环境域名
-  DOMAIN = 'http://39.106.96.7:7500';
+  DOMAIN = 'http://www.zhiyingguihua.com:7500';
 }
 
 // 模块
