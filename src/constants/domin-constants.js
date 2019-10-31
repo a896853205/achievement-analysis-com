@@ -9,10 +9,10 @@ if (SAP_CONTROL === ENVIRONMENT.DEV) {
   DOMAIN = 'http://localhost:7500';
 } else if (SAP_CONTROL === ENVIRONMENT.TEST) {
   // 测试环境域名
-  DOMAIN = 'http://39.106.96.7:7500';
+  DOMAIN = 'http://39.106.96.7:4433';
 } else {
   // 生产环境域名
-  DOMAIN = 'http://39.106.96.7:7500';
+  DOMAIN = 'http://39.106.96.7:4433';
 }
 
 // 模块
