@@ -56,26 +56,6 @@ class FooterController extends React.Component {
             className="footer-title-logo"
             alt="title-logo"
           />
-          <div className="footer-link-list-box">
-            <h5> 友情链接 </h5>{' '}
-            <ul>
-              <li>
-                <a href="https://gaokao.chsi.com.cn/"> 阳光高考 </a>{' '}
-              </li>{' '}
-              <li>
-                <a href="http://www.gkzxw.net.cn/"> 高考在线 </a>{' '}
-              </li>{' '}
-              <li>
-                <a href="http://www.lzk.hl.cn/"> 黑龙江龙招港 </a>{' '}
-              </li>{' '}
-              <li>
-                <a href="http://www.cnrencai.com/ceping/"> 人才测评 </a>{' '}
-              </li>{' '}
-              <li>
-                <a href="https://ke.qq.com/"> 腾讯课堂 </a>{' '}
-              </li>{' '}
-            </ul>{' '}
-          </div>{' '}
           <div className="footer-icon-list">
             <div className="footer-icon-box">
               <Icon className="footer-icon" type="trophy" />

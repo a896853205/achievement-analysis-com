@@ -27,6 +27,7 @@
 .carousel-information-box {
   width: 1000px;
 }
+
 /* 智赢快讯 end */
 
 /** 
@@ -37,20 +38,24 @@
   display: flex;
   background-image: linear-gradient(#00d6ef, #0e407b);
 }
+
 .carou-left-img {
   background-image: url('/index-icon/index-background-left.png');
   width: calc((100% - 870px - 330px) / 2);
   height: 360px;
 }
+
 .carou-right-img {
   background-image: url('/index-icon/index-background-left.png');
   width: calc((100% - 870px - 330px) / 2);
   height: 360px;
   transform: rotateY(180deg);
 }
+
 .carou-inner-box {
   display: flex;
 }
+
 .carou {
   width: 870px;
   height: 360px;
@@ -69,6 +74,7 @@
   width: 400px;
   height: 350px;
 }
+
 .index-login-box {
   width: 330px;
   height: 100%;
@@ -79,12 +85,14 @@
   align-items: center;
   padding: 25px;
 }
+
 .index-login-h5 {
   color: #ffffff;
   font-size: 23px;
   font-weight: 400;
   align-self: flex-start;
 }
+
 .index-login-input {
   width: 280px;
   background: #0e407b;
@@ -93,6 +101,7 @@
   border-radius: 0;
   text-align: center;
 }
+
 .index-login-button {
   width: 200px;
   background: #f06000;
@@ -113,19 +122,23 @@
   background: #fff;
   padding: 20px;
 }
+
 .index-profile-box .index-profile-item {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .index-profile-box .index-profile-item img {
   width: 100px;
   height: 100px;
   margin-bottom: 44px;
 }
+
 .index-popover-box {
   width: 200px;
 }
+
 /** 
 * profile板块 end
 */
@@ -136,6 +149,7 @@
   display: flex;
   justify-content: space-between;
 }
+
 .intelligent-course-box {
   width: 100%;
   margin-bottom: 11px;
@@ -211,6 +225,7 @@
   margin-right: 0;
   background: #10417c;
 }
+
 .school-information-box ul li h5 {
   width: 275px;
   color: #0e407b;
@@ -272,6 +287,7 @@
   margin-right: 0;
   background: #10417c;
 }
+
 .major-information-box ul li h5 {
   width: 275px;
   color: #0e407b;
@@ -291,6 +307,7 @@
   font-size: 13px;
   margin-left: 28px;
 }
+
 /* 专业百科 end */
 /* 高考百问 start */
 .page-inner-right-box {
@@ -303,7 +320,7 @@
 }
 
 .index-question-ul-box {
-  border: 2px solid #0e407b;
+
   padding: 0 13px;
   height: 250px;
   display: flex;
@@ -322,6 +339,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
 /* 高考百问 end */
 /* 排名集锦 start */
 .index-rank-show-box ul {
@@ -330,6 +348,7 @@
   flex-direction: column;
   justify-content: space-around;
 }
+
 .index-rank-show-box ul li {
   height: 70px;
   box-shadow: 0px 1px 4px 0px rgba(13, 5, 9, 0.3);
@@ -363,9 +382,11 @@
   font-size: 13px;
   color: #a4a4a4;
 }
+
 .index-rank-detail-box span:first-child {
   margin-right: 24px;
 }
+
 /* 排名集锦 end */
 /* 特色学校推荐 start */
 .index-good-school-box ul {
@@ -386,11 +407,13 @@
   width: 100%;
   /* height: 125px; */
 }
+
 /* 特色学校推荐 end */
 /* 考生必读 start */
 .student-must-read-box {
   height: 100%;
 }
+
 .student-must-read-box ul {
   display: flex;
   flex-direction: column;
@@ -408,6 +431,7 @@
 .student-must-read-icon {
   margin-right: 17px;
 }
+
 /* 考生必读 end */
 /* 首页全局样式 */
 .page-inner-width-box {
