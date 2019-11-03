@@ -46,7 +46,7 @@ class FooterController extends React.Component {
             <h5 className="footer-list-title"> 优惠团购 </h5>{' '}
             <ul>
               <li> 多人预定 </li> <li> 超值优惠 </li> <li> 如有需求请联系 </li>{' '}
-              <li> 1234567890 </li>{' '}
+              <li> 18644091056 </li>{' '}
             </ul>{' '}
           </div>{' '}
         </div>{' '}
