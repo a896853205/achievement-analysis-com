@@ -100,7 +100,7 @@ class SchoolFirstController extends React.Component {
             <Checkbox.Group onChange={this.handleProvinceListChange}>
               {this.state.provinceList.map(provinceItem => {
                 return (
-                  <Checkbox key={provinceItem.id} value={provinceItem.id}>
+                  <Checkbox key={provinceItem.code} value={provinceItem.code}>
                     {provinceItem.name}
                   </Checkbox>
                 );

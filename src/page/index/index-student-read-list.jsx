@@ -35,7 +35,7 @@ export default props => {
                 marginRight: '5px'
               }}
             />
-            {item.title}
+            <span>{item.title}</span>
           </li>
         </Link>
       );

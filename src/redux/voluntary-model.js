@@ -99,6 +99,7 @@ const effects = {
         propertyValues,
         typeValues,
         areaFeatureValues,
+        provinceListValues,
         gatherValue
       } = schoolOption;
 
@@ -109,6 +110,7 @@ const effects = {
           propertyValues,
           typeValues,
           areaFeatureValues,
+          provinceListValues,
           gatherValue,
           type: payload
         });
@@ -220,6 +222,7 @@ export const voluntaryReducer = handleActions(
       //   propertyValues: [],
       //   typeValues: [],
       //   areaFeatureValues: [],
+      //   provinceListValues: [],
       //   gatherValue: 'a'
       // }
       return {
@@ -386,6 +389,7 @@ export const voluntaryReducer = handleActions(
       propertyValues: [],
       typeValues: [],
       areaFeatureValues: [],
+      provinceListValues: [],
       gatherValue: 'a'
     },
     schoolName: '',
