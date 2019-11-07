@@ -25,14 +25,15 @@ class SchoolFirstController extends React.Component {
     schoolProperty: [],
     schoolType: [],
     areaFeature: [],
-    gatherOptionList: []
+    gatherOptionList: [],
+    provinceList: []
   };
   render() {
     return (
       <div>
-        <div className='school-option-box'>
-          <div className='option-box'>
-            <span className='option-name'>报考批次</span>
+        <div className="school-option-box">
+          <div className="option-box">
+            <span className="option-name">报考批次</span>
             <Radio.Group
               onChange={this.handleLotsChange}
               value={this.props.lotId}
@@ -46,8 +47,8 @@ class SchoolFirstController extends React.Component {
               })}
             </Radio.Group>
           </div>
-          <div className='option-box'>
-            <span className='option-name'>办学性质</span>
+          <div className="option-box">
+            <span className="option-name">办学性质</span>
             <Checkbox.Group onChange={this.handleNatureChange}>
               {this.state.schoolNature.map(natureItem => {
                 return (
@@ -58,8 +59,8 @@ class SchoolFirstController extends React.Component {
               })}
             </Checkbox.Group>
           </div>
-          <div className='option-box'>
-            <span className='option-name'>学校属性</span>
+          <div className="option-box">
+            <span className="option-name">学校属性</span>
             <Checkbox.Group onChange={this.handlePropertyChange}>
               {this.state.schoolProperty.map(propertyItem => {
                 return (
@@ -70,8 +71,8 @@ class SchoolFirstController extends React.Component {
               })}
             </Checkbox.Group>
           </div>
-          <div className='option-box'>
-            <span className='option-name'>高校类别</span>
+          <div className="option-box">
+            <span className="option-name">高校类别</span>
             <Checkbox.Group onChange={this.handleTypeChange}>
               {this.state.schoolType.map(typeItem => {
                 return (
@@ -82,8 +83,8 @@ class SchoolFirstController extends React.Component {
               })}
             </Checkbox.Group>
           </div>
-          <div className='option-box'>
-            <span className='option-name'>地域特色</span>
+          <div className="option-box">
+            <span className="option-name">地域特色</span>
             <Checkbox.Group onChange={this.handleAreaFeatureChange}>
               {this.state.areaFeature.map(areaFeatureItem => {
                 return (
@@ -94,19 +95,31 @@ class SchoolFirstController extends React.Component {
               })}
             </Checkbox.Group>
           </div>
+          <div className="option-box">
+            <span className="option-name">所在省份</span>
+            <Checkbox.Group onChange={this.handleProvinceListChange}>
+              {this.state.provinceList.map(provinceItem => {
+                return (
+                  <Checkbox key={provinceItem.id} value={provinceItem.id}>
+                    {provinceItem.name}
+                  </Checkbox>
+                );
+              })}
+            </Checkbox.Group>
+          </div>
         </div>
         <Radio.Group
-          className='school-first-btn-group'
+          className="school-first-btn-group"
           value={this.props.gatherValue}
           onChange={this.handleGatherChange}
         >
           {this.state.gatherOptionList.map(item => (
-            <Radio.Button key={item.value} className='btn' value={item.value}>
+            <Radio.Button key={item.value} className="btn" value={item.value}>
               {item.name}
             </Radio.Button>
           ))}
         </Radio.Group>
-        <span className='school-first-alert-box'>
+        <span className="school-first-alert-box">
           *
           {this.state.gatherOptionList.find(
             gather => gather.value === this.props.gatherValue
@@ -130,7 +143,8 @@ class SchoolFirstController extends React.Component {
         schoolType,
         areaFeature,
         voluntaryOptionList,
-        gatherOptionList
+        gatherOptionList,
+        provinceList
       },
       { lotsOption }
     ] = await Promise.all([
@@ -152,7 +166,8 @@ class SchoolFirstController extends React.Component {
       areaFeature,
       voluntaryOptionList,
       gatherOptionList,
-      lotsOption
+      lotsOption,
+      provinceList
     });
   };
 
@@ -202,6 +217,11 @@ class SchoolFirstController extends React.Component {
   // 高校类别改变
   handleTypeChange = async checkedValues => {
     this.props.recordSchoolOption({ typeValues: checkedValues });
+  };
+
+  //学校省份改变
+  handleProvinceListChange = async checkedValues => {
+    this.props.recordSchoolOption({ provinceListValues: checkedValues });
   };
 
   // 地域特色改变
