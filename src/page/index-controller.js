@@ -377,4 +377,5 @@ class IndexController extends React.Component {
     });
   };
 }
+
 export default withRouter(IndexController);
