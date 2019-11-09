@@ -16,6 +16,7 @@ import SchoolNewsList from '@/page/index/index-school-news-list.jsx';
 import MajorNewsList from '@/page/index/index-major-news-list.jsx';
 import StudentReadList from '@/page/index/index-student-read-list.jsx';
 import RankShowNewsList from '@/page/index/index-rank-show-news-list.jsx';
+import QuestionNewsList from '@/page/index/index-question-news-list.jsx';
 import Login from '@/page/index-components/login-components.jsx';
 
 // 工具类
@@ -27,6 +28,7 @@ class IndexController extends React.Component {
     majorNewsList: [],
     studentReadNewsList: [],
     rankNewsList: [],
+    questionNewsList: [],
     loading: false
   };
 
@@ -243,27 +245,7 @@ class IndexController extends React.Component {
             <div className='page-inner-right-box'>
               <Skeleton active loading={this.state.loading}>
                 {/* 高考百问 */}
-                <div>
-                  <h2 className='h2-title-box'>
-                    <span className='index-h2-title'>
-                      <Icon
-                        type='question-circle'
-                        theme='filled'
-                        style={{ color: '#18C218' }}
-                      />
-                      高考百问
-                    </span>
-                    <span className='index-more'>
-                      更多 <Icon type='right' />
-                    </span>
-                  </h2>
-                  <ul className='index-question-ul-box'>
-                    <li>高考百问信息高考百问信息高考百问信息</li>
-                    <li>高考百问信息高考百问信息高考百问信息</li>
-                    <li>高考百问信息高考百问信息高考百问信息</li>
-                    <li>高考百问信息高考百问信息高考百问信息</li>
-                  </ul>
-                </div>
+                <QuestionNewsList newsList={this.state.questionNewsList} />
                 {/* 排名集锦 */}
                 <RankShowNewsList newsList={this.state.rankNewsList} />
               </Skeleton>
@@ -361,7 +343,13 @@ class IndexController extends React.Component {
     });
 
     let [
-      { schoolNewsList, majorNewsList, studentReadNewsList, rankNewsList }
+      {
+        schoolNewsList,
+        majorNewsList,
+        studentReadNewsList,
+        rankNewsList,
+        questionNewsList
+      }
     ] = await Promise.all([
       launchRequest(APIS.GET_HOME_DATA),
       // 防闪烁
@@ -373,6 +361,7 @@ class IndexController extends React.Component {
       majorNewsList,
       studentReadNewsList,
       rankNewsList,
+      questionNewsList,
       loading: false
     });
   };
