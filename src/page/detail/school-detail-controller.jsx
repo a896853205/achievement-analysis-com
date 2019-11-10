@@ -313,6 +313,7 @@ const SchoolDetailProfile = props => {
         onCancel={() => {
           setModalVisible(false);
         }}
+        width='90%'
       >
         <p>{schoolCompleteIntro}</p>
       </Modal>

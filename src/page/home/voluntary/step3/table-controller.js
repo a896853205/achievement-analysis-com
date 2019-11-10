@@ -117,7 +117,7 @@ class TableController extends React.Component {
       },
       {
         title: () => (
-          <Tooltip title='提档概率的解释'>
+          <Tooltip title='综合考虑考生位次/线差、院校近三年录取位次/线差。'>
             <span>
               投档概率
               <Icon type='question-circle' />
@@ -142,7 +142,7 @@ class TableController extends React.Component {
       },
       {
         title: () => (
-          <Tooltip title='风险系数的解释'>
+          <Tooltip title='综合考虑院校位次/线差的波动幅度、趋势以及院校的招生计划变化情况。'>
             <span>
               风险系数
               <Icon type='question-circle' />
