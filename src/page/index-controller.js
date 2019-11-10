@@ -293,6 +293,7 @@ class IndexController extends React.Component {
                         pathname: `/${SCHOOL_DETAIL.path}/45`
                       }}
                     >
+                      
                       <img src='/index-school-pic/2.jpg' alt='' />
                       <span>原电子工业部直属院校——北京信息科技大学</span>
                     </Link>
