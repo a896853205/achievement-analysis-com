@@ -120,9 +120,17 @@ const SchoolEnrollmentNewsList = props => {
         onCancel={() => {
           setModalShow(false);
         }}
+        width='90%'
       >
         <Skeleton loading={modalLoading}>
-          <p>{enrollmentNewsContent}</p>
+          <div
+            style={{
+              display: 'block'
+            }}
+            dangerouslySetInnerHTML={{
+              __html: enrollmentNewsContent
+            }}
+          ></div>
         </Skeleton>
       </Modal>
     </div>

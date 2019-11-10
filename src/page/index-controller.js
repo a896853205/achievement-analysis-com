@@ -5,7 +5,8 @@ import { Carousel, Icon, Skeleton, Popover } from 'antd';
 import '../style/index-controller.css';
 
 // 路由
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
+import { SCHOOL_DETAIL } from '@/constants/route-constants';
 
 // 请求文件
 import { launchRequest } from '@/util/request';
@@ -268,58 +269,98 @@ class IndexController extends React.Component {
                     />{' '}
                     院校推荐
                   </span>
-                  <span className='index-more'>
+                  {/* <span className='index-more'>
                     更多 <Icon type='right' />
-                  </span>
+                  </span> */}
                 </h2>
                 <ul>
                   <li>
-                    <img
-                      src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
-                      alt=''
-                    />
+                    <Link
+                      to={{
+                        pathname: `/${SCHOOL_DETAIL.path}/11`
+                      }}
+                    >
+                      <img src='/index-school-pic/1.jpg' alt='' />
+                      <p>
+                        <span>原兵器部直属院校</span>
+                        <span>北京理工大学</span>
+                      </p>
+                    </Link>
                   </li>
                   <li>
-                    <img
-                      src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
-                      alt=''
-                    />
+                    <Link
+                      to={{
+                        pathname: `/${SCHOOL_DETAIL.path}/45`
+                      }}
+                    >
+                      <img src='/index-school-pic/2.jpg' alt='' />
+                      <span>原电子工业部直属院校——北京信息科技大学</span>
+                    </Link>
                   </li>
                   <li>
-                    <img
-                      src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
-                      alt=''
-                    />
+                    <Link
+                      to={{
+                        pathname: `/${SCHOOL_DETAIL.path}/14`
+                      }}
+                    >
+                      <img src='/index-school-pic/3.jpg' alt='' />
+                      <span>原化工部直属院校——北京化工大学</span>
+                    </Link>
                   </li>
                   <li>
-                    <img
-                      src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
-                      alt=''
-                    />
+                    <Link
+                      to={{
+                        pathname: `/${SCHOOL_DETAIL.path}/737`
+                      }}
+                    >
+                      <img src='/index-school-pic/4.jpg' alt='' />
+                      <p>
+                        <span>原建材总局直属高校</span>
+                        <span>山东建材工业学院</span>
+                      </p>
+                    </Link>
                   </li>
                   <li>
-                    <img
-                      src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
-                      alt=''
-                    />
+                    <Link
+                      to={{
+                        pathname: `/${SCHOOL_DETAIL.path}/385`
+                      }}
+                    >
+                      <img src='/index-school-pic/5.jpg' alt='' />
+                      <span>
+                        原建筑部直属高校——哈尔滨建筑大学（合并于哈尔滨工业大学）
+                      </span>
+                    </Link>
                   </li>
                   <li>
-                    <img
-                      src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
-                      alt=''
-                    />
+                    <Link
+                      to={{
+                        pathname: `/${SCHOOL_DETAIL.path}/250`
+                      }}
+                    >
+                      <img src='/index-school-pic/6.jpg' alt='' />
+                      <span>原交通部直属高校——大连海事大学</span>
+                    </Link>
                   </li>
                   <li>
-                    <img
-                      src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
-                      alt=''
-                    />
+                    <Link
+                      to={{
+                        pathname: `/${SCHOOL_DETAIL.path}/519`
+                      }}
+                    >
+                      <img src='/index-school-pic/7.jpg' alt='' />
+                      <span>原石油部直属院校——常州大学</span>
+                    </Link>
                   </li>
                   <li>
-                    <img
-                      src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
-                      alt=''
-                    />
+                    <Link
+                      to={{
+                        pathname: `/${SCHOOL_DETAIL.path}/521`
+                      }}
+                    >
+                      <img src='/index-school-pic/8.jpg' alt='' />
+                      <span>原水电部的直属院校——河海大学</span>
+                    </Link>
                   </li>
                 </ul>
               </Skeleton>

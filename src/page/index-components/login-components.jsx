@@ -74,7 +74,7 @@ export default connect(
             }
           >
             <Button type='round' className='index-login-button'>
-              开始测评
+              开始填报吧
             </Button>
           </Link>
         </div>
