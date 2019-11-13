@@ -29,7 +29,8 @@ export const actions = {
   recordMajorName: createAction('recordMajorName'),
   recordVoluntaryResultType: createAction('recordVoluntaryResultType'),
   recordVoluntaryListOption: createAction('recordVoluntaryListOption'),
-  recordVoluntaryDeepUuid: createAction('recordVoluntaryDeepUuid')
+  recordVoluntaryDeepUuid: createAction('recordVoluntaryDeepUuid'),
+  recordVoluntaryType: createAction('recordVoluntaryType')
 };
 const recordVoluntaryResult = createAction('recordVoluntaryResult');
 const setMeScoreRank = createAction('setMeScoreRank');
@@ -64,13 +65,6 @@ const effects = {
     } = yield call(launchRequest, APIS.GET_SCORE_RANK, payload);
 
     // yield call(userEffects.recordUserSaga, { payload });
-
-    console.log(
-      fitCurrent,
-      fitOld,
-      lotsScoreDifferMsg,
-      currentLotsScoreDifferMsg
-    );
     yield put(
       setMeScoreRank({
         fitCurrent,
@@ -87,11 +81,12 @@ const effects = {
     let schoolList = [];
     const state = yield select();
     const voluntaryStore = state['voluntaryStore'];
+    const { voluntaryType } = voluntaryStore;
 
     // 获取当前redux学校的配置项
     // 这里需要做一下type判断,如果是1就按照学校优先来处理
     // 如果是3就按照查学校名来处理
-    if (payload === 1) {
+    if (voluntaryType === 1) {
       let { schoolOption, lot_id } = voluntaryStore;
 
       let {
@@ -112,28 +107,41 @@ const effects = {
           areaFeatureValues,
           provinceListValues,
           gatherValue,
-          type: payload
+          type: voluntaryType
         });
 
         schoolList = data.schoolList;
       } else {
         schoolList = [];
       }
-    } else if (payload === 2) {
-      let { lot_id, majorName } = voluntaryStore;
+    } else if (voluntaryType === 2) {
+      let { lot_id, majorName, schoolOption } = voluntaryStore;
+
+      let {
+        natureValues,
+        propertyValues,
+        typeValues,
+        areaFeatureValues,
+        provinceListValues
+      } = schoolOption;
 
       if (lot_id && majorName !== '') {
         let data = yield call(launchRequest, APIS.GET_SCHOOL, {
           lotId: lot_id,
           majorName,
-          type: payload
+          natureValues,
+          propertyValues,
+          typeValues,
+          areaFeatureValues,
+          provinceListValues,
+          type: voluntaryType
         });
 
         schoolList = data.schoolList;
       } else {
         schoolList = [];
       }
-    } else if (payload === 3) {
+    } else if (voluntaryType === 3) {
       // 指定院校
       let { lot_id, schoolName } = voluntaryStore;
 
@@ -141,7 +149,7 @@ const effects = {
         let data = yield call(launchRequest, APIS.GET_SCHOOL, {
           lotId: lot_id,
           schoolName,
-          type: payload
+          type: voluntaryType
         });
 
         schoolList = data.schoolList;
@@ -373,6 +381,12 @@ export const voluntaryReducer = handleActions(
         ...state,
         voluntaryDeepUuid: result
       };
+    },
+    recordVoluntaryType(state, { payload: result }) {
+      return {
+        ...state,
+        voluntaryType: result
+      };
     }
   },
   {
@@ -396,6 +410,8 @@ export const voluntaryReducer = handleActions(
     majorName: '',
     schoolList: [],
     schoolTableLoading: false,
+    // 那种方式获取学校列表
+    voluntaryType: 1,
     // 设置志愿用的数据
     voluntary: [],
     // 查看志愿用的数据

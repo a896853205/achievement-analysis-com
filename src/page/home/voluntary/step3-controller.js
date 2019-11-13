@@ -28,7 +28,7 @@ class Step3Controller extends React.Component {
     // 右侧志愿表的删除UI
     const genExtra = voluntaryItem => (
       <Icon
-        type='delete'
+        type="delete"
         onClick={event => {
           confirm({
             title: '删除志愿信息',
@@ -47,61 +47,37 @@ class Step3Controller extends React.Component {
     );
 
     return (
-      <div className='step3-box'>
-        <div className='content'>
-          <div className='content-left'>
-            <Spin
-              tip='数据量较大,请耐心等待'
-              delay={200}
-              spinning={this.props.schoolTableLoading}
-            >
-              <Tabs
-                className='content-box'
-                defaultActiveKey='1'
-                onChange={this.handleChangeTabsKey}
-                type='card'
-              >
-                <TabPane tab='院校优先' key='1'>
-                  <SchoolFirstController />
-                </TabPane>
-                <TabPane tab='专业优先' key='2'>
-                  <MajorFirstController />
-                </TabPane>
-                <TabPane tab='指定院校' key='3'>
-                  <PointSchoolController />
-                </TabPane>
-              </Tabs>
-            </Spin>
-          </div>
+      <div className="step3-box">
+        <div className="content">
           <div
-            className='content-right'
+            className="content-right"
             style={{ right: this.state.isFold ? '0' : '-260px' }}
           >
             <Affix offsetTop={10}>
-              <div className='right-affix-box'>
+              <div className="right-affix-box">
                 <button
                   onClick={() => {
                     this.setState({
                       isFold: !this.state.isFold
                     });
                   }}
-                  className='show-voluntary-btn btn-transition-blue-background'
+                  className="show-voluntary-btn btn-transition-blue-background"
                 >
                   {this.state.isFold ? (
                     <span>
-                      <Icon type='right' />
+                      <Icon type="right" />
                       收起志愿表
-                      <Icon type='right' />
+                      <Icon type="right" />
                     </span>
                   ) : (
                     <span>
-                      <Icon type='left' />
+                      <Icon type="left" />
                       展开志愿表
-                      <Icon type='left' />
+                      <Icon type="left" />
                     </span>
                   )}
                 </button>
-                <div className='affix-collapse-box'>
+                <div className="affix-collapse-box">
                   <Collapse bordered={true}>
                     {this.props.voluntary.map(voluntaryItem => (
                       <Panel
@@ -119,10 +95,10 @@ class Step3Controller extends React.Component {
                     ))}
                   </Collapse>
                   <Button
-                    className='btn-large btn-transition-blue-background'
+                    className="btn-large btn-transition-blue-background"
                     style={{ width: '100%' }}
-                    size='large'
-                    type='primary'
+                    size="large"
+                    type="primary"
                     onClick={this.handleClickCheckVoluntary}
                   >
                     查看志愿表
@@ -131,13 +107,38 @@ class Step3Controller extends React.Component {
               </div>
             </Affix>
           </div>
+
+          <div className="content-left">
+            <Spin
+              tip="数据量较大,请耐心等待"
+              delay={200}
+              spinning={this.props.schoolTableLoading}
+            >
+              <Tabs
+                className="content-box"
+                defaultActiveKey="1"
+                onChange={this.handleChangeTabsKey}
+                type="card"
+              >
+                <TabPane tab="院校优先" key="1">
+                  <SchoolFirstController />
+                </TabPane>
+                <TabPane tab="专业优先" key="2">
+                  <MajorFirstController />
+                </TabPane>
+                <TabPane tab="指定院校" key="3">
+                  <PointSchoolController />
+                </TabPane>
+              </Tabs>
+            </Spin>
+          </div>
         </div>
-        <div className='voluntarty-button-box'>
+        <div className="voluntarty-button-box">
           <Button
-            className='btn-large btn-transition-blue-background'
+            className="btn-large btn-transition-blue-background"
             style={{ marginTop: '20px' }}
-            size='large'
-            type='primary'
+            size="large"
+            type="primary"
             onClick={this.handleClickCheckVoluntary}
           >
             查看志愿表
@@ -148,7 +149,8 @@ class Step3Controller extends React.Component {
   }
 
   handleChangeTabsKey = key => {
-    this.props.recordSchoolList(parseInt(key));
+    this.props.recordVoluntaryType(parseInt(key));
+    this.props.recordSchoolList();
   };
 
   handleClickCheckVoluntary = () => {
@@ -183,11 +185,11 @@ const mapDispatchToProps = dispatch => {
     // 查数据库
     recordSchoolList: params => {
       dispatch(voluntaryActions.recordSchoolList(params));
+    },
+    recordVoluntaryType: params => {
+      dispatch(voluntaryActions.recordVoluntaryType(params));
     }
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Step3Controller);
+export default connect(mapStateToProps, mapDispatchToProps)(Step3Controller);
