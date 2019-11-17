@@ -32,16 +32,16 @@ class FooterController extends React.Component {
             <h5 className="footer-list-title"> 关于我们 </h5>{' '}
             <ul>
               <li> 团队介绍 </li> <li> 联系我们 </li> <li> 商务合作 </li>{' '}
-            </ul>{' '}
-          </div>{' '}
-          <div className="footer-list-item">
-            <h5 className="footer-list-title"> 志愿填报 </h5>{' '}
+            </ul>
+          </div>
+          {/* <div className="footer-list-item">
+            <h5 className="footer-list-title"> 志愿填报 </h5>
             <img
               className="index-qr-code"
               src="/index-icon/QR-fuwu-code.jpg"
               alt=""
             />
-          </div>{' '}
+          </div> */}
           <div className="footer-list-item">
             <h5 className="footer-list-title"> 关注微信 </h5>{' '}
             <img
