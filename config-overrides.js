@@ -3,9 +3,7 @@ const {
   fixBabelImports,
   addDecoratorsLegacy,
   addWebpackAlias,
-  addBabelPresets,
-  addExternalBabelPlugins,
-  addBabelPlugins
+  addWebpackModuleRule
 } = require('customize-cra');
 const path = require('path');
 
@@ -90,10 +88,11 @@ const babelPluginOptions = [
   'transform-class-properties',
   '@babel/plugin-transform-arrow-functions',
   '@babel/plugin-transform-for-of',
-  "@babel/plugin-transform-object-super"
+  '@babel/plugin-transform-object-super'
 ];
 
 module.exports = override(
+  addWebpackModuleRule({ test: /\.styl$/, use: ['style-loader', 'css-loader', 'stylus-loader'] }),
   fixBabelImports('import', {
     libraryName: 'antd',
     style: 'css'
@@ -102,7 +101,7 @@ module.exports = override(
     '@': path.resolve(__dirname, 'src')
   }),
   addDecoratorsLegacy(),
-  addCustomize(),
+  addCustomize()
   // ...addExternalBabelPlugins(...babelPluginOptions),
   // ...addBabelPlugins(...babelPluginOptions),
   // ...addBabelPresets(...babelPresetsOptions)
