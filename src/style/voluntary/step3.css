@@ -79,6 +79,10 @@
 
 .right-affix-box .affix-collapse-box {
   width: 260px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .school-first-btn-group {

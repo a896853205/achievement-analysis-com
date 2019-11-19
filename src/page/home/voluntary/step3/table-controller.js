@@ -181,23 +181,31 @@ class TableController extends React.Component {
               this.handleSchoolChange(e, record);
             }}
             value={
-              this.props.voluntary.find(voluntaryItem => {
-                return voluntaryItem.schoolId === record.school_id;
-              })
-                ? this.props.voluntary.find(voluntaryItem => {
-                    return voluntaryItem.schoolId === record.school_id;
-                  }).five_volunteer_id
+              this.props.voluntary[this.props.lot_id]
+                ? this.props.voluntary[this.props.lot_id].find(
+                    voluntaryItem => {
+                      return voluntaryItem.schoolId === record.school_id;
+                    }
+                  )
+                  ? this.props.voluntary[this.props.lot_id].find(
+                      voluntaryItem => {
+                        return voluntaryItem.schoolId === record.school_id;
+                      }
+                    ).five_volunteer_id
+                  : undefined
                 : undefined
             }
           >
-            {this.props.voluntary.map(voluntaryItem => (
-              <Option
-                key={voluntaryItem.five_volunteer_id}
-                value={voluntaryItem.five_volunteer_id}
-              >
-                {voluntaryItem.volunteer_name}
-              </Option>
-            ))}
+            {this.props.voluntary[this.props.lot_id]
+              ? this.props.voluntary[this.props.lot_id].map(voluntaryItem => (
+                  <Option
+                    key={voluntaryItem.five_volunteer_id}
+                    value={voluntaryItem.five_volunteer_id}
+                  >
+                    {voluntaryItem.volunteer_name}
+                  </Option>
+                ))
+              : undefined}
           </Select>
         )
       }
@@ -278,13 +286,14 @@ class TableController extends React.Component {
 const mapStateToProps = store => {
   const voluntaryStore = store['voluntaryStore'];
   const userStore = store['userStore'];
-  let { schoolList, schoolTableLoading, voluntary } = voluntaryStore;
+  let { schoolList, schoolTableLoading, voluntary, lot_id } = voluntaryStore;
   let { user } = userStore;
   return {
     schoolList,
     schoolTableLoading,
     voluntary: [...voluntary],
-    user
+    user,
+    lot_id
   };
 };
 
@@ -303,7 +312,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TableController);
+export default connect(mapStateToProps, mapDispatchToProps)(TableController);

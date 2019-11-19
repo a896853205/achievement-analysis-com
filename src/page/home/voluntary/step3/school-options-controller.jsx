@@ -5,14 +5,12 @@ import { connect } from 'react-redux';
 import { actions as voluntaryActions } from '@/redux/voluntary-model';
 
 // UI组件
-import { Checkbox, Radio, Modal } from 'antd';
+import { Checkbox, Radio } from 'antd';
 
 // 请求文件
 import { launchRequest } from '@/util/request';
 import * as APIS from '@/constants/api-constants';
 import * as DominConfigs from '@/constants/domin-constants';
-
-const { confirm } = Modal;
 
 const mapStateToProps = store => {
   const voluntaryStore = store['voluntaryStore'];
@@ -68,6 +66,7 @@ export default connect(
   let lotId = props.lotId;
   let voluntaryLength = props.voluntary.length;
   let initVoluntary = props.initVoluntary;
+  let voluntary = props.voluntary;
   useEffect(() => {
     (async () => {
       let [
@@ -88,7 +87,7 @@ export default connect(
       ]);
 
       // 如果有志愿表就不初始化了
-      if (!voluntaryLength) {
+      if (!(voluntary[lotId] && voluntary[lotId].length)) {
         initVoluntary(voluntaryOptionList);
       }
 
@@ -99,31 +98,32 @@ export default connect(
       setAreaFeature(areaFeature);
       setProvinceList(provinceList);
     })();
-  }, [lotId, voluntaryLength, initVoluntary]);
+  }, [lotId, voluntaryLength, initVoluntary, voluntary]);
 
   // 学校批次改变
   const handleLotsChange = e => {
-    confirm({
-      title: '修改批次',
-      content: '您确定修改批次吗,修改批次会使志愿表清空?',
-      okText: '确认',
-      cancelText: '取消',
-      onOk: async () => {
-        // 调用查询表格数据函数
-        props.setLotId(e.target.value);
-        props.recordSchoolList();
+    (async () => {
+      // 调用查询表格数据函数
+      props.setLotId(e.target.value);
+      props.recordSchoolList();
 
-        // 需要重构成saga -----
-        let { voluntaryOptionList } = await launchRequest(
-          APIS.GET_SCHOOL_OPTION,
-          {
-            lotId: props.lotId
-          }
-        );
+      // 需要重构成saga -----
+      let { voluntaryOptionList } = await launchRequest(
+        APIS.GET_SCHOOL_OPTION,
+        {
+          lotId: e.target.value
+        }
+      );
+
+      if (
+        !(
+          props.voluntary[e.target.value] &&
+          props.voluntary[e.target.value].length
+        )
+      ) {
         props.initVoluntary(voluntaryOptionList);
-      },
-      onCancel() {}
-    });
+      }
+    })();
   };
 
   // 办学性质改变
@@ -152,9 +152,9 @@ export default connect(
   };
 
   return (
-    <div className="school-option-box">
-      <div className="option-box">
-        <span className="option-name">报考批次</span>
+    <div className='school-option-box'>
+      <div className='option-box'>
+        <span className='option-name'>报考批次</span>
         <Radio.Group onChange={handleLotsChange} value={props.lotId}>
           {lotsOption.map(lotsItem => {
             return (
@@ -165,8 +165,8 @@ export default connect(
           })}
         </Radio.Group>
       </div>
-      <div className="option-box">
-        <span className="option-name">办学性质</span>
+      <div className='option-box'>
+        <span className='option-name'>办学性质</span>
         <Checkbox.Group onChange={handleNatureChange}>
           {schoolNature.map(natureItem => {
             return (
@@ -177,8 +177,8 @@ export default connect(
           })}
         </Checkbox.Group>
       </div>
-      <div className="option-box">
-        <span className="option-name">学校属性</span>
+      <div className='option-box'>
+        <span className='option-name'>学校属性</span>
         <Checkbox.Group onChange={handlePropertyChange}>
           {schoolProperty.map(propertyItem => {
             return (
@@ -189,8 +189,8 @@ export default connect(
           })}
         </Checkbox.Group>
       </div>
-      <div className="option-box">
-        <span className="option-name">高校类别</span>
+      <div className='option-box'>
+        <span className='option-name'>高校类别</span>
         <Checkbox.Group onChange={handleTypeChange}>
           {schoolType.map(typeItem => {
             return (
@@ -201,8 +201,8 @@ export default connect(
           })}
         </Checkbox.Group>
       </div>
-      <div className="option-box">
-        <span className="option-name">地域特色</span>
+      <div className='option-box'>
+        <span className='option-name'>地域特色</span>
         <Checkbox.Group onChange={handleAreaFeatureChange}>
           {areaFeature.map(areaFeatureItem => {
             return (
@@ -213,8 +213,8 @@ export default connect(
           })}
         </Checkbox.Group>
       </div>
-      <div className="option-box">
-        <span className="option-name">所在省份</span>
+      <div className='option-box'>
+        <span className='option-name'>所在省份</span>
         <Checkbox.Group onChange={handleProvinceListChange}>
           {provinceList.map(provinceItem => {
             return (

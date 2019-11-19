@@ -75,7 +75,7 @@ class ResultReportController extends React.Component {
             <div className='voluntary-result-title-box'>
               <h3
                 className={`voluntary-result-title ${
-                  this.props.voluntaryResult.completeResult.reasonable
+                  this.props.voluntaryResult.gradedResult.reasonable
                     ? 'voluntary-result-title-success'
                     : 'voluntary-result-title-error'
                 }`}
@@ -115,7 +115,7 @@ class ResultReportController extends React.Component {
             <div className='voluntary-result-title-box'>
               <h3
                 className={`voluntary-result-title ${
-                  this.props.voluntaryResult.completeResult.reasonable
+                  this.props.voluntaryResult.planResult.reasonable
                     ? 'voluntary-result-title-success'
                     : 'voluntary-result-title-error'
                 }`}

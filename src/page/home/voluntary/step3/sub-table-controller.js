@@ -18,9 +18,15 @@ class SubTableController extends React.Component {
   };
 
   render() {
-    let voluntaryObj = this.props.voluntary.find(voluntaryItem => {
-      return voluntaryItem.schoolId === this.props.schoolId;
-    });
+    let voluntaryObj = null;
+
+    if (this.props.voluntary[this.props.lotId]) {
+      voluntaryObj = this.props.voluntary[this.props.lotId].find(
+        voluntaryItem => {
+          return voluntaryItem.schoolId === this.props.schoolId;
+        }
+      );
+    }
 
     let majorList = [];
 
@@ -103,9 +109,11 @@ class SubTableController extends React.Component {
               this.handleMajorChange(e, record);
             }}
             disabled={
-              this.props.voluntary.findIndex(item => {
-                return item.schoolId === this.props.schoolId;
-              }) === -1
+              this.props.voluntary[this.props.lotId]
+                ? this.props.voluntary[this.props.lotId].findIndex(item => {
+                    return item.schoolId === this.props.schoolId;
+                  }) === -1
+                : undefined
             }
             value={
               majorList.findIndex(majorItem => {
@@ -191,7 +199,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SubTableController);
+export default connect(mapStateToProps, mapDispatchToProps)(SubTableController);

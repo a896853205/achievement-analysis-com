@@ -27,6 +27,7 @@ export const actions = {
   recordSchoolOption: createAction('recordSchoolOption'),
   recordSchoolName: createAction('recordSchoolName'),
   recordMajorName: createAction('recordMajorName'),
+  recordVoluntary: createAction('recordVoluntary'),
   recordVoluntaryResultType: createAction('recordVoluntaryResultType'),
   recordVoluntaryListOption: createAction('recordVoluntaryListOption'),
   recordVoluntaryDeepUuid: createAction('recordVoluntaryDeepUuid'),
@@ -241,24 +242,34 @@ export const voluntaryReducer = handleActions(
         }
       };
     },
-    initVoluntary(state, { payload: result }) {
-      result.forEach((item, index, arr) => {
-        initSchoolObj(arr[index]);
-      });
-
+    recordVoluntary(state, { payload: result }) {
       return {
         ...state,
         voluntary: result
       };
     },
+    initVoluntary(state, { payload: result }) {
+      let { lot_id, voluntary } = state;
+
+      result.forEach((item, index, arr) => {
+        initSchoolObj(arr[index]);
+      });
+
+      voluntary[lot_id] = result;
+
+      return {
+        ...state,
+        voluntary
+      };
+    },
     deleteVoluntary(state, { payload: result }) {
-      let { voluntary } = state,
-        oldIndex = voluntary.findIndex(item => {
+      let { voluntary, lot_id } = state,
+        oldIndex = voluntary[lot_id].findIndex(item => {
           return item.five_volunteer_id === result;
         });
 
       if (oldIndex !== -1) {
-        initSchoolObj(voluntary[oldIndex]);
+        initSchoolObj(voluntary[lot_id][oldIndex]);
       }
 
       return {
@@ -267,25 +278,25 @@ export const voluntaryReducer = handleActions(
       };
     },
     recordSchool(state, { payload: result }) {
-      let { voluntary } = state;
+      let { voluntary, lot_id } = state;
       let { changeVolunteerId, schoolData } = result;
 
       // 找到原来的位置清空
-      let oldIndex = voluntary.findIndex(item => {
+      let oldIndex = voluntary[lot_id].findIndex(item => {
         return item.schoolId === schoolData.school_id;
       });
 
       if (oldIndex !== -1) {
-        initSchoolObj(voluntary[oldIndex]);
+        initSchoolObj(voluntary[lot_id][oldIndex]);
       }
 
       // 新位置修改
-      let changeIndex = voluntary.findIndex(item => {
+      let changeIndex = voluntary[lot_id].findIndex(item => {
         return item.five_volunteer_id === changeVolunteerId;
       });
 
       setSchool({
-        school: voluntary[changeIndex],
+        school: voluntary[lot_id][changeIndex],
         schoolName: schoolData.school_name,
         schoolId: schoolData.school_id,
         major: initMajorArr(),
@@ -300,26 +311,26 @@ export const voluntaryReducer = handleActions(
       };
     },
     recordMajor(state, { payload: result }) {
-      let { voluntary } = state,
+      let { voluntary, lot_id } = state,
         { majorData, schoolId, changeMajorIndex } = result;
 
       // 找学校的志愿
-      let schoolIndex = voluntary.findIndex(item => {
+      let schoolIndex = voluntary[lot_id].findIndex(item => {
         return item.schoolId === schoolId;
       });
 
       // 找专业的位置
-      let majorIndex = voluntary[schoolIndex].major.findIndex(item => {
+      let majorIndex = voluntary[lot_id][schoolIndex].major.findIndex(item => {
         return item.majorId === majorData.enrollment_id;
       });
 
       // 这里还需要清除专业
       if (majorIndex !== -1) {
-        voluntary[schoolIndex].major[majorIndex] = initMajorObj();
+        voluntary[lot_id][schoolIndex].major[majorIndex] = initMajorObj();
       }
 
       setMajor({
-        major: voluntary[schoolIndex].major[changeMajorIndex],
+        major: voluntary[lot_id][schoolIndex].major[changeMajorIndex],
         majorId: majorData.enrollment_id,
         majorName: majorData.major_name
       });

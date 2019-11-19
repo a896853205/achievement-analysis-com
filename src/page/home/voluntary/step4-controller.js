@@ -77,7 +77,7 @@ class Step4Controller extends React.Component {
         // 提交到后台后返回uuid
         let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
           lotId: this.props.lotId,
-          voluntary: this.props.voluntary,
+          voluntary: this.props.voluntary[this.props.lotId],
           reportType: 1
         });
 
@@ -175,7 +175,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Step4Controller);
+export default connect(mapStateToProps, mapDispatchToProps)(Step4Controller);
