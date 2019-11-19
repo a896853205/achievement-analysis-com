@@ -1,4 +1,255 @@
+vipOrange = #F06000;
+vipGrap = #898989;
+
 .vip-profile {
-  background: #000;
-  color: red;
+  background: #fff;
+  padding: 11px 0;
+  color: #3C3C3C;
+  display: flex;
+  justify-content: space-between;
+
+  .left-box {
+    width: 910px;
+
+    .left-top-box {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 25px;
+
+      .carousel-box {
+        width: 300px;
+
+        .carousel {
+          width: 100%;
+          height: 215px;
+
+          img {
+            height: 215px;
+          }
+        }
+
+        .carousel-list {
+          width: 100%;
+          height: 80px;
+          display: flex;
+          justify-content: space-between;
+
+          .carousel-list-item {
+            width: calc(100% / 3 - 10px);
+            border: 1px solid #fff;
+            padding: 6px 8px;
+
+            img {
+              width: 100%;
+              height: 100%;
+            }
+
+            &:hover {
+              border: 1px solid vipOrange;
+            }
+          }
+        }
+      }
+
+      .vip-card-info-box {
+        width: 580px;
+
+        .vip-link {
+          color: #888888;
+          text-decoration: underline;
+          font-size: 13px;
+        }
+
+        h4 {
+          font-size: 25px;
+        }
+
+        .card-profile {
+          font-size: 15px;
+          margin-bottom: 30px;
+        }
+
+        .card-money-box {
+          font-size: 15px;
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+
+          .money {
+            color: vipOrange;
+            font-size: 25px;
+            padding: 0 23px 0 7px;
+            font-weight: bold;
+          }
+
+          .origin-money {
+            text-decoration: line-through;
+            color: vipGrap;
+          }
+        }
+
+        .card-type-box {
+          display: flex;
+          justify-content: space-around;
+
+          button {
+            width: calc(((100% - 27px) / 4));
+            border: 1px solid #C9C9C9;
+            background: #fff;
+            color: #C9C9C9;
+            font-size: 13px;
+            padding: 8px 9px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+
+            &:hover {
+              border: 1px solid vipOrange;
+              color: vipOrange;
+            }
+
+            &:first-child {
+              border: 1px solid vipOrange;
+              color: vipOrange;
+            }
+          }
+        }
+
+        .buy-button-box {
+          display: flex;
+          align-items: flex-end;
+          margin-bottom: 25px;
+
+          .buy-button {
+            background: vipOrange;
+            color: #fff;
+            width: 380px;
+            height: 40px;
+            border: 0;
+            margin-right: 5px;
+          }
+        }
+
+        .vip-describe-list-box {
+          font-size: 13px;
+          font-weight: bold;
+          color: #BABABA;
+
+          .vip-describe-hot-item {
+            color: vipOrange;
+          }
+        }
+      }
+    }
+
+    .left-bottom-box {
+      .vip-detail-nav-box {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+
+        button {
+          width: calc(((100% - 27px) / 3));
+          border: 1px solid rgba(0, 0, 0, 0);
+          background: #F4F4F4;
+          padding: 15px 0;
+          cursor: pointer;
+
+          &:hover {
+            border: 1px solid vipOrange;
+            background: #fff;
+          }
+
+          &:first-child {
+            border: 1px solid vipOrange;
+            background: #fff;
+          }
+        }
+      }
+
+      .vip-detail {
+        width: 100%;
+        border: 1px solid #C9C9C9;
+      }
+    }
+  }
+
+  .right-box {
+    width: 270px;
+
+    .vip-top-adv {
+      width: 100%;
+      height: 410px;
+      margin-bottom: 26px;
+    }
+
+    .vip-middle-adv-box {
+      border: 1px solid #C9C9C9;
+      margin-bottom: 18px;
+
+      h5 {
+        font-weight: bold;
+        color: vipGrap;
+        padding: 10px 0;
+        text-align: center;
+      }
+
+      img {
+        width: 100%;
+        height: 150px;
+      }
+
+      div {
+        background: #7D7D7D;
+        color: #fff;
+        text-align: right;
+        padding: 10px 8px 10px 0;
+      }
+    }
+
+    .vip-bottom-adv-box {
+      border: 1px solid #F4F4F4;
+
+      h4 {
+        background: #F4F4F4;
+        color: vipGrap;
+        padding: 18px;
+        font-size: 15px;
+      }
+
+      .success-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 10px 0;
+
+        div {
+          width: 106px;
+          margin-top: 40px;
+
+          img {
+            width: 100%;
+            height: 106px;
+          }
+
+          span {
+            margin-top: 7px;
+            font-size: 13px;
+            color: #3C3C3C;
+          }
+
+          &:nth-child(1) {
+            margin-top: 0;
+          }
+
+          &:nth-child(2) {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+  }
 }
