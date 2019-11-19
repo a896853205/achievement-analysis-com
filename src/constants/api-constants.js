@@ -60,6 +60,8 @@ export const GET_VOLUNTARY_RESULT = `${DominConfigs.DOMAIN}${DominConfigs.PART.O
 export const GET_MY_VOLUNTARY = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_VOLUNTARY}/getMyVoluntary`;
 export const GET_VOLUNTARY_LIST_OPTION = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_VOLUNTARY}/getVoluntaryListOption`;
 export const GET_VOLUNTARY_DEEP_RESULT = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_VOLUNTARY}/getVoluntaryDeepResult`;
+export const SAVE_TEMP_VOLUNTARY = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_VOLUNTARY}/saveTempVoluntary`;
+export const GET_TEMP_VOLUNTARY = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_VOLUNTARY}/getTempVoluntary`;
 
 /**
  * optnews

@@ -11,6 +11,11 @@ import SchoolFirstController from './step3/school-first-controller';
 import MajorFirstController from './step3/major-first-controller';
 import PointSchoolController from './step3/point-school-controller';
 
+// 请求文件
+import { launchRequest } from '../../../util/request';
+import * as APIS from '../../../constants/api-constants';
+import * as DominConfigs from '../../../constants/domin-constants';
+
 // 关于数据模块交互
 import { connect } from 'react-redux';
 import { actions as voluntaryActions } from '../../../redux/voluntary-model';
@@ -163,6 +168,11 @@ class Step3Controller extends React.Component {
     );
   }
 
+  componentDidMount = async () => {
+    let voluntary = await launchRequest(APIS.GET_TEMP_VOLUNTARY);
+    await this.props.recordVoluntary(voluntary);
+  };
+
   handleChangeTabsKey = key => {
     this.props.recordVoluntaryType(parseInt(key));
     this.props.recordSchoolList();
@@ -175,11 +185,10 @@ class Step3Controller extends React.Component {
 
   // 暂存函数
   handleClickSaveVoluntary = () => {
-    console.log(JSON.stringify(this.props.voluntary));
-    this.props.recordVoluntary(
-      JSON.parse(JSON.stringify(this.props.voluntary))
-    );
-    console.log(this.props.voluntary);
+    // saveMyVoluntary
+    launchRequest(APIS.SAVE_TEMP_VOLUNTARY, {
+      voluntary: this.props.voluntary
+    });
   };
 }
 
