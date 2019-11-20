@@ -14,7 +14,6 @@ import PointSchoolController from './step3/point-school-controller';
 // 请求文件
 import { launchRequest } from '../../../util/request';
 import * as APIS from '../../../constants/api-constants';
-import * as DominConfigs from '../../../constants/domin-constants';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
@@ -170,7 +169,10 @@ class Step3Controller extends React.Component {
 
   componentDidMount = async () => {
     let voluntary = await launchRequest(APIS.GET_TEMP_VOLUNTARY);
-    await this.props.recordVoluntary(voluntary);
+    
+    if (voluntary) {
+      await this.props.recordVoluntary(voluntary);
+    }
   };
 
   handleChangeTabsKey = key => {
