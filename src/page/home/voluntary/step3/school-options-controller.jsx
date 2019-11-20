@@ -63,9 +63,9 @@ export default connect(
   const [areaFeature, setAreaFeature] = useState([]);
   const [provinceList, setProvinceList] = useState([]);
 
-  let { lotId, initVoluntary, voluntary } = props,
-    voluntaryLength = props.voluntary.length;
+  let { lot_id: lotId, voluntary, initVoluntary } = props;
 
+  const hasVoluntary = !(voluntary[lotId] && voluntary[lotId].length);
   useEffect(() => {
     (async () => {
       let [
@@ -85,8 +85,7 @@ export default connect(
         launchRequest(APIS.GET_LOTS_OPTION, {}, DominConfigs.REQUEST_TYPE.GET)
       ]);
 
-      // 如果有志愿表就不初始化了
-      if (!(voluntary[lotId] && voluntary[lotId].length)) {
+      if (hasVoluntary) {
         initVoluntary(voluntaryOptionList);
       }
 
@@ -97,7 +96,7 @@ export default connect(
       setAreaFeature(areaFeature);
       setProvinceList(provinceList);
     })();
-  }, [lotId, voluntaryLength, initVoluntary, voluntary]);
+  }, [lotId, hasVoluntary, initVoluntary]);
 
   // 学校批次改变
   const handleLotsChange = e => {

@@ -171,7 +171,7 @@ class Step3Controller extends React.Component {
     let voluntary = await launchRequest(APIS.GET_TEMP_VOLUNTARY);
     
     if (voluntary) {
-      await this.props.recordVoluntary(voluntary);
+      this.props.recordVoluntary(voluntary);
     }
   };
 
