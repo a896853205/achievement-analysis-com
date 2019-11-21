@@ -63,7 +63,7 @@ export default connect(
   const [areaFeature, setAreaFeature] = useState([]);
   const [provinceList, setProvinceList] = useState([]);
 
-  let { lot_id: lotId, voluntary, initVoluntary } = props;
+  let { lotId, voluntary, initVoluntary } = props;
 
   const hasVoluntary = !(voluntary[lotId] && voluntary[lotId].length);
   useEffect(() => {
