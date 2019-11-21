@@ -13,6 +13,9 @@ import * as APIS from '@/constants/api-constants';
 // 自定义函数
 import wait from '@/util/wait-helper';
 
+// 关于数据模块交互
+import { connect } from 'react-redux';
+
 const { Option } = Select;
 const { Column } = Table;
 
@@ -35,6 +38,8 @@ export default props => {
         {/* 大学详情右边数据 */}
         <SchoolRank schoolId={schoolId} />
       </div>
+      {/* 专业分数线 */}
+      <SchoolMajorScoreList schoolId={schoolId} />
     </div>
   );
 };
@@ -476,3 +481,108 @@ const SchoolRank = props => {
     </div>
   );
 };
+
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+const mapStateToProps = store => {
+  const userStore = store['userStore'];
+  let { user } = userStore;
+
+  return { user };
+};
+
+// 学校专业分数线模块
+const SchoolMajorScoreList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(props => {
+  const [loading, setLoading] = useState(true);
+  const [schoolMajor, setSchoolMajor] = useState([]);
+
+  let { schoolId } = props;
+
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+
+      let [schoolMajor] = await Promise.all([
+        launchRequest(APIS.GET_SCHOOL_MAJOR, {
+          schoolId
+        }),
+        // 避免闪烁
+        wait(500)
+      ]);
+
+      setSchoolMajor(schoolMajor);
+      setLoading(false);
+    })();
+  }, [schoolId]);
+
+  return (
+    <div className='school-detail-item-box'>
+      <h3 className='school-detail-item-title school-score-title-box'>
+        <span>院校专业分数</span>
+      </h3>
+      {/* Table */}
+      {props.user.uuid ? (
+        <Table
+          rowKey={(record, index) => index}
+          dataSource={schoolMajor}
+          loading={loading}
+          pagination={false}
+        >
+          <Column
+            title='年份'
+            dataIndex='year'
+            render={text => (text ? text : '-')}
+          />
+          <Column
+            title='专业代码'
+            dataIndex='majorLevelTwoCode'
+            render={text => (text ? text : '-')}
+            width='100px'
+          />
+          <Column
+            title='专业名称'
+            dataIndex='majorName'
+            render={text => (text ? text : '-')}
+            width='150px'
+          />
+          <Column
+            title='备注'
+            dataIndex='comment'
+            render={text => (text ? text : '-')}
+          />
+          <Column
+            title='招生批次'
+            dataIndex='lotsName'
+            render={text => (text ? text : '-')}
+            width='100px'
+          />
+          <Column
+            title='最高分'
+            dataIndex='enrollmentScoreMax'
+            render={text => (text ? text : '-')}
+            width='80px'
+          />
+          <Column
+            title='最低分'
+            dataIndex='enrollmentScore'
+            render={text => (text ? text : '-')}
+            width='80px'
+          />
+          <Column
+            title='录取人数'
+            dataIndex='enrollment'
+            render={text => (text ? text : '-')}
+            width='100px'
+          />
+        </Table>
+      ) : (
+        '请登录VIP'
+      )}
+    </div>
+  );
+});
