@@ -358,6 +358,7 @@ class BasicController extends React.Component {
           content: `剩余修改次数${this.props.user.scoreAlterTime}次`,
           onOk: () => {
             this.props.recordUserImport(values);
+            this.props.initVoluntary([]);
             this.setState({ isImportAlert: false });
           },
           onCancel: () => {},
@@ -510,6 +511,9 @@ const mapDispatchToProps = dispatch => {
     },
     recordUserImport: params => {
       dispatch(userActions.recordUserImport(params));
+    },
+    initVoluntary: params => {
+      dispatch(voluntaryActions.initVoluntary(params));
     }
   };
 };

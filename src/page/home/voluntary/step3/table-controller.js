@@ -246,6 +246,10 @@ class TableController extends React.Component {
           onExpand={this.onExpand}
           expandIcon={CustomExpandIcon}
           bordered
+          onChange={page => {
+            this.props.recordPage(page.current);
+          }}
+          pagination={{ current: this.props.page }}
           expandedRowRender={record => (
             <SubTableController
               key={record.school_id}
@@ -286,14 +290,21 @@ class TableController extends React.Component {
 const mapStateToProps = store => {
   const voluntaryStore = store['voluntaryStore'];
   const userStore = store['userStore'];
-  let { schoolList, schoolTableLoading, voluntary, lot_id } = voluntaryStore;
+  let {
+    schoolList,
+    schoolTableLoading,
+    voluntary,
+    lot_id,
+    page
+  } = voluntaryStore;
   let { user } = userStore;
   return {
     schoolList,
     schoolTableLoading,
     voluntary: [...voluntary],
     user,
-    lot_id
+    lot_id,
+    page
   };
 };
 
@@ -308,6 +319,9 @@ const mapDispatchToProps = dispatch => {
     },
     showSchoolDetail: params => {
       dispatch(schoolActions.showSchoolDetail(params));
+    },
+    recordPage: params => {
+      dispatch(voluntaryActions.recordPage(params));
     }
   };
 };

@@ -1,7 +1,7 @@
 import { handleActions, createAction } from 'redux-actions';
 
 // saga
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, select } from 'redux-saga/effects';
 
 // 请求文件
 import { launchRequest } from '../util/request';
@@ -33,7 +33,14 @@ export const effects = {
     yield put(actions._recordUser(data));
 
     if (data && +data.score > 0) {
-      yield put(voluntaryActions.setStep(1));
+      const state = yield select();
+      const voluntaryStore = state['voluntaryStore'];
+      const { step } = voluntaryStore;
+
+      if (!step) {
+        yield put(voluntaryActions.setStep(1));
+      }
+      
       yield put(voluntaryActions.getMeScoreRank(data));
     }
 

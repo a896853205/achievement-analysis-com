@@ -34,7 +34,8 @@ export const actions = {
   recordVoluntaryResultType: createAction('recordVoluntaryResultType'),
   recordVoluntaryListOption: createAction('recordVoluntaryListOption'),
   recordVoluntaryDeepUuid: createAction('recordVoluntaryDeepUuid'),
-  recordVoluntaryType: createAction('recordVoluntaryType')
+  recordVoluntaryType: createAction('recordVoluntaryType'),
+  recordPage: createAction('recordPage')
 };
 const recordVoluntaryResult = createAction('recordVoluntaryResult');
 const setMeScoreRank = createAction('setMeScoreRank');
@@ -162,6 +163,8 @@ const effects = {
       }
     }
 
+    // 设置为第一页
+    yield put(actions.recordPage(1));
     yield put(actions._recordSchoolList(schoolList));
     yield put(switchSchoolTableLoading(false));
   }
@@ -406,6 +409,12 @@ export const voluntaryReducer = handleActions(
         ...state,
         voluntaryType: result
       };
+    },
+    recordPage(state, { payload: result }) {
+      return {
+        ...state,
+        page: result
+      }
     }
   },
   {
@@ -428,6 +437,7 @@ export const voluntaryReducer = handleActions(
     schoolName: '',
     majorName: '',
     schoolList: [],
+    page: 1,
     schoolTableLoading: false,
     // 那种方式获取学校列表
     voluntaryType: 1,

@@ -55,7 +55,7 @@ class Step3Controller extends React.Component {
         <div className='content'>
           <div
             className='content-right'
-            style={{ right: this.state.isFold ? '0' : '-260px' }}
+            style={{ right: this.state.isFold ? '0' : '-460px' }}
           >
             <Affix offsetTop={10}>
               <div className='right-affix-box'>

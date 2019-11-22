@@ -58,7 +58,6 @@
 }
 
 .content-right {
-  width: 300px;
   border: 1px solid #d9d9d9;
   position: absolute;
   transition: 0.2s ease;
@@ -67,6 +66,7 @@
 
 .right-affix-box {
   display: flex;
+  width: 500px;
 }
 
 .right-affix-box .show-voluntary-btn {
@@ -78,7 +78,7 @@
 }
 
 .right-affix-box .affix-collapse-box {
-  width: 260px;
+  width: 460px;
   background: #fff;
   display: flex;
   flex-direction: column;
