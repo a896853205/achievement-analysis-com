@@ -92,7 +92,6 @@ const babelPluginOptions = [
 ];
 
 module.exports = override(
-  addWebpackModuleRule({ test: /\.styl$/, use: ['style-loader', 'css-loader', 'stylus-loader'] }),
   fixBabelImports('import', {
     libraryName: 'antd',
     style: 'css'
@@ -101,7 +100,8 @@ module.exports = override(
     '@': path.resolve(__dirname, 'src')
   }),
   addDecoratorsLegacy(),
-  addCustomize()
+  addCustomize(),
+  addWebpackModuleRule({ test: /\.styl$/, use: ['style-loader', 'css-loader', 'stylus-loader'] })
   // ...addExternalBabelPlugins(...babelPluginOptions),
   // ...addBabelPlugins(...babelPluginOptions),
   // ...addBabelPresets(...babelPresetsOptions)
