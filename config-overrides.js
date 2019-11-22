@@ -99,9 +99,9 @@ module.exports = override(
   addWebpackAlias({
     '@': path.resolve(__dirname, 'src')
   }),
+  addWebpackModuleRule({ test: /\.styl$/, use: ['style-loader', 'css-loader', 'stylus-loader'] }),
   addDecoratorsLegacy(),
   addCustomize(),
-  addWebpackModuleRule({ test: /\.styl$/, use: ['style-loader', 'css-loader', 'stylus-loader'] })
   // ...addExternalBabelPlugins(...babelPluginOptions),
   // ...addBabelPlugins(...babelPluginOptions),
   // ...addBabelPresets(...babelPresetsOptions)
