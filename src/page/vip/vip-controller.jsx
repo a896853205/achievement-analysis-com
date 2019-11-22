@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Carousel } from 'antd';
 
-import '@/style/vip/profile.styl';
+import '@/style/vip/profile.css';
 
 export default props => {
   return (

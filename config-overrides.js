@@ -13,7 +13,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 
 const addCustomize = () => config => {
   if (process.env.NODE_ENV === 'production') {
-    // config.devtool = false; //去掉map文件
+    config.devtool = false; //去掉map文件
     if (config.plugins) {
       config.plugins.push(new BundleAnalyzerPlugin());
     }
@@ -92,6 +92,7 @@ const babelPluginOptions = [
 ];
 
 module.exports = override(
+  addWebpackModuleRule({ test: /\.styl$/, use: ['style-loader', 'css-loader', 'stylus-loader'] }),
   fixBabelImports('import', {
     libraryName: 'antd',
     style: 'css'
@@ -99,9 +100,8 @@ module.exports = override(
   addWebpackAlias({
     '@': path.resolve(__dirname, 'src')
   }),
-  addWebpackModuleRule({ test: /\.styl$/, use: ['style-loader', 'css-loader', 'stylus-loader'] }),
   addDecoratorsLegacy(),
-  addCustomize(),
+  addCustomize()
   // ...addExternalBabelPlugins(...babelPluginOptions),
   // ...addBabelPlugins(...babelPluginOptions),
   // ...addBabelPresets(...babelPresetsOptions)
