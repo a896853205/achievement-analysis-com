@@ -4,7 +4,7 @@ import { handleActions, createAction } from 'redux-actions';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 // UI 提示
-import { message } from 'antd';
+// import { message } from 'antd';
 
 // 请求文件
 import { launchRequest } from '../util/request';
@@ -170,6 +170,9 @@ const effects = {
       }
     }
 
+    // if (!schoolList || !schoolList.length) {
+    //   message.error('您的分数或筛选条件没有其对应学校集群');
+    // }
     // 设置为第一页
     yield put(actions.recordPage(1));
     yield put(actions._recordSchoolList(schoolList));
@@ -382,9 +385,6 @@ export const voluntaryReducer = handleActions(
     },
     // 记录学校列表
     _recordSchoolList(state, { payload: result }) {
-      if (!result || !result.length) {
-        // message.error('您的分数或筛选条件没有其对应学校集群');
-      }
 
       return {
         ...state,

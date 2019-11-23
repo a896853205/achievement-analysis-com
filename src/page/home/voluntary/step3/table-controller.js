@@ -13,6 +13,7 @@ import { actions as voluntaryActions } from '../../../../redux/voluntary-model';
 import { actions as schoolActions } from '../../../../redux/school-model';
 
 const { Option } = Select;
+
 class TableController extends React.Component {
   state = {
     // 抽屉显示
@@ -284,6 +285,7 @@ class TableController extends React.Component {
     this.props.showSchoolDetail(record.school_id);
     this.setState({ schoolDrawerVisible: true });
   };
+
 }
 
 // 从store接收state数据
@@ -298,6 +300,7 @@ const mapStateToProps = store => {
     page
   } = voluntaryStore;
   let { user } = userStore;
+
   return {
     schoolList,
     schoolTableLoading,
