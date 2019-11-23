@@ -135,7 +135,8 @@ class SchoolSearchController extends React.Component {
                   this.handlePageChange(page);
                 },
                 pageSize: 12,
-                total: this.state.totalSchool
+                total: this.state.totalSchool,
+                current: this.state.page
               }}
               dataSource={this.state.schoolList}
               renderItem={item => (
@@ -175,7 +176,7 @@ class SchoolSearchController extends React.Component {
                     </h5>
                   </Link>
                   <p>{item.school_nature_name}</p>
-                  <p>
+                  <p style={{ height: '20px' }}>
                     {item.school_property_name.map(property => (
                       <Tag key={property} color='#108ee9'>
                         {property}
@@ -226,7 +227,8 @@ class SchoolSearchController extends React.Component {
     this.setState({
       schoolList,
       loading: false,
-      totalSchool
+      totalSchool,
+      page: 1
     });
   };
 

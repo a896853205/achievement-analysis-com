@@ -357,6 +357,7 @@ class BasicController extends React.Component {
           title: '您确定使用一次修改分数的机会吗?',
           content: `剩余修改次数${this.props.user.scoreAlterTime}次`,
           onOk: () => {
+            this.props.getMeScoreRank(values);
             this.props.recordUserImport(values);
             this.props.initVoluntary([]);
             this.setState({ isImportAlert: false });
@@ -458,7 +459,6 @@ class BasicController extends React.Component {
       }
     });
   };
-  s;
 
   getHightSchool = async (value, selectOptions) => {
     if (value[2]) {

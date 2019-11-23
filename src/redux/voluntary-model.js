@@ -69,7 +69,14 @@ const effects = {
       currentLotsScoreDifferMsg
     } = yield call(launchRequest, APIS.GET_SCORE_RANK, payload);
 
-    // yield call(userEffects.recordUserSaga, { payload });
+    console.log(
+      '+++++++++++++++',
+      fitCurrent,
+      fitOld,
+      lotsScoreDifferMsg,
+      currentLotsScoreDifferMsg
+    );
+
     yield put(
       setMeScoreRank({
         fitCurrent,
@@ -375,7 +382,6 @@ export const voluntaryReducer = handleActions(
     },
     // 记录学校列表
     _recordSchoolList(state, { payload: result }) {
-
       if (!result || !result.length) {
         message.error('您的分数或筛选条件没有其对应学校集群');
       }
@@ -414,7 +420,7 @@ export const voluntaryReducer = handleActions(
       return {
         ...state,
         page: result
-      }
+      };
     }
   },
   {

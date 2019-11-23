@@ -133,8 +133,12 @@ class HomeVoluntaryController extends React.Component {
   }
 
   componentWillUnmount = () => {
-    this.props.setStep(1);
-  }
+    if (this.props.user.score) {
+      this.props.setStep(1);
+    } else {
+      this.props.setStep(0);
+    }
+  };
 }
 
 // 从store接收state数据

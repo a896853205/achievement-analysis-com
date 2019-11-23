@@ -63,7 +63,7 @@ export default connect(
   const [areaFeature, setAreaFeature] = useState([]);
   const [provinceList, setProvinceList] = useState([]);
 
-  let { lotId, voluntary, initVoluntary } = props;
+  let { lotId, voluntary, initVoluntary, recordSchoolOption } = props;
 
   const hasVoluntary = !(voluntary[lotId] && voluntary[lotId].length);
   useEffect(() => {
@@ -96,7 +96,15 @@ export default connect(
       setAreaFeature(areaFeature);
       setProvinceList(provinceList);
     })();
-  }, [lotId, hasVoluntary, initVoluntary]);
+
+    return () => {
+      recordSchoolOption({ natureValues: [] });
+      recordSchoolOption({ propertyValues: [] });
+      recordSchoolOption({ typeValues: [] });
+      recordSchoolOption({ provinceListValues: [] });
+      recordSchoolOption({ areaFeatureValues: [] });
+    };
+  }, [lotId, hasVoluntary, initVoluntary, recordSchoolOption]);
 
   // 学校批次改变
   const handleLotsChange = e => {
