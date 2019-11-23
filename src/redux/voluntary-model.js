@@ -383,7 +383,7 @@ export const voluntaryReducer = handleActions(
     // 记录学校列表
     _recordSchoolList(state, { payload: result }) {
       if (!result || !result.length) {
-        message.error('您的分数或筛选条件没有其对应学校集群');
+        // message.error('您的分数或筛选条件没有其对应学校集群');
       }
 
       return {
