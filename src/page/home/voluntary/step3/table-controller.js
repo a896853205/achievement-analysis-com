@@ -72,7 +72,7 @@ class TableController extends React.Component {
           {
             title: this.props.user.examYear - 1,
             key: 'oldOneScore',
-            width: 50,
+            width: 70,
             render: record => {
               let cerrctObj = record.scoreAndRank.find(
                 item => item.year === this.props.user.examYear - 1
