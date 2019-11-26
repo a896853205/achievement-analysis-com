@@ -68,7 +68,7 @@ class TableController extends React.Component {
       },
       {
         title: '历年位次',
-        width: 210,
+        width: 240,
         children: [
           {
             title: this.props.user.examYear - 1,
