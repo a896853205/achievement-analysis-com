@@ -20,8 +20,13 @@ const { Option } = Select;
 const { Column } = Table;
 
 export default props => {
-  const schoolId = props.match.params.id;
-
+  let schoolId;
+  if (props.match) {
+    schoolId = props.match.params.id;
+  } else {
+    schoolId = props.schoolId;
+  }
+  
   return (
     <div className='school-detail-box page-inner-width-box'>
       {/* 学校详情头部数据 */}

@@ -1,11 +1,11 @@
 import React from 'react';
 
 // UI组件
-import { Select, Button, Icon, Table, Drawer, Tag, Tooltip } from 'antd';
+import { Select, Button, Icon, Table, Modal, Tag, Tooltip } from 'antd';
 
 // 自定义组件
 import SubTableController from './sub-table-controller';
-import SchoolDetailController from '../../school/school-detail';
+import SchoolDetailController from '@/page/detail/school-detail-controller.jsx';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
@@ -17,7 +17,8 @@ const { Option } = Select;
 class TableController extends React.Component {
   state = {
     // 抽屉显示
-    schoolDrawerVisible: false
+    schoolDrawerVisible: false,
+    schoolId: 0
   };
   render() {
     // 表格表头
@@ -260,17 +261,16 @@ class TableController extends React.Component {
             />
           )}
         />
-        <Drawer
-          width={640}
-          placement='right'
-          closable={false}
-          onClose={() => {
+        <Modal
+          width={1300}
+          footer={null}
+          onCancel={() => {
             this.setState({ schoolDrawerVisible: false });
           }}
           visible={this.state.schoolDrawerVisible}
         >
-          <SchoolDetailController />
-        </Drawer>
+          <SchoolDetailController schoolId={this.state.schoolId} />
+        </Modal>
       </div>
     );
   }
@@ -283,10 +283,12 @@ class TableController extends React.Component {
   };
 
   showSchoolDetail = record => {
-    this.props.showSchoolDetail(record.school_id);
+    this.setState({
+      schoolId: record.school_id
+    })
+    // this.props.showSchoolDetail(record.school_id);
     this.setState({ schoolDrawerVisible: true });
   };
-
 }
 
 // 从store接收state数据
