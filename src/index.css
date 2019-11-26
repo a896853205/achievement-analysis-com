@@ -91,3 +91,7 @@ html {
   display: block!important;
 }
 /* 甲方要的渐变end */
+
+.layout {
+  min-width: 1200px;
+}

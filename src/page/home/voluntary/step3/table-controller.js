@@ -262,7 +262,8 @@ class TableController extends React.Component {
           )}
         />
         <Modal
-          width={1300}
+          style={{ minWidth: '1300px' }}
+          // width={1300}
           footer={null}
           onCancel={() => {
             this.setState({ schoolDrawerVisible: false });
@@ -285,7 +286,7 @@ class TableController extends React.Component {
   showSchoolDetail = record => {
     this.setState({
       schoolId: record.school_id
-    })
+    });
     // this.props.showSchoolDetail(record.school_id);
     this.setState({ schoolDrawerVisible: true });
   };
