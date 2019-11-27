@@ -70,10 +70,10 @@ const mapDispatchToProps = dispatch => {
   return {
     recordSchoolOption: params => {
       dispatch(voluntaryActions.recordSchoolOption(params));
-      dispatch(voluntaryActions.recordSchoolList(1));
+      dispatch(voluntaryActions.recordSchoolList());
     },
     recordSchoolList: () => {
-      dispatch(voluntaryActions.recordSchoolList(1));
+      dispatch(voluntaryActions.recordSchoolList());
     }
   };
 };

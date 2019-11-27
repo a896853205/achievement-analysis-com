@@ -38,7 +38,6 @@ const mapDispatchToProps = dispatch => {
   return {
     recordSchoolOption: params => {
       dispatch(voluntaryActions.recordSchoolOption(params));
-      dispatch(voluntaryActions.recordSchoolList());
     },
     setLotId: lotId => {
       dispatch(voluntaryActions.setLotId(lotId));
@@ -96,16 +95,18 @@ export default connect(
       setAreaFeature(areaFeature);
       setProvinceList(provinceList);
     })();
+  }, [lotId, hasVoluntary, initVoluntary, recordSchoolOption]);
 
+  useEffect(() => {
     return () => {
+      // 组件销毁时将所有的选项清空
       recordSchoolOption({ natureValues: [] });
       recordSchoolOption({ propertyValues: [] });
       recordSchoolOption({ typeValues: [] });
       recordSchoolOption({ provinceListValues: [] });
       recordSchoolOption({ areaFeatureValues: [] });
     };
-  }, [lotId, hasVoluntary, initVoluntary, recordSchoolOption]);
-
+  }, [recordSchoolOption]);
   // 学校批次改变
   const handleLotsChange = e => {
     (async () => {
@@ -135,26 +136,31 @@ export default connect(
   // 办学性质改变
   const handleNatureChange = async checkedValues => {
     props.recordSchoolOption({ natureValues: checkedValues });
+    props.recordSchoolList();
   };
 
   // 学校属性改变
   const handlePropertyChange = async checkedValues => {
     props.recordSchoolOption({ propertyValues: checkedValues });
+    props.recordSchoolList();
   };
 
   // 高校类别改变
   const handleTypeChange = async checkedValues => {
     props.recordSchoolOption({ typeValues: checkedValues });
+    props.recordSchoolList();
   };
 
   //学校省份改变
   const handleProvinceListChange = async checkedValues => {
     props.recordSchoolOption({ provinceListValues: checkedValues });
+    props.recordSchoolList();
   };
 
   // 地域特色改变
   const handleAreaFeatureChange = async checkedValues => {
     props.recordSchoolOption({ areaFeatureValues: checkedValues });
+    props.recordSchoolList();
   };
 
   return (

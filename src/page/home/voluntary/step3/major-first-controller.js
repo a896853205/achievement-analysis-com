@@ -33,7 +33,7 @@ class MajorFirstController extends React.Component {
 
   // 搜专业名
   handleSearchMajor = () => {
-    this.props.recordSchoolList(2);
+    this.props.recordSchoolList();
   };
 
   handleChangeName = e => {

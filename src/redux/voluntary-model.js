@@ -87,7 +87,7 @@ const effects = {
     );
     yield put(switchMeLoading(false));
   },
-  recordSchoolListSaga: function*({ payload }) {
+  recordSchoolListSaga: function*() {
     yield put(switchSchoolTableLoading(true));
 
     let schoolList = [];

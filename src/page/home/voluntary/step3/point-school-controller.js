@@ -33,7 +33,7 @@ class PointSchoolController extends React.Component {
 
   // 搜索学校名
   handleSearchSchool = () => {
-    this.props.recordSchoolList(3);
+    this.props.recordSchoolList();
   }
   handleChangeName = (e) => {
     this.props.recordSchoolName(e.target.value);
