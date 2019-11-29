@@ -168,11 +168,6 @@ class Step3Controller extends React.Component {
   }
 
   componentDidMount = async () => {
-    let voluntary = await launchRequest(APIS.GET_TEMP_VOLUNTARY);
-    
-    if (voluntary) {
-      this.props.recordVoluntary(voluntary);
-    }
   };
 
   handleChangeTabsKey = key => {
@@ -224,9 +219,6 @@ const mapDispatchToProps = dispatch => {
     },
     recordVoluntaryType: params => {
       dispatch(voluntaryActions.recordVoluntaryType(params));
-    },
-    recordVoluntary: params => {
-      dispatch(voluntaryActions.recordVoluntary(params));
     }
   };
 };

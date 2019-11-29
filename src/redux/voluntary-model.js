@@ -69,14 +69,6 @@ const effects = {
       currentLotsScoreDifferMsg
     } = yield call(launchRequest, APIS.GET_SCORE_RANK, payload);
 
-    console.log(
-      '+++++++++++++++',
-      fitCurrent,
-      fitOld,
-      lotsScoreDifferMsg,
-      currentLotsScoreDifferMsg
-    );
-
     yield put(
       setMeScoreRank({
         fitCurrent,

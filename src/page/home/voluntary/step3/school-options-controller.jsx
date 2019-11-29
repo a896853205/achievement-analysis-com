@@ -47,6 +47,9 @@ const mapDispatchToProps = dispatch => {
     },
     recordSchoolList: () => {
       dispatch(voluntaryActions.recordSchoolList());
+    },
+    recordVoluntary: params => {
+      dispatch(voluntaryActions.recordVoluntary(params))
     }
   };
 };
@@ -62,7 +65,7 @@ export default connect(
   const [areaFeature, setAreaFeature] = useState([]);
   const [provinceList, setProvinceList] = useState([]);
 
-  let { lotId, voluntary, initVoluntary, recordSchoolOption } = props;
+  let { lotId, voluntary, initVoluntary, recordSchoolOption, recordVoluntary } = props;
 
   const hasVoluntary = !(voluntary[lotId] && voluntary[lotId].length);
   useEffect(() => {
@@ -76,14 +79,22 @@ export default connect(
           voluntaryOptionList,
           provinceList
         },
-        { lotsOption }
+        { lotsOption },
+        voluntary
       ] = await Promise.all([
         launchRequest(APIS.GET_SCHOOL_OPTION, {
           lotId
         }),
-        launchRequest(APIS.GET_LOTS_OPTION, {}, DominConfigs.REQUEST_TYPE.GET)
+        launchRequest(APIS.GET_LOTS_OPTION, {}, DominConfigs.REQUEST_TYPE.GET),
+        launchRequest(APIS.GET_TEMP_VOLUNTARY)
       ]);
 
+      // 先判断是否有暂存
+      if (voluntary) {
+        recordVoluntary(voluntary);
+      }
+
+      // 然后再判断每个批次的表格是否有基础信息
       if (hasVoluntary) {
         initVoluntary(voluntaryOptionList);
       }
@@ -95,7 +106,7 @@ export default connect(
       setAreaFeature(areaFeature);
       setProvinceList(provinceList);
     })();
-  }, [lotId, hasVoluntary, initVoluntary, recordSchoolOption]);
+  }, [lotId, hasVoluntary, initVoluntary, recordSchoolOption, recordVoluntary]);
 
   useEffect(() => {
     return () => {
@@ -162,6 +173,13 @@ export default connect(
     props.recordSchoolOption({ areaFeatureValues: checkedValues });
     props.recordSchoolList();
   };
+
+  // 组件销毁时将志愿表数组清空
+  useEffect(() => {
+    return () => {
+      recordVoluntary([]);
+    };
+  }, [recordVoluntary]);
 
   return (
     <div className='school-option-box'>
