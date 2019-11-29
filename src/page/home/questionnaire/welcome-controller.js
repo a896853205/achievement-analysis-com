@@ -75,12 +75,12 @@ class WelcomeController extends React.Component {
 
   componentDidMount = async () => {
     let status = await launchRequest(APIS.GET_QUESTIONNAIRE_STATUS);
-    console.log('show status', status);
+
     if (!status) {
       return;
     }
     status = status.status[0].isEvaluate;
-    console.log('status', status);
+
     await this.setState({
       loading: false,
       questionnaireDone: status ? true : false

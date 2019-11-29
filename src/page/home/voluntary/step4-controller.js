@@ -107,7 +107,7 @@ class Step4Controller extends React.Component {
         // 提交到后台后返回uuid
         let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
           lotId: this.props.lotId,
-          voluntary: this.props.voluntary[this.props.lotId],
+          voluntary: this.props.voluntaryDetail,
           reportType: 1
         });
         await this.props.getUser();
@@ -145,7 +145,7 @@ class Step4Controller extends React.Component {
         // 提交到后台后返回uuid,而且重新查询一下用户数据
         let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
           lotId: this.props.lotId,
-          voluntary: this.props.voluntary[this.props.lotId],
+          voluntary: this.props.voluntaryDetail,
           reportType: 2
         });
         await this.props.getUser();
@@ -176,12 +176,13 @@ class Step4Controller extends React.Component {
 const mapStateToProps = store => {
   const userStore = store['userStore'],
     voluntaryStore = store['voluntaryStore'];
-  let { lot_id, voluntary } = voluntaryStore,
+  let { lot_id, voluntary, voluntaryDetail } = voluntaryStore,
     { user } = userStore;
 
   return {
     lotId: lot_id,
     voluntary: [...voluntary],
+    voluntaryDetail,
     user
   };
 };
