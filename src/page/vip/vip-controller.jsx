@@ -43,7 +43,7 @@ export default props => {
             </div>
           </div>
           <div className='vip-card-info-box'>
-            <h4>志愿卡(VIP)</h4>
+            <h4>VIP志愿卡（黑龙江专用）</h4>
             <p className='card-profile'>
               考试院专家推荐平台，录取参考数据与省考试院完全一致
             </p>
@@ -51,13 +51,13 @@ export default props => {
               <p>
                 <span>价格</span>
                 <span className='money'>¥360</span>
-                <span className='origin-money'>原价¥698</span>
+                <span className='origin-money'>原价¥680</span>
               </p>
               <p>
                 <span className='vip-link'>查看权限</span>
               </p>
             </div>
-            <div className='card-type-box'>
+            {/* <div className='card-type-box'>
               <button>
                 <span>志愿卡</span>
                 <span>(VIP)</span>
@@ -74,34 +74,20 @@ export default props => {
                 <span>升学卡+自主招生卡</span>
                 <span>(送自招宝典)</span>
               </button>
-            </div>
+            </div> */}
             <div className='buy-button-box'>
               <button className='buy-button'>立即购买</button>
               <span className='vip-link'>咨询热线: 18644091056</span>
             </div>
             <div className='vip-describe-list-box'>
               <ul>
-                <li>1. 开通志愿卡畅想查,测,填,学,问5大核心功能。</li>
                 <li>
-                  2. 1000部学长学姐讲专业、500部专
-                  家讲志愿在线视频讲座，帮助考生科学填志愿。
+                  使用功能：学业测评、查数据、智能填报、志愿合理分析、就业前景分析等。
                 </li>
                 <li>
-                  3.
-                  适用对象：普通类文理科考生、新高考选科类考生（提前批次、自主招生及艺术体育类考生
-                  暂不适用）
+                  适用对象：普通类文理科考生（自主招生、专科及艺术体育类考生暂不适用）。
                 </li>
-                <li>
-                  4.
-                  使用时效：有效期截止到用户自行选择高考年的9月1日为止（非高考年高考期间仅提供数
-                  据查询）
-                </li>
-                <li className='vip-describe-hot-item'>
-                  5. 海不提供普通类“专科批次”模拟填报服务(全端设备)
-                </li>
-                <li className='vip-describe-hot-item'>
-                  6. 陕西不提供普通类文理“单设本科批次”模拟填报服务(全端设备)
-                </li>
+                <li>使用时效：有效期截止到用户自行选择高考年的9月1日为止。</li>
               </ul>
             </div>
           </div>
