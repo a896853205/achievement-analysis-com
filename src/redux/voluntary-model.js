@@ -126,7 +126,8 @@ const effects = {
         propertyValues,
         typeValues,
         areaFeatureValues,
-        provinceListValues
+        provinceListValues,
+        gatherValue
       } = schoolOption;
 
       if (lot_id && majorName !== '') {
@@ -138,7 +139,8 @@ const effects = {
           typeValues,
           areaFeatureValues,
           provinceListValues,
-          type: voluntaryType
+          type: voluntaryType,
+          gatherValue
         });
 
         schoolList = data.schoolList;
