@@ -23,6 +23,7 @@ class MajorFirstController extends React.Component {
             size="large"
             onSearch={this.handleSearchMajor}
             onChange={this.handleChangeName}
+            placeholder='请输入专业名称'
           />
         </div>
         <SchoolOptionsController />
