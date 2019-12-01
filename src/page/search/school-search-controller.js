@@ -69,6 +69,7 @@ class SchoolSearchController extends React.Component {
               onChange={e => {
                 this.setState({ schoolNameValue: e.target.value });
               }}
+              placeholder='请输入院校名称'
             />
           </div>
           <div className='school-list-option-box'>
