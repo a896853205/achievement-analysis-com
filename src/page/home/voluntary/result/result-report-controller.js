@@ -17,7 +17,8 @@ class ResultReportController extends React.Component {
       },
       yAxis: {
         type: 'value',
-        max: 750
+        max: Math.max(...result),
+        min: Math.min(...result)
       },
       series: [
         {
