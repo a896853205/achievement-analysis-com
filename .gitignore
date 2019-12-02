@@ -22,6 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# 图片
 /public/school-logo
-
+/public/school-recommend
 /public/news

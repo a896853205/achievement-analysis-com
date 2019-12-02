@@ -6,7 +6,14 @@ import '../style/index-controller.css';
 
 // 路由
 import { withRouter, Link } from 'react-router-dom';
-import { SCHOOL_DETAIL } from '@/constants/route-constants';
+import {
+  VOLUNTARY,
+  BCG_ROOT_NAME,
+  QUESTIONNAIRE,
+  LOGIN,
+  SCHOOL_RECOMMEND,
+  SCHOOL_DETAIL
+} from '../constants/route-constants';
 
 // 请求文件
 import { launchRequest } from '@/util/request';
@@ -22,14 +29,6 @@ import Login from '@/page/index-components/login-components.jsx';
 
 // 工具类
 import wait from '@/util/wait-helper';
-
-// 路由
-import {
-  VOLUNTARY,
-  BCG_ROOT_NAME,
-  QUESTIONNAIRE,
-  LOGIN
-} from '../constants/route-constants';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
@@ -312,9 +311,15 @@ class IndexController extends React.Component {
                     />{' '}
                     院校推荐
                   </span>
-                  {/* <span className='index-more'>
-                    更多 <Icon type='right' />
-                  </span> */}
+                  <Link
+                    to={{
+                      pathname: `/${SCHOOL_RECOMMEND.path}`
+                    }}
+                  >
+                    <span className='index-more'>
+                      更多 <Icon type='right' />
+                    </span>
+                  </Link>
                 </h2>
                 <ul>
                   <li>

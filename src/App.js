@@ -10,6 +10,7 @@ import BackgroundController from './page/home-controller';
 import NewsDetailController from '@/page/news/news-detail-controller';
 import NewsMoreController from '@/page/news/news-more-controller.jsx';
 import VipController from '@/page/vip/vip-controller.jsx';
+import SchoolRecommendController from '@/page/school/school-recommend-controller.jsx';
 
 // search 组件
 import SchoolSearchController from './page/search/school-search-controller';
@@ -32,7 +33,8 @@ import {
   NEWS_MORE,
   SCHOOL_DETAIL,
   MAJOR_DETAIL,
-  VIP_PROFILE
+  VIP_PROFILE,
+  SCHOOL_RECOMMEND
 } from '@/constants/route-constants';
 
 const { Content } = Layout;
@@ -40,7 +42,7 @@ const { Content } = Layout;
 class App extends Component {
   render() {
     return (
-      <div className="layout">
+      <div className='layout'>
         <HeaderController />
         <Content>
           <div>
@@ -87,13 +89,17 @@ class App extends Component {
                 component={BackgroundController}
               />
               <Route
+                path={`/${SCHOOL_RECOMMEND.path}`}
+                component={SchoolRecommendController}
+              />
+              <Route
                 component={() => (
                   <Result
-                    status="404"
-                    title="404"
-                    subTitle="对不起,您访问的页面不存在"
+                    status='404'
+                    title='404'
+                    subTitle='对不起,您访问的页面不存在'
                     extra={
-                      <Button type="primary">
+                      <Button type='primary'>
                         <Link to={'/'}>回到首页</Link>
                       </Button>
                     }

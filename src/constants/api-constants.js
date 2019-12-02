@@ -43,6 +43,7 @@ export const GET_SCHOOL_SCORE_LIST = `${DominConfigs.DOMAIN}${DominConfigs.PART.
 export const GET_SCHOOL_ENROLLMENT_GUIDE_NEWS = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SCHOOL}/getEnrollmentGuideNews`;
 export const GET_SCHOOL_RANK = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SCHOOL}/getSchoolRank`;
 export const GET_ENROLLMENT_GUIDE_NEWS_DETAIL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SCHOOL}/getEnrollmentGuideNewsDetail`;
+export const GET_SCHOOL_RECOMMEND_LIST = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SCHOOL}/getSchoolRecommendList`
 
 /**
  * optquestionnaire
