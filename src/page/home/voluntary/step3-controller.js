@@ -25,7 +25,8 @@ const { confirm } = Modal;
 
 class Step3Controller extends React.Component {
   state = {
-    isFold: false
+    isFold: false,
+    loading: false
   };
 
   render() {
@@ -114,6 +115,7 @@ class Step3Controller extends React.Component {
                     暂存
                   </Button>
                   <Button
+                    loading={this.state.loading}
                     className='btn-large btn-transition-blue-background'
                     style={{ width: '100%' }}
                     size='large'
@@ -154,6 +156,7 @@ class Step3Controller extends React.Component {
         </div>
         <div className='voluntarty-button-box'>
           <Button
+            loading={this.state.loading}
             className='btn-large btn-transition-blue-background'
             style={{ marginTop: '20px' }}
             size='large'
@@ -167,17 +170,23 @@ class Step3Controller extends React.Component {
     );
   }
 
-  componentDidMount = async () => {
-  };
-
   handleChangeTabsKey = key => {
     this.props.recordVoluntaryType(parseInt(key));
     this.props.recordSchoolList();
   };
 
-  handleClickCheckVoluntary = () => {
+  handleClickCheckVoluntary = async () => {
+    await launchRequest(APIS.SAVE_TEMP_VOLUNTARY, {
+      voluntary: this.props.voluntary
+    });
+    await this.setState({
+      loading: true
+    });
     this.props.recordVoluntaryDetail(this.props.voluntary[this.props.lot_id]);
     this.props.nextStep();
+    this.setState({
+      loading: false
+    });
   };
 
   // 暂存函数

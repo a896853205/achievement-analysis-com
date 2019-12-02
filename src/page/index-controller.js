@@ -23,6 +23,17 @@ import Login from '@/page/index-components/login-components.jsx';
 // 工具类
 import wait from '@/util/wait-helper';
 
+// 路由
+import {
+  VOLUNTARY,
+  BCG_ROOT_NAME,
+  QUESTIONNAIRE,
+  LOGIN
+} from '../constants/route-constants';
+
+// 关于数据模块交互
+import { connect } from 'react-redux';
+
 class IndexController extends React.Component {
   state = {
     schoolNewsList: [],
@@ -85,7 +96,15 @@ class IndexController extends React.Component {
               }
               title={<h1>学业测评</h1>}
             >
-              <img src='/index-icon/1.png' alt='' />
+              <Link
+                to={
+                  this.props.user.uuid
+                    ? `/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}`
+                    : `/${LOGIN.path}`
+                }
+              >
+                <img src='/index-icon/1.png' alt='' />
+              </Link>
             </Popover>
             <span>学业测评</span>
           </div>
@@ -100,7 +119,15 @@ class IndexController extends React.Component {
               }
               title={<h1>院校优先</h1>}
             >
-              <img src='/index-icon/2.png' alt='' />
+              <Link
+                to={
+                  this.props.user.uuid
+                    ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
+                    : `/${LOGIN.path}`
+                }
+              >
+                <img src='/index-icon/2.png' alt='' />
+              </Link>
             </Popover>
             <span>院校优先</span>
           </div>
@@ -115,7 +142,15 @@ class IndexController extends React.Component {
               }
               title={<h1>专业优先</h1>}
             >
-              <img src='/index-icon/3.png' alt='' />
+              <Link
+                to={
+                  this.props.user.uuid
+                    ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
+                    : `/${LOGIN.path}`
+                }
+              >
+                <img src='/index-icon/3.png' alt='' />
+              </Link>
             </Popover>
             <span>专业优先</span>
           </div>
@@ -145,7 +180,15 @@ class IndexController extends React.Component {
               }
               title={<h1>分析报告</h1>}
             >
-              <img src='/index-icon/5.png' alt='' />
+              <Link
+                to={
+                  this.props.user.uuid
+                    ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
+                    : `/${LOGIN.path}`
+                }
+              >
+                <img src='/index-icon/5.png' alt='' />
+              </Link>
             </Popover>
             <span>分析报告</span>
           </div>
@@ -293,7 +336,6 @@ class IndexController extends React.Component {
                         pathname: `/${SCHOOL_DETAIL.path}/45`
                       }}
                     >
-                      
                       <img src='/index-school-pic/2.jpg' alt='' />
                       <span>原电子工业部直属院校——北京信息科技大学</span>
                     </Link>
@@ -409,4 +451,20 @@ class IndexController extends React.Component {
   };
 }
 
-export default withRouter(IndexController);
+const mapStateToProps = store => {
+  const userStore = store['userStore'];
+  let { user } = userStore;
+
+  return {
+    user
+  };
+};
+
+// 向store dispatch action
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(IndexController)
+);

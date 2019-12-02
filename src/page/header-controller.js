@@ -27,7 +27,8 @@ import {
   MY_VOLUNTARY,
   SEARCH_SCHOOL,
   SEARCH_MAJOR,
-  VIP_PROFILE
+  VIP_PROFILE,
+  NEWS_MORE
 } from '../constants/route-constants';
 
 const { SubMenu } = Menu;
@@ -204,13 +205,37 @@ class HeaderController extends React.Component {
                     <Link to={'/'}>正式填报</Link>
                   </Menu.Item>
                   <Menu.Item key='9'>
-                    <Link to={'/'}>院校优先</Link>
+                    <Link
+                      to={
+                        this.props.user.uuid
+                          ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
+                          : `/${LOGIN.path}`
+                      }
+                    >
+                      院校优先
+                    </Link>
                   </Menu.Item>
                   <Menu.Item key='10'>
-                    <Link to={'/'}>专业优先</Link>
+                    <Link
+                      to={
+                        this.props.user.uuid
+                          ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
+                          : `/${LOGIN.path}`
+                      }
+                    >
+                      专业优先
+                    </Link>
                   </Menu.Item>
                   <Menu.Item key='11'>
-                    <Link to={'/'}>指定院校</Link>
+                    <Link
+                      to={
+                        this.props.user.uuid
+                          ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
+                          : `/${LOGIN.path}`
+                      }
+                    >
+                      指定院校
+                    </Link>
                   </Menu.Item>
                 </SubMenu>
 
@@ -248,10 +273,22 @@ class HeaderController extends React.Component {
                     <Link to={`/${SEARCH_MAJOR.path}`}>专业百科</Link>
                   </Menu.Item>
                   <Menu.Item key='17'>
-                    <Link to={'/'}>排名集锦</Link>
+                    <Link
+                      to={{
+                        pathname: `/${NEWS_MORE.path}/4`
+                      }}
+                    >
+                      排名集锦
+                    </Link>
                   </Menu.Item>
                   <Menu.Item key='18'>
-                    <Link to={'/'}>高考百科</Link>
+                    <Link
+                      to={{
+                        pathname: `/${NEWS_MORE.path}/5`
+                      }}
+                    >
+                      高考百问
+                    </Link>
                   </Menu.Item>
                 </SubMenu>
                 <Menu.Item key='19'>
