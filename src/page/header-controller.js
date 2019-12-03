@@ -34,6 +34,9 @@ import {
 const { SubMenu } = Menu;
 
 class HeaderController extends React.Component {
+  state = {
+    searchValue: ''
+  };
   render() {
     let userMenu = (
       <Menu theme='dark'>
@@ -103,15 +106,24 @@ class HeaderController extends React.Component {
             </div>
           </Link>
           <div className='index-search-box'>
-            <input className='index-search-input' type='text' />
-            <button className='index-search-button'>
-              <span className='search-bottom-top-text'>搜索</span>
-              <Icon
-                className='search-bottom-bottom-text'
-                style={{ fontSize: '25px', marginTop: '3px' }}
-                type='search'
-              />
-            </button>
+            <input
+              className='index-search-input'
+              type='text'
+              onChange={e => {
+                this.setState({ searchValue: e.target.value });
+              }}
+              placeholder='搜学校'
+            />
+            <Link to={`/${SEARCH_SCHOOL.path}/${this.state.searchValue}`}>
+              <button className='index-search-button'>
+                <span className='search-bottom-top-text'>搜索</span>
+                <Icon
+                  className='search-bottom-bottom-text'
+                  style={{ fontSize: '25px', marginTop: '3px' }}
+                  type='search'
+                />
+              </button>
+            </Link>
             <Link
               to={{
                 pathname: `/${VIP_PROFILE.path}`

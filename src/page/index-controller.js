@@ -414,7 +414,6 @@ class IndexController extends React.Component {
               </Skeleton>
             </div>
             {/* 考生必读 */}
-
             <div className='page-inner-right-box'>
               <Skeleton active loading={this.state.loading}>
                 <StudentReadList newsList={this.state.studentReadNewsList} />

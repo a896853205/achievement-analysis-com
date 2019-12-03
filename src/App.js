@@ -58,7 +58,7 @@ class App extends Component {
                 component={LoginController}
               />
               <Route
-                path={`/${SEARCH_SCHOOL.path}`}
+                path={[`/${SEARCH_SCHOOL.path}`, `/${SEARCH_SCHOOL.path}/:searchName`]}
                 exact
                 component={SchoolSearchController}
               />

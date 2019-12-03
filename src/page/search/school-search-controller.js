@@ -194,8 +194,11 @@ class SchoolSearchController extends React.Component {
   }
 
   componentDidMount = async () => {
+    const searchName = this.props.match.params.searchName || '';
+
     await this.setState({
-      loading: true
+      loading: true,
+      schoolNameValue: searchName
     });
 
     let [
@@ -215,6 +218,25 @@ class SchoolSearchController extends React.Component {
       schoolList,
       totalSchool
     });
+  };
+
+  componentWillReceiveProps = async (nextProps) => {
+    const searchName = nextProps.match.params.searchName || '';
+    
+    if (searchName !== this.state.schoolNameValue) {
+      await this.setState({
+        loading: true,
+        schoolNameValue: searchName
+      });
+
+      let [{ schoolList, totalSchool }] = await Promise.all([this.getSchool()]);
+
+      await this.setState({
+        loading: false,
+        schoolList,
+        totalSchool
+      });
+    }
   };
 
   searchSchool = async () => {
@@ -308,7 +330,8 @@ class SchoolSearchController extends React.Component {
       propertyValues,
       typeValues,
       areaFeatureValues,
-      page
+      page,
+      schoolNameValue
     } = this.state;
 
     let schoolObj = await launchRequest(APIS.SEARCH_SCHOOL, {
@@ -316,7 +339,7 @@ class SchoolSearchController extends React.Component {
       propertyValues,
       typeValues,
       areaFeatureValues,
-      schoolName: this.state.schoolNameValue,
+      schoolName: schoolNameValue,
       page
     });
 
