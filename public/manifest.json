@@ -16,7 +16,11 @@
       "src": "logo512.png",
       "type": "image/png",
       "sizes": "512x512"
+<<<<<<< HEAD
     }	    
+=======
+    }
+>>>>>>> 6097761b9ef750d8c2736bf86d90088a87bab8b7
   ],
   "start_url": ".",
   "display": "standalone",

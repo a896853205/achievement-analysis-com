@@ -21,8 +21,11 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
 
 # 图片
 /public/school-logo
 /public/school-recommend
 /public/news
+=======
+>>>>>>> 6097761b9ef750d8c2736bf86d90088a87bab8b7
