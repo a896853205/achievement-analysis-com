@@ -12,7 +12,8 @@ import {
   QUESTIONNAIRE,
   LOGIN,
   SCHOOL_RECOMMEND,
-  SCHOOL_DETAIL
+  SCHOOL_DETAIL,
+  NEWS_DETAIL
 } from '../constants/route-constants';
 
 // 请求文件
@@ -211,60 +212,75 @@ class IndexController extends React.Component {
                     <span className='index-h2-title'>
                       <Icon type='book' style={{ color: '#F1AC20' }} /> 智课堂
                     </span>
-                    <span className='index-more'>
+                    {/* <span className='index-more'>
                       更多 <Icon type='right' />
-                    </span>
+                    </span> */}
                   </h2>
                   <ul>
                     <li>
-                      <img
-                        src='https://cdn.dribbble.com/users/992274/screenshots/7440971/media/2405976c7c1485050e78fcf54ca4bfe4.jpg'
-                        alt=''
-                      />
-                      <h5>高考志愿早准备</h5>
-                      <p>
-                        <Icon type='eye' /> 874
-                      </p>
+                      <Link
+                        to={{
+                          pathname: `/${NEWS_DETAIL.path}/khukgtyuytutyuytytyu&-1`
+                        }}
+                      >
+                        <img src='/index-course-pic/1.jpg' alt='' />
+                        <h5>智赢学业规划网系统操作详细流程</h5>
+                        <p>
+                          <Icon type='eye' /> 874
+                        </p>
+                      </Link>
                     </li>
                     <li>
-                      <img
-                        src='https://cdn.dribbble.com/users/278549/screenshots/7448782/media/87fe1bff113e26825d8f58e3b1bbb785.png'
-                        alt=''
-                      />
-                      <h5>高考填志愿怎样选专业？</h5>
-                      <p>
-                        <Icon type='eye' /> 2134
-                      </p>
+                      <Link
+                        to={{
+                          pathname: `/${NEWS_DETAIL.path}/jjyujddhtyjthytbtjtujytgrfvrhh&-1`
+                        }}
+                      >
+                        <img src='/index-course-pic/2.jpg' alt='' />
+                        <h5>如何填报志愿</h5>
+                        <p>
+                          <Icon type='eye' /> 2134
+                        </p>
+                      </Link>
                     </li>
                     <li>
-                      <img
-                        src='https://cdn.dribbble.com/users/371094/screenshots/6793394/_bbb-dribble.jpg'
-                        alt=''
-                      />
-                      <h5>优志愿系统电脑端使用教程</h5>
-                      <p>
-                        <Icon type='eye' /> 63245
-                      </p>
+                      <Link
+                        to={{
+                          pathname: `/${NEWS_DETAIL.path}/hmbnmhjkiukughvbn&-1`
+                        }}
+                      >
+                        <img src='/index-course-pic/3.jpg' alt='' />
+                        <h5>如何从城市、学校、专业三个方面考虑选择志愿</h5>
+                        <p>
+                          <Icon type='eye' /> 63245
+                        </p>
+                      </Link>
                     </li>
                     <li>
-                      <img
-                        src='https://cdn.dribbble.com/users/503590/screenshots/6292998/thestudy05.jpg'
-                        alt=''
-                      />
-                      <h5>优志愿系统电脑端使用教程</h5>
-                      <p>
-                        <Icon type='eye' /> 23423
-                      </p>
+                      <Link
+                        to={{
+                          pathname: `/${NEWS_DETAIL.path}/hjkukhhjkhjkhgjkyukfdty&-1`
+                        }}
+                      >
+                        <img src='/index-course-pic/4.jpg' alt='' />
+                        <h5>如何填报高考志愿-家长必读</h5>
+                        <p>
+                          <Icon type='eye' /> 23423
+                        </p>
+                      </Link>
                     </li>
                     <li>
-                      <img
-                        src='https://cdn.dribbble.com/users/503590/screenshots/6293010/thestudy01.jpg'
-                        alt=''
-                      />
-                      <h5>会计学专业解读</h5>
-                      <p>
-                        <Icon type='eye' /> 234
-                      </p>
+                      <Link
+                        to={{
+                          pathname: `/${NEWS_DETAIL.path}/nmtryutyutiutirui&-1`
+                        }}
+                      >
+                        <img src='/index-course-pic/5.jpg' alt='' />
+                        <h5>四招锁定专业方向，家有高三生快收藏！</h5>
+                        <p>
+                          <Icon type='eye' /> 234
+                        </p>
+                      </Link>
                     </li>
                   </ul>
                 </div>
