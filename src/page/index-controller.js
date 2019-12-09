@@ -5,7 +5,15 @@ import { Carousel, Icon, Skeleton, Popover } from 'antd';
 import '../style/index-controller.css';
 
 // 路由
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
+import {
+  VOLUNTARY,
+  BCG_ROOT_NAME,
+  QUESTIONNAIRE,
+  LOGIN,
+  SCHOOL_RECOMMEND,
+  SCHOOL_DETAIL
+} from '../constants/route-constants';
 
 // 请求文件
 import { launchRequest } from '@/util/request';
@@ -16,10 +24,14 @@ import SchoolNewsList from '@/page/index/index-school-news-list.jsx';
 import MajorNewsList from '@/page/index/index-major-news-list.jsx';
 import StudentReadList from '@/page/index/index-student-read-list.jsx';
 import RankShowNewsList from '@/page/index/index-rank-show-news-list.jsx';
+import QuestionNewsList from '@/page/index/index-question-news-list.jsx';
 import Login from '@/page/index-components/login-components.jsx';
 
 // 工具类
 import wait from '@/util/wait-helper';
+
+// 关于数据模块交互
+import { connect } from 'react-redux';
 
 class IndexController extends React.Component {
   state = {
@@ -27,6 +39,7 @@ class IndexController extends React.Component {
     majorNewsList: [],
     studentReadNewsList: [],
     rankNewsList: [],
+    questionNewsList: [],
     loading: false
   };
 
@@ -40,15 +53,8 @@ class IndexController extends React.Component {
               <div>
                 <img
                   className='carou-img'
-                  src='http://img3.youzy.cn/content/media/thumbs/p00191258.jpeg'
+                  src='/images/banner/1.jpg'
                   alt='banner1'
-                />
-              </div>
-              <div>
-                <img
-                  className='carou-img'
-                  src='http://img3.youzy.cn/content/media/thumbs/p00191467.jpeg'
-                  alt='banner2'
                 />
               </div>
             </Carousel>
@@ -82,7 +88,15 @@ class IndexController extends React.Component {
               }
               title={<h1>学业测评</h1>}
             >
-              <img src='/index-icon/1.png' alt='' />
+              <Link
+                to={
+                  this.props.user.uuid
+                    ? `/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}`
+                    : `/${LOGIN.path}`
+                }
+              >
+                <img src='/index-icon/1.png' alt='' />
+              </Link>
             </Popover>
             <span>学业测评</span>
           </div>
@@ -97,7 +111,15 @@ class IndexController extends React.Component {
               }
               title={<h1>院校优先</h1>}
             >
-              <img src='/index-icon/2.png' alt='' />
+              <Link
+                to={
+                  this.props.user.uuid
+                    ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
+                    : `/${LOGIN.path}`
+                }
+              >
+                <img src='/index-icon/2.png' alt='' />
+              </Link>
             </Popover>
             <span>院校优先</span>
           </div>
@@ -112,7 +134,15 @@ class IndexController extends React.Component {
               }
               title={<h1>专业优先</h1>}
             >
-              <img src='/index-icon/3.png' alt='' />
+              <Link
+                to={
+                  this.props.user.uuid
+                    ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
+                    : `/${LOGIN.path}`
+                }
+              >
+                <img src='/index-icon/3.png' alt='' />
+              </Link>
             </Popover>
             <span>专业优先</span>
           </div>
@@ -142,7 +172,15 @@ class IndexController extends React.Component {
               }
               title={<h1>分析报告</h1>}
             >
-              <img src='/index-icon/5.png' alt='' />
+              <Link
+                to={
+                  this.props.user.uuid
+                    ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
+                    : `/${LOGIN.path}`
+                }
+              >
+                <img src='/index-icon/5.png' alt='' />
+              </Link>
             </Popover>
             <span>分析报告</span>
           </div>
@@ -243,27 +281,7 @@ class IndexController extends React.Component {
             <div className='page-inner-right-box'>
               <Skeleton active loading={this.state.loading}>
                 {/* 高考百问 */}
-                <div>
-                  <h2 className='h2-title-box'>
-                    <span className='index-h2-title'>
-                      <Icon
-                        type='question-circle'
-                        theme='filled'
-                        style={{ color: '#18C218' }}
-                      />
-                      高考百问
-                    </span>
-                    <span className='index-more'>
-                      更多 <Icon type='right' />
-                    </span>
-                  </h2>
-                  <ul className='index-question-ul-box'>
-                    <li>高考百问信息高考百问信息高考百问信息</li>
-                    <li>高考百问信息高考百问信息高考百问信息</li>
-                    <li>高考百问信息高考百问信息高考百问信息</li>
-                    <li>高考百问信息高考百问信息高考百问信息</li>
-                  </ul>
-                </div>
+                <QuestionNewsList newsList={this.state.questionNewsList} />
                 {/* 排名集锦 */}
                 <RankShowNewsList newsList={this.state.rankNewsList} />
               </Skeleton>
@@ -286,64 +304,109 @@ class IndexController extends React.Component {
                     />{' '}
                     院校推荐
                   </span>
-                  <span className='index-more'>
-                    更多 <Icon type='right' />
-                  </span>
+                  <Link
+                    to={{
+                      pathname: `/${SCHOOL_RECOMMEND.path}`
+                    }}
+                  >
+                    <span className='index-more'>
+                      更多 <Icon type='right' />
+                    </span>
+                  </Link>
                 </h2>
                 <ul>
                   <li>
-                    <img
-                      src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
-                      alt=''
-                    />
+                    <Link
+                      to={{
+                        pathname: `/${SCHOOL_DETAIL.path}/11`
+                      }}
+                    >
+                      <img src='/index-school-pic/1.jpg' alt='' />
+                      <p>
+                        <span>原兵器部直属院校</span>
+                        <span>北京理工大学</span>
+                      </p>
+                    </Link>
                   </li>
                   <li>
-                    <img
-                      src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
-                      alt=''
-                    />
+                    <Link
+                      to={{
+                        pathname: `/${SCHOOL_DETAIL.path}/45`
+                      }}
+                    >
+                      <img src='/index-school-pic/2.jpg' alt='' />
+                      <span>原电子工业部直属院校——北京信息科技大学</span>
+                    </Link>
                   </li>
                   <li>
-                    <img
-                      src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
-                      alt=''
-                    />
+                    <Link
+                      to={{
+                        pathname: `/${SCHOOL_DETAIL.path}/14`
+                      }}
+                    >
+                      <img src='/index-school-pic/3.jpg' alt='' />
+                      <span>原化工部直属院校——北京化工大学</span>
+                    </Link>
                   </li>
                   <li>
-                    <img
-                      src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
-                      alt=''
-                    />
+                    <Link
+                      to={{
+                        pathname: `/${SCHOOL_DETAIL.path}/737`
+                      }}
+                    >
+                      <img src='/index-school-pic/4.jpg' alt='' />
+                      <p>
+                        <span>原建材总局直属高校</span>
+                        <span>山东建材工业学院</span>
+                      </p>
+                    </Link>
                   </li>
                   <li>
-                    <img
-                      src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
-                      alt=''
-                    />
+                    <Link
+                      to={{
+                        pathname: `/${SCHOOL_DETAIL.path}/385`
+                      }}
+                    >
+                      <img src='/index-school-pic/5.jpg' alt='' />
+                      <span>
+                        原建筑部直属高校——哈尔滨建筑大学（合并于哈尔滨工业大学）
+                      </span>
+                    </Link>
                   </li>
                   <li>
-                    <img
-                      src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
-                      alt=''
-                    />
+                    <Link
+                      to={{
+                        pathname: `/${SCHOOL_DETAIL.path}/250`
+                      }}
+                    >
+                      <img src='/index-school-pic/6.jpg' alt='' />
+                      <span>原交通部直属高校——大连海事大学</span>
+                    </Link>
                   </li>
                   <li>
-                    <img
-                      src='https://cdn.dribbble.com/users/46302/screenshots/5092379/school.png'
-                      alt=''
-                    />
+                    <Link
+                      to={{
+                        pathname: `/${SCHOOL_DETAIL.path}/519`
+                      }}
+                    >
+                      <img src='/index-school-pic/7.jpg' alt='' />
+                      <span>原石油部直属院校——常州大学</span>
+                    </Link>
                   </li>
                   <li>
-                    <img
-                      src='https://cdn.dribbble.com/users/992274/screenshots/6412657/school_3_kit8-net.png'
-                      alt=''
-                    />
+                    <Link
+                      to={{
+                        pathname: `/${SCHOOL_DETAIL.path}/521`
+                      }}
+                    >
+                      <img src='/index-school-pic/8.jpg' alt='' />
+                      <span>原水电部的直属院校——河海大学</span>
+                    </Link>
                   </li>
                 </ul>
               </Skeleton>
             </div>
             {/* 考生必读 */}
-
             <div className='page-inner-right-box'>
               <Skeleton active loading={this.state.loading}>
                 <StudentReadList newsList={this.state.studentReadNewsList} />
@@ -361,7 +424,13 @@ class IndexController extends React.Component {
     });
 
     let [
-      { schoolNewsList, majorNewsList, studentReadNewsList, rankNewsList }
+      {
+        schoolNewsList,
+        majorNewsList,
+        studentReadNewsList,
+        rankNewsList,
+        questionNewsList
+      }
     ] = await Promise.all([
       launchRequest(APIS.GET_HOME_DATA),
       // 防闪烁
@@ -373,9 +442,26 @@ class IndexController extends React.Component {
       majorNewsList,
       studentReadNewsList,
       rankNewsList,
+      questionNewsList,
       loading: false
     });
   };
 }
 
-export default withRouter(IndexController);
+const mapStateToProps = store => {
+  const userStore = store['userStore'];
+  let { user } = userStore;
+
+  return {
+    user
+  };
+};
+
+// 向store dispatch action
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(IndexController)
+);

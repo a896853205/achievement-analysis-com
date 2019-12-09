@@ -86,4 +86,12 @@ html {
 .btn-transition-blue-background:hover {
   background-image: linear-gradient(#059ac1, #0e417c);
 }
+
+.content {
+  display: block!important;
+}
 /* 甲方要的渐变end */
+
+.layout {
+  min-width: 1200px;
+}

@@ -1,0 +1,26 @@
+.school-recommend-box {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+
+.school-recommend-item {
+  width: 30%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-top: 10px;
+  box-shadow: 0 0 5px #ddd;
+}
+
+.school-recommend-item img {
+  width: 100%;
+}
+
+.school-recommend-item h5 {
+  width: 100%;
+  text-align: center;
+  margin-top: 5px;
+  font-size: 16px;
+}

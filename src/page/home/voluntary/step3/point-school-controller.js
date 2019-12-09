@@ -24,6 +24,7 @@ class PointSchoolController extends React.Component {
             size='large'
             onSearch={this.handleSearchSchool}
             onChange={this.handleChangeName}
+            placeholder='请输入院校名称'
           />
         </div>
         <TableController />
@@ -33,7 +34,7 @@ class PointSchoolController extends React.Component {
 
   // 搜索学校名
   handleSearchSchool = () => {
-    this.props.recordSchoolList(3);
+    this.props.recordSchoolList();
   }
   handleChangeName = (e) => {
     this.props.recordSchoolName(e.target.value);

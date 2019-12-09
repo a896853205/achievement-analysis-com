@@ -3,6 +3,9 @@ import { handleActions, createAction } from 'redux-actions';
 // saga
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
+// UI 提示
+// import { message } from 'antd';
+
 // 请求文件
 import { launchRequest } from '../util/request';
 import * as APIS from '../constants/api-constants';
@@ -27,9 +30,12 @@ export const actions = {
   recordSchoolOption: createAction('recordSchoolOption'),
   recordSchoolName: createAction('recordSchoolName'),
   recordMajorName: createAction('recordMajorName'),
+  recordVoluntary: createAction('recordVoluntary'),
   recordVoluntaryResultType: createAction('recordVoluntaryResultType'),
   recordVoluntaryListOption: createAction('recordVoluntaryListOption'),
-  recordVoluntaryDeepUuid: createAction('recordVoluntaryDeepUuid')
+  recordVoluntaryDeepUuid: createAction('recordVoluntaryDeepUuid'),
+  recordVoluntaryType: createAction('recordVoluntaryType'),
+  recordPage: createAction('recordPage')
 };
 const recordVoluntaryResult = createAction('recordVoluntaryResult');
 const setMeScoreRank = createAction('setMeScoreRank');
@@ -63,14 +69,6 @@ const effects = {
       currentLotsScoreDifferMsg
     } = yield call(launchRequest, APIS.GET_SCORE_RANK, payload);
 
-    // yield call(userEffects.recordUserSaga, { payload });
-
-    console.log(
-      fitCurrent,
-      fitOld,
-      lotsScoreDifferMsg,
-      currentLotsScoreDifferMsg
-    );
     yield put(
       setMeScoreRank({
         fitCurrent,
@@ -81,17 +79,18 @@ const effects = {
     );
     yield put(switchMeLoading(false));
   },
-  recordSchoolListSaga: function*({ payload }) {
+  recordSchoolListSaga: function*() {
     yield put(switchSchoolTableLoading(true));
 
     let schoolList = [];
     const state = yield select();
     const voluntaryStore = state['voluntaryStore'];
+    const { voluntaryType } = voluntaryStore;
 
     // 获取当前redux学校的配置项
     // 这里需要做一下type判断,如果是1就按照学校优先来处理
     // 如果是3就按照查学校名来处理
-    if (payload === 1) {
+    if (voluntaryType === 1) {
       let { schoolOption, lot_id } = voluntaryStore;
 
       let {
@@ -112,28 +111,43 @@ const effects = {
           areaFeatureValues,
           provinceListValues,
           gatherValue,
-          type: payload
+          type: voluntaryType
         });
 
         schoolList = data.schoolList;
       } else {
         schoolList = [];
       }
-    } else if (payload === 2) {
-      let { lot_id, majorName } = voluntaryStore;
+    } else if (voluntaryType === 2) {
+      let { lot_id, majorName, schoolOption } = voluntaryStore;
+
+      let {
+        natureValues,
+        propertyValues,
+        typeValues,
+        areaFeatureValues,
+        provinceListValues,
+        gatherValue
+      } = schoolOption;
 
       if (lot_id && majorName !== '') {
         let data = yield call(launchRequest, APIS.GET_SCHOOL, {
           lotId: lot_id,
           majorName,
-          type: payload
+          natureValues,
+          propertyValues,
+          typeValues,
+          areaFeatureValues,
+          provinceListValues,
+          type: voluntaryType,
+          gatherValue
         });
 
         schoolList = data.schoolList;
       } else {
         schoolList = [];
       }
-    } else if (payload === 3) {
+    } else if (voluntaryType === 3) {
       // 指定院校
       let { lot_id, schoolName } = voluntaryStore;
 
@@ -141,7 +155,7 @@ const effects = {
         let data = yield call(launchRequest, APIS.GET_SCHOOL, {
           lotId: lot_id,
           schoolName,
-          type: payload
+          type: voluntaryType
         });
 
         schoolList = data.schoolList;
@@ -150,6 +164,11 @@ const effects = {
       }
     }
 
+    // if (!schoolList || !schoolList.length) {
+    //   message.error('您的分数或筛选条件没有其对应学校集群');
+    // }
+    // 设置为第一页
+    yield put(actions.recordPage(1));
     yield put(actions._recordSchoolList(schoolList));
     yield put(switchSchoolTableLoading(false));
   }
@@ -233,24 +252,34 @@ export const voluntaryReducer = handleActions(
         }
       };
     },
-    initVoluntary(state, { payload: result }) {
-      result.forEach((item, index, arr) => {
-        initSchoolObj(arr[index]);
-      });
-
+    recordVoluntary(state, { payload: result }) {
       return {
         ...state,
         voluntary: result
       };
     },
+    initVoluntary(state, { payload: result }) {
+      let { lot_id, voluntary } = state;
+
+      result.forEach((item, index, arr) => {
+        initSchoolObj(arr[index]);
+      });
+
+      voluntary[lot_id] = result;
+
+      return {
+        ...state,
+        voluntary
+      };
+    },
     deleteVoluntary(state, { payload: result }) {
-      let { voluntary } = state,
-        oldIndex = voluntary.findIndex(item => {
+      let { voluntary, lot_id } = state,
+        oldIndex = voluntary[lot_id].findIndex(item => {
           return item.five_volunteer_id === result;
         });
 
       if (oldIndex !== -1) {
-        initSchoolObj(voluntary[oldIndex]);
+        initSchoolObj(voluntary[lot_id][oldIndex]);
       }
 
       return {
@@ -259,25 +288,25 @@ export const voluntaryReducer = handleActions(
       };
     },
     recordSchool(state, { payload: result }) {
-      let { voluntary } = state;
+      let { voluntary, lot_id } = state;
       let { changeVolunteerId, schoolData } = result;
 
       // 找到原来的位置清空
-      let oldIndex = voluntary.findIndex(item => {
+      let oldIndex = voluntary[lot_id].findIndex(item => {
         return item.schoolId === schoolData.school_id;
       });
 
       if (oldIndex !== -1) {
-        initSchoolObj(voluntary[oldIndex]);
+        initSchoolObj(voluntary[lot_id][oldIndex]);
       }
 
       // 新位置修改
-      let changeIndex = voluntary.findIndex(item => {
+      let changeIndex = voluntary[lot_id].findIndex(item => {
         return item.five_volunteer_id === changeVolunteerId;
       });
 
       setSchool({
-        school: voluntary[changeIndex],
+        school: voluntary[lot_id][changeIndex],
         schoolName: schoolData.school_name,
         schoolId: schoolData.school_id,
         major: initMajorArr(),
@@ -292,26 +321,26 @@ export const voluntaryReducer = handleActions(
       };
     },
     recordMajor(state, { payload: result }) {
-      let { voluntary } = state,
+      let { voluntary, lot_id } = state,
         { majorData, schoolId, changeMajorIndex } = result;
 
       // 找学校的志愿
-      let schoolIndex = voluntary.findIndex(item => {
+      let schoolIndex = voluntary[lot_id].findIndex(item => {
         return item.schoolId === schoolId;
       });
 
       // 找专业的位置
-      let majorIndex = voluntary[schoolIndex].major.findIndex(item => {
+      let majorIndex = voluntary[lot_id][schoolIndex].major.findIndex(item => {
         return item.majorId === majorData.enrollment_id;
       });
 
       // 这里还需要清除专业
       if (majorIndex !== -1) {
-        voluntary[schoolIndex].major[majorIndex] = initMajorObj();
+        voluntary[lot_id][schoolIndex].major[majorIndex] = initMajorObj();
       }
 
       setMajor({
-        major: voluntary[schoolIndex].major[changeMajorIndex],
+        major: voluntary[lot_id][schoolIndex].major[changeMajorIndex],
         majorId: majorData.enrollment_id,
         majorName: majorData.major_name
       });
@@ -350,6 +379,7 @@ export const voluntaryReducer = handleActions(
     },
     // 记录学校列表
     _recordSchoolList(state, { payload: result }) {
+
       return {
         ...state,
         schoolList: result
@@ -373,6 +403,18 @@ export const voluntaryReducer = handleActions(
         ...state,
         voluntaryDeepUuid: result
       };
+    },
+    recordVoluntaryType(state, { payload: result }) {
+      return {
+        ...state,
+        voluntaryType: result
+      };
+    },
+    recordPage(state, { payload: result }) {
+      return {
+        ...state,
+        page: result
+      };
     }
   },
   {
@@ -395,7 +437,10 @@ export const voluntaryReducer = handleActions(
     schoolName: '',
     majorName: '',
     schoolList: [],
+    page: 1,
     schoolTableLoading: false,
+    // 那种方式获取学校列表
+    voluntaryType: 1,
     // 设置志愿用的数据
     voluntary: [],
     // 查看志愿用的数据

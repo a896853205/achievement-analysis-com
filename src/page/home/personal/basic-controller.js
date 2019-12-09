@@ -35,7 +35,8 @@ class BasicController extends React.Component {
   state = {
     isAlert: false,
     isImportAlert: false,
-    optionList: []
+    optionList: [],
+    highSchoolList: [{ code: '其他', highSchoolName: '其他' }]
   };
   render() {
     const { getFieldDecorator } = this.props.form,
@@ -62,6 +63,12 @@ class BasicController extends React.Component {
         </Option>
       );
     }
+
+    let highSchoolOption = this.state.highSchoolList.map(item => (
+      <Option key={item.code} value={item.highSchoolName}>
+        {item.highSchoolName}
+      </Option>
+    ));
 
     return (
       <div className='basic-info-box'>
@@ -112,8 +119,19 @@ class BasicController extends React.Component {
                       loadData={this.loadAddress}
                       options={this.state.optionList}
                       changeOnSelect
+                      onChange={this.getHightSchool}
                     />
                   )}
+                </Form.Item>
+                <Form.Item label='所在高中'>
+                  {getFieldDecorator('highSchool', {
+                    rules: [
+                      {
+                        required: true,
+                        message: '请选择所在高中'
+                      }
+                    ]
+                  })(<Select>{highSchoolOption}</Select>)}
                 </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 2 }}>
                   <Button
@@ -141,6 +159,9 @@ class BasicController extends React.Component {
                 <Descriptions.Item label='地区'>
                   {this.props.user.provinceName}/{this.props.user.cityName}/
                   {this.props.user.areaName}
+                </Descriptions.Item>
+                <Descriptions.Item label='所在高中'>
+                  {this.props.user.highSchool}
                 </Descriptions.Item>
               </Descriptions>
               <Button
@@ -336,7 +357,9 @@ class BasicController extends React.Component {
           title: '您确定使用一次修改分数的机会吗?',
           content: `剩余修改次数${this.props.user.scoreAlterTime}次`,
           onOk: () => {
+            this.props.getMeScoreRank(values);
             this.props.recordUserImport(values);
+            this.props.initVoluntary([]);
             this.setState({ isImportAlert: false });
           },
           onCancel: () => {},
@@ -363,6 +386,7 @@ class BasicController extends React.Component {
       }
     }
 
+    await this.getHightSchool(this.props.form.getFieldValue('address'));
     await this.setState({
       optionList
     });
@@ -435,6 +459,27 @@ class BasicController extends React.Component {
       }
     });
   };
+
+  getHightSchool = async (value, selectOptions) => {
+    if (value[2]) {
+      let highSchoolList = await launchRequest(APIS.GET_HIGH_SCHOOL, {
+        areaCode: value[2]
+      });
+
+      if (highSchoolList) {
+        highSchoolList.push({ code: '其他', highSchoolName: '其他' });
+        await this.setState({
+          highSchoolList
+        });
+      }
+    } else {
+      let highSchoolList = [{ code: '其他', highSchoolName: '其他' }];
+
+      await this.setState({
+        highSchoolList
+      });
+    }
+  };
 }
 
 // 从store接收state数据
@@ -466,6 +511,9 @@ const mapDispatchToProps = dispatch => {
     },
     recordUserImport: params => {
       dispatch(userActions.recordUserImport(params));
+    },
+    initVoluntary: params => {
+      dispatch(voluntaryActions.initVoluntary(params));
     }
   };
 };
@@ -504,6 +552,9 @@ export default connect(
         }),
         examYear: Form.createFormField({
           value: user.examYear
+        }),
+        highSchool: Form.createFormField({
+          value: user.highSchool
         })
       };
     }

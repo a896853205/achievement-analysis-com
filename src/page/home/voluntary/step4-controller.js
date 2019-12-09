@@ -2,9 +2,13 @@ import React from 'react';
 
 import VoluntaryDetailController from '@/page/home/voluntary/step4/voluntary-detail-controller';
 
+// 路由
+import { Link } from 'react-router-dom';
+
 // 关于数据模块交互
 import { connect } from 'react-redux';
 import { actions as voluntaryActions } from '@/redux/voluntary-model';
+import { actions as userActions } from '@/redux/user-model';
 
 // 请求文件
 import { launchRequest } from '@/util/request';
@@ -31,16 +35,29 @@ class Step4Controller extends React.Component {
               type='info'
               showIcon
             />
-            <Button
-              className='btn-large btn-transition-blue-background'
-              loading={this.state.btnLoading}
-              onClick={this.handleClickSubmit}
-              size='large'
-              type='primary'
-              style={{ marginTop: '20px', marginBottom: '20px' }}
-            >
-              确认生成报表
-            </Button>
+            {this.props.user.reportAlterTime ? (
+              <Button
+                className='btn-large btn-transition-blue-background'
+                loading={this.state.btnLoading}
+                onClick={this.handleClickSubmit}
+                size='large'
+                type='primary'
+                style={{ marginTop: '20px', marginBottom: '20px' }}
+              >
+                确认生成报表
+              </Button>
+            ) : (
+              <Link to='/vipProfile'>
+                <Button
+                  className='btn-large btn-transition-blue-background'
+                  size='large'
+                  type='primary'
+                  style={{ marginTop: '20px', marginBottom: '20px' }}
+                >
+                  没有次数了,充值VIP
+                </Button>
+              </Link>
+            )}
           </div>
           <div>
             <Alert
@@ -48,16 +65,29 @@ class Step4Controller extends React.Component {
               type='info'
               showIcon
             />
-            <Button
-              className='btn-large btn-transition-blue-background'
-              loading={this.state.btnLoading}
-              onClick={this.handleClickDeepSubmit}
-              size='large'
-              type='primary'
-              style={{ marginTop: '20px', marginBottom: '20px' }}
-            >
-              确认深度体验表
-            </Button>
+            {this.props.user.deepAlterTime ? (
+              <Button
+                className='btn-large btn-transition-blue-background'
+                loading={this.state.btnLoading}
+                onClick={this.handleClickDeepSubmit}
+                size='large'
+                type='primary'
+                style={{ marginTop: '20px', marginBottom: '20px' }}
+              >
+                确认深度体验表
+              </Button>
+            ) : (
+              <Link to='/vipProfile'>
+                <Button
+                  className='btn-large btn-transition-blue-background'
+                  size='large'
+                  type='primary'
+                  style={{ marginTop: '20px', marginBottom: '20px' }}
+                >
+                  没有次数了,充值VIP
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -77,9 +107,10 @@ class Step4Controller extends React.Component {
         // 提交到后台后返回uuid
         let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
           lotId: this.props.lotId,
-          voluntary: this.props.voluntary,
+          voluntary: this.props.voluntaryDetail,
           reportType: 1
         });
+        await this.props.getUser();
 
         if (voluntaryId) {
           // 将uuid存入redux
@@ -111,12 +142,13 @@ class Step4Controller extends React.Component {
         // loading
         await this.setState({ btnLoading: true });
 
-        // 提交到后台后返回uuid
+        // 提交到后台后返回uuid,而且重新查询一下用户数据
         let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
           lotId: this.props.lotId,
-          voluntary: this.props.voluntary,
+          voluntary: this.props.voluntaryDetail,
           reportType: 2
         });
+        await this.props.getUser();
 
         if (voluntaryId) {
           // 将uuid存入redux
@@ -144,12 +176,13 @@ class Step4Controller extends React.Component {
 const mapStateToProps = store => {
   const userStore = store['userStore'],
     voluntaryStore = store['voluntaryStore'];
-  let { lot_id, voluntary } = voluntaryStore,
+  let { lot_id, voluntary, voluntaryDetail } = voluntaryStore,
     { user } = userStore;
 
   return {
     lotId: lot_id,
     voluntary: [...voluntary],
+    voluntaryDetail,
     user
   };
 };
@@ -171,11 +204,11 @@ const mapDispatchToProps = dispatch => {
     },
     recordVoluntaryDeepUuid: params => {
       dispatch(voluntaryActions.recordVoluntaryDeepUuid(params));
+    },
+    getUser: () => {
+      dispatch(userActions.getUser());
     }
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Step4Controller);
+export default connect(mapStateToProps, mapDispatchToProps)(Step4Controller);

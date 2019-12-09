@@ -9,6 +9,8 @@ import IndexController from './page/index-controller';
 import BackgroundController from './page/home-controller';
 import NewsDetailController from '@/page/news/news-detail-controller';
 import NewsMoreController from '@/page/news/news-more-controller.jsx';
+import VipController from '@/page/vip/vip-controller.jsx';
+import SchoolRecommendController from '@/page/school/school-recommend-controller.jsx';
 
 // search 组件
 import SchoolSearchController from './page/search/school-search-controller';
@@ -30,7 +32,9 @@ import {
   NEWS_DETAIL,
   NEWS_MORE,
   SCHOOL_DETAIL,
-  MAJOR_DETAIL
+  MAJOR_DETAIL,
+  VIP_PROFILE,
+  SCHOOL_RECOMMEND
 } from '@/constants/route-constants';
 
 const { Content } = Layout;
@@ -54,7 +58,7 @@ class App extends Component {
                 component={LoginController}
               />
               <Route
-                path={`/${SEARCH_SCHOOL.path}`}
+                path={[`/${SEARCH_SCHOOL.path}`, `/${SEARCH_SCHOOL.path}/:searchName`]}
                 exact
                 component={SchoolSearchController}
               />
@@ -79,10 +83,14 @@ class App extends Component {
                 path={`/${MAJOR_DETAIL.path}/:id`}
                 component={MajorDetailController}
               />
-
+              <Route path={`/${VIP_PROFILE.path}`} component={VipController} />
               <Route
                 path={`/${BCG_ROOT_NAME}`}
                 component={BackgroundController}
+              />
+              <Route
+                path={`/${SCHOOL_RECOMMEND.path}`}
+                component={SchoolRecommendController}
               />
               <Route
                 component={() => (

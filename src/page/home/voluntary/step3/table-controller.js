@@ -1,11 +1,11 @@
 import React from 'react';
 
 // UI组件
-import { Select, Button, Icon, Table, Drawer, Tag, Tooltip } from 'antd';
+import { Select, Button, Icon, Table, Modal, Tag, Tooltip } from 'antd';
 
 // 自定义组件
 import SubTableController from './sub-table-controller';
-import SchoolDetailController from '../../school/school-detail';
+import SchoolDetailController from '@/page/detail/school-detail-controller.jsx';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
@@ -13,10 +13,12 @@ import { actions as voluntaryActions } from '../../../../redux/voluntary-model';
 import { actions as schoolActions } from '../../../../redux/school-model';
 
 const { Option } = Select;
+
 class TableController extends React.Component {
   state = {
     // 抽屉显示
-    schoolDrawerVisible: false
+    schoolDrawerVisible: false,
+    schoolId: 0
   };
   render() {
     // 表格表头
@@ -67,11 +69,12 @@ class TableController extends React.Component {
       },
       {
         title: '历年位次',
+        width: 240,
         children: [
           {
             title: this.props.user.examYear - 1,
             key: 'oldOneScore',
-            width: 50,
+            width: 80,
             render: record => {
               let cerrctObj = record.scoreAndRank.find(
                 item => item.year === this.props.user.examYear - 1
@@ -86,7 +89,7 @@ class TableController extends React.Component {
           {
             title: this.props.user.examYear - 2,
             key: 'oldTwoScore',
-            width: 50,
+            width: 80,
             render: record => {
               let cerrctObj = record.scoreAndRank.find(
                 item => item.year === this.props.user.examYear - 2
@@ -101,7 +104,7 @@ class TableController extends React.Component {
           {
             title: this.props.user.examYear - 3,
             key: 'oldThreeScore',
-            width: 50,
+            width: 80,
             render: record => {
               let cerrctObj = record.scoreAndRank.find(
                 item => item.year === this.props.user.examYear - 3
@@ -117,7 +120,7 @@ class TableController extends React.Component {
       },
       {
         title: () => (
-          <Tooltip title='提档概率的解释'>
+          <Tooltip title='综合考虑考生位次/线差、院校近三年录取位次/线差。'>
             <span>
               投档概率
               <Icon type='question-circle' />
@@ -142,7 +145,7 @@ class TableController extends React.Component {
       },
       {
         title: () => (
-          <Tooltip title='风险系数的解释'>
+          <Tooltip title='综合考虑院校位次/线差的波动幅度、趋势以及院校的招生计划变化情况。'>
             <span>
               风险系数
               <Icon type='question-circle' />
@@ -181,23 +184,31 @@ class TableController extends React.Component {
               this.handleSchoolChange(e, record);
             }}
             value={
-              this.props.voluntary.find(voluntaryItem => {
-                return voluntaryItem.schoolId === record.school_id;
-              })
-                ? this.props.voluntary.find(voluntaryItem => {
-                    return voluntaryItem.schoolId === record.school_id;
-                  }).five_volunteer_id
+              this.props.voluntary[this.props.lot_id]
+                ? this.props.voluntary[this.props.lot_id].find(
+                    voluntaryItem => {
+                      return voluntaryItem.schoolId === record.school_id;
+                    }
+                  )
+                  ? this.props.voluntary[this.props.lot_id].find(
+                      voluntaryItem => {
+                        return voluntaryItem.schoolId === record.school_id;
+                      }
+                    ).five_volunteer_id
+                  : undefined
                 : undefined
             }
           >
-            {this.props.voluntary.map(voluntaryItem => (
-              <Option
-                key={voluntaryItem.five_volunteer_id}
-                value={voluntaryItem.five_volunteer_id}
-              >
-                {voluntaryItem.volunteer_name}
-              </Option>
-            ))}
+            {this.props.voluntary[this.props.lot_id]
+              ? this.props.voluntary[this.props.lot_id].map(voluntaryItem => (
+                  <Option
+                    key={voluntaryItem.five_volunteer_id}
+                    value={voluntaryItem.five_volunteer_id}
+                  >
+                    {voluntaryItem.volunteer_name}
+                  </Option>
+                ))
+              : undefined}
           </Select>
         )
       }
@@ -238,6 +249,10 @@ class TableController extends React.Component {
           onExpand={this.onExpand}
           expandIcon={CustomExpandIcon}
           bordered
+          onChange={page => {
+            this.props.recordPage(page.current);
+          }}
+          pagination={{ current: this.props.page }}
           expandedRowRender={record => (
             <SubTableController
               key={record.school_id}
@@ -246,17 +261,17 @@ class TableController extends React.Component {
             />
           )}
         />
-        <Drawer
-          width={640}
-          placement='right'
-          closable={false}
-          onClose={() => {
+        <Modal
+          style={{ minWidth: '1300px' }}
+          // width={1300}
+          footer={null}
+          onCancel={() => {
             this.setState({ schoolDrawerVisible: false });
           }}
           visible={this.state.schoolDrawerVisible}
         >
-          <SchoolDetailController />
-        </Drawer>
+          <SchoolDetailController schoolId={this.state.schoolId} />
+        </Modal>
       </div>
     );
   }
@@ -269,7 +284,10 @@ class TableController extends React.Component {
   };
 
   showSchoolDetail = record => {
-    this.props.showSchoolDetail(record.school_id);
+    this.setState({
+      schoolId: record.school_id
+    });
+    // this.props.showSchoolDetail(record.school_id);
     this.setState({ schoolDrawerVisible: true });
   };
 }
@@ -278,13 +296,22 @@ class TableController extends React.Component {
 const mapStateToProps = store => {
   const voluntaryStore = store['voluntaryStore'];
   const userStore = store['userStore'];
-  let { schoolList, schoolTableLoading, voluntary } = voluntaryStore;
+  let {
+    schoolList,
+    schoolTableLoading,
+    voluntary,
+    lot_id,
+    page
+  } = voluntaryStore;
   let { user } = userStore;
+
   return {
     schoolList,
     schoolTableLoading,
     voluntary: [...voluntary],
-    user
+    user,
+    lot_id,
+    page
   };
 };
 
@@ -299,11 +326,11 @@ const mapDispatchToProps = dispatch => {
     },
     showSchoolDetail: params => {
       dispatch(schoolActions.showSchoolDetail(params));
+    },
+    recordPage: params => {
+      dispatch(voluntaryActions.recordPage(params));
     }
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TableController);
+export default connect(mapStateToProps, mapDispatchToProps)(TableController);

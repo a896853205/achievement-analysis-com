@@ -25,6 +25,7 @@ export const GET_HOME_DATA = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_INDE
 export const GET_ADDRESS_OPTION = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SYSTEM}/getAddressOption`;
 export const GET_SCHOOL_OPTION = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SYSTEM}/getSchoolOption`;
 export const GET_LOTS_OPTION = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SYSTEM}/getLotsOption`;
+export const GET_HIGH_SCHOOL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SYSTEM}/gethighSchool`;
 
 /**
  * optentry score
@@ -42,6 +43,7 @@ export const GET_SCHOOL_SCORE_LIST = `${DominConfigs.DOMAIN}${DominConfigs.PART.
 export const GET_SCHOOL_ENROLLMENT_GUIDE_NEWS = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SCHOOL}/getEnrollmentGuideNews`;
 export const GET_SCHOOL_RANK = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SCHOOL}/getSchoolRank`;
 export const GET_ENROLLMENT_GUIDE_NEWS_DETAIL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SCHOOL}/getEnrollmentGuideNewsDetail`;
+export const GET_SCHOOL_RECOMMEND_LIST = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SCHOOL}/getSchoolRecommendList`
 
 /**
  * optquestionnaire
@@ -59,6 +61,8 @@ export const GET_VOLUNTARY_RESULT = `${DominConfigs.DOMAIN}${DominConfigs.PART.O
 export const GET_MY_VOLUNTARY = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_VOLUNTARY}/getMyVoluntary`;
 export const GET_VOLUNTARY_LIST_OPTION = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_VOLUNTARY}/getVoluntaryListOption`;
 export const GET_VOLUNTARY_DEEP_RESULT = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_VOLUNTARY}/getVoluntaryDeepResult`;
+export const SAVE_TEMP_VOLUNTARY = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_VOLUNTARY}/saveTempVoluntary`;
+export const GET_TEMP_VOLUNTARY = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_VOLUNTARY}/getTempVoluntary`;
 
 /**
  * optnews
@@ -75,6 +79,7 @@ export const GET_MAJOR_CATEGORY = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT
 export const GET_MAJOR_PROFILE = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MAJOR}/getMajorProfile`;
 export const GET_MARJO_DETAIL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MAJOR}/getMajorDetail`;
 export const GET_HOT_MAJORS = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MAJOR}/getHotMajors`;
+export const GET_SCHOOL_MAJOR = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MAJOR}/getSchoolMajor`;
 
 // 获取上传Token
 export const GetUploadToken = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_UPLOAD}/getuploadtoken`;

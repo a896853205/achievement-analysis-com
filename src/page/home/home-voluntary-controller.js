@@ -131,6 +131,14 @@ class HomeVoluntaryController extends React.Component {
       </div>
     );
   }
+
+  componentWillUnmount = () => {
+    if (this.props.user.score) {
+      this.props.setStep(1);
+    } else {
+      this.props.setStep(0);
+    }
+  };
 }
 
 // 从store接收state数据
@@ -153,6 +161,9 @@ const mapDispatchToProps = dispatch => {
   return {
     prevStep: () => {
       dispatch(voluntaryActions.prevStep());
+    },
+    setStep: params => {
+      dispatch(voluntaryActions.setStep(params));
     }
   };
 };

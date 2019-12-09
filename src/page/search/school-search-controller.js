@@ -69,6 +69,7 @@ class SchoolSearchController extends React.Component {
               onChange={e => {
                 this.setState({ schoolNameValue: e.target.value });
               }}
+              placeholder='请输入院校名称'
             />
           </div>
           <div className='school-list-option-box'>
@@ -135,7 +136,8 @@ class SchoolSearchController extends React.Component {
                   this.handlePageChange(page);
                 },
                 pageSize: 12,
-                total: this.state.totalSchool
+                total: this.state.totalSchool,
+                current: this.state.page
               }}
               dataSource={this.state.schoolList}
               renderItem={item => (
@@ -175,7 +177,7 @@ class SchoolSearchController extends React.Component {
                     </h5>
                   </Link>
                   <p>{item.school_nature_name}</p>
-                  <p>
+                  <p style={{ height: '20px' }}>
                     {item.school_property_name.map(property => (
                       <Tag key={property} color='#108ee9'>
                         {property}
@@ -192,8 +194,11 @@ class SchoolSearchController extends React.Component {
   }
 
   componentDidMount = async () => {
+    const searchName = this.props.match.params.searchName || '';
+
     await this.setState({
-      loading: true
+      loading: true,
+      schoolNameValue: searchName
     });
 
     let [
@@ -215,6 +220,25 @@ class SchoolSearchController extends React.Component {
     });
   };
 
+  componentWillReceiveProps = async (nextProps) => {
+    const searchName = nextProps.match.params.searchName || '';
+    
+    if (searchName !== this.state.schoolNameValue) {
+      await this.setState({
+        loading: true,
+        schoolNameValue: searchName
+      });
+
+      let [{ schoolList, totalSchool }] = await Promise.all([this.getSchool()]);
+
+      await this.setState({
+        loading: false,
+        schoolList,
+        totalSchool
+      });
+    }
+  };
+
   searchSchool = async () => {
     await this.setState({
       loading: true
@@ -226,7 +250,8 @@ class SchoolSearchController extends React.Component {
     this.setState({
       schoolList,
       loading: false,
-      totalSchool
+      totalSchool,
+      page: 1
     });
   };
 
@@ -305,7 +330,8 @@ class SchoolSearchController extends React.Component {
       propertyValues,
       typeValues,
       areaFeatureValues,
-      page
+      page,
+      schoolNameValue
     } = this.state;
 
     let schoolObj = await launchRequest(APIS.SEARCH_SCHOOL, {
@@ -313,7 +339,7 @@ class SchoolSearchController extends React.Component {
       propertyValues,
       typeValues,
       areaFeatureValues,
-      schoolName: this.state.schoolNameValue,
+      schoolName: schoolNameValue,
       page
     });
 

@@ -27,7 +27,8 @@ class Step1Controller extends React.Component {
   state = {
     loading: false,
     // 查询分数位次的按钮和展示数据的地方
-    optionList: []
+    optionList: [],
+    highSchoolList: [{ code: '其他', highSchoolName: '其他' }]
   };
   render() {
     const { getFieldDecorator } = this.props.form,
@@ -60,6 +61,12 @@ class Step1Controller extends React.Component {
         </Option>
       );
     }
+
+    let highSchoolOption = this.state.highSchoolList.map(item => (
+      <Option key={item.code} value={item.highSchoolName}>
+        {item.highSchoolName}
+      </Option>
+    ));
 
     return (
       <div>
@@ -107,8 +114,19 @@ class Step1Controller extends React.Component {
                 loadData={this.loadAddress}
                 options={this.state.optionList}
                 changeOnSelect
+                onChange={this.getHightSchool}
               />
             )}
+          </Form.Item>
+          <Form.Item label='所在高中'>
+            {getFieldDecorator('highSchool', {
+              rules: [
+                {
+                  required: true,
+                  message: '请选择所在高中'
+                }
+              ]
+            })(<Select>{highSchoolOption}</Select>)}
           </Form.Item>
           <Form.Item label='考试年份'>
             {getFieldDecorator('examYear', {
@@ -268,6 +286,27 @@ class Step1Controller extends React.Component {
           value: item.code,
           label: item.name
         };
+      });
+    }
+  };
+
+  getHightSchool = async value => {
+    if (value[2]) {
+      let highSchoolList = await launchRequest(APIS.GET_HIGH_SCHOOL, {
+        areaCode: value[2]
+      });
+
+      if (highSchoolList) {
+        highSchoolList.push({ code: '其他', highSchoolName: '其他' });
+        await this.setState({
+          highSchoolList
+        });
+      }
+    } else {
+      let highSchoolList = [{ code: '其他', highSchoolName: '其他' }];
+
+      await this.setState({
+        highSchoolList
       });
     }
   };

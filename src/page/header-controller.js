@@ -26,12 +26,17 @@ import {
   PASSWORD,
   MY_VOLUNTARY,
   SEARCH_SCHOOL,
-  SEARCH_MAJOR
+  SEARCH_MAJOR,
+  VIP_PROFILE,
+  NEWS_MORE
 } from '../constants/route-constants';
 
 const { SubMenu } = Menu;
 
 class HeaderController extends React.Component {
+  state = {
+    searchValue: ''
+  };
   render() {
     let userMenu = (
       <Menu theme='dark'>
@@ -82,32 +87,53 @@ class HeaderController extends React.Component {
           </div>
         </div>
         <div className='index-logo-box page-inner-width-box'>
-          <div className='img-logo-box'>
-            <img
-              className='img-logo'
-              src='/images/header/logo-color.png'
-              alt='logo'
-            />
-            <img
-              className='img-title-logo'
-              src='/images/header/title-logo-color.png'
-              alt='文字logo'
-            />
-          </div>
-          <div className='index-search-box'>
-            <input className='index-search-input' type='text' />
-            <button className='index-search-button'>
-              <span className='search-bottom-top-text'>搜索</span>
-              <Icon
-                className='search-bottom-bottom-text'
-                style={{ fontSize: '25px', marginTop: '3px' }}
-                type='search'
+          <Link
+            to={{
+              pathname: `/${INDEX.path}`
+            }}
+          >
+            <div className='img-logo-box'>
+              <img
+                className='img-logo'
+                src='/images/header/logo-color.png'
+                alt='logo'
               />
-            </button>
-            <button className='index-search-button'>
-              <span className='search-bottom-top-text'>开通</span>
-              <span className='search-bottom-bottom-text'>VIP</span>
-            </button>
+              <img
+                className='img-title-logo'
+                src='/images/header/title-logo-color.png'
+                alt='文字logo'
+              />
+            </div>
+          </Link>
+          <div className='index-search-box'>
+            <input
+              className='index-search-input'
+              type='text'
+              onChange={e => {
+                this.setState({ searchValue: e.target.value });
+              }}
+              placeholder='搜学校'
+            />
+            <Link to={`/${SEARCH_SCHOOL.path}/${this.state.searchValue}`}>
+              <button className='index-search-button'>
+                <span className='search-bottom-top-text'>搜索</span>
+                <Icon
+                  className='search-bottom-bottom-text'
+                  style={{ fontSize: '25px', marginTop: '3px' }}
+                  type='search'
+                />
+              </button>
+            </Link>
+            <Link
+              to={{
+                pathname: `/${VIP_PROFILE.path}`
+              }}
+            >
+              <button className='index-search-button'>
+                <span className='search-bottom-top-text'>开通</span>
+                <span className='search-bottom-bottom-text'>VIP</span>
+              </button>
+            </Link>
           </div>
         </div>
         <div className='index-menu-box'>
@@ -191,13 +217,37 @@ class HeaderController extends React.Component {
                     <Link to={'/'}>正式填报</Link>
                   </Menu.Item>
                   <Menu.Item key='9'>
-                    <Link to={'/'}>院校优先</Link>
+                    <Link
+                      to={
+                        this.props.user.uuid
+                          ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
+                          : `/${LOGIN.path}`
+                      }
+                    >
+                      院校优先
+                    </Link>
                   </Menu.Item>
                   <Menu.Item key='10'>
-                    <Link to={'/'}>专业优先</Link>
+                    <Link
+                      to={
+                        this.props.user.uuid
+                          ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
+                          : `/${LOGIN.path}`
+                      }
+                    >
+                      专业优先
+                    </Link>
                   </Menu.Item>
                   <Menu.Item key='11'>
-                    <Link to={'/'}>指定院校</Link>
+                    <Link
+                      to={
+                        this.props.user.uuid
+                          ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
+                          : `/${LOGIN.path}`
+                      }
+                    >
+                      指定院校
+                    </Link>
                   </Menu.Item>
                 </SubMenu>
 
@@ -235,10 +285,22 @@ class HeaderController extends React.Component {
                     <Link to={`/${SEARCH_MAJOR.path}`}>专业百科</Link>
                   </Menu.Item>
                   <Menu.Item key='17'>
-                    <Link to={'/'}>排名集锦</Link>
+                    <Link
+                      to={{
+                        pathname: `/${NEWS_MORE.path}/4`
+                      }}
+                    >
+                      排名集锦
+                    </Link>
                   </Menu.Item>
                   <Menu.Item key='18'>
-                    <Link to={'/'}>高考百科</Link>
+                    <Link
+                      to={{
+                        pathname: `/${NEWS_MORE.path}/5`
+                      }}
+                    >
+                      高考百问
+                    </Link>
                   </Menu.Item>
                 </SubMenu>
                 <Menu.Item key='19'>
@@ -335,8 +397,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(HeaderController)
+  connect(mapStateToProps, mapDispatchToProps)(HeaderController)
 );
