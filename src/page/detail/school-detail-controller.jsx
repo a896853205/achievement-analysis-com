@@ -584,6 +584,12 @@ const SchoolMajorScoreList = connect(
             render={text => (text ? text : '-')}
             width='100px'
           />
+          <Column
+            title='文理'
+            dataIndex='accountCategory'
+            render={text => (text === 1 ? '理科' : '文科')}
+            width='100px'
+          />
         </Table>
       ) : (
         '请登录VIP'
