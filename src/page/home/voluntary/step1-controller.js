@@ -51,16 +51,11 @@ class Step1Controller extends React.Component {
     // }); // 地区的list
 
     let yearsList = [];
-    for (let i = 0; i < 1; i++) {
-      yearsList.push(
-        <Option
-          key={new Date().getFullYear() - i}
-          value={new Date().getFullYear() - i}
-        >
-          {new Date().getFullYear() - i}
-        </Option>
-      );
-    }
+    yearsList.push(
+      <Option key={2019} value={2019}>
+        2019
+      </Option>
+    );
 
     let highSchoolOption = this.state.highSchoolList.map(item => (
       <Option key={item.code} value={item.highSchoolName}>
