@@ -12,33 +12,19 @@ export default props => {
         <div className='left-top-box'>
           <div className='carousel-box'>
             <Carousel autoplay className='carousel'>
-              <img
-                src='https://cdn.dribbble.com/users/1537480/screenshots/7228565/media/1df88153f3e674a7baf3e13522234b3b.png'
-                alt=''
-              />
-              <img
-                src='https://cdn.dribbble.com/users/380199/screenshots/7069563/media/769211f0bae5f0342800b22361e93b22.jpg'
-                alt=''
-              />
+              <img src='/vip/left1.jpg' alt='' />
+              <img src='/vip/left2.jpg' alt='' />
+              <img src='/vip/left3.jpg' alt='' />
             </Carousel>
             <div className='carousel-list'>
               <div className='carousel-list-item'>
-                <img
-                  src='https://cdn.dribbble.com/users/1537480/screenshots/7228565/media/1df88153f3e674a7baf3e13522234b3b.png'
-                  alt=''
-                />
+                <img src='/vip/left1.jpg' alt='' />
               </div>
               <div className='carousel-list-item'>
-                <img
-                  src='https://cdn.dribbble.com/users/380199/screenshots/7069563/media/769211f0bae5f0342800b22361e93b22.jpg'
-                  alt=''
-                />
+                <img src='/vip/left2.jpg' alt='' />
               </div>
               <div className='carousel-list-item'>
-                <img
-                  src='https://cdn.dribbble.com/users/1537480/screenshots/7228565/media/1df88153f3e674a7baf3e13522234b3b.png'
-                  alt=''
-                />
+                <img src='/vip/left3.jpg' alt='' />
               </div>
             </div>
           </div>
@@ -103,12 +89,8 @@ export default props => {
       </div>
       {/* 页面右部分 */}
       <div className='right-box'>
-        <img
-          className='vip-top-adv'
-          src='https://cdn.dribbble.com/users/1564335/screenshots/8341408/media/77e97bc742fd87af6eaa09fccd232191.png'
-          alt=''
-        />
-        <div className='vip-middle-adv-box'>
+        <img className='vip-top-adv' src='/vip/right.jpg' alt='' />
+        {/* <div className='vip-middle-adv-box'>
           <h5>400万考生的首选，专家的认可</h5>
           <img src='/vip/vip-middle-adv.jpg' alt='' />
           <div>太和一中志愿公益讲座</div>
@@ -201,7 +183,7 @@ export default props => {
               <span>王鹏飞成功考入北京理工大学</span>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
