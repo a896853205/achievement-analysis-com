@@ -57,6 +57,26 @@ class IndexController extends React.Component {
                   src='/images/banner/1.jpg'
                   alt='banner1'
                 />
+                <img
+                  className='carou-img'
+                  src='/images/banner/2.jpg'
+                  alt='banner1'
+                />
+                <img
+                  className='carou-img'
+                  src='/images/banner/3.jpg'
+                  alt='banner1'
+                />
+                <img
+                  className='carou-img'
+                  src='/images/banner/4.jpg'
+                  alt='banner1'
+                />
+                <img
+                  className='carou-img'
+                  src='/images/banner/5.jpg'
+                  alt='banner1'
+                />
               </div>
             </Carousel>
             <Login />
