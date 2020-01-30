@@ -52,30 +52,42 @@ class IndexController extends React.Component {
           <div className='carou-inner-box'>
             <Carousel className='carou' autoplay>
               <div>
+                {' '}
                 <img
                   className='carou-img'
                   src='/images/banner/1.jpg'
                   alt='banner1'
                 />
+              </div>
+              <div>
+                {' '}
                 <img
                   className='carou-img'
                   src='/images/banner/2.jpg'
-                  alt='banner1'
+                  alt='banner2'
                 />
+              </div>
+              <div>
+                {' '}
                 <img
                   className='carou-img'
                   src='/images/banner/3.jpg'
-                  alt='banner1'
+                  alt='banner3'
                 />
+              </div>
+              <div>
+                {' '}
                 <img
                   className='carou-img'
                   src='/images/banner/4.jpg'
-                  alt='banner1'
+                  alt='banner4'
                 />
+              </div>
+              <div>
                 <img
                   className='carou-img'
                   src='/images/banner/5.jpg'
-                  alt='banner1'
+                  alt='banner5'
                 />
               </div>
             </Carousel>
