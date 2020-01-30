@@ -26,7 +26,7 @@ export default props => {
   } else {
     schoolId = props.schoolId;
   }
-  
+
   return (
     <div className='school-detail-box page-inner-width-box'>
       {/* 学校详情头部数据 */}
@@ -504,7 +504,8 @@ const SchoolMajorScoreList = connect(
   mapDispatchToProps
 )(props => {
   const [loading, setLoading] = useState(true);
-  const [schoolMajor, setSchoolMajor] = useState([]);
+  const [schoolMajor, setSchoolMajor] = useState([]),
+    [accountCategory, setAccountCategory] = useState(1);
 
   let { schoolId } = props;
 
@@ -514,7 +515,8 @@ const SchoolMajorScoreList = connect(
 
       let [schoolMajor] = await Promise.all([
         launchRequest(APIS.GET_SCHOOL_MAJOR, {
-          schoolId
+          schoolId,
+          accountCategory
         }),
         // 避免闪烁
         wait(500)
@@ -523,12 +525,20 @@ const SchoolMajorScoreList = connect(
       setSchoolMajor(schoolMajor);
       setLoading(false);
     })();
-  }, [schoolId]);
+  }, [schoolId, accountCategory]);
 
   return (
     <div className='school-detail-item-box'>
       <h3 className='school-detail-item-title school-score-title-box'>
         <span>院校专业分数</span>
+        <Select
+          value={accountCategory}
+          onChange={value => setAccountCategory(value)}
+          style={{ width: 200 }}
+        >
+          <Option value={1}>理科</Option>
+          <Option value={2}>文科</Option>
+        </Select>
       </h3>
       {/* Table */}
       {props.user.uuid ? (
@@ -582,6 +592,12 @@ const SchoolMajorScoreList = connect(
             title='录取人数'
             dataIndex='enrollment'
             render={text => (text ? text : '-')}
+            width='100px'
+          />
+          <Column
+            title='文理'
+            dataIndex='accountCategory'
+            render={text => (text === 1 ? '理科' : '文科')}
             width='100px'
           />
         </Table>

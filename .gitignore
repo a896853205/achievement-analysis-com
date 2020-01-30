@@ -26,3 +26,4 @@ yarn-error.log*
 /public/school-logo
 /public/school-recommend
 /public/news
+/public/pdf
