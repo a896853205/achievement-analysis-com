@@ -256,7 +256,7 @@ class IndexController extends React.Component {
                         }}
                       >
                         <img src='/index-course-pic/1.jpg' alt='' />
-                        <h5>智赢学业规划网系统操作详细流程</h5>
+                        <h5>高考填报志愿的注意事项</h5>
                         <p>
                           <Icon type='eye' /> 874
                         </p>
