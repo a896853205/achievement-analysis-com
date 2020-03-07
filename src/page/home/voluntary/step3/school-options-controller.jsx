@@ -49,7 +49,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(voluntaryActions.recordSchoolList());
     },
     recordVoluntary: params => {
-      dispatch(voluntaryActions.recordVoluntary(params))
+      dispatch(voluntaryActions.recordVoluntary(params));
     }
   };
 };
@@ -65,9 +65,15 @@ export default connect(
   const [areaFeature, setAreaFeature] = useState([]);
   const [provinceList, setProvinceList] = useState([]);
 
-  let { lotId, voluntary, initVoluntary, recordSchoolOption, recordVoluntary } = props;
+  let {
+    lotId,
+    voluntary,
+    initVoluntary,
+    recordSchoolOption,
+    recordVoluntary
+  } = props;
 
-  const hasVoluntary = !(voluntary[lotId] && voluntary[lotId].length);
+  const hasVoluntary = !!(voluntary[lotId] && voluntary[lotId].length);
   useEffect(() => {
     (async () => {
       let [
@@ -106,18 +112,27 @@ export default connect(
       setAreaFeature(areaFeature);
       setProvinceList(provinceList);
     })();
-  }, [lotId, hasVoluntary, initVoluntary, recordSchoolOption, recordVoluntary]);
+  }, [lotId, initVoluntary, recordVoluntary]);
 
   useEffect(() => {
     return () => {
       // 组件销毁时将所有的选项清空
-      recordSchoolOption({ natureValues: [] });
-      recordSchoolOption({ propertyValues: [] });
-      recordSchoolOption({ typeValues: [] });
-      recordSchoolOption({ provinceListValues: [] });
-      recordSchoolOption({ areaFeatureValues: [] });
+      recordSchoolOption({
+        natureValues: [],
+        propertyValues: [],
+        typeValues: [],
+        provinceListValues: [],
+        areaFeatureValues: []
+      });
     };
   }, [recordSchoolOption]);
+  // 组件销毁时将志愿表数组清空
+  useEffect(() => {
+    return () => {
+      recordVoluntary([]);
+    };
+  }, [recordVoluntary]);
+
   // 学校批次改变
   const handleLotsChange = e => {
     (async () => {
@@ -173,13 +188,6 @@ export default connect(
     props.recordSchoolOption({ areaFeatureValues: checkedValues });
     props.recordSchoolList();
   };
-
-  // 组件销毁时将志愿表数组清空
-  useEffect(() => {
-    return () => {
-      recordVoluntary([]);
-    };
-  }, [recordVoluntary]);
 
   return (
     <div className='school-option-box'>

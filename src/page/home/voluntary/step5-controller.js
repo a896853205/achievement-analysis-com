@@ -42,36 +42,37 @@ class Step5Controller extends React.Component {
       <div className='step5-box'>
         {report}
         {this.props.voluntaryResultType === 'report' ? (
-          <div className='voluntarty-button-box'>
-            <Alert
-              message={`剩余生成深度体验次数${this.props.user.deepAlterTime}次`}
-              type='info'
-              showIcon
-            />
-            {this.props.user.deepAlterTime ? (
-              <Button
-                className='btn-large btn-transition-blue-background'
-                loading={this.state.btnLoading}
-                onClick={this.handleClickDeepSubmit}
-                size='large'
-                type='primary'
-                style={{ marginTop: '20px', marginBottom: '20px' }}
-              >
-                确认深度体验表
-              </Button>
-            ) : (
-              <Link to='/vipProfile'>
-                <Button
-                  className='btn-large btn-transition-blue-background'
-                  size='large'
-                  type='primary'
-                  style={{ marginTop: '20px', marginBottom: '20px' }}
-                >
-                  没有次数了,充值VIP
-                </Button>
-              </Link>
-            )}
-          </div>
+          // <div className='voluntarty-button-box'>
+          //   <Alert
+          //     message={`剩余生成深度体验次数${this.props.user.deepAlterTime}次`}
+          //     type='info'
+          //     showIcon
+          //   />
+          //   {this.props.user.deepAlterTime ? (
+          //     <Button
+          //       className='btn-large btn-transition-blue-background'
+          //       loading={this.state.btnLoading}
+          //       onClick={this.handleClickDeepSubmit}
+          //       size='large'
+          //       type='primary'
+          //       style={{ marginTop: '20px', marginBottom: '20px' }}
+          //     >
+          //       确认深度体验表
+          //     </Button>
+          //   ) : (
+          //     <Link to='/vipProfile'>
+          //       <Button
+          //         className='btn-large btn-transition-blue-background'
+          //         size='large'
+          //         type='primary'
+          //         style={{ marginTop: '20px', marginBottom: '20px' }}
+          //       >
+          //         没有次数了,充值VIP
+          //       </Button>
+          //     </Link>
+          //   )}
+          // </div>
+          undefined
         ) : (
           undefined
         )}
