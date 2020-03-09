@@ -73,8 +73,9 @@ export default connect(
     recordVoluntary
   } = props;
 
-  const hasVoluntary = !!(voluntary[lotId] && voluntary[lotId].length);
   useEffect(() => {
+    const hasVoluntary = !!(voluntary[lotId] && voluntary[lotId].length);
+
     (async () => {
       let [
         {
@@ -96,12 +97,10 @@ export default connect(
       ]);
 
       // 先判断是否有暂存
-      if (voluntary) {
+      if (voluntary && voluntary[lotId]) {
         recordVoluntary(voluntary);
-      }
-
-      // 然后再判断每个批次的表格是否有基础信息
-      if (hasVoluntary) {
+      } else if (!hasVoluntary) {
+        // 然后再判断每个批次的表格是否有基础信息
         initVoluntary(voluntaryOptionList);
       }
 
