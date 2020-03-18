@@ -11,6 +11,7 @@ import NewsDetailController from '@/page/news/news-detail-controller';
 import NewsMoreController from '@/page/news/news-more-controller.jsx';
 import VipController from '@/page/vip/vip-controller.jsx';
 import SchoolRecommendController from '@/page/school/school-recommend-controller.jsx';
+import RegistrationController from '@/page/register-controller';
 
 // search 组件
 import SchoolSearchController from './page/search/school-search-controller';
@@ -34,7 +35,8 @@ import {
   SCHOOL_DETAIL,
   MAJOR_DETAIL,
   VIP_PROFILE,
-  SCHOOL_RECOMMEND
+  SCHOOL_RECOMMEND,
+  REGISTER
 } from '@/constants/route-constants';
 
 const { Content } = Layout;
@@ -56,6 +58,11 @@ class App extends Component {
                 path={`/${LOGIN.path}`}
                 exact
                 component={LoginController}
+              />
+              <Route
+                path={`/${REGISTER.path}`}
+                exact
+                component={RegistrationController}
               />
               <Route
                 path={[

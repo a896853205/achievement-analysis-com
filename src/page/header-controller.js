@@ -28,7 +28,8 @@ import {
   SEARCH_SCHOOL,
   SEARCH_MAJOR,
   VIP_PROFILE,
-  NEWS_MORE
+  NEWS_MORE,
+  REGISTER
 } from '../constants/route-constants';
 
 const { SubMenu } = Menu;
@@ -320,14 +321,14 @@ class HeaderController extends React.Component {
                 </Dropdown>
               ) : (
                 <div>
-                  {/* <Link
-                  to={{
-                    pathname: `/${REGISTER.path}`
-                  }}
-                >
-                  注册
-                </Link>
-                | */}
+                  <Link
+                    to={{
+                      pathname: `/${REGISTER.path}`
+                    }}
+                  >
+                    注册
+                  </Link>
+                  |
                   <Link
                     to={{
                       pathname: `/${LOGIN.path}`
