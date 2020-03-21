@@ -29,9 +29,14 @@ class RegisterController extends React.Component {
           {
             verifyCodeBackwardCount: 60
           },
-          () => {
+          async () => {
             this.count();
             // 请求
+            let result = await launchRequest(APIS.SAVE_VERIFY_CODE, {
+              username: values.username
+            });
+
+            console.log(result);
           }
         );
       }

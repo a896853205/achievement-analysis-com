@@ -83,3 +83,6 @@ export const GET_SCHOOL_MAJOR = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_M
 
 // 获取上传Token
 export const GetUploadToken = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_UPLOAD}/getuploadtoken`;
+
+// 保存验证码
+export const SAVE_VERIFY_CODE = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/saveVerifyCode`;
