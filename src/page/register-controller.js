@@ -18,6 +18,7 @@ class RegisterController extends React.Component {
     username: '',
     password: '',
     rePassword: '',
+    code: '',
     loading: false,
     verifyCodeBackwardCount: 0
   };
@@ -125,14 +126,14 @@ class RegisterController extends React.Component {
             <Form.Item className='form-item'>
               <Row gutter={8}>
                 <Col span={12}>
-                  <Input
-                    className='register-input'
-                    size='large'
-                    placeholder='短信验证码'
-                    onChange={e =>
-                      this.setState({ rePassword: e.target.value })
-                    }
-                  />
+                  {getFieldDecorator('code')(
+                    <Input
+                      className='register-input'
+                      size='large'
+                      placeholder='短信验证码'
+                      onChange={e => this.setState({ code: e.target.value })}
+                    />
+                  )}
                 </Col>
                 <Col span={12}>
                   {this.state.verifyCodeBackwardCount <= 0 ? (
@@ -177,7 +178,7 @@ class RegisterController extends React.Component {
     // 表单验证
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
-        let { username, password, rePassword } = values;
+        let { username, password, rePassword, code } = values;
         if (password !== rePassword) {
           message.error('两次密码不一致');
           this.setState({
@@ -188,7 +189,8 @@ class RegisterController extends React.Component {
           // 发送请求
           let result = await launchRequest(APIS.USER_REGISTER, {
             username,
-            password: md5(password)
+            password: md5(password),
+            code
           });
 
           this.setState({
