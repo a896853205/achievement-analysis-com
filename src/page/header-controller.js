@@ -38,7 +38,9 @@ class HeaderController extends React.Component {
   state = {
     searchValue: ''
   };
+
   render() {
+    console.log('user', this.props.user);
     let userMenu = (
       <Menu theme='dark'>
         <Menu.Item>
@@ -125,16 +127,18 @@ class HeaderController extends React.Component {
                 />
               </button>
             </Link>
-            <Link
-              to={{
-                pathname: `/${VIP_PROFILE.path}`
-              }}
-            >
-              <button className='index-search-button'>
-                <span className='search-bottom-top-text'>开通</span>
-                <span className='search-bottom-bottom-text'>VIP</span>
-              </button>
-            </Link>
+            {this.props.user.roleCode && this.props.user.roleCode !== 2 ? (
+              <Link
+                to={{
+                  pathname: `/${VIP_PROFILE.path}`
+                }}
+              >
+                <button className='index-search-button'>
+                  <span className='search-bottom-top-text'>开通</span>
+                  <span className='search-bottom-bottom-text'>VIP</span>
+                </button>
+              </Link>
+            ) : null}
           </div>
         </div>
         <div className='index-menu-box'>
@@ -326,7 +330,7 @@ class HeaderController extends React.Component {
                       pathname: `/${REGISTER.path}`
                     }}
                   >
-                    注册
+                    <span style={{ color: '#fff' }}>注册</span>
                   </Link>
                   |
                   <Link
