@@ -1,5 +1,5 @@
-import { ENVIRONMENT } from "./app-constants";
-import { SAP_CONTROL } from "../config/app-config";
+import { ENVIRONMENT } from './app-constants';
+import { SAP_CONTROL } from '../config/app-config';
 
 /** 域名 */
 export let DOMAIN = 'http://localhost:1208';
@@ -27,6 +27,7 @@ export const PART = {
   OPT_NEWS: '/news',
   OPT_INDEX: '/index',
   OPT_MAJOR: '/major',
+  OPT_PAYMENT: '/payment'
 };
 
 // 请求类型
@@ -38,7 +39,7 @@ export const REQUEST_TYPE = {
 
 // 返回码
 export const RESPONSE_CODE = {
-  success: 200,
+  success: 200
 };
 
 // 服务器状态码
@@ -46,5 +47,5 @@ export const SERVICE_CODE = {
   Error: 0,
   Successed: 1,
   SetToken: 2,
-  OutTimeToken: 3,
+  OutTimeToken: 3
 };

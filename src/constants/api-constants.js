@@ -43,7 +43,7 @@ export const GET_SCHOOL_SCORE_LIST = `${DominConfigs.DOMAIN}${DominConfigs.PART.
 export const GET_SCHOOL_ENROLLMENT_GUIDE_NEWS = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SCHOOL}/getEnrollmentGuideNews`;
 export const GET_SCHOOL_RANK = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SCHOOL}/getSchoolRank`;
 export const GET_ENROLLMENT_GUIDE_NEWS_DETAIL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SCHOOL}/getEnrollmentGuideNewsDetail`;
-export const GET_SCHOOL_RECOMMEND_LIST = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SCHOOL}/getSchoolRecommendList`
+export const GET_SCHOOL_RECOMMEND_LIST = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SCHOOL}/getSchoolRecommendList`;
 
 /**
  * optquestionnaire
@@ -86,3 +86,6 @@ export const GetUploadToken = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_UPL
 
 // 保存验证码
 export const SAVE_VERIFY_CODE = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/saveVerifyCode`;
+
+// 获取支付宝付款url
+export const GET_ALIPAY_PAYMENT_URL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_PAYMENT}/getAlipayPaymentUrl`;

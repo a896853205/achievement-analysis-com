@@ -1,10 +1,20 @@
 import React from 'react';
 
+// 请求文件
+import { launchRequest } from '../../util/request';
+import * as APIS from '../../constants/api-constants';
+
 import { Carousel } from 'antd';
 
 import '@/style/vip/profile.css';
 
 export default props => {
+  const handleToAlipayClick = async () => {
+    let url = await launchRequest(APIS.GET_ALIPAY_PAYMENT_URL);
+
+    window.open(url);
+  };
+
   return (
     <div className='page-inner-width-box vip-profile'>
       {/* 页面左部分 */}
@@ -63,6 +73,8 @@ export default props => {
             </div> */}
             <div className='buy-button-box'>
               <button className='buy-button'>立即购买</button>
+              <button onClick={handleToAlipayClick}>支付宝支付</button>
+              <button>微信支付</button>
               <span className='vip-link'>咨询热线: 18644091056</span>
             </div>
             <div className='vip-describe-list-box'>
