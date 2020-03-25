@@ -89,3 +89,4 @@ export const SAVE_VERIFY_CODE = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_U
 
 // 获取支付宝付款url
 export const GET_ALIPAY_PAYMENT_URL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_PAYMENT}/getAlipayPaymentUrl`;
+export const GET_WECHAT_PAYMENT_QR_URL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_PAYMENT}/getWechatPaymentQRUrl`;

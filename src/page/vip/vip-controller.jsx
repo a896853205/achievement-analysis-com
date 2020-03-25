@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import QRCode from 'qrcode';
 
 // 请求文件
 import { launchRequest } from '../../util/request';
@@ -9,10 +10,17 @@ import { Carousel } from 'antd';
 import '@/style/vip/profile.css';
 
 export default props => {
+  const couterRef = useRef();
   const handleToAlipayClick = async () => {
     let url = await launchRequest(APIS.GET_ALIPAY_PAYMENT_URL);
 
     window.open(url);
+  };
+
+  const handleToWeChatClick = async () => {
+    let url = await launchRequest(APIS.GET_WECHAT_PAYMENT_QR_URL);
+
+    QRCode.toCanvas(couterRef.current, url);
   };
 
   return (
@@ -74,7 +82,8 @@ export default props => {
             <div className='buy-button-box'>
               <button className='buy-button'>立即购买</button>
               <button onClick={handleToAlipayClick}>支付宝支付</button>
-              <button>微信支付</button>
+              <button onClick={handleToWeChatClick}>微信支付</button>
+              <canvas ref={couterRef}></canvas>
               <span className='vip-link'>咨询热线: 18644091056</span>
             </div>
             <div className='vip-describe-list-box'>
