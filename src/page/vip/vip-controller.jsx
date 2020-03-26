@@ -13,14 +13,17 @@ export default props => {
   const couterRef = useRef();
   const handleToAlipayClick = async () => {
     let url = await launchRequest(APIS.GET_ALIPAY_PAYMENT_URL);
-
-    window.open(url);
+    if (url) {
+      window.open(url);
+    }
   };
 
   const handleToWeChatClick = async () => {
     let url = await launchRequest(APIS.GET_WECHAT_PAYMENT_QR_URL);
 
-    QRCode.toCanvas(couterRef.current, url);
+    if (url) {
+      QRCode.toCanvas(couterRef.current, url);
+    }
   };
 
   return (
