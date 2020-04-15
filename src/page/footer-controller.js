@@ -101,6 +101,12 @@ class FooterController extends React.Component {
             </div>{' '}
           </div>{' '}
         </div>{' '}
+        <div className='beihao'>
+          <ul>
+            <li>网站信息 : 黑ICP备19005978号</li>
+            <li>网站内容 : 单位门户网站</li>
+          </ul>
+        </div>
       </div>
     );
   }
