@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import QRCode from 'qrcode';
 
 // 请求文件
@@ -8,6 +8,10 @@ import * as APIS from '../../constants/api-constants';
 import { Carousel } from 'antd';
 
 import '@/style/vip/profile.css';
+
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 export default props => {
   const couterRef = useRef();
@@ -24,6 +28,16 @@ export default props => {
     if (url) {
       QRCode.toCanvas(couterRef.current, url);
     }
+  };
+  //使用menu
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -83,9 +97,31 @@ export default props => {
               </button>
             </div> */}
             <div className='buy-button-box'>
-              <button className='buy-button'>立即购买</button>
-              <button onClick={handleToAlipayClick}>支付宝支付</button>
-              <button onClick={handleToWeChatClick}>微信支付</button>
+              <Button
+                aria-controls='simple-menu'
+                aria-haspopup='true'
+                onClick={handleClick}
+                className='buy-button'
+              >
+                立即购买
+              </Button>
+              <Menu
+                id='simple-menu'
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleToAlipayClick}>
+                  <img src='/vip/zhifubao.jpg' alt='' className='wechat' />
+                  支付宝支付
+                </MenuItem>
+                <MenuItem onClick={handleToWeChatClick}>
+                  <img src='/vip/wechat.jpg' alt='' className='wechat' />
+                  微信支付
+                </MenuItem>
+              </Menu>
+
               <canvas ref={couterRef}></canvas>
               <span className='vip-link'>咨询热线: 18644091056</span>
             </div>
