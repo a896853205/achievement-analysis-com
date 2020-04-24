@@ -1,7 +1,7 @@
 import React from 'react';
 
 // UI组件
-import { Icon } from 'antd';
+import { Icon, Modal, Button } from 'antd';
 
 // 请求文件
 import { launchRequest } from '../../../util/request';
@@ -17,19 +17,59 @@ import '@/style/voluntary/step2.css';
 class Step2Controller extends React.Component {
   state = {
     entryScoreList: [],
-    loading: false
+    loading: false,
+    visible: false
   };
+
+  //modal
+  showModal = () => {
+    this.setState({
+      visible: true
+    });
+  };
+
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false
+    });
+  };
+  //modal jieshu
+
   render() {
+    for (var i = 0; i < this.state.entryScoreList.length; i++) {
+      if (this.state.entryScoreList[i].lots_name === '三批') {
+        this.state.entryScoreList[i].lots_name = '强基计划';
+      }
+    }
+
     let entryScoreList = this.state.entryScoreList.map(entryScoreItem => {
       return (
-        <div
-          key={entryScoreItem.id}
-          onClick={() => {
-            this.handleClickCard(entryScoreItem.id);
-          }}
-          className='step2-card-item'
-        >
-          {entryScoreItem.lots_name}
+        <div>
+          <div
+            key={entryScoreItem.id}
+            onClick={() => {
+              this.handleClickCard(entryScoreItem.id);
+            }}
+            className='step2-card-item'
+          >
+            {entryScoreItem.lots_name}
+          </div>
+          <Modal
+            title='警告'
+            visible={this.state.visible}
+            onOk={this.handleOk}
+            onCancel={this.handleCancel}
+          >
+            <p>详情请咨询专家</p>
+          </Modal>
         </div>
       );
     });
@@ -71,8 +111,12 @@ class Step2Controller extends React.Component {
   };
 
   handleClickCard = lotId => {
-    this.props.setLotId(lotId);
-    this.props.nextStep();
+    if (lotId != 6) {
+      this.props.setLotId(lotId);
+      this.props.nextStep();
+    } else {
+      this.showModal();
+    }
   };
 }
 
@@ -93,7 +137,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Step2Controller);
+export default connect(mapStateToProps, mapDispatchToProps)(Step2Controller);
