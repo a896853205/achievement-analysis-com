@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import QRCode from 'qrcode';
 
 // 请求文件

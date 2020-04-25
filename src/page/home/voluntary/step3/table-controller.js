@@ -68,7 +68,7 @@ class TableController extends React.Component {
         )
       },
       {
-        title: '历年位次',
+        title: '历年位次/分数',
         width: 240,
         children: [
           {
@@ -80,7 +80,7 @@ class TableController extends React.Component {
                 item => item.year === this.props.user.examYear - 1
               );
               if (cerrctObj) {
-                return <span>{cerrctObj.rank}</span>;
+                return <span>{cerrctObj.rank + '/' + cerrctObj.score}</span>;
               } else {
                 return <span>-</span>;
               }
@@ -95,7 +95,7 @@ class TableController extends React.Component {
                 item => item.year === this.props.user.examYear - 2
               );
               if (cerrctObj) {
-                return <span>{cerrctObj.rank}</span>;
+                return <span>{cerrctObj.rank + '/' + cerrctObj.score}</span>;
               } else {
                 return <span>-</span>;
               }
@@ -110,7 +110,7 @@ class TableController extends React.Component {
                 item => item.year === this.props.user.examYear - 3
               );
               if (cerrctObj) {
-                return <span>{cerrctObj.rank}</span>;
+                return <span>{cerrctObj.rank + '/' + cerrctObj.score}</span>;
               } else {
                 return <span>-</span>;
               }
@@ -118,31 +118,7 @@ class TableController extends React.Component {
           }
         ]
       },
-      {
-        title: () => (
-          <Tooltip title='综合考虑考生位次/线差、院校近三年录取位次/线差。'>
-            <span>
-              投档概率
-              <Icon type='question-circle' />
-            </span>
-          </Tooltip>
-        ),
-        dataIndex: 'enrollRate',
-        key: 'enrollRate',
-        align: 'center',
-        render: text => {
-          switch (text) {
-            case 1:
-              return <Tag color='red'>低</Tag>;
-            case 2:
-              return <Tag color='blue'>中</Tag>;
-            case 3:
-              return <Tag color='green'>高</Tag>;
-            default:
-              return <Tag color='purple'>未知</Tag>;
-          }
-        }
-      },
+
       {
         title: () => (
           <Tooltip title='综合考虑院校位次/线差的波动幅度、趋势以及院校的招生计划变化情况。'>

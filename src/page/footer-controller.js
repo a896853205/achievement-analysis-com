@@ -115,18 +115,17 @@ class FooterController extends React.Component {
         </div>{' '}
         <div className='beihao'>
           <ul>
-            <li>网站信息 : 黑ICP备19005978号</li>
-            <li>网站内容 : 单位门户网站</li>
-            <div>
-              友情链接:{' '}
+            <li>
+              备案号 :
               <a
                 href='http://www.beian.miit.gov.cn/'
                 target='_blank'
                 rel='noopener noreferrer'
               >
-                工信部
-              </a>
-            </div>
+                黑ICP备19005978号
+              </a>{' '}
+            </li>
+            <li>网站内容 : 单位门户网站</li>
           </ul>
         </div>
       </div>
