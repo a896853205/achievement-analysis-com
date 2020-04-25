@@ -8,6 +8,8 @@ import { Skeleton, Tag } from 'antd';
 import ReactEcharts from 'echarts-for-react';
 import '@/style/voluntary/result.css';
 
+import VoluntaryDetailController from '@/page/home/voluntary/step4/voluntary-detail-controller';
+
 class ResultReportController extends React.Component {
   getOption = result => {
     const option = {
@@ -36,10 +38,13 @@ class ResultReportController extends React.Component {
     return (
       <div className='voluntary-result-content'>
         <h1>志愿分析评测报告</h1>
-        <div>
+        <div className="voluntary-result-mgb20">
           名称: 志愿分析评测报告 批次:
           {this.props.voluntaryResult.lotsName}
         </div>
+
+        <VoluntaryDetailController />
+
         <div className='voluntary-result-detail-box'>
           {this.props.voluntaryResult.completeResult ? (
             <div className='voluntary-result-title-box'>

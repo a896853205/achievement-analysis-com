@@ -12,6 +12,7 @@ import NewsMoreController from '@/page/news/news-more-controller.jsx';
 import VipController from '@/page/vip/vip-controller.jsx';
 import SchoolRecommendController from '@/page/school/school-recommend-controller.jsx';
 import RegistrationController from '@/page/register-controller';
+import WarningController from '@/page/warning-controller';
 
 // search 组件
 import SchoolSearchController from './page/search/school-search-controller';
@@ -45,6 +46,7 @@ class App extends Component {
   render() {
     return (
       <div className='layout'>
+        <WarningController/>
         <HeaderController />
         <Content>
           <div>

@@ -26,6 +26,7 @@ export const GET_ADDRESS_OPTION = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT
 export const GET_SCHOOL_OPTION = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SYSTEM}/getSchoolOption`;
 export const GET_LOTS_OPTION = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SYSTEM}/getLotsOption`;
 export const GET_HIGH_SCHOOL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SYSTEM}/gethighSchool`;
+export const GET_WARNING_DATA = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_SYSTEM}/getWarningData`;
 
 /**
  * optentry score
