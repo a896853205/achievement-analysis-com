@@ -4,7 +4,7 @@ class HomeVoluntaryResultController extends React.Component {
 	render() {
 		return (
 			<div>
-				<ResultReportController />
+				<ResultReportController {...this.props}/>
 			</div>
 		);
 	}
