@@ -100,10 +100,11 @@ class MyVoluntaryController extends React.Component {
   };
 
   handleClickVoluntaryResut = voluntaryId => {
+    this.props.recordVoluntarySchoolAndMajorUuid(voluntaryId);
     // 将uuid存入redux
     this.props.recordVoluntaryIdGetResult(voluntaryId);
     // 跳转页面
-    this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY_RESULT.path}`);
+    this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY_RESULT.path}?from=myVoluntary`);
   };
 
   handleClickDeepResut = voluntaryId => {
@@ -116,17 +117,21 @@ class MyVoluntaryController extends React.Component {
 // 从store接收state数据
 const mapStateToProps = store => {
   const voluntaryStore = store['voluntaryStore'];
-  let { lot_id, voluntary } = voluntaryStore;
+  let { lot_id, voluntary, schoolAndMajorUuid } = voluntaryStore;
 
   return {
     lotId: lot_id,
-    voluntary: [...voluntary]
+    voluntary: [...voluntary],
+    schoolAndMajorUuid
   };
 };
 
 // 向store dispatch action
 const mapDispatchToProps = dispatch => {
   return {
+    recordVoluntarySchoolAndMajorUuid: params => {
+      dispatch(voluntaryActions.recordVoluntarySchoolAndMajorUuid(params));
+    },
     recordVoluntaryIdGetResult: params => {
       dispatch(voluntaryActions.recordVoluntaryIdGetResult(params));
     },

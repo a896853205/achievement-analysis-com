@@ -8,6 +8,8 @@ import { Skeleton, Tag } from 'antd';
 import ReactEcharts from 'echarts-for-react';
 import '@/style/voluntary/result.css';
 
+import ResultVoluntaryDetailController from '@/page/home/voluntary/result/result-voluntary-detail-controller';
+import { readUrlParams } from '@/util/parseUrlParams';
 import VoluntaryDetailController from '@/page/home/voluntary/step4/voluntary-detail-controller';
 
 class ResultReportController extends React.Component {
@@ -43,7 +45,12 @@ class ResultReportController extends React.Component {
           {this.props.voluntaryResult.lotsName}
         </div>
 
-        <VoluntaryDetailController />
+        { readUrlParams('from') ? (
+          <ResultVoluntaryDetailController
+           schoolAndMajorUuid={this.props.schoolAndMajorUuid}
+          />
+        ) : (<VoluntaryDetailController />)}
+        
 
         <div className='voluntary-result-detail-box'>
           {this.props.voluntaryResult.completeResult ? (
@@ -156,10 +163,11 @@ class ResultReportController extends React.Component {
 // 从store接收state数据
 const mapStateToProps = store => {
   const voluntaryStore = store['voluntaryStore'];
-  let { voluntaryResult } = voluntaryStore;
+  let { voluntaryResult, schoolAndMajorUuid } = voluntaryStore;
 
   return {
-    voluntaryResult
+    voluntaryResult,
+    schoolAndMajorUuid
   };
 };
 

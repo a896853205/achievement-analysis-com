@@ -35,7 +35,8 @@ export const actions = {
   recordVoluntaryListOption: createAction('recordVoluntaryListOption'),
   recordVoluntaryDeepUuid: createAction('recordVoluntaryDeepUuid'),
   recordVoluntaryType: createAction('recordVoluntaryType'),
-  recordPage: createAction('recordPage')
+  recordPage: createAction('recordPage'),
+  recordVoluntarySchoolAndMajorUuid:createAction('recordVoluntarySchoolAndMajorUuid')
 };
 const recordVoluntaryResult = createAction('recordVoluntaryResult');
 const setMeScoreRank = createAction('setMeScoreRank');
@@ -189,6 +190,12 @@ export const voluntarySaga = function*() {
 
 export const voluntaryReducer = handleActions(
   {
+    recordVoluntarySchoolAndMajorUuid(state,{ payload }) {
+      return {
+        ...state,
+        schoolAndMajorUuid: payload
+      };
+    },
     prevStep(state) {
       return {
         ...state,
