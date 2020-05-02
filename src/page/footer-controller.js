@@ -43,7 +43,19 @@ class FooterController extends React.Component {
           <div className='footer-list-item'>
             <h5 className='footer-list-title'> 关于我们 </h5>{' '}
             <ul>
-              <li> 团队介绍 </li> <li> 联系我们 </li> <li> 商务合作 </li>{' '}
+              <li>
+                {' '}
+                <a style={{ color: 'white' }} href='/pdf/团队介绍.pdf'>
+                  团队介绍
+                </a>{' '}
+              </li>{' '}
+              <li> 联系我们 </li>{' '}
+              <li>
+                {' '}
+                <a style={{ color: 'white' }} href='/pdf/商务合作.pdf'>
+                  商务合作
+                </a>
+              </li>{' '}
             </ul>
           </div>
           {/* <div className="footer-list-item">

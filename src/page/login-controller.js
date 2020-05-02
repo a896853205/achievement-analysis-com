@@ -44,7 +44,7 @@ class LoginController extends React.Component {
                   className='login-input'
                   onChange={e => this.setState({ userName: e.target.value })}
                   size='large'
-                  placeholder='卡号'
+                  placeholder='卡号/手机号'
                 />
               )}
             </Form.Item>
