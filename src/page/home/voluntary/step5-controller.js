@@ -7,11 +7,8 @@ import { connect } from 'react-redux';
 import { actions as voluntaryActions } from '@/redux/voluntary-model';
 import { actions as userActions } from '@/redux/user-model';
 
-// 路由
-import { Link } from 'react-router-dom';
-
 // UI组件
-import { Button, Modal, Alert } from 'antd';
+import { Modal } from 'antd';
 
 // 请求文件
 import { launchRequest } from '@/util/request';

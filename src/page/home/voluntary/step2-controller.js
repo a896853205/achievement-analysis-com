@@ -1,7 +1,7 @@
 import React from 'react';
 
 // UI组件
-import { Icon, Modal, Button } from 'antd';
+import { Icon, Modal } from 'antd';
 
 // 请求文件
 import { launchRequest } from '../../../util/request';
@@ -18,67 +18,40 @@ class Step2Controller extends React.Component {
   state = {
     entryScoreList: [],
     loading: false,
-    visible: false
+    visible: false,
   };
 
-  //modal
+  // modal
   showModal = () => {
     this.setState({
-      visible: true
+      visible: true,
     });
   };
 
-  handleOk = e => {
-    console.log(e);
+  handleOk = (e) => {
     this.setState({
-      visible: false
+      visible: false,
     });
   };
 
-  handleCancel = e => {
-    console.log(e);
+  // modal jieshu
+  handleCancel = (e) => {
     this.setState({
-      visible: false
+      visible: false,
     });
-  };
-  //modal jieshu
-
-  swap = num => {
-    var temp = this.state.entryScoreList[0];
-    this.state.entryScoreList[0] = this.state.entryScoreList[num];
-    this.state.entryScoreList[num] = temp;
   };
 
   render() {
-    for (var i = 0; i < this.state.entryScoreList.length; i++) {
-      if (this.state.entryScoreList[i].lots_name === '三批') {
-        this.state.entryScoreList[i].lots_name = '强基计划';
-        this.swap(i);
-      }
-    }
-
-    let entryScoreList = this.state.entryScoreList.map(entryScoreItem => {
+    let entryScoreList = this.state.entryScoreList.map((entryScoreItem, i) => {
       return (
-        <div>
-          <div
-            key={entryScoreItem.id}
-            onClick={() => {
-              this.handleClickCard(entryScoreItem.id);
-            }}
-            className='step2-card-item'
-          >
-            {entryScoreItem.lots_name}
-          </div>
-          <Modal
-            title='警告'
-            visible={this.state.visible}
-            onOk={this.handleOk}
-            onCancel={this.handleCancel}
-            okText='确定'
-            cancelText='取消'
-          >
-            <p>详情请咨询专家</p>
-          </Modal>
+        <div
+          key={entryScoreItem.id}
+          onClick={() => {
+            this.handleClickCard(entryScoreItem.id);
+          }}
+          className='step2-card-item'
+        >
+          {entryScoreItem.lots_name}
         </div>
       );
     });
@@ -97,6 +70,16 @@ class Step2Controller extends React.Component {
         </p>
         <div className='step2-box'>
           <div className='step2-card-box'>{entryScoreList}</div>
+          <Modal
+            title='警告'
+            visible={this.state.visible}
+            onOk={this.handleOk}
+            onCancel={this.handleCancel}
+            okText='确定'
+            cancelText='取消'
+          >
+            <p>详情请咨询专家</p>
+          </Modal>
         </div>
       </div>
     );
@@ -104,7 +87,7 @@ class Step2Controller extends React.Component {
 
   componentDidMount = async () => {
     await this.setState({
-      loading: true
+      loading: true,
     });
 
     let { lotsOption } = await launchRequest(
@@ -113,14 +96,23 @@ class Step2Controller extends React.Component {
       DominConfigs.REQUEST_TYPE.GET
     );
 
+    // 强基计划进
+    lotsOption.unshift({
+      id: -1,
+      lots_name: '强基计划',
+    });
+
+    // 三批走
+    lotsOption.splice(6, 1);
+
     this.setState({
       entryScoreList: lotsOption,
-      loading: false
+      loading: false,
     });
   };
 
-  handleClickCard = lotId => {
-    if (lotId != 6) {
+  handleClickCard = (lotId) => {
+    if (lotId !== -1) {
       this.props.setLotId(lotId);
       this.props.nextStep();
     } else {
@@ -130,19 +122,19 @@ class Step2Controller extends React.Component {
 }
 
 // 从store接收state数据
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {};
 };
 
 // 向store dispatch action
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    setLotId: lotId => {
+    setLotId: (lotId) => {
       dispatch(voluntaryActions.setLotId(lotId));
     },
     nextStep: () => {
       dispatch(voluntaryActions.nextStep());
-    }
+    },
   };
 };
 
