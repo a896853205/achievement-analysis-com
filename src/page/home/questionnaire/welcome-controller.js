@@ -1,9 +1,9 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 //数据模块交互
 import { connect } from 'react-redux';
 import { actions as questionnaireActions } from '../../../redux/questionnaire-model';
-
+import { actions as userActions } from '../../../redux/user-model';
 // 请求文件
 import { launchRequest } from '../../../util/request';
 import * as APIS from '../../../constants/api-constants';
@@ -37,22 +37,45 @@ class WelcomeController extends React.Component {
               <Paragraph>
                 只要你认真、真实地填写了测试问卷，那么通常情况下你都能得到一个确实和你的性格相匹配地类型，从而我们可以得知您所适合报考的专业。
               </Paragraph>
-              <Button
-                type='primary'
-                htmlType='submit'
-                shape='round'
-                size='large'
-                disabled={this.state.loading}
-                onClick={() => {
-                  this.handleStart();
-                }}
-              >
-                {this.state.loading
-                  ? '加载中...'
-                  : this.state.questionnaireDone
-                  ? '查看结果'
-                  : '开始测试'}
-              </Button>
+              <div>
+                {this.props.user.roleCode === 2 ? (
+                  <Button
+                    type='primary'
+                    htmlType='submit'
+                    shape='round'
+                    size='large'
+                    disabled={this.state.loading}
+                    onClick={() => {
+                      this.handleStart();
+                    }}
+                  >
+                    {this.state.loading
+                      ? '加载中...'
+                      : this.state.questionnaireDone
+                      ? '查看结果'
+                      : '开始测试'}
+                  </Button>
+                ) : (
+                  <Link to='/vipProfile'>
+                    <Button
+                      type='primary'
+                      htmlType='submit'
+                      shape='round'
+                      size='large'
+                      disabled={this.state.loading}
+                      onClick={() => {
+                        this.handleStart();
+                      }}
+                    >
+                      {this.state.loading
+                        ? '加载中...'
+                        : this.state.questionnaireDone
+                        ? '查看结果'
+                        : '请先开通vip'}
+                    </Button>
+                  </Link>
+                )}
+              </div>
             </Typography>
           </div>
           <div className='question-welcome-img-box'>
@@ -74,6 +97,7 @@ class WelcomeController extends React.Component {
   };
 
   componentDidMount = async () => {
+    console.log(this.props.roleCode + '123');
     let status = await launchRequest(APIS.GET_QUESTIONNAIRE_STATUS);
 
     if (!status) {
@@ -90,10 +114,14 @@ class WelcomeController extends React.Component {
 
 const mapStateToProps = store => {
   const questionnaireStore = store['questionnaireStore'];
+  const userStore = store['userStore'];
+  let { user } = userStore;
+
   let { status } = questionnaireStore;
 
   return {
-    status
+    status,
+    user
   };
 };
 
@@ -101,11 +129,11 @@ const mapDispatchToProps = dispatch => {
   return {
     setQuesStatus: pageIndex => {
       dispatch(questionnaireActions.setQuesStatus(pageIndex));
+    },
+    getUser: () => {
+      dispatch(userActions.getUser());
     }
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(WelcomeController);
+export default connect(mapStateToProps, mapDispatchToProps)(WelcomeController);
