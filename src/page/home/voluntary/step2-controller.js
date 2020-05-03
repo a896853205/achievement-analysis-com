@@ -43,10 +43,17 @@ class Step2Controller extends React.Component {
   };
   //modal jieshu
 
+  swap = num => {
+    var temp = this.state.entryScoreList[0];
+    this.state.entryScoreList[0] = this.state.entryScoreList[num];
+    this.state.entryScoreList[num] = temp;
+  };
+
   render() {
     for (var i = 0; i < this.state.entryScoreList.length; i++) {
       if (this.state.entryScoreList[i].lots_name === '三批') {
         this.state.entryScoreList[i].lots_name = '强基计划';
+        this.swap(i);
       }
     }
 
@@ -67,6 +74,8 @@ class Step2Controller extends React.Component {
             visible={this.state.visible}
             onOk={this.handleOk}
             onCancel={this.handleCancel}
+            okText='确定'
+            cancelText='取消'
           >
             <p>详情请咨询专家</p>
           </Modal>
