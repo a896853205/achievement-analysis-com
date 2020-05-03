@@ -3,7 +3,7 @@ const {
   fixBabelImports,
   addDecoratorsLegacy,
   addWebpackAlias,
-  addWebpackModuleRule
+  addWebpackModuleRule,
 } = require('customize-cra');
 const path = require('path');
 
@@ -11,7 +11,7 @@ const path = require('path');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 
-const addCustomize = () => config => {
+const addCustomize = () => (config) => {
   if (process.env.NODE_ENV === 'production') {
     config.devtool = false; //去掉map文件
     if (config.plugins) {
@@ -29,8 +29,8 @@ const addCustomize = () => config => {
           'redux',
           'lodash',
           'moment',
-          'react-router'
-        ]
+          'react-router',
+        ],
       };
     } else if (config.entry && typeof config.entry === 'object') {
       config.entry.vendor = [
@@ -41,7 +41,7 @@ const addCustomize = () => config => {
         'redux',
         'lodash',
         'moment',
-        'react-router'
+        'react-router',
       ];
     }
 
@@ -51,15 +51,15 @@ const addCustomize = () => config => {
         vendors: {
           test: /node_modules/,
           name: 'vendors',
-          priority: -10
+          priority: -10,
         },
         common: {
           name: 'common',
           minChunks: 2,
           minSize: 30000,
-          chunks: 'all'
-        }
-      }
+          chunks: 'all',
+        },
+      },
     });
   }
   return config;
@@ -75,10 +75,10 @@ const babelPresetsOptions = [
     {
       useBuiltIns: 'entry',
       targets: {
-        ie: '11'
-      }
-    }
-  ]
+        ie: '11',
+      },
+    },
+  ],
 ];
 
 /**
@@ -88,17 +88,39 @@ const babelPluginOptions = [
   'transform-class-properties',
   '@babel/plugin-transform-arrow-functions',
   '@babel/plugin-transform-for-of',
-  '@babel/plugin-transform-object-super'
+  '@babel/plugin-transform-object-super',
 ];
 
 module.exports = override(
-  addWebpackModuleRule({ test: /\.styl$/, use: ['style-loader', 'css-loader', 'stylus-loader'] }),
+  addWebpackModuleRule({
+    test: /\.styl$/,
+    use: ['style-loader', 'css-loader', 'stylus-loader'],
+  }),
+  addWebpackModuleRule({
+    test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+    use: [
+      {
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: 'static/media/[name].[hash:8].[ext]',
+        },
+      },
+      {
+        loader: 'image-webpack-loader',
+        options: {
+          bypassOnDebug: true,
+        },
+      },
+    ],
+  }),
+
   fixBabelImports('import', {
     libraryName: 'antd',
-    style: 'css'
+    style: 'css',
   }),
   addWebpackAlias({
-    '@': path.resolve(__dirname, 'src')
+    '@': path.resolve(__dirname, 'src'),
   }),
   addDecoratorsLegacy(),
   addCustomize()

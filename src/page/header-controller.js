@@ -29,14 +29,14 @@ import {
   SEARCH_MAJOR,
   VIP_PROFILE,
   NEWS_MORE,
-  REGISTER
+  REGISTER,
 } from '../constants/route-constants';
 
 const { SubMenu } = Menu;
 
 class HeaderController extends React.Component {
   state = {
-    searchValue: ''
+    searchValue: '',
   };
 
   render() {
@@ -46,7 +46,7 @@ class HeaderController extends React.Component {
         <Menu.Item>
           <Link
             to={{
-              pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${BASIC.path}`
+              pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${BASIC.path}`,
             }}
           >
             修改信息
@@ -55,7 +55,7 @@ class HeaderController extends React.Component {
         <Menu.Item>
           <Link
             to={{
-              pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${PASSWORD.path}`
+              pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${PASSWORD.path}`,
             }}
           >
             修改密码
@@ -64,7 +64,7 @@ class HeaderController extends React.Component {
         <Menu.Item>
           <Link
             to={{
-              pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${MY_VOLUNTARY.path}`
+              pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${MY_VOLUNTARY.path}`,
             }}
           >
             我的志愿
@@ -92,7 +92,7 @@ class HeaderController extends React.Component {
         <div className='index-logo-box page-inner-width-box'>
           <Link
             to={{
-              pathname: `/${INDEX.path}`
+              pathname: `/${INDEX.path}`,
             }}
           >
             <div className='img-logo-box'>
@@ -112,7 +112,7 @@ class HeaderController extends React.Component {
             <input
               className='index-search-input'
               type='text'
-              onChange={e => {
+              onChange={(e) => {
                 this.setState({ searchValue: e.target.value });
               }}
               placeholder='搜学校'
@@ -127,19 +127,30 @@ class HeaderController extends React.Component {
                 />
               </button>
             </Link>
-            {this.props.user.roleCode && this.props.user.roleCode !== 2 ? (
-              <Link
-                to={{
-                  pathname: `/${VIP_PROFILE.path}`
-                }}
-              >
-                <button className='index-search-button'>
-                  <span className='search-bottom-top-text'>开通</span>
-                  <span className='search-bottom-bottom-text'>VIP</span>
-                </button>
-              </Link>
-            ) : null}
           </div>
+          {!this.props.user.roleCode ? (
+            <Link
+              to={{
+                pathname: `/${LOGIN.path}`,
+              }}
+            >
+              <button className='index-search-button'>
+                <span className='search-bottom-top-text'>开通</span>
+                <span className='search-bottom-bottom-text'>VIP</span>
+              </button>
+            </Link>
+          ) : this.props.user.roleCode && this.props.user.roleCode !== 2 ? (
+            <Link
+              to={{
+                pathname: `/${VIP_PROFILE.path}`,
+              }}
+            >
+              <button className='index-search-button'>
+                <span className='search-bottom-top-text'>开通</span>
+                <span className='search-bottom-bottom-text'>VIP</span>
+              </button>
+            </Link>
+          ) : null}
         </div>
         <div className='index-menu-box'>
           <Row className='page-inner-width-box'>
@@ -149,7 +160,7 @@ class HeaderController extends React.Component {
                 style={{
                   lineHeight: '54px',
                   background: '#F06000',
-                  borderBottom: '1px solid #F06000'
+                  borderBottom: '1px solid #F06000',
                 }}
                 theme='dark'
                 className='index-menu'
@@ -157,7 +168,7 @@ class HeaderController extends React.Component {
                 <Menu.Item key='0'>
                   <Link
                     to={{
-                      pathname: `/${INDEX.path}`
+                      pathname: `/${INDEX.path}`,
                     }}
                   >
                     首页
@@ -292,7 +303,7 @@ class HeaderController extends React.Component {
                   <Menu.Item key='17'>
                     <Link
                       to={{
-                        pathname: `/${NEWS_MORE.path}/4`
+                        pathname: `/${NEWS_MORE.path}/4`,
                       }}
                     >
                       排名集锦
@@ -301,7 +312,7 @@ class HeaderController extends React.Component {
                   <Menu.Item key='18'>
                     <Link
                       to={{
-                        pathname: `/${NEWS_MORE.path}/5`
+                        pathname: `/${NEWS_MORE.path}/5`,
                       }}
                     >
                       高考百问
@@ -327,7 +338,7 @@ class HeaderController extends React.Component {
                 <div>
                   <Link
                     to={{
-                      pathname: `/${REGISTER.path}`
+                      pathname: `/${REGISTER.path}`,
                     }}
                   >
                     <span style={{ color: '#fff' }}>注册</span>
@@ -335,7 +346,7 @@ class HeaderController extends React.Component {
                   |
                   <Link
                     to={{
-                      pathname: `/${LOGIN.path}`
+                      pathname: `/${LOGIN.path}`,
                     }}
                   >
                     <span className='login-text'>登录</span>
@@ -380,24 +391,24 @@ class HeaderController extends React.Component {
 }
 
 // 从store接收state数据
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   const userStore = store['userStore'];
   let { user } = userStore;
 
   return {
-    user
+    user,
   };
 };
 
 // 向store dispatch action
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     getUser: () => {
       dispatch(userActions.getUser());
     },
     clearUser: () => {
       dispatch(userActions.clearUser());
-    }
+    },
   };
 };
 
