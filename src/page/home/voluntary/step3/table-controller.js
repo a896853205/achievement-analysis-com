@@ -80,7 +80,7 @@ class TableController extends React.Component {
                 item => item.year === this.props.user.examYear - 1
               );
               if (cerrctObj) {
-                return <span>{cerrctObj.rank + '/' + cerrctObj.score}</span>;
+                return <span>{`${cerrctObj.rank ? cerrctObj.rank : '-'}/${cerrctObj.score ? cerrctObj.score : '-'}`}</span>;
               } else {
                 return <span>-</span>;
               }
@@ -95,7 +95,7 @@ class TableController extends React.Component {
                 item => item.year === this.props.user.examYear - 2
               );
               if (cerrctObj) {
-                return <span>{cerrctObj.rank + '/' + cerrctObj.score}</span>;
+                return <span>{`${cerrctObj.rank ? cerrctObj.rank : '-'}/${cerrctObj.score ? cerrctObj.score : '-'}`}</span>;
               } else {
                 return <span>-</span>;
               }
@@ -110,7 +110,7 @@ class TableController extends React.Component {
                 item => item.year === this.props.user.examYear - 3
               );
               if (cerrctObj) {
-                return <span>{cerrctObj.rank + '/' + cerrctObj.score}</span>;
+                return <span>{`${cerrctObj.rank ? cerrctObj.rank : '-'}/${cerrctObj.score ? cerrctObj.score : '-'}`}</span>;
               } else {
                 return <span>-</span>;
               }

@@ -68,7 +68,7 @@ class PointTableController extends React.Component {
         )
       },
       {
-        title: '历年位次',
+        title: '历年位次/分数',
         width: 240,
         children: [
           {
@@ -80,7 +80,7 @@ class PointTableController extends React.Component {
                 item => item.year === this.props.user.examYear - 1
               );
               if (cerrctObj) {
-                return <span>{cerrctObj.rank}</span>;
+                return <span>{`${cerrctObj.rank ? cerrctObj.rank : '-'}/${cerrctObj.score ? cerrctObj.score : '-'}`}</span>;
               } else {
                 return <span>-</span>;
               }
@@ -95,7 +95,7 @@ class PointTableController extends React.Component {
                 item => item.year === this.props.user.examYear - 2
               );
               if (cerrctObj) {
-                return <span>{cerrctObj.rank}</span>;
+                return <span>{`${cerrctObj.rank ? cerrctObj.rank : '-'}/${cerrctObj.score ? cerrctObj.score : '-'}`}</span>;
               } else {
                 return <span>-</span>;
               }
@@ -110,7 +110,7 @@ class PointTableController extends React.Component {
                 item => item.year === this.props.user.examYear - 3
               );
               if (cerrctObj) {
-                return <span>{cerrctObj.rank}</span>;
+                return <span>{`${cerrctObj.rank ? cerrctObj.rank : '-'}/${cerrctObj.score ? cerrctObj.score : '-'}`}</span>;
               } else {
                 return <span>-</span>;
               }
