@@ -335,6 +335,7 @@ const SchoolDetailProfile = props => {
 const SchoolScoreList = props => {
   const [scoreList, setScoreList] = useState([]);
   const [accountCategory, setAccountCategory] = useState(1);
+  const [year, setYear] = useState(2019);
   const [loading, setLoading] = useState(true);
 
   let { schoolId } = props;
@@ -346,7 +347,8 @@ const SchoolScoreList = props => {
       let [scoreList] = await Promise.all([
         launchRequest(APIS.GET_SCHOOL_SCORE_LIST, {
           schoolId,
-          accountCategory
+          accountCategory,
+          year
         }),
         // 避免闪烁
         wait(500)
@@ -355,13 +357,23 @@ const SchoolScoreList = props => {
       setScoreList(scoreList);
       setLoading(false);
     })();
-  }, [schoolId, accountCategory]);
+  }, [schoolId, accountCategory,year]);
 
   return (
     <div className='school-detail-item-box'>
       <h3 className='school-detail-item-title school-score-title-box'>
         <span>院校分数线</span>
         {/* Select */}
+        <Select
+          value={year}
+          onChange={value => setYear(value)}
+          style={{ width: 200 }}
+        >
+          <Option value={2019}>2019</Option>
+          <Option value={2018}>2018</Option>
+          <Option value={2017}>2017</Option>
+          <Option value={2016}>2016</Option>
+        </Select>
         <Select
           value={accountCategory}
           onChange={value => setAccountCategory(value)}
