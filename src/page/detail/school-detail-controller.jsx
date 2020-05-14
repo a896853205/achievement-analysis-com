@@ -517,7 +517,8 @@ const SchoolMajorScoreList = connect(
 )(props => {
   const [loading, setLoading] = useState(true);
   const [schoolMajor, setSchoolMajor] = useState([]),
-    [accountCategory, setAccountCategory] = useState(1);
+    [accountCategory, setAccountCategory] = useState(1),
+  [year, setYear] = useState(2019);
 
   let { schoolId } = props;
 
@@ -528,7 +529,8 @@ const SchoolMajorScoreList = connect(
       let [schoolMajor] = await Promise.all([
         launchRequest(APIS.GET_SCHOOL_MAJOR, {
           schoolId,
-          accountCategory
+          accountCategory,
+          year
         }),
         // 避免闪烁
         wait(500)
@@ -537,12 +539,22 @@ const SchoolMajorScoreList = connect(
       setSchoolMajor(schoolMajor);
       setLoading(false);
     })();
-  }, [schoolId, accountCategory]);
+  }, [schoolId, accountCategory,year]);
 
   return (
     <div className='school-detail-item-box'>
       <h3 className='school-detail-item-title school-score-title-box'>
         <span>院校专业分数</span>
+        <Select
+          value={year}
+          onChange={value => setYear(value)}
+          style={{ width: 200 }}
+        >
+          <Option value={2019}>2019</Option>
+          <Option value={2018}>2018</Option>
+          <Option value={2017}>2017</Option>
+          <Option value={2016}>2016</Option>
+        </Select>
         <Select
           value={accountCategory}
           onChange={value => setAccountCategory(value)}
