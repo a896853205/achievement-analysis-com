@@ -194,11 +194,14 @@ export default connect(
         <span className='option-name'>报考批次</span>
         <Radio.Group onChange={handleLotsChange} value={props.lotId}>
           {lotsOption.map(lotsItem => {
-            return (
-              <Radio value={lotsItem.id} key={lotsItem.id}>
-                {lotsItem.lots_name}
-              </Radio>
-            );
+            // 取消三批
+            if(lotsItem.id != 6) {
+              return (
+                <Radio value={lotsItem.id} key={lotsItem.id}>
+                  {lotsItem.lots_name}
+                </Radio>
+              );
+            }
           })}
         </Radio.Group>
       </div>
