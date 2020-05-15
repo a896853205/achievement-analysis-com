@@ -131,7 +131,7 @@ class HeaderController extends React.Component {
           {!this.props.user.roleCode ? (
             <Link
               to={{
-                pathname: `/${LOGIN.path}`,
+                pathname: `/${REGISTER.path}`,
               }}
             >
               <button className='index-search-button'>
