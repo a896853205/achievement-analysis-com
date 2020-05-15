@@ -21,7 +21,7 @@ class TableController extends React.Component {
     schoolId: 0
   };
   render() {
-    // 表格表头
+    // 表格表头，带备注（三批合并到二批，需区分一下）
     const columns = [
       {
         title: '院校名称',
@@ -37,6 +37,16 @@ class TableController extends React.Component {
           >
             {text}
           </span>
+        )
+      },
+      {
+        title: '备注',
+        dataIndex: 'lot_id',
+        key: 'school_remark',
+        align: 'center',
+        width: 80,
+        render: text => (
+          <span>{text == 4 ? '二批':'原三批'}</span>
         )
       },
       {
@@ -190,6 +200,175 @@ class TableController extends React.Component {
       }
     ];
 
+    // 不带备注
+    const columns2 = [
+      {
+        title: '院校名称',
+        dataIndex: 'school_name',
+        key: 'schoolName',
+        align: 'center',
+        render: (text, record) => (
+          <span
+            onClick={() => {
+              this.showSchoolDetail(record);
+            }}
+            style={{ cursor: 'pointer' }}
+          >
+            {text}
+          </span>
+        )
+      },
+      {
+        title: '地区',
+        dataIndex: 'province_name',
+        key: 'province_name',
+        align: 'center'
+      },
+      {
+        title: '招生人数',
+        dataIndex: 'enrollment',
+        key: 'enrollment',
+        align: 'center',
+        render: text => (text ? <span>{text}</span> : <span>-</span>)
+      },
+      {
+        title: '详细信息',
+        dataIndex: 'schoolDetail',
+        key: 'schoolDetail',
+        align: 'center',
+        render: (text, record) => (
+          <Button
+            onClick={() => {
+              this.showSchoolDetail(record);
+            }}
+          >
+            查看
+          </Button>
+        )
+      },
+      {
+        title: '历年位次/分数',
+        width: 240,
+        children: [
+          {
+            title: this.props.user.examYear - 1,
+            key: 'oldOneScore',
+            width: 80,
+            render: record => {
+              let cerrctObj = record.scoreAndRank.find(
+                item => item.year === this.props.user.examYear - 1
+              );
+              if (cerrctObj) {
+                return <span>{`${cerrctObj.rank ? cerrctObj.rank : '-'}/${cerrctObj.score ? cerrctObj.score : '-'}`}</span>;
+              } else {
+                return <span>-</span>;
+              }
+            }
+          },
+          {
+            title: this.props.user.examYear - 2,
+            key: 'oldTwoScore',
+            width: 80,
+            render: record => {
+              let cerrctObj = record.scoreAndRank.find(
+                item => item.year === this.props.user.examYear - 2
+              );
+              if (cerrctObj) {
+                return <span>{`${cerrctObj.rank ? cerrctObj.rank : '-'}/${cerrctObj.score ? cerrctObj.score : '-'}`}</span>;
+              } else {
+                return <span>-</span>;
+              }
+            }
+          },
+          {
+            title: this.props.user.examYear - 3,
+            key: 'oldThreeScore',
+            width: 80,
+            render: record => {
+              let cerrctObj = record.scoreAndRank.find(
+                item => item.year === this.props.user.examYear - 3
+              );
+              if (cerrctObj) {
+                return <span>{`${cerrctObj.rank ? cerrctObj.rank : '-'}/${cerrctObj.score ? cerrctObj.score : '-'}`}</span>;
+              } else {
+                return <span>-</span>;
+              }
+            }
+          }
+        ]
+      },
+
+      {
+        title: () => (
+          <Tooltip title='综合考虑院校位次/线差的波动幅度、趋势以及院校的招生计划变化情况。'>
+            <span>
+              风险系数
+              <Icon type='question-circle' />
+            </span>
+          </Tooltip>
+        ),
+        dataIndex: 'riskRate',
+        key: 'riskRate',
+        align: 'center',
+        render: text => {
+          switch (text) {
+            case 1:
+              return <Tag color='green'>低</Tag>;
+            case 2:
+              return <Tag color='blue'>中</Tag>;
+            case 3:
+              return <Tag color='red'>高</Tag>;
+            default:
+              return <Tag color='purple'>未知</Tag>;
+          }
+        },
+        defaultSortOrder: 'descend',
+        sorter: (a, b) => b.riskRate - a.riskRate
+      },
+      {
+        title: '填报',
+        dataIndex: 'option',
+        key: 'option',
+        width: 150,
+        align: 'center',
+        render: (text, record) => (
+          <Select
+            placeholder='选择志愿'
+            style={{ width: 125 }}
+            onChange={e => {
+              this.handleSchoolChange(e, record);
+            }}
+            value={
+              this.props.voluntary[this.props.lot_id]
+                ? this.props.voluntary[this.props.lot_id].find(
+                voluntaryItem => {
+                  return voluntaryItem.schoolId === record.school_id;
+                }
+                )
+                ? this.props.voluntary[this.props.lot_id].find(
+                  voluntaryItem => {
+                    return voluntaryItem.schoolId === record.school_id;
+                  }
+                ).five_volunteer_id
+                : undefined
+                : undefined
+            }
+          >
+            {this.props.voluntary[this.props.lot_id]
+              ? this.props.voluntary[this.props.lot_id].map(voluntaryItem => (
+                <Option
+                  key={voluntaryItem.five_volunteer_id}
+                  value={voluntaryItem.five_volunteer_id}
+                >
+                  {voluntaryItem.volunteer_name}
+                </Option>
+              ))
+              : undefined}
+          </Select>
+        )
+      }
+    ];
+
     // 查看专业的UI
     const CustomExpandIcon = props => {
       if (props.expanded) {
@@ -220,7 +399,7 @@ class TableController extends React.Component {
         <Table
           style={{ background: '#fff' }}
           rowKey={record => record.school_id}
-          columns={columns}
+          columns={this.props.lot_id == 4 ? columns : columns2}
           dataSource={this.props.schoolList}
           onExpand={this.onExpand}
           expandIcon={CustomExpandIcon}
