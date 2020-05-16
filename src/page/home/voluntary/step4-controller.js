@@ -16,6 +16,7 @@ import * as APIS from '@/constants/api-constants';
 
 // UI组件
 import { Button, Modal, Alert } from 'antd';
+import { BCG_ROOT_NAME, REPORT } from '../../../constants/route-constants';
 
 const { confirm } = Modal;
 
@@ -121,7 +122,9 @@ class Step4Controller extends React.Component {
           await this.setState({ btnLoading: false });
 
           // 跳转页面
-          this.props.nextStep();
+          // 要拆分路由，所以不再对redux中step进行维护，改用路由的方式跳转
+          // this.props.nextStep();
+          this.props.history.push(`/${BCG_ROOT_NAME}/${REPORT.path}`);
         } else {
           // 结束loading
           await this.setState({ btnLoading: false });

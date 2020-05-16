@@ -13,31 +13,32 @@ import { connect } from 'react-redux';
 import { actions as voluntaryActions } from '../../../redux/voluntary-model';
 
 import '@/style/voluntary/step2.css';
+import { BCG_ROOT_NAME, SCHOOLS } from '../../../constants/route-constants';
 
 class Step2Controller extends React.Component {
   state = {
     entryScoreList: [],
     loading: false,
-    visible: false,
+    visible: false
   };
 
   // modal
   showModal = () => {
     this.setState({
-      visible: true,
+      visible: true
     });
   };
 
   handleOk = (e) => {
     this.setState({
-      visible: false,
+      visible: false
     });
   };
 
   // modal jieshu
   handleCancel = (e) => {
     this.setState({
-      visible: false,
+      visible: false
     });
   };
 
@@ -58,7 +59,7 @@ class Step2Controller extends React.Component {
 
     entryScoreList.push(
       <div className='step2-card-item' key='help'>
-        <Icon type='question-circle' />
+        <Icon type='question-circle'/>
         帮助
       </div>
     );
@@ -87,7 +88,7 @@ class Step2Controller extends React.Component {
 
   componentDidMount = async () => {
     await this.setState({
-      loading: true,
+      loading: true
     });
 
     let { lotsOption } = await launchRequest(
@@ -99,7 +100,7 @@ class Step2Controller extends React.Component {
     // 强基计划进
     lotsOption.unshift({
       id: -1,
-      lots_name: '强基计划',
+      lots_name: '强基计划'
     });
 
     // 三批走
@@ -107,14 +108,17 @@ class Step2Controller extends React.Component {
 
     this.setState({
       entryScoreList: lotsOption,
-      loading: false,
+      loading: false
     });
   };
 
   handleClickCard = (lotId) => {
+
     if (lotId !== -1) {
-      this.props.setLotId(lotId);
-      this.props.nextStep();
+      // this.props.setLotId(lotId);
+      // 要拆分路由，所以不再对redux中step进行维护，改用路由的方式跳转
+      // this.props.nextStep();
+      this.props.history.push(`/${BCG_ROOT_NAME}/${SCHOOLS.path}/${lotId}`);
     } else {
       this.showModal();
     }
@@ -134,7 +138,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     nextStep: () => {
       dispatch(voluntaryActions.nextStep());
-    },
+    }
   };
 };
 

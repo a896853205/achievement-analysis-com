@@ -20,6 +20,7 @@ import * as DominConfigs from '../../../constants/domin-constants';
 import { connect } from 'react-redux';
 import { actions as voluntaryActions } from '../../../redux/voluntary-model';
 import { actions as userActions } from '../../../redux/user-model';
+import { BCG_ROOT_NAME, VOLUNTARY } from '../../../constants/route-constants';
 
 const { Option } = Select;
 
@@ -360,7 +361,9 @@ class Step1Controller extends React.Component {
           loading: false
         });
         // 向redux提交下一步的申请.
-        this.props.nextStep();
+        // 由于拆分路由，不再用redux维护的step参数，改为路由的方式跳转
+        // this.props.nextStep();
+        this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY.path}`);
       } else {
         this.setState({
           loading: false

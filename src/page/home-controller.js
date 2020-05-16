@@ -15,15 +15,27 @@ import HomeVoluntaryDeepResultController from '@/page/home/home-voluntary-deep-r
 // 路由
 import {
   BCG_ROOT_NAME,
-  VOLUNTARY,
   VOLUNTARY_RESULT,
   QUESTIONNAIRE,
   PERSONAL,
-  VOLUNTARY_DEEP_RESULT
+  VOLUNTARY_DEEP_RESULT,
+
+  COMPLETE_INFO,
+  VOLUNTARY,
+  SCHOOLS,
+  VOLUNTARY_DETAIL,
+  REPORT,
+  DEEP_REPORT
+
 } from '../constants/route-constants';
 
 // UI
 import { Result, Button } from 'antd';
+import CompleteInfoController from './voluntary-page/CompleteInfoController';
+import VoluntaryController from './voluntary-page/VoluntaryController';
+import SchoolsController from './voluntary-page/SchoolsController';
+import VoluntaryDetail from './voluntary-page/VoluntaryDetail';
+import ReportController from './voluntary-page/ReportController';
 
 class HomeController extends React.Component {
   render() {
@@ -35,11 +47,48 @@ class HomeController extends React.Component {
             exact
             component={HomeIndexController}
           />
+
           <Route
-            path={`/${BCG_ROOT_NAME}/${VOLUNTARY.path}`}
+            path={`/${BCG_ROOT_NAME}/aaaa`}
             exact
             component={HomeVoluntaryController}
           />
+
+          {/*step1 完善个人信息 拆分路由*/}
+          <Route
+            path={`/${BCG_ROOT_NAME}/${COMPLETE_INFO.path}`}
+            exact
+            component={CompleteInfoController}
+          />
+          {/*step2  拆分路由  voluntary   原路由不变，填报志愿*/}
+          <Route
+            path={`/${BCG_ROOT_NAME}/${VOLUNTARY.path}`}
+            exact
+            component={VoluntaryController}
+          />
+
+          {/*step3  拆分路由     schools   学校页*/}
+          <Route
+            path={`/${BCG_ROOT_NAME}/${SCHOOLS.path}/:lotId`}
+            exact
+            component={SchoolsController}
+          />
+
+          {/*step4  拆分路由    voluntary_detail   志愿详情页*/}
+          <Route
+            path={`/${BCG_ROOT_NAME}/${VOLUNTARY_DETAIL.path}/:lotId`}
+            exact
+            component={VoluntaryDetail}
+          />
+
+          {/*step5/1  拆分路由    report   报表页*/}
+          <Route
+            path={`/${BCG_ROOT_NAME}/${REPORT.path}`}
+            exact
+            component={ReportController}
+          />
+
+
           <Route
             path={`/${BCG_ROOT_NAME}/${VOLUNTARY_RESULT.path}`}
             exact

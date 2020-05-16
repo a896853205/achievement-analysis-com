@@ -50,16 +50,15 @@ class SchoolFirstController extends React.Component {
   }
 
   componentDidMount = async () => {
-    this.props.recordSchoolList();
-    
     let { gatherOptionList } = await launchRequest(APIS.GET_SCHOOL_OPTION, {
       lotId: this.props.lotId
     });
-
+   
     await this.setState({
       gatherOptionList
     });
   };
+
 
   // 改变集合
   handleGatherChange = async e => {

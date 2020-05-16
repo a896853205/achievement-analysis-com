@@ -18,6 +18,7 @@ import * as APIS from '../../../constants/api-constants';
 // 关于数据模块交互
 import { connect } from 'react-redux';
 import { actions as voluntaryActions } from '../../../redux/voluntary-model';
+import { BCG_ROOT_NAME, VOLUNTARY_DETAIL } from '../../../constants/route-constants';
 
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
@@ -182,8 +183,12 @@ class Step3Controller extends React.Component {
     await this.setState({
       loading: true
     });
+    console.log(this.props.voluntary[this.props.lot_id],666666666666666666);
     this.props.recordVoluntaryDetail(this.props.voluntary[this.props.lot_id]);
-    this.props.nextStep();
+    // 要拆分路由，所以不再对redux中step进行维护，改用路由的方式跳转
+    // this.props.nextStep();
+    this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY_DETAIL.path}/${this.props.lot_id}`);
+
     this.setState({
       loading: false
     });
