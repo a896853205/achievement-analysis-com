@@ -41,6 +41,10 @@ class VoluntaryDetail extends React.Component {
       this.props.recordVoluntaryDetail(data[this.props.match.params.lotId]);
     }
   }
+
+  async componentDidMount() {
+    this.props.setLotId(+this.props.match.params.lotId);
+  }
 }
 
 // 从store接收state数据
@@ -56,6 +60,9 @@ const mapDispatchToProps = dispatch => {
   return {
     recordVoluntaryDetail: params => {
       dispatch(voluntaryActions.recordVoluntaryDetail(params));
+    },
+    setLotId: (lotId) => {
+      dispatch(voluntaryActions.setLotId(lotId));
     },
   };
 };

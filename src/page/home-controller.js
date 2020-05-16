@@ -36,6 +36,7 @@ import VoluntaryController from './voluntary-page/VoluntaryController';
 import SchoolsController from './voluntary-page/SchoolsController';
 import VoluntaryDetail from './voluntary-page/VoluntaryDetail';
 import ReportController from './voluntary-page/ReportController';
+import DeepReportController from './voluntary-page/DeepReportController';
 
 class HomeController extends React.Component {
   render() {
@@ -83,9 +84,16 @@ class HomeController extends React.Component {
 
           {/*step5/1  拆分路由    report   报表页*/}
           <Route
-            path={`/${BCG_ROOT_NAME}/${REPORT.path}`}
+            path={`/${BCG_ROOT_NAME}/${REPORT.path}/:lotId`}
             exact
             component={ReportController}
+          />
+
+          {/*step5/2  拆分路由    deep_report   深度体验页*/}
+          <Route
+            path={`/${BCG_ROOT_NAME}/${DEEP_REPORT.path}/:lotId`}
+            exact
+            component={DeepReportController}
           />
 
 

@@ -4,21 +4,22 @@ import { connect } from 'react-redux';
 
 // import Step1 from '../home/voluntary/step1-controller';
 import { BaseHeader } from './component/VoluntaryHeader';
-import ResultReportController from '../home/voluntary/result/result-report-controller';
+import ResultDeepController from '../home/voluntary/result/result-deep-analysis-controller';
+
 import { Divider } from 'antd';
 import { launchRequest } from '../../util/request';
 import * as APIS from '../../constants/api-constants';
 import { actions as voluntaryActions } from '../../redux/voluntary-model';
 
-class ReportController extends React.Component {
+class DeepReportController extends React.Component {
   render() {
     return (
       <div>
-        <h1>55555555555-1</h1>
+        <h1>55555555555-2</h1>
         <BaseHeader/>
         <Divider>结果</Divider>
         <div className='steps-content'>
-          <ResultReportController/>
+          <ResultDeepController/>
         </div>
       </div>
     );
@@ -41,15 +42,16 @@ class ReportController extends React.Component {
       let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
         lotId: +this.props.match.params.lotId,
         voluntary: data[this.props.match.params.lotId],
-        reportType: 1
+        reportType: 2
       });
 
       // await this.props.getUser();
 
       if (voluntaryId) {
         // 将uuid存入redux
-        this.props.recordVoluntaryResultType('report');
-        this.props.recordVoluntaryIdGetResult(voluntaryId);
+        this.props.recordVoluntaryResultType('deepReport');
+        this.props.recordVoluntaryListOption(voluntaryId);
+        this.props.recordVoluntaryDeepUuid(voluntaryId);
 
       }
     }
@@ -80,8 +82,11 @@ const mapDispatchToProps = dispatch => {
     setLotId: (lotId) => {
       dispatch(voluntaryActions.setLotId(lotId));
     },
-    recordVoluntaryIdGetResult: params => {
-      dispatch(voluntaryActions.recordVoluntaryIdGetResult(params));
+    recordVoluntaryListOption: params => {
+      dispatch(voluntaryActions.recordVoluntaryListOption(params));
+    },
+    recordVoluntaryDeepUuid: params => {
+      dispatch(voluntaryActions.recordVoluntaryDeepUuid(params));
     },
     recordVoluntaryResultType: type => {
       dispatch(voluntaryActions.recordVoluntaryResultType(type));
@@ -92,4 +97,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ReportController);
+)(DeepReportController);

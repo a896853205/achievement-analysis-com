@@ -1,6 +1,7 @@
 import React from 'react';
 
-import VoluntaryDetailController from '@/page/home/voluntary/step4/voluntary-detail-controller';
+// import VoluntaryDetailController from '@/page/home/voluntary/step4/voluntary-detail-controller';
+import VoluntaryDetailController from '../voluntary/step4/voluntary-detail-controller';
 
 // 路由
 import { Link } from 'react-router-dom';
@@ -16,7 +17,7 @@ import * as APIS from '@/constants/api-constants';
 
 // UI组件
 import { Button, Modal, Alert } from 'antd';
-import { BCG_ROOT_NAME, REPORT } from '../../../constants/route-constants';
+import { BCG_ROOT_NAME, DEEP_REPORT, REPORT } from '../../../constants/route-constants';
 
 const { confirm } = Modal;
 
@@ -124,7 +125,7 @@ class Step4Controller extends React.Component {
           // 跳转页面
           // 要拆分路由，所以不再对redux中step进行维护，改用路由的方式跳转
           // this.props.nextStep();
-          this.props.history.push(`/${BCG_ROOT_NAME}/${REPORT.path}`);
+          this.props.history.push(`/${BCG_ROOT_NAME}/${REPORT.path}/${this.props.lotId}`);
         } else {
           // 结束loading
           await this.setState({ btnLoading: false });
@@ -163,7 +164,9 @@ class Step4Controller extends React.Component {
           await this.setState({ btnLoading: false });
 
           // 跳转页面
-          this.props.nextStep();
+          // 要拆分路由，所以不再对redux中step进行维护，改用路由的方式跳转
+          // this.props.nextStep();
+          this.props.history.push(`/${BCG_ROOT_NAME}/${DEEP_REPORT.path}/${this.props.lotId}`);
         } else {
           // 结束loading
           await this.setState({ btnLoading: false });
