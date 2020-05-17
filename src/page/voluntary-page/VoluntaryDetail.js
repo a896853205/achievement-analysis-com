@@ -8,21 +8,37 @@ import { Divider } from 'antd';
 import { BaseHeader } from './component/VoluntaryHeader';
 import Step4 from '../home/voluntary/step4-controller';
 
+import '../../style/home-voluntary.css';
+
 // 请求文件
 import * as APIS from '../../constants/api-constants';
 import { launchRequest } from '../../util/request';
 import { actions as voluntaryActions } from '../../redux/voluntary-model';
+import { BackgroundImage } from './component/BackgroundImage';
+import { PreviousStep } from './component/PreviousStep';
 
 class VoluntaryDetail extends React.Component {
   render() {
     return (
-      <div>
+      <div className='home-voluntary-box'>
+
         <h1>4444444</h1>
         <BaseHeader/>
-        <Divider>确认志愿表</Divider>
-        <div className='steps-content'>
-          <Step4 {...this.props}/>
+
+        <div className='home-voluntary-content'>
+          <div className='voluntary-main-box'>
+            <Divider>确认志愿表</Divider>
+            <div className='steps-content'>
+              <Step4 {...this.props}/>
+            </div>
+
+            <PreviousStep {...this.props}/>
+
+          </div>
         </div>
+
+        <BackgroundImage/>
+
       </div>
     );
 

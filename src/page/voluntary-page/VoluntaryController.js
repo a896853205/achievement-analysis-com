@@ -7,17 +7,27 @@ import Step2 from '../home/voluntary/step2-controller';
 
 // 关于数据模块交互
 import { BaseHeader } from './component/VoluntaryHeader';
+import { BackgroundImage } from './component/BackgroundImage';
 
 class VoluntaryController extends React.Component {
   render() {
     return (
-      <div>
+      <div className='home-voluntary-box'>
+
         <h1>22222</h1>
         <BaseHeader/>
-        <Divider>选择报考批次</Divider>
-        <div className='steps-content'>
-          <Step2 {...this.props}/>
+
+        <div className='home-voluntary-content'>
+          <div className='voluntary-main-box'>
+            <Divider>选择报考批次</Divider>
+            <div className='steps-content'>
+              <Step2 {...this.props}/>
+            </div>
+          </div>
         </div>
+
+        <BackgroundImage/>
+
       </div>
     );
   }

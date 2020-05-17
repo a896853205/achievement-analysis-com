@@ -4,23 +4,37 @@ import { Divider } from 'antd';
 // 关于数据模块交互
 import { connect } from 'react-redux';
 
+import '../../style/home-voluntary.css';
+
 import { BaseHeader } from './component/VoluntaryHeader';
 
 import Step3 from '../home/voluntary/step3-controller';
 import { actions as voluntaryActions } from '../../redux/voluntary-model';
-import { launchRequest } from '../../util/request';
-import * as APIS from '../../constants/api-constants';
+import { BackgroundImage } from './component/BackgroundImage';
+import { PreviousStep } from './component/PreviousStep';
 
 class SchoolsController extends React.Component {
   render() {
     return (
-      <div>
+      <div className='home-voluntary-box'>
+
         <h1>3333333---------{this.props.match.params.lotId}</h1>
         <BaseHeader/>
-        <Divider>填报具体学校(专业)</Divider>
-        <div className='steps-content'>
-          <Step3 {...this.props}/>
+
+        <div className='home-voluntary-content'>
+          <div className='voluntary-main-box'>
+            <Divider>填报具体学校(专业)</Divider>
+            <div className='steps-content'>
+              <Step3 {...this.props}/>
+            </div>
+
+            <PreviousStep {...this.props}/>
+
+          </div>
         </div>
+
+        <BackgroundImage/>
+
       </div>
     );
   }

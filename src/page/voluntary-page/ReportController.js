@@ -2,24 +2,39 @@ import React from 'react';
 // 关于数据模块交互
 import { connect } from 'react-redux';
 
-// import Step1 from '../home/voluntary/step1-controller';
+import '../../style/home-voluntary.css';
+
 import { BaseHeader } from './component/VoluntaryHeader';
 import ResultReportController from '../home/voluntary/result/result-report-controller';
 import { Divider } from 'antd';
 import { launchRequest } from '../../util/request';
 import * as APIS from '../../constants/api-constants';
 import { actions as voluntaryActions } from '../../redux/voluntary-model';
+import { PreviousStep } from './component/PreviousStep';
+import { BackgroundImage } from './component/BackgroundImage';
 
 class ReportController extends React.Component {
   render() {
     return (
-      <div>
+      <div className='home-voluntary-box'>
+
         <h1>55555555555-1</h1>
         <BaseHeader/>
-        <Divider>结果</Divider>
-        <div className='steps-content'>
-          <ResultReportController/>
+
+        <div className='home-voluntary-content'>
+          <div className='voluntary-main-box'>
+            <Divider>结果</Divider>
+            <div className='steps-content'>
+              <ResultReportController/>
+            </div>
+
+            <PreviousStep {...this.props}/>
+
+          </div>
         </div>
+
+        <BackgroundImage/>
+
       </div>
     );
   }
