@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom';
 
 // 路由
 import { VOLUNTARY, BCG_ROOT_NAME, LOGIN } from '@/constants/route-constants';
+import { COMPLETE_INFO } from '../../constants/route-constants';
 
 const mapStateToProps = store => {
   const userStore = store['userStore'];
@@ -69,7 +70,11 @@ export default connect(
           <Link
             to={
               props.user.uuid
-                ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
+                ? (
+                  props.user.score > 0 ?
+                    `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` :
+                    `/${BCG_ROOT_NAME}/${COMPLETE_INFO.path}`
+                )
                 : `/${LOGIN.path}`
             }
           >

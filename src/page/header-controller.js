@@ -29,7 +29,7 @@ import {
   SEARCH_MAJOR,
   VIP_PROFILE,
   NEWS_MORE,
-  REGISTER,
+  REGISTER, COMPLETE_INFO
 } from '../constants/route-constants';
 
 const { SubMenu } = Menu;
@@ -222,7 +222,11 @@ class HeaderController extends React.Component {
                     <Link
                       to={
                         this.props.user.uuid
-                          ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
+                          ? (
+                            this.props.user.score > 0 ?
+                              `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` :
+                              `/${BCG_ROOT_NAME}/${COMPLETE_INFO.path}`
+                          )
                           : `/${LOGIN.path}`
                       }
                     >
