@@ -86,7 +86,7 @@ export default connect(
           props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY.path}`);
         }else {
           Modal.warning({
-            content: '当前为正式填报，只有一次填写分数的机会，请填写高考分数，一旦确定，修改次数就用完，若想继续修改分数，需购买修改次数',
+            content: '当前为正式填报，*高考分数，一经填写，不能修改',
             icon: null,
             onOk: ()=>{
               props.history.push(`/${BCG_ROOT_NAME}/${COMPLETE_INFO.path}`);
