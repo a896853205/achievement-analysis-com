@@ -219,10 +219,10 @@ class HeaderController extends React.Component {
                   }
                 >
                   <Menu.Item key='7'>
-                    <div onClick={this.handleSimulatedApplyClose}>模拟填报</div>
+                    <div onClick={this.handleSimulatedApplyOpen}>模拟填报</div>
                   </Menu.Item>
                   <Menu.Item key='8'>
-                    <div onClick={this.handleFormalApplyOpen}>正式填报</div>
+                    <div onClick={this.handleFormalApplyClose}>正式填报</div>
                   </Menu.Item>
                   <Menu.Item key='9'>
                     <Link to={'/'}> 院校优先 </Link>
