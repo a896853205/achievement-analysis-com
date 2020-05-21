@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import * as APIS from '@/constants/api-constants';
 import '@/style/detail/school-detail.css';
 import { launchRequest } from 'util/request';
-import { Input, Button } from 'antd';
+import { Input, Button, Modal } from 'antd';
 import md5 from 'md5';
 
 // 关于数据模块交互
@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 
 // 路由
 import { VOLUNTARY, BCG_ROOT_NAME, LOGIN } from '@/constants/route-constants';
-import { COMPLETE_INFO } from '../../constants/route-constants';
+import { COMPLETE_INFO, VIP_PROFILE } from '../../constants/route-constants';
 
 const mapStateToProps = store => {
   const userStore = store['userStore'];
@@ -38,6 +38,8 @@ const mapDispatchToProps = dispatch => {
     }
   };
 };
+
+
 
 export default connect(
   mapStateToProps,
@@ -62,26 +64,90 @@ export default connect(
     }
   };
 
+  // 正式填报开启
+  const handleFormalApplyOpen = () => {
+    console.log(props.user.roleCode, 2222222222222);
+    /*
+    * 正式填报
+    *   如果未登录，跳转到登录页
+    *   如果已登录，权限是1，跳转到开通vip页面
+    *   如果已经是VIP，跳转到填报志愿页
+    * */
+    if(props.user.uuid){
+      if(props.user.roleCode == 1){
+        Modal.warning({
+          content:'请开通VIP',
+          onOk: ()=>{
+            props.history.push(`/${VIP_PROFILE.path}`);
+          }
+        });
+      }else {
+        if(props.user.score > 0) {
+          props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY.path}`);
+        }else {
+          Modal.warning({
+            content: '当前为正式填报，只有一次填写分数的机会，请填写高考分数，一旦确定，修改次数就用完，若想继续修改分数，需购买修改次数',
+            icon: null,
+            onOk: ()=>{
+              props.history.push(`/${BCG_ROOT_NAME}/${COMPLETE_INFO.path}`);
+            }
+          });
+        }
+      }
+    }else {
+      props.history.push(`/${LOGIN.path}`);
+    }
+  };
+  // 正式填报关闭
+  const handleFormalApplyClose = () => {
+    // 如果未登录 跳转到登录页
+    if(props.user.uuid){
+      Modal.warning({
+        content:'正式填报入口已关闭，请使用模拟填报'
+      });
+    }else {
+      props.history.push(`/${LOGIN.path}`);
+    }
+  };
+
+  // 模拟填报开启
+  const handleSimulatedApplyOpen = () => {
+    // 如果未登录 跳转到登录页
+    if(props.user.uuid){
+      // 如果已经登录，尚未完善个人信息，就跳转至个人信息页
+      if(props.user.score > 0) {
+        props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY.path}`);
+      }else {
+        props.history.push(`/${BCG_ROOT_NAME}/${COMPLETE_INFO.path}`);
+      }
+    }else {
+      props.history.push(`/${LOGIN.path}`);
+    }
+  };
+  // 模拟填报关闭
+  const handleSimulatedApplyClose = () => {
+    // 如果未登录 跳转到登录页
+    if(props.user.uuid){
+      Modal.warning({
+        content:'模拟填报入口已关闭，请使用正式填报'
+      });
+    }else {
+      props.history.push(`/${LOGIN.path}`);
+    }
+  };
+
   return (
     <div>
       {props.user.uuid ? (
         <div className='index-login-box'>
           <h5 className='index-login-h5'>智赢学业规划网欢迎您</h5>
-          <Link
-            to={
-              props.user.uuid
-                ? (
-                  props.user.score > 0 ?
-                    `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` :
-                    `/${BCG_ROOT_NAME}/${COMPLETE_INFO.path}`
-                )
-                : `/${LOGIN.path}`
-            }
-          >
-            <Button type='round' className='index-login-button'>
+            <Button
+              type='round'
+              className='index-login-button'
+              onClick={handleFormalApplyOpen}
+            >
               开始填报吧
             </Button>
-          </Link>
         </div>
       ) : (
         <div className='index-login-box'>

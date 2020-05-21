@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 // UI组件
-import { Row, Menu, Col, Dropdown, Icon } from 'antd';
+import { Row, Menu, Col, Dropdown, Icon, Modal } from 'antd';
 
 // 路由
 import { Link } from 'react-router-dom';
@@ -219,55 +219,19 @@ class HeaderController extends React.Component {
                   }
                 >
                   <Menu.Item key='7'>
-                    <Link
-                      to={
-                        this.props.user.uuid
-                          ? (
-                            this.props.user.score > 0 ?
-                              `/${BCG_ROOT_NAME}/${VOLUNTARY.path}` :
-                              `/${BCG_ROOT_NAME}/${COMPLETE_INFO.path}`
-                          )
-                          : `/${LOGIN.path}`
-                      }
-                    >
-                      模拟填报
-                    </Link>
+                    <div onClick={this.handleSimulatedApplyClose}>模拟填报</div>
                   </Menu.Item>
                   <Menu.Item key='8'>
-                    <Link to={'/'}>正式填报</Link>
+                    <div onClick={this.handleFormalApplyOpen}>正式填报</div>
                   </Menu.Item>
                   <Menu.Item key='9'>
-                    <Link
-                      to={
-                        this.props.user.uuid
-                          ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
-                          : `/${LOGIN.path}`
-                      }
-                    >
-                      院校优先
-                    </Link>
+                    <Link to={'/'}> 院校优先 </Link>
                   </Menu.Item>
                   <Menu.Item key='10'>
-                    <Link
-                      to={
-                        this.props.user.uuid
-                          ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
-                          : `/${LOGIN.path}`
-                      }
-                    >
-                      专业优先
-                    </Link>
+                    <Link to={'/'}>专业优先</Link>
                   </Menu.Item>
                   <Menu.Item key='11'>
-                    <Link
-                      to={
-                        this.props.user.uuid
-                          ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
-                          : `/${LOGIN.path}`
-                      }
-                    >
-                      指定院校
-                    </Link>
+                    <Link to={'/'}>指定院校</Link>
                   </Menu.Item>
                 </SubMenu>
 
@@ -363,6 +327,78 @@ class HeaderController extends React.Component {
       </div>
     );
   }
+
+  // 正式填报开启
+  handleFormalApplyOpen = () => {
+    console.log(this.props.user.roleCode, 2222222222222);
+    /*
+    * 正式填报
+    *   如果未登录，跳转到登录页
+    *   如果已登录，权限是1，跳转到开通vip页面
+    *   如果已经是VIP，跳转到填报志愿页
+    * */
+    if(this.props.user.uuid){
+      if(this.props.user.roleCode == 1){
+        Modal.warning({
+          content:'请开通VIP',
+          onOk: ()=>{
+            this.props.history.push(`/${VIP_PROFILE.path}`);
+          }
+        });
+      }else {
+        if(this.props.user.score > 0) {
+          this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY.path}`);
+        }else {
+          Modal.warning({
+            content: '当前为正式填报，只有一次填写分数的机会，请填写高考分数，一旦确定，修改次数就用完，若想继续修改分数，需购买修改次数',
+            icon: null,
+            onOk: ()=>{
+              this.props.history.push(`/${BCG_ROOT_NAME}/${COMPLETE_INFO.path}`);
+            }
+          });
+        }
+      }
+    }else {
+      this.props.history.push(`/${LOGIN.path}`);
+    }
+  };
+  // 正式填报关闭
+  handleFormalApplyClose = () => {
+    // 如果未登录 跳转到登录页
+    if(this.props.user.uuid){
+      Modal.warning({
+        content:'正式填报入口已关闭，请使用模拟填报'
+      });
+    }else {
+      this.props.history.push(`/${LOGIN.path}`);
+    }
+  };
+
+  // 模拟填报开启
+  handleSimulatedApplyOpen = () => {
+    // 如果未登录 跳转到登录页
+    if(this.props.user.uuid){
+      // 如果已经登录，尚未完善个人信息，就跳转至个人信息页
+      if(this.props.user.score > 0) {
+        this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY.path}`);
+      }else {
+        this.props.history.push(`/${BCG_ROOT_NAME}/${COMPLETE_INFO.path}`);
+      }
+    }else {
+      this.props.history.push(`/${LOGIN.path}`);
+    }
+  };
+  // 模拟填报关闭
+  handleSimulatedApplyClose = () => {
+    // 如果未登录 跳转到登录页
+    if(this.props.user.uuid){
+      Modal.warning({
+        content:'模拟填报入口已关闭，请使用正式填报'
+      });
+    }else {
+      this.props.history.push(`/${LOGIN.path}`);
+    }
+  };
 
   componentDidMount() {
     let pathArr = this.props.location.pathname.split('/'),

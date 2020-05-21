@@ -91,7 +91,7 @@ class IndexController extends React.Component {
                 />
               </div>
             </Carousel>
-            <Login />
+            <Login {...this.props}/>
           </div>
           <div className='carou-right-img' />
         </div>
