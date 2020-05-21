@@ -1,6 +1,9 @@
 import React, { useRef } from 'react';
 import QRCode from 'qrcode';
 
+// 关于数据模块交互
+import { connect } from 'react-redux';
+
 // 请求文件
 import { launchRequest } from '../../util/request';
 import * as APIS from '../../constants/api-constants';
@@ -13,7 +16,32 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-export default props => {
+// 从store接收state数据
+const mapStateToProps = store => {
+  const { user } = store['userStore'];
+  return {
+    user
+  };
+};
+
+// 向store dispatch action
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+export const vipPage = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)((props) => {
+
+  console.log( props.user.roleCode,111111111111111);
+
+  const testClick = async () => {
+    let data = await launchRequest(APIS.PAY_TEST);
+    console.log(data, 66666666666);
+  };
+
+
   const couterRef = useRef();
   const handleToAlipayClick = async () => {
     let url = await launchRequest(APIS.GET_ALIPAY_PAYMENT_URL);
@@ -47,27 +75,35 @@ export default props => {
         <div className='left-top-box'>
           <div className='carousel-box'>
             <Carousel autoplay className='carousel'>
-              <img src='/vip/left1.jpg' alt='' />
-              <img src='/vip/left2.jpg' alt='' />
-              <img src='/vip/left3.jpg' alt='' />
+              <img src='/vip/left1.jpg' alt=''/>
+              <img src='/vip/left2.jpg' alt=''/>
+              <img src='/vip/left3.jpg' alt=''/>
             </Carousel>
             <div className='carousel-list'>
               <div className='carousel-list-item'>
-                <img src='/vip/left1.jpg' alt='' />
+                <img src='/vip/left1.jpg' alt=''/>
               </div>
               <div className='carousel-list-item'>
-                <img src='/vip/left2.jpg' alt='' />
+                <img src='/vip/left2.jpg' alt=''/>
               </div>
               <div className='carousel-list-item'>
-                <img src='/vip/left3.jpg' alt='' />
+                <img src='/vip/left3.jpg' alt=''/>
               </div>
             </div>
           </div>
           <div className='vip-card-info-box'>
-            <h4>VIP志愿卡（黑龙江专用）</h4>
-            <p className='card-profile'>
-              考试院专家推荐平台，录取参考数据与省考试院完全一致
-            </p>
+            {props.user.roleCode == 1 ?
+              <h4>VIP志愿卡（黑龙江专用）</h4> :
+              <h4>获取更多体验次数</h4>
+            }
+            {props.user.roleCode == 1 ?
+              <p className='card-profile'>
+                考试院专家推荐平台，录取参考数据与省考试院完全一致
+              </p> :
+              <p className='card-profile'>
+                包含：10次修改分数次数、100次生成报表次数、100次深度体验次数
+              </p>
+            }
             <div className='card-money-box'>
               <p>
                 <span>价格</span>
@@ -100,6 +136,14 @@ export default props => {
               <Button
                 aria-controls='simple-menu'
                 aria-haspopup='true'
+                onClick={testClick}
+                className='buy-button'
+              >
+                test
+              </Button>
+              <Button
+                aria-controls='simple-menu'
+                aria-haspopup='true'
                 onClick={handleClick}
                 className='buy-button'
               >
@@ -113,11 +157,11 @@ export default props => {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleToAlipayClick}>
-                  <img src='/vip/zhifubao.jpg' alt='' className='wechat' />
+                  <img src='/vip/zhifubao.jpg' alt='' className='wechat'/>
                   支付宝支付
                 </MenuItem>
                 <MenuItem onClick={handleToWeChatClick}>
-                  <img src='/vip/wechat.jpg' alt='' className='wechat' />
+                  <img src='/vip/wechat.jpg' alt='' className='wechat'/>
                   微信支付
                 </MenuItem>
               </Menu>
@@ -144,12 +188,12 @@ export default props => {
             <button>用户评价</button>
             <button>常见问题</button>
           </div>
-          <img className='vip-detail' src='/vip/vip-detail.jpg' alt='' />
+          <img className='vip-detail' src='/vip/vip-detail.jpg' alt=''/>
         </div>
       </div>
       {/* 页面右部分 */}
       <div className='right-box'>
-        <img className='vip-top-adv' src='/vip/right.jpg' alt='' />
+        <img className='vip-top-adv' src='/vip/right.jpg' alt=''/>
         {/* <div className='vip-middle-adv-box'>
           <h5>400万考生的首选，专家的认可</h5>
           <img src='/vip/vip-middle-adv.jpg' alt='' />
@@ -247,4 +291,4 @@ export default props => {
       </div>
     </div>
   );
-};
+});

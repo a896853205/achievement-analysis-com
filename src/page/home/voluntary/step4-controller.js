@@ -56,7 +56,7 @@ class Step4Controller extends React.Component {
                   type='primary'
                   style={{ marginTop: '20px', marginBottom: '20px' }}
                 >
-                  没有次数了,充值VIP
+                  没有次数了,获取更多修改次数
                 </Button>
               </Link>
             )}
@@ -86,7 +86,7 @@ class Step4Controller extends React.Component {
                   type='primary'
                   style={{ marginTop: '20px', marginBottom: '20px' }}
                 >
-                  没有次数了,充值VIP
+                  没有次数了,获取更多修改次数
                 </Button>
               </Link>
             )}

@@ -39,6 +39,7 @@ import {
   SCHOOL_RECOMMEND,
   REGISTER
 } from '@/constants/route-constants';
+import { vipPage } from './page/vip/vip-controller';
 
 const { Content } = Layout;
 
@@ -95,7 +96,7 @@ class App extends Component {
                 path={`/${MAJOR_DETAIL.path}/:id`}
                 component={MajorDetailController}
               />
-              <Route path={`/${VIP_PROFILE.path}`} component={VipController} />
+              <Route path={`/${VIP_PROFILE.path}`} component={vipPage} />
               <Route
                 path={`/${BCG_ROOT_NAME}`}
                 component={BackgroundController}

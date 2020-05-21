@@ -27,6 +27,7 @@ import '../../../style/basic.css';
 import { connect } from 'react-redux';
 import { actions as userActions } from '../../../redux/user-model';
 import { actions as voluntaryActions } from '../../../redux/voluntary-model';
+import { VIP_PROFILE } from '../../../constants/route-constants';
 
 const { Option } = Select;
 const { confirm } = Modal;
@@ -294,7 +295,9 @@ class BasicController extends React.Component {
                     </Button>
                   </div>
                 ) : (
-                  <Button type='primary'>获得更多修改次数</Button>
+                  <Button onClick={this.toVipPage} type='primary'>
+                    获得更多修改次数
+                  </Button>
                 )}
               </Form.Item>
             </Form>
@@ -477,6 +480,10 @@ class BasicController extends React.Component {
       });
     }
   };
+
+  toVipPage = ()=> {
+    this.props.history.push(`/${VIP_PROFILE.path}`);
+  }
 }
 
 // 从store接收state数据
