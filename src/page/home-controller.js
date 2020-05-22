@@ -84,14 +84,14 @@ class HomeController extends React.Component {
 
           {/*step5/1  拆分路由    report   报表页*/}
           <Route
-            path={`/${BCG_ROOT_NAME}/${REPORT.path}/:lotId`}
+            path={`/${BCG_ROOT_NAME}/${REPORT.path}/:lotId/:voluntaryId`}
             exact
             component={ReportController}
           />
 
           {/*step5/2  拆分路由    deep_report   深度体验页*/}
           <Route
-            path={`/${BCG_ROOT_NAME}/${DEEP_REPORT.path}/:lotId`}
+            path={`/${BCG_ROOT_NAME}/${DEEP_REPORT.path}/:lotId/:voluntaryId`}
             exact
             component={DeepReportController}
           />

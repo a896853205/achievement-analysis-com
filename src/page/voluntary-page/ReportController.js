@@ -50,24 +50,11 @@ class ReportController extends React.Component {
       });
       this.props.recordVoluntaryDetail(data[this.props.match.params.lotId]);
 
-      // 提交到后台后返回uuid
-      let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
-        lotId: +this.props.match.params.lotId,
-        voluntary: data[this.props.match.params.lotId],
-        reportType: 1
-      });
-
-      // await this.props.getUser();
-
-      if (voluntaryId) {
         // 将uuid存入redux
         this.props.recordVoluntaryResultType('report');
-        this.props.recordVoluntaryIdGetResult(voluntaryId);
+        this.props.recordVoluntaryIdGetResult(this.props.match.params.voluntaryId);
 
-      }
     }
-
-
 
   }
 

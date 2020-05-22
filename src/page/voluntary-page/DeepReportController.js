@@ -48,22 +48,13 @@ class DeepReportController extends React.Component {
       });
       this.props.recordVoluntaryDetail(data[this.props.match.params.lotId]);
 
-      // 提交到后台后返回uuid
-      let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
-        lotId: +this.props.match.params.lotId,
-        voluntary: data[this.props.match.params.lotId],
-        reportType: 2
-      });
+
 
       // await this.props.getUser();
-
-      if (voluntaryId) {
         // 将uuid存入redux
         this.props.recordVoluntaryResultType('deepReport');
-        this.props.recordVoluntaryListOption(voluntaryId);
-        this.props.recordVoluntaryDeepUuid(voluntaryId);
-
-      }
+        this.props.recordVoluntaryListOption(this.props.match.params.voluntaryId);
+        this.props.recordVoluntaryDeepUuid(this.props.match.params.voluntaryId);
     }
 
 
