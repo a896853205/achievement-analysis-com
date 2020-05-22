@@ -22,7 +22,6 @@ class VoluntaryDetail extends React.Component {
     return (
       <div className='home-voluntary-box'>
 
-        <h1>4444444</h1>
         <BaseHeader/>
 
         <div className='home-voluntary-content'>
@@ -49,7 +48,6 @@ class VoluntaryDetail extends React.Component {
   // 得再这里取值 坑b
   async componentDidUpdate(prevProps, prevState, snapshot) {
     if(JSON.stringify(prevProps.user) !== JSON.stringify(this.props.user)){
-      console.log(this.props.user.uuid, 99999999)
       // saveMyVoluntary
       const data = await launchRequest(APIS.GET_TEMP_VOLUNTARY, {
         uuid: this.props.user

@@ -40,7 +40,6 @@ class HeaderController extends React.Component {
   };
 
   render() {
-    console.log('user', this.props.user);
     let userMenu = (
       <Menu theme='dark'>
         <Menu.Item>
@@ -330,7 +329,6 @@ class HeaderController extends React.Component {
 
   // 正式填报开启
   handleFormalApplyOpen = () => {
-    console.log(this.props.user.roleCode, 2222222222222);
     /*
     * 正式填报
     *   如果未登录，跳转到登录页

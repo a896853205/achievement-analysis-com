@@ -11,7 +11,6 @@ class CompleteInfoController extends React.Component {
     return (
       <div className='home-voluntary-box'>
 
-        <h1>11111</h1>
 
         <div className='home-voluntary-content'>
           <div className='voluntary-main-box'>

@@ -25,7 +25,6 @@ export const BaseHeader = connect(
   mapStateToProps,
   mapDispatchToProps
 )((props) => {
-  console.log(props.me, props.user,222222222);
   return (
     <div className='home-voluntary-me'>
       <div className='voluntarty-me-box'>

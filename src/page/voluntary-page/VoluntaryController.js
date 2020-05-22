@@ -14,7 +14,6 @@ class VoluntaryController extends React.Component {
     return (
       <div className='home-voluntary-box'>
 
-        <h1>22222</h1>
         <BaseHeader/>
 
         <div className='home-voluntary-content'>

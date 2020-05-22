@@ -106,15 +106,15 @@ export function uploadProjectImageToQiniu(image) {
 }
 
 async function _fetch(url, params = {}, requestType, fetchParams = {}) {
-	console.log(`-----------------\n发起${requestType}请求\n * url: ${url}\n * params:`);
-	console.dir(params);
+	// console.log(`-----------------\n发起${requestType}请求\n * url: ${url}\n * params:`);
+	// console.dir(params);
 
 	const response = await fetch(url, fetchParams);
 	const responseData = await response.json();
 
-	console.log('请求返回: status:' + responseData.succ + '\n');
-	console.dir(responseData);
-	console.log('-----------------');
+	// console.log('请求返回: status:' + responseData.succ + '\n');
+	// console.dir(responseData);
+	// console.log('-----------------');
 
 	if (responseData.succ === DominConfigs.RESPONSE_CODE.success) {
 		// 请求成功 succ: 200 && status: 1

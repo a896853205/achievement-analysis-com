@@ -18,7 +18,6 @@ class SchoolsController extends React.Component {
     return (
       <div className='home-voluntary-box'>
 
-        <h1>3333333---------{this.props.match.params.lotId}</h1>
         <BaseHeader/>
 
         <div className='home-voluntary-content'>

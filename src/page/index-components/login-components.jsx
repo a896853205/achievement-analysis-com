@@ -66,7 +66,6 @@ export default connect(
 
   // 正式填报开启
   const handleFormalApplyOpen = () => {
-    console.log(props.user.roleCode, 2222222222222);
     /*
     * 正式填报
     *   如果未登录，跳转到登录页

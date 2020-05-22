@@ -97,7 +97,6 @@ class WelcomeController extends React.Component {
   };
 
   componentDidMount = async () => {
-    console.log(this.props.roleCode + '123');
     let status = await launchRequest(APIS.GET_QUESTIONNAIRE_STATUS);
 
     if (!status) {

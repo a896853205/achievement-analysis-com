@@ -81,7 +81,6 @@ const effects = {
     yield put(switchMeLoading(false));
   },
   recordSchoolListSaga: function*() {
-    console.log('4444444444444444444444444444444');
     yield put(switchSchoolTableLoading(true));
 
     let schoolList = [];
@@ -93,7 +92,6 @@ const effects = {
     // 这里需要做一下type判断,如果是1就按照学校优先来处理
     // 如果是3就按照查学校名来处理
     if (voluntaryType === 1) {
-      console.log('5555555555555');
       let { schoolOption, lot_id } = voluntaryStore;
 
       let {
@@ -106,7 +104,6 @@ const effects = {
       } = schoolOption;
 
       if (lot_id) {
-        console.log('66666666666666666',lot_id);
         let data = yield call(launchRequest, APIS.GET_SCHOOL, {
           lotId: lot_id,
           natureValues,

@@ -33,12 +33,8 @@ export const vipPage = connect(
   mapStateToProps,
   mapDispatchToProps
 )((props) => {
-
-  console.log( props.user.roleCode,111111111111111);
-
   const testClick = async () => {
     let data = await launchRequest(APIS.PAY_TEST);
-    console.log(data, 66666666666);
   };
 
 
@@ -133,14 +129,14 @@ export const vipPage = connect(
               </button>
             </div> */}
             <div className='buy-button-box'>
-              <Button
+              {/*<Button
                 aria-controls='simple-menu'
                 aria-haspopup='true'
                 onClick={testClick}
                 className='buy-button'
               >
                 test
-              </Button>
+              </Button>*/}
               <Button
                 aria-controls='simple-menu'
                 aria-haspopup='true'

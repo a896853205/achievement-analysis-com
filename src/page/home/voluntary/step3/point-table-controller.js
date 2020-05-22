@@ -367,7 +367,6 @@ class PointTableController extends React.Component {
       }
     ];
 
-    console.log("columns",columns);
     // 查看专业的UI
     const CustomExpandIcon = props => {
       if (props.expanded) {

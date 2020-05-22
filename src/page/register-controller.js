@@ -37,7 +37,6 @@ class RegisterController extends React.Component {
               username: values.username
             });
 
-            console.log(result);
           }
         );
       }

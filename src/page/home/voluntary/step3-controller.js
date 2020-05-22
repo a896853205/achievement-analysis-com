@@ -183,7 +183,6 @@ class Step3Controller extends React.Component {
     await this.setState({
       loading: true
     });
-    console.log(this.props.voluntary[this.props.lot_id],666666666666666666);
     this.props.recordVoluntaryDetail(this.props.voluntary[this.props.lot_id]);
     // 要拆分路由，所以不再对redux中step进行维护，改用路由的方式跳转
     // this.props.nextStep();
