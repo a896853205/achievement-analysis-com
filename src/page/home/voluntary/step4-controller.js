@@ -13,7 +13,7 @@ import { actions as userActions } from '@/redux/user-model';
 
 // 请求文件
 import { launchRequest } from '@/util/request';
-import * as APIS from '@/constants/api-constants';
+import * as APIS from '../../../constants/api-constants';
 
 // UI组件
 import { Button, Modal, Alert } from 'antd';
@@ -96,6 +96,10 @@ class Step4Controller extends React.Component {
     );
   }
 
+  testClick = async () => {
+    let data = await launchRequest(APIS.UPDATE_DEEP_ALTER_TIME_DROP_1);
+    console.log(data);
+  };
   handleClickSubmit = async () => {
     confirm({
       title: '生成报表',
@@ -112,12 +116,19 @@ class Step4Controller extends React.Component {
           voluntary: this.props.voluntaryDetail,
           reportType: 1
         });
-        await this.props.getUser();
+
 
         if (voluntaryId) {
           // 将uuid存入redux
           this.props.recordVoluntaryResultType('report');
           this.props.recordVoluntaryIdGetResult(voluntaryId);
+
+
+          // 在这里将生成报表次数减少1
+          await launchRequest(APIS.UPDATE_REPORT_ALTER_TIME_DROP_1);
+
+
+          await this.props.getUser();
 
           // 结束loading
           await this.setState({ btnLoading: false });
@@ -152,7 +163,7 @@ class Step4Controller extends React.Component {
           voluntary: this.props.voluntaryDetail,
           reportType: 2
         });
-        await this.props.getUser();
+
 
         if (voluntaryId) {
           // 将uuid存入redux
@@ -160,8 +171,15 @@ class Step4Controller extends React.Component {
           this.props.recordVoluntaryListOption(voluntaryId);
           this.props.recordVoluntaryDeepUuid(voluntaryId);
 
+          // 在这里将深度体验次数减少1
+          await launchRequest(APIS.UPDATE_DEEP_ALTER_TIME_DROP_1);
+
+          await this.props.getUser();
+
           // 结束loading
           await this.setState({ btnLoading: false });
+
+
 
           // 跳转页面
           // 要拆分路由，所以不再对redux中step进行维护，改用路由的方式跳转
