@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-
+// 关于数据模块交互
+import { connect } from 'react-redux';
 // 自定义组件
 import BasicController from "./personal/basic-controller";
 import PasswordController from "./personal/password-controller";
@@ -23,6 +24,7 @@ import {
 import "../../style/home-personal.css";
 class HomePersonalController extends React.Component {
   render() {
+
     return (
       <div className="personal-box">
         <div className="slidebar">
@@ -32,10 +34,11 @@ class HomePersonalController extends React.Component {
               src="https://alioss.gcores.com/default_thumb/user-large.png"
               alt=""
             />
-            <p className="aus-user-name">hrbust_cheny</p>
+            <p className="aus-user-name">
+              {this.props.user.nickname ? this.props.user.nickname : '智赢规划'}
+            </p>
           </div>
           <Menu
-            onClick={this.handleClick}
             className="personl-menu"
             defaultSelectedKeys={["1"]}
             defaultOpenKeys={["sub1"]}
@@ -85,4 +88,21 @@ class HomePersonalController extends React.Component {
     );
   }
 }
-export default HomePersonalController;
+
+// 从store接收state数据
+const mapStateToProps = store => {
+  const { user } = store['userStore'];
+  return {
+    user
+  };
+};
+
+// 向store dispatch action
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomePersonalController);

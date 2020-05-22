@@ -117,6 +117,7 @@ class HomeController extends React.Component {
             path={`/${BCG_ROOT_NAME}/${PERSONAL.path}`}
             component={HomePersonalController}
           />
+
           <Route
             component={() => (
               <Result

@@ -298,7 +298,7 @@ class HeaderController extends React.Component {
               {this.props.user.uuid ? (
                 <Dropdown overlay={userMenu}>
                   <span className='user-menu-span login-text'>
-                    {this.props.user.nickname} <Icon type='down' />
+                    {this.props.user.nickname ? this.props.user.nickname : '我'} <Icon type='down' />
                   </span>
                 </Dropdown>
               ) : (
