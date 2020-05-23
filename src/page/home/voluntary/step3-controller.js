@@ -31,6 +31,8 @@ class Step3Controller extends React.Component {
   };
 
   render() {
+    console.log(this.props.voluntary,this.props.lot_id,5555555555);
+
     // 右侧志愿表的删除UI
     const genExtra = voluntaryItem => (
       <Icon
@@ -199,6 +201,9 @@ class Step3Controller extends React.Component {
       voluntary: this.props.voluntary
     });
   };
+  componentDidMount() {
+    this.props.setLotId(+this.props.match.params.lotId);
+  }
 }
 
 // 从store接收state数据
@@ -231,7 +236,10 @@ const mapDispatchToProps = dispatch => {
     },
     recordVoluntaryType: params => {
       dispatch(voluntaryActions.recordVoluntaryType(params));
-    }
+    },
+    setLotId: lotId => {
+      dispatch(voluntaryActions.setLotId(lotId));
+    },
   };
 };
 
