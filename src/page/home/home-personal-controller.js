@@ -40,23 +40,23 @@ class HomePersonalController extends React.Component {
           </div>
           <Menu
             className="personl-menu"
-            defaultSelectedKeys={["1"]}
+            defaultSelectedKeys={[this.props.match.params.type || BASIC.path]}
             defaultOpenKeys={["sub1"]}
             mode="inline"
           >
-            <Menu.Item key="1" className="personl-menu-item">
+            <Menu.Item key={BASIC.path} className="personl-menu-item">
               <Link to={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${BASIC.path}`}>
                 <Icon type="user" />
                 基本信息
               </Link>
             </Menu.Item>
-            <Menu.Item key="2" className="personl-menu-item">
+            <Menu.Item key={PASSWORD.path} className="personl-menu-item">
               <Link to={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${PASSWORD.path}`}>
                 <Icon type="key" />
                 修改密码
               </Link>
             </Menu.Item>
-            <Menu.Item key="3" className="personl-menu-item">
+            <Menu.Item key={MY_VOLUNTARY.path} className="personl-menu-item">
               <Link to={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${MY_VOLUNTARY.path}`}>
                 <Icon type="schedule" />
                 我的志愿
