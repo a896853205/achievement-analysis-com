@@ -192,7 +192,6 @@ class Step3Controller extends React.Component {
       loading: false
     });
   };
-
   // 暂存函数
   handleClickSaveVoluntary = () => {
     // saveMyVoluntary

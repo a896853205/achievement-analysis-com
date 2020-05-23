@@ -526,8 +526,6 @@ const SchoolMajorScoreList = connect(
         // 避免闪烁
         wait(500)
       ]);
-      console.log(schoolMajor,99999999999);
-      console.log(allYear,88888888);
       setSchoolMajor(schoolMajor);
       setAllYear(allYear);
       setLoading(false);

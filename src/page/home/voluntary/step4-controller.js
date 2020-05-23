@@ -42,7 +42,6 @@ class Step4Controller extends React.Component {
                 className='btn-large btn-transition-blue-background'
                 loading={this.state.btnLoading}
                 onClick={this.handleClickSubmit}
-                // onClick={this.testClick}
                 size='large'
                 type='primary'
                 style={{ marginTop: '20px', marginBottom: '20px' }}
@@ -96,13 +95,6 @@ class Step4Controller extends React.Component {
       </div>
     );
   }
-
-  testClick = async () => {
-    // let data = await launchRequest(APIS.UPDATE_DEEP_ALTER_TIME_DROP_1);
-    // console.log(data);
-
-    console.log(this.props.voluntaryDetail,this.props.lotId, 9999999);
-  };
   handleClickSubmit = async () => {
     confirm({
       title: '生成报表',
@@ -119,10 +111,6 @@ class Step4Controller extends React.Component {
           voluntary: this.props.voluntaryDetail,
           reportType: 1
         });
-
-        // 保存这个id
-        console.log(voluntaryId,8888);
-
         if (voluntaryId) {
           // 将uuid存入redux
           this.props.recordVoluntaryResultType('report');
