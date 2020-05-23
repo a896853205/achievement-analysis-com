@@ -90,8 +90,8 @@ class MyVoluntaryController extends React.Component {
   componentDidMount = async () => {
     let myVoluntary = await launchRequest(GET_MY_VOLUNTARY);
     
-    let reportVoluntary = myVoluntary.filter(item => item.reportType === 1);
-    let deepVoluntary = myVoluntary.filter(item => item.reportType === 2);
+    let reportVoluntary = myVoluntary.filter(item => item.reportType === 1).reverse();
+    let deepVoluntary = myVoluntary.filter(item => item.reportType === 2).reverse();
 
     this.setState({
       reportVoluntary,
