@@ -1,8 +1,9 @@
 import React from 'react';
 
 // UI样式
-import { Carousel, Icon, Skeleton, Popover } from 'antd';
+import { Carousel, Icon, Skeleton, Popover, Modal } from 'antd';
 import '../style/index-controller.css';
+import { FILL_TYPE } from '../config/app-config';
 
 // 路由
 import { withRouter, Link } from 'react-router-dom';
@@ -13,7 +14,7 @@ import {
   LOGIN,
   SCHOOL_RECOMMEND,
   SCHOOL_DETAIL,
-  NEWS_DETAIL
+  NEWS_DETAIL, VIP_PROFILE, COMPLETE_INFO
 } from '../constants/route-constants';
 
 // 请求文件
@@ -121,15 +122,10 @@ class IndexController extends React.Component {
               }
               title={<h1>学业测评</h1>}
             >
-              <Link
-                to={
-                  this.props.user.uuid
-                    ? `/${BCG_ROOT_NAME}/${QUESTIONNAIRE.path}`
-                    : `/${LOGIN.path}`
-                }
-              >
+              <div style={{cursor:'pointer'}}
+                onClick={ FILL_TYPE == 0 ? this.handleSimulatedApplyOpen : this.handleFormalApplyOpen} >
                 <img src='/index-icon/1.png' alt='' />
-              </Link>
+              </div>
             </Popover>
             <span>学业测评</span>
           </div>
@@ -144,15 +140,12 @@ class IndexController extends React.Component {
               }
               title={<h1>院校优先</h1>}
             >
-              <Link
-                to={
-                  this.props.user.uuid
-                    ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
-                    : `/${LOGIN.path}`
-                }
+              <div
+                style={{cursor:'pointer'}}
+                onClick={ FILL_TYPE == 0 ? this.handleSimulatedApplyOpen : this.handleFormalApplyOpen}
               >
                 <img src='/index-icon/2.png' alt='' />
-              </Link>
+              </div>
             </Popover>
             <span>院校优先</span>
           </div>
@@ -167,15 +160,10 @@ class IndexController extends React.Component {
               }
               title={<h1>专业优先</h1>}
             >
-              <Link
-                to={
-                  this.props.user.uuid
-                    ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
-                    : `/${LOGIN.path}`
-                }
-              >
+              <div style={{cursor:'pointer'}}
+                   onClick={ FILL_TYPE == 0 ? this.handleSimulatedApplyOpen : this.handleFormalApplyOpen}>
                 <img src='/index-icon/3.png' alt='' />
-              </Link>
+              </div>
             </Popover>
             <span>专业优先</span>
           </div>
@@ -205,15 +193,12 @@ class IndexController extends React.Component {
               }
               title={<h1>分析报告</h1>}
             >
-              <Link
-                to={
-                  this.props.user.uuid
-                    ? `/${BCG_ROOT_NAME}/${VOLUNTARY.path}`
-                    : `/${LOGIN.path}`
-                }
+              <div
+                style={{cursor:'pointer'}}
+                onClick={ FILL_TYPE == 0 ? this.handleSimulatedApplyOpen : this.handleFormalApplyOpen}
               >
                 <img src='/index-icon/5.png' alt='' />
-              </Link>
+              </div>
             </Popover>
             <span>分析报告</span>
           </div>
@@ -493,6 +478,52 @@ class IndexController extends React.Component {
       questionNewsList,
       loading: false
     });
+  };
+  // 正式填报开启
+  handleFormalApplyOpen = () => {
+    /*
+    * 正式填报
+    *   如果未登录，跳转到登录页
+    *   如果已登录，权限是1，跳转到开通vip页面
+    *   如果已经是VIP，跳转到填报志愿页
+    * */
+    if(this.props.user.uuid){
+      if(this.props.user.roleCode == 1){
+        Modal.warning({
+          content:'请开通VIP',
+          onOk: ()=>{
+            this.props.history.push(`/${VIP_PROFILE.path}`);
+          }
+        });
+      }else {
+        if(this.props.user.score > 0) {
+          this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY.path}`);
+        }else {
+          Modal.warning({
+            content: '当前为正式填报，*高考分数，一经填写，不能修改',
+            onOk: ()=>{
+              this.props.history.push(`/${BCG_ROOT_NAME}/${COMPLETE_INFO.path}`);
+            }
+          });
+        }
+      }
+    }else {
+      this.props.history.push(`/${LOGIN.path}`);
+    }
+  };
+  // 模拟填报开启
+  handleSimulatedApplyOpen = () => {
+    // 如果未登录 跳转到登录页
+    if(this.props.user.uuid){
+      // 如果已经登录，尚未完善个人信息，就跳转至个人信息页
+      if(this.props.user.score > 0) {
+        this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY.path}`);
+      }else {
+        this.props.history.push(`/${BCG_ROOT_NAME}/${COMPLETE_INFO.path}`);
+      }
+    }else {
+      this.props.history.push(`/${LOGIN.path}`);
+    }
   };
 }
 
