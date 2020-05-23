@@ -32,6 +32,8 @@ import {
   REGISTER, COMPLETE_INFO
 } from '../constants/route-constants';
 
+import { FILL_TYPE } from '../config/app-config';
+
 const { SubMenu } = Menu;
 
 class HeaderController extends React.Component {
@@ -218,10 +220,10 @@ class HeaderController extends React.Component {
                   }
                 >
                   <Menu.Item key='7'>
-                    <div onClick={this.handleSimulatedApplyOpen}>模拟填报</div>
+                    <div onClick={ FILL_TYPE == 0 ? this.handleSimulatedApplyOpen : this.handleSimulatedApplyClose }>模拟填报</div>
                   </Menu.Item>
                   <Menu.Item key='8'>
-                    <div onClick={this.handleFormalApplyClose}>正式填报</div>
+                    <div onClick={FILL_TYPE == 1 ? this.handleFormalApplyOpen : this.handleFormalApplyClose}>正式填报</div>
                   </Menu.Item>
                   <Menu.Item key='9'>
                     <Link to={'/'}> 院校优先 </Link>

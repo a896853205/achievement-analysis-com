@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-import * as APIS from '@/constants/api-constants';
+import * as APIS from '../../constants/api-constants';
+import { FILL_TYPE } from '../../config/app-config';
 import '@/style/detail/school-detail.css';
 import { launchRequest } from 'util/request';
 import { Input, Button, Modal } from 'antd';
@@ -10,9 +11,6 @@ import md5 from 'md5';
 import { connect } from 'react-redux';
 import { actions as userActions } from '../../redux/user-model';
 import { actions as voluntaryActions } from '../../redux/voluntary-model';
-
-// 路由
-import { Link } from 'react-router-dom';
 
 // 路由
 import { VOLUNTARY, BCG_ROOT_NAME, LOGIN } from '@/constants/route-constants';
@@ -97,17 +95,6 @@ export default connect(
       props.history.push(`/${LOGIN.path}`);
     }
   };
-  // 正式填报关闭
-  const handleFormalApplyClose = () => {
-    // 如果未登录 跳转到登录页
-    if(props.user.uuid){
-      Modal.warning({
-        content:'正式填报入口已关闭，请使用模拟填报'
-      });
-    }else {
-      props.history.push(`/${LOGIN.path}`);
-    }
-  };
 
   // 模拟填报开启
   const handleSimulatedApplyOpen = () => {
@@ -123,17 +110,6 @@ export default connect(
       props.history.push(`/${LOGIN.path}`);
     }
   };
-  // 模拟填报关闭
-  const handleSimulatedApplyClose = () => {
-    // 如果未登录 跳转到登录页
-    if(props.user.uuid){
-      Modal.warning({
-        content:'模拟填报入口已关闭，请使用正式填报'
-      });
-    }else {
-      props.history.push(`/${LOGIN.path}`);
-    }
-  };
 
   return (
     <div>
@@ -143,7 +119,7 @@ export default connect(
             <Button
               type='round'
               className='index-login-button'
-              onClick={handleSimulatedApplyOpen}
+              onClick={ FILL_TYPE == 0 ? handleSimulatedApplyOpen : handleFormalApplyOpen }
             >
               开始填报吧
             </Button>
