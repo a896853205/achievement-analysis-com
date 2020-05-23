@@ -40,7 +40,7 @@ class HomePersonalController extends React.Component {
           </div>
           <Menu
             className="personl-menu"
-            defaultSelectedKeys={[this.props.match.params.type || BASIC.path]}
+            selectedKeys={[this.props.match.params.type || BASIC.path]}
             defaultOpenKeys={["sub1"]}
             mode="inline"
           >
