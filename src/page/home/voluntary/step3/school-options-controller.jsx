@@ -117,7 +117,7 @@ export default connect(
       setProvinceList(provinceList);
       setGatherOptionList(gatherOptionList)
     })();
-  }, [lotId, initVoluntary, recordVoluntary]);
+  }, [lotId]);
 
   useEffect(() => {
     return () => {
