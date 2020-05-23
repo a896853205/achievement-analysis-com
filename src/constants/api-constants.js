@@ -84,6 +84,7 @@ export const GET_MAJOR_PROFILE = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_
 export const GET_MARJO_DETAIL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MAJOR}/getMajorDetail`;
 export const GET_HOT_MAJORS = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MAJOR}/getHotMajors`;
 export const GET_SCHOOL_MAJOR = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MAJOR}/getSchoolMajor`;
+export const GET_ALL_YEAR = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MAJOR}/getAllYear`;
 
 // 获取上传Token
 export const GetUploadToken = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_UPLOAD}/getuploadtoken`;

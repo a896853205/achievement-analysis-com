@@ -8,7 +8,8 @@ import { Icon, Table, Select, Skeleton, Modal } from 'antd';
 
 // 请求
 import { launchRequest } from '@/util/request';
-import * as APIS from '@/constants/api-constants';
+import * as APIS from '../../constants/api-constants';
+import * as DominConfigs from '../../constants/domin-constants';
 
 // 自定义函数
 import wait from '@/util/wait-helper';
@@ -505,8 +506,9 @@ const SchoolMajorScoreList = connect(
 )(props => {
   const [loading, setLoading] = useState(true);
   const [schoolMajor, setSchoolMajor] = useState([]),
+       [allYear, setAllYear] = useState([]),
     [accountCategory, setAccountCategory] = useState(1),
-  [year, setYear] = useState(2019);
+  [year, setYear] = useState(new Date().getFullYear()-1);
 
   let { schoolId } = props;
 
@@ -514,17 +516,20 @@ const SchoolMajorScoreList = connect(
     (async () => {
       setLoading(true);
 
-      let [schoolMajor] = await Promise.all([
+      let [schoolMajor, allYear] = await Promise.all([
         launchRequest(APIS.GET_SCHOOL_MAJOR, {
           schoolId,
           accountCategory,
           year
         }),
+        launchRequest(APIS.GET_ALL_YEAR, {}, DominConfigs.REQUEST_TYPE.GET),
         // 避免闪烁
         wait(500)
       ]);
-
+      console.log(schoolMajor,99999999999);
+      console.log(allYear,88888888);
       setSchoolMajor(schoolMajor);
+      setAllYear(allYear);
       setLoading(false);
     })();
   }, [schoolId, accountCategory,year]);
@@ -538,10 +543,13 @@ const SchoolMajorScoreList = connect(
           onChange={value => setYear(value)}
           style={{ width: 200 }}
         >
-          <Option value={2019}>2019</Option>
-          <Option value={2018}>2018</Option>
-          <Option value={2017}>2017</Option>
-          <Option value={2016}>2016</Option>
+          {allYear.map( item =>(
+            <Option value={item.year}>{item.year}</Option>
+          ))}
+          {/*<Option value={2019}>2019</Option>*/}
+          {/*<Option value={2018}>2018</Option>*/}
+          {/*<Option value={2017}>2017</Option>*/}
+          {/*<Option value={2016}>2016</Option>*/}
         </Select>
         <Select
           value={accountCategory}

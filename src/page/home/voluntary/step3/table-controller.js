@@ -5,7 +5,7 @@ import { Select, Button, Icon, Table, Modal, Tag, Tooltip } from 'antd';
 
 // 自定义组件
 import SubTableController from './sub-table-controller';
-import SchoolDetailController from '@/page/detail/school-detail-controller.jsx';
+import SchoolDetailController from '../../../detail/school-detail-controller.jsx';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
