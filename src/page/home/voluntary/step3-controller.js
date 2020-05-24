@@ -113,7 +113,7 @@ class Step3Controller extends React.Component {
                     type='primary'
                     onClick={this.handleClickSaveVoluntary}
                   >
-                    暂存
+                    保存
                   </Button>
                   <Button
                     loading={this.state.loading}
@@ -199,9 +199,38 @@ class Step3Controller extends React.Component {
       voluntary: this.props.voluntary
     });
   };
+
   componentDidMount() {
-    this.props.setLotId(+this.props.match.params.lotId);
+    // this.props.setLotId(+this.props.match.params.lotId);
+    this.handleLotsChange();
   }
+
+  // 学校批次改变
+  handleLotsChange = () => {
+    (async () => {
+      console.log('handleLotsChange',9999999999);
+      // 调用查询表格数据函数
+      this.props.setLotId(+this.props.match.params.lotId);
+      this.props.recordSchoolList();
+
+      // 需要重构成saga -----
+      let { voluntaryOptionList } = await launchRequest(
+        APIS.GET_SCHOOL_OPTION,
+        {
+          lotId: this.props.match.params.lotId
+        }
+      );
+
+      if (
+        !(
+          this.props.voluntary[this.props.match.params.lotId] &&
+          this.voluntary[this.props.match.params.lotId].length
+        )
+      ) {
+        this.props.initVoluntary(voluntaryOptionList);
+      }
+    })();
+  };
 }
 
 // 从store接收state数据
@@ -219,6 +248,9 @@ const mapStateToProps = store => {
 // 向store dispatch action
 const mapDispatchToProps = dispatch => {
   return {
+    initVoluntary: params => {
+      dispatch(voluntaryActions.initVoluntary(params));
+    },
     deleteVoluntary: params => {
       dispatch(voluntaryActions.deleteVoluntary(params));
     },
