@@ -104,7 +104,7 @@ class MyVoluntaryController extends React.Component {
     // 将uuid存入redux
     this.props.recordVoluntaryIdGetResult(voluntaryId);
     // 跳转页面
-    this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY_RESULT.path}?from=myVoluntary`);
+    this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY_RESULT.path}?from=${voluntaryId}`);
   };
 
   handleClickDeepResut = voluntaryId => {

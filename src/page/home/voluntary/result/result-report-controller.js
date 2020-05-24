@@ -8,9 +8,10 @@ import { Skeleton, Tag } from 'antd';
 import ReactEcharts from 'echarts-for-react';
 import '@/style/voluntary/result.css';
 
-import ResultVoluntaryDetailController from '@/page/home/voluntary/result/result-voluntary-detail-controller';
+import ResultVoluntaryDetailController from '../../../home/voluntary/result/result-voluntary-detail-controller';
 import { readUrlParams } from '@/util/parseUrlParams';
 import VoluntaryDetailController from '@/page/home/voluntary/step4/voluntary-detail-controller';
+import { actions as voluntaryActions } from '../../../../redux/voluntary-model';
 
 class ResultReportController extends React.Component {
   getOption = result => {
@@ -47,7 +48,7 @@ class ResultReportController extends React.Component {
 
         { readUrlParams('from') ? (
           <ResultVoluntaryDetailController
-           schoolAndMajorUuid={this.props.schoolAndMajorUuid}
+           schoolAndMajorUuid={readUrlParams('from')}
           />
         ) : (<VoluntaryDetailController />)}
         
@@ -158,6 +159,11 @@ class ResultReportController extends React.Component {
       </div>
     );
   }
+  componentDidMount() {
+    if(readUrlParams('from')){
+      this.props.recordVoluntaryIdGetResult(readUrlParams('from'));
+    }
+  }
 }
 
 // 从store接收state数据
@@ -173,7 +179,11 @@ const mapStateToProps = store => {
 
 // 向store dispatch action
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    recordVoluntaryIdGetResult: params => {
+      dispatch(voluntaryActions.recordVoluntaryIdGetResult(params));
+    },
+  };
 };
 
 export default connect(

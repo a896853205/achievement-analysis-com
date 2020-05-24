@@ -9,7 +9,7 @@ import HomeIndexController from './home/home-index-controller';
 import HomeVoluntaryController from './home/home-voluntary-controller';
 import HomeQuestionnaireController from './home/home-questionnaire-controller';
 import HomePersonalController from './home/home-personal-controller';
-import HomeVoluntaryReportResultController from '@/page/home/home-voluntary-report-result-controller';
+import HomeVoluntaryReportResultController from './home/home-voluntary-report-result-controller';
 import HomeVoluntaryDeepResultController from '@/page/home/home-voluntary-deep-result-controller';
 
 // 路由

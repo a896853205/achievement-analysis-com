@@ -1,5 +1,5 @@
 import React from 'react';
-import ResultReportController from '@/page/home/voluntary/result/result-report-controller';
+import ResultReportController from '../home/voluntary/result/result-report-controller';
 class HomeVoluntaryResultController extends React.Component {
 	render() {
 		return (

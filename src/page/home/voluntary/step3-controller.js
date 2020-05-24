@@ -31,8 +31,6 @@ class Step3Controller extends React.Component {
   };
 
   render() {
-    console.log(this.props.voluntary,this.props.lot_id,5555555555);
-
     // 右侧志愿表的删除UI
     const genExtra = voluntaryItem => (
       <Icon
