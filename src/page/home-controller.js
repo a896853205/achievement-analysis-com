@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch, Link, Redirect } from 'react-router-dom';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
@@ -115,7 +115,14 @@ class HomeController extends React.Component {
           />
           <Route
             path={`/${BCG_ROOT_NAME}/${PERSONAL.path}/:type`}
-            component={HomePersonalController}
+            // component={HomePersonalController}
+            render={
+              (props) => {
+                return +this.props.user.score ? <HomePersonalController {...props}/> : (
+                  <Redirect to={`/${BCG_ROOT_NAME}/${COMPLETE_INFO.path}`}/>
+                )
+              }
+            }
           />
 
           <Route
