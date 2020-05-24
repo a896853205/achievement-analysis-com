@@ -104,7 +104,7 @@ export default connect(
       // 先判断是否有暂存
       if (voluntary && voluntary[lotId] && voluntary[lotId].length) {
         recordVoluntary(voluntary);
-      } else if (!hasVoluntary) {
+      } else {
         // 然后再判断每个批次的表格是否有基础信息
         initVoluntary(voluntaryOptionList);
       }
