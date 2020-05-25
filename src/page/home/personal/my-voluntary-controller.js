@@ -110,7 +110,7 @@ class MyVoluntaryController extends React.Component {
   handleClickDeepResut = voluntaryId => {
     this.props.recordVoluntaryListOption(voluntaryId);
     this.props.recordVoluntaryDeepUuid(voluntaryId);
-    this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY_DEEP_RESULT.path}`);
+    this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY_DEEP_RESULT.path}/${voluntaryId}`);
   }
 }
 

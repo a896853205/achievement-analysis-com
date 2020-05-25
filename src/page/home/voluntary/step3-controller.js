@@ -202,6 +202,7 @@ class Step3Controller extends React.Component {
 
   componentDidMount() {
     // this.props.setLotId(+this.props.match.params.lotId);
+    // 这里是强行调用一次这个方法，把专业批次切换一次，解决那个很迷的线上bug
     this.handleLotsChange();
   }
 

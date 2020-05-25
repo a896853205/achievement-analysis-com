@@ -10,7 +10,7 @@ import HomeVoluntaryController from './home/home-voluntary-controller';
 import HomeQuestionnaireController from './home/home-questionnaire-controller';
 import HomePersonalController from './home/home-personal-controller';
 import HomeVoluntaryReportResultController from './home/home-voluntary-report-result-controller';
-import HomeVoluntaryDeepResultController from '@/page/home/home-voluntary-deep-result-controller';
+import HomeVoluntaryDeepResultController from './home/home-voluntary-deep-result-controller';
 
 // 路由
 import {
@@ -104,7 +104,7 @@ class HomeController extends React.Component {
           />
           {/* 深度体验的路由 */}
           <Route
-            path={`/${BCG_ROOT_NAME}/${VOLUNTARY_DEEP_RESULT.path}`}
+            path={`/${BCG_ROOT_NAME}/${VOLUNTARY_DEEP_RESULT.path}/:voluntaryId`}
             exact
             component={HomeVoluntaryDeepResultController}
           />
