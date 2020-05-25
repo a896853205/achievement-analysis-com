@@ -31,7 +31,6 @@ class Step3Controller extends React.Component {
   };
 
   render() {
-    console.log(this.props.voluntary, this.props.lot_id,this.props.match.params.lotId, 9999999999);
     // 右侧志愿表的删除UI
     const genExtra = voluntaryItem => (
       <Icon
@@ -216,7 +215,8 @@ class Step3Controller extends React.Component {
         lotId
       });
       // 先判断是否有暂存
-      if (voluntary && voluntary[this.props.lot_id] && voluntary[this.props.lot_id].length) {
+      console.log(voluntary,voluntary[lotId],6666666666);
+      if (voluntary && voluntary[lotId] && voluntary[lotId].length) {
         this.props.recordVoluntary(voluntary);
       } else {
         // 然后再判断每个批次的表格是否有基础信息
