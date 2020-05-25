@@ -210,19 +210,24 @@ class Step3Controller extends React.Component {
       // 进到这里就说明出bug了
       console.log('aaaaaaaaaaaaaaaaaaaaa','线上bug又出现了，哈哈哈');
       // 重新走一遍逻辑
-      const { voluntary } = await launchRequest(APIS.GET_TEMP_VOLUNTARY);
+      const voluntary  = await launchRequest(APIS.GET_TEMP_VOLUNTARY);
       const { voluntaryOptionList } = await launchRequest(APIS.GET_SCHOOL_OPTION, {
         lotId
       });
       // 先判断是否有暂存
-      console.log(voluntary,voluntary[lotId],6666666666);
-      if (voluntary && voluntary[lotId] && voluntary[lotId].length) {
+      // console.log(voluntary,voluntary[this.props.lot_id],this.props.lot_id,6666666666);
+      console.log(voluntary,this.props.lot_id,6666666666);
+      if (voluntary && voluntary[this.props.lot_id] && voluntary[this.props.lot_id].length) {
+        console.log('赋值voluntary',555);
         this.props.recordVoluntary(voluntary);
       } else {
         // 然后再判断每个批次的表格是否有基础信息
+        console.log('赋值voluntaryOptionList',555);
         this.props.initVoluntary(voluntaryOptionList);
       }
     }
+
+
     this.setState({
       isFold: !this.state.isFold
     })
