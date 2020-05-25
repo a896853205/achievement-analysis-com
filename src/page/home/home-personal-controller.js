@@ -31,7 +31,7 @@ class HomePersonalController extends React.Component {
           <div className="aus-user">
             <img
               className="aus-user-thumb"
-              src="https://alioss.gcores.com/default_thumb/user-large.png"
+              src="/images/logo2.jpg"
               alt=""
             />
             <p className="aus-user-name">
