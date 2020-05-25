@@ -31,6 +31,7 @@ class Step3Controller extends React.Component {
   };
 
   render() {
+    console.log(this.props.voluntary, this.props.lot_id,this.props.match.params.lotId, 9999999999);
     // 右侧志愿表的删除UI
     const genExtra = voluntaryItem => (
       <Icon
@@ -62,11 +63,8 @@ class Step3Controller extends React.Component {
             <Affix offsetTop={10}>
               <div className='right-affix-box'>
                 <button
-                  onClick={() => {
-                    this.setState({
-                      isFold: !this.state.isFold
-                    });
-                  }}
+                  disabled={this.props.schoolTableLoading}
+                  onClick={this.switchVoluntaryTable}
                   className='show-voluntary-btn btn-transition-blue-background'
                 >
                   {this.state.isFold ? (
@@ -200,38 +198,36 @@ class Step3Controller extends React.Component {
     });
   };
 
-  componentDidMount() {
-    // this.props.setLotId(+this.props.match.params.lotId);
-    // 这里是强行调用一次这个方法，把专业批次切换一次，解决那个很迷的线上bug
-    this.handleLotsChange();
+  async componentDidMount() {
+    this.props.setLotId(+this.props.match.params.lotId);
   }
 
-  // 学校批次改变
-  handleLotsChange = () => {
-    (async () => {
-      console.log('handleLotsChange',9999999999);
-      // 调用查询表格数据函数
-      this.props.setLotId(+this.props.match.params.lotId);
-      this.props.recordSchoolList();
 
-      // 需要重构成saga -----
-      let { voluntaryOptionList } = await launchRequest(
-        APIS.GET_SCHOOL_OPTION,
-        {
-          lotId: this.props.match.params.lotId
-        }
-      );
-
-      if (
-        !(
-          this.props.voluntary[this.props.match.params.lotId] &&
-          this.voluntary[this.props.match.params.lotId].length
-        )
-      ) {
+  // 打开或收起志愿表
+  switchVoluntaryTable = async ()=>{
+    const lotId = this.props.lot_id;
+    console.log(this.props.voluntary[lotId], lotId, 44444444);
+    if(this.props.voluntary[lotId].length==0){
+      // 进到这里就说明出bug了
+      console.log('aaaaaaaaaaaaaaaaaaaaa','线上bug又出现了，哈哈哈');
+      // 重新走一遍逻辑
+      const { voluntary } = await launchRequest(APIS.GET_TEMP_VOLUNTARY);
+      const { voluntaryOptionList } = await launchRequest(APIS.GET_SCHOOL_OPTION, {
+        lotId
+      });
+      // 先判断是否有暂存
+      if (voluntary && voluntary[this.props.lot_id] && voluntary[this.props.lot_id].length) {
+        this.props.recordVoluntary(voluntary);
+      } else {
+        // 然后再判断每个批次的表格是否有基础信息
         this.props.initVoluntary(voluntaryOptionList);
       }
-    })();
-  };
+    }
+    this.setState({
+      isFold: !this.state.isFold
+    })
+  }
+
 }
 
 // 从store接收state数据
@@ -249,6 +245,9 @@ const mapStateToProps = store => {
 // 向store dispatch action
 const mapDispatchToProps = dispatch => {
   return {
+    recordVoluntary: params => {
+      dispatch(voluntaryActions.recordVoluntary(params));
+    },
     initVoluntary: params => {
       dispatch(voluntaryActions.initVoluntary(params));
     },
