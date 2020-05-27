@@ -31,7 +31,7 @@ class HomePersonalController extends React.Component {
           <div className="aus-user">
             <img
               className="aus-user-thumb"
-              src="/images/logo2.jpg"
+              src="/images/logo.jpg"
               alt=""
             />
             <p className="aus-user-name">
@@ -45,19 +45,19 @@ class HomePersonalController extends React.Component {
             mode="inline"
           >
             <Menu.Item key={BASIC.path} className="personl-menu-item">
-              <Link to={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${BASIC.path}`}>
+              <Link to={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${BASIC.path}/${this.props.user.score>0?1:0}`}>
                 <Icon type="user" />
                 基本信息
               </Link>
             </Menu.Item>
             <Menu.Item key={PASSWORD.path} className="personl-menu-item">
-              <Link to={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${PASSWORD.path}`}>
+              <Link to={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${PASSWORD.path}/${this.props.user.score>0?1:0}`}>
                 <Icon type="key" />
                 修改密码
               </Link>
             </Menu.Item>
             <Menu.Item key={MY_VOLUNTARY.path} className="personl-menu-item">
-              <Link to={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${MY_VOLUNTARY.path}`}>
+              <Link to={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${MY_VOLUNTARY.path}/${this.props.user.score>0?1:0}`}>
                 <Icon type="schedule" />
                 我的志愿
               </Link>
@@ -68,17 +68,17 @@ class HomePersonalController extends React.Component {
         <div className="personal-contant">
           <Switch>
             <Route
-              path={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${BASIC.path}`}
+              path={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${BASIC.path}/:score`}
               exact
               component={BasicController}
             />
             <Route
-              path={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${PASSWORD.path}`}
+              path={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${PASSWORD.path}/:score`}
               exact
               component={PasswordController}
             />
             <Route
-              path={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${MY_VOLUNTARY.path}`}
+              path={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${MY_VOLUNTARY.path}/:score`}
               exact
               component={MyVoluntaryController}
             />

@@ -28,7 +28,10 @@ import {
   DEEP_REPORT
 
 } from '../constants/route-constants';
-
+// 请求文件
+import { launchRequest } from '../util/request';
+import * as DominConfigs from '../constants/domin-constants';
+import * as APIS from '../constants/api-constants';
 // UI
 import { Result, Button } from 'antd';
 import CompleteInfoController from './voluntary-page/CompleteInfoController';
@@ -114,11 +117,13 @@ class HomeController extends React.Component {
             component={HomeQuestionnaireController}
           />
           <Route
-            path={`/${BCG_ROOT_NAME}/${PERSONAL.path}/:type`}
+            path={`/${BCG_ROOT_NAME}/${PERSONAL.path}/:type/:score`}
             // component={HomePersonalController}
             render={
-              (props) => {
-                return +this.props.user.score ? <HomePersonalController {...props}/> : (
+               (props) => {
+                console.log(props.match.params.score,777);
+
+                return props.match.params.score>0 ? <HomePersonalController {...props}/> : (
                   <Redirect to={`/${BCG_ROOT_NAME}/${COMPLETE_INFO.path}`}/>
                 )
               }
@@ -142,6 +147,9 @@ class HomeController extends React.Component {
         </Switch>
       </div>
     );
+  }
+  componentDidMount() {
+    console.log(this.props.user, 999);
   }
 }
 

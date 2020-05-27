@@ -11,6 +11,7 @@ export const SET_USER_INFO = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER
 export const ALTER_USER_PASSWORD = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/alterPassword`; // 修改用户密码
 export const USER_REGISTER = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/register`; // 注册
 export const GET_SCORE_RANK = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/getScoreRank`; // 获取当年批次和去年的分数和批次
+export const GET_SCORE_BY_UUID = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/getScoreByUuid`; // 获取用户的分数
 export const SET_USER_BASIC_INFO = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/setUserBasicInfo`; // 设置用户基本信息
 export const SET_USER_IMPORT_INFO = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/setUserImportInfo`; // 设置用户的重要信息
 

@@ -47,7 +47,7 @@ class HeaderController extends React.Component {
         <Menu.Item>
           <Link
             to={{
-              pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${BASIC.path}`,
+              pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${BASIC.path}/${this.props.user.score>0?1:0}`,
             }}
           >
             修改信息
@@ -56,7 +56,7 @@ class HeaderController extends React.Component {
         <Menu.Item>
           <Link
             to={{
-              pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${PASSWORD.path}`,
+              pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${PASSWORD.path}/${this.props.user.score>0?1:0}`,
             }}
           >
             修改密码
@@ -65,7 +65,7 @@ class HeaderController extends React.Component {
         <Menu.Item>
           <Link
             to={{
-              pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${MY_VOLUNTARY.path}`,
+              pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${MY_VOLUNTARY.path}/${this.props.user.score>0?1:0}`,
             }}
           >
             我的志愿
