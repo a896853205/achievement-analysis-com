@@ -130,6 +130,35 @@ class PointTableController extends React.Component {
       },
       {
         title: () => (
+          <Tooltip title='根据考生分数所匹配的类型'>
+            <span>
+              匹配类型
+              <Icon type='question-circle' />
+            </span>
+          </Tooltip>
+        ),
+        dataIndex: 'gather',
+        key: 'gather',
+        align: 'center',
+        render: text => {
+          switch (text) {
+            case 'a':
+              return <Tag color='red'>高风险型</Tag>;
+            case 'b':
+              return <Tag color='blue'>中风险型</Tag>;
+            case 'c':
+              return <Tag color='green'>微风险型</Tag>;
+            case 'd':
+              return <Tag color='pink'>最佳匹配</Tag>;
+            case 'e':
+              return <Tag color='orange'>完美专业型</Tag>;
+            default:
+              return <Tag color='purple'>无</Tag>;
+          }
+        }
+      },
+      {
+        title: () => (
           <Tooltip title='综合考虑院校位次/线差的波动幅度、趋势以及院校的招生计划变化情况。'>
             <span>
               风险系数
@@ -295,6 +324,36 @@ class PointTableController extends React.Component {
             }
           }
         ]
+      },
+      {
+        title: () => (
+          <Tooltip title='根据考生分数所匹配的类型'>
+            <span>
+              匹配类型
+              <Icon type='question-circle' />
+            </span>
+          </Tooltip>
+        ),
+        dataIndex: 'gather',
+        key: 'gather',
+        align: 'center',
+        render: text => {
+          //console.log("text",text);
+          switch (text) {
+            case 'a':
+              return <Tag color='red'>高风险型</Tag>;
+            case 'b':
+              return <Tag color='blue'>中风险型</Tag>;
+            case 'c':
+              return <Tag color='green'>微风险型</Tag>;
+            case 'd':
+              return <Tag color='pink'>最佳匹配</Tag>;
+            case 'e':
+              return <Tag color='orange'>完美专业型</Tag>;
+            default:
+              return <Tag color='purple'>无</Tag>;
+          }
+        }
       },
       {
         title: () => (

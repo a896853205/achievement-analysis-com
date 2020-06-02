@@ -208,15 +208,13 @@ class Step3Controller extends React.Component {
     console.log(this.props.voluntary[lotId], lotId, 44444444);
     if(this.props.voluntary[lotId].length==0){
       // 进到这里就说明出bug了
-      console.log('aaaaaaaaaaaaaaaaaaaaa','线上bug又出现了，哈哈哈');
+      console.log('aaaaa','整活');
       // 重新走一遍逻辑
       const voluntary  = await launchRequest(APIS.GET_TEMP_VOLUNTARY);
       const { voluntaryOptionList } = await launchRequest(APIS.GET_SCHOOL_OPTION, {
         lotId
       });
       // 先判断是否有暂存
-      // console.log(voluntary,voluntary[this.props.lot_id],this.props.lot_id,6666666666);
-      console.log(voluntary,this.props.lot_id,6666666666);
       if (voluntary && voluntary[this.props.lot_id] && voluntary[this.props.lot_id].length) {
         console.log('赋值voluntary',555);
         this.props.recordVoluntary(voluntary);

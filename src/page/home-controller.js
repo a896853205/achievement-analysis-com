@@ -121,8 +121,6 @@ class HomeController extends React.Component {
             // component={HomePersonalController}
             render={
                (props) => {
-                console.log(props.match.params.score,777);
-
                 return props.match.params.score>0 ? <HomePersonalController {...props}/> : (
                   <Redirect to={`/${BCG_ROOT_NAME}/${COMPLETE_INFO.path}`}/>
                 )
@@ -149,7 +147,7 @@ class HomeController extends React.Component {
     );
   }
   componentDidMount() {
-    console.log(this.props.user, 999);
+
   }
 }
 
