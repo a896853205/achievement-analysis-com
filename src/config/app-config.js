@@ -17,8 +17,8 @@ export const kAppVersion = 'v0.0.8';
 export const kAPPInfo_Appversion = '00000008';
 
 // 控制填报类型
-export const FILL_TYPE = 0;  // 开启模拟填报，关闭正式填报
-// export const FILL_TYPE = 1;  // 开启正式填报，关闭模拟填报
+// export const FILL_TYPE = 0;  // 开启模拟填报，关闭正式填报
+export const FILL_TYPE = 1;  // 开启正式填报，关闭模拟填报
 
 /*
   注意！！！如果开启正式填报，记得在数据库将VIP用户的修改次数重新初始化一次
