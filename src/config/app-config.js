@@ -22,7 +22,7 @@ export const FILL_TYPE = 1;  // 开启正式填报，关闭模拟填报
 
 /*
   注意！！！如果开启正式填报，记得在数据库将VIP用户的修改次数重新初始化一次
-  update t_user set score=0,scoreAlterTime=1,reportAlterTime=100,deepAlterTime=100 where roleCode=2;
+  update t_user set score='',scoreAlterTime=1,reportAlterTime=100,deepAlterTime=100 where roleCode=2;
 */
 
 

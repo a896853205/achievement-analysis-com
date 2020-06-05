@@ -56,7 +56,7 @@ class HeaderController extends React.Component {
         <Menu.Item>
           <Link
             to={{
-              pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${PASSWORD.path}/${this.props.user.score>0?1:0}`,
+              pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${PASSWORD.path}/1`,
             }}
           >
             修改密码

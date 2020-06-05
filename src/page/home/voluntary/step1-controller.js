@@ -241,7 +241,20 @@ class Step1Controller extends React.Component {
 
   componentDidMount = async () => {
     let optionList = await this.getAddress();
+    let selectedOption = optionList.find(
+      item => item.value === this.props.user.provinceCode
+    );
+    if (selectedOption) {
+      await this.loadAddress([selectedOption]);
+      let selectedCityOption = selectedOption.children.find(
+        item => item.value === this.props.user.cityCode
+      );
+      if (selectedCityOption) {
+        await this.loadAddress([selectedOption, selectedCityOption]);
+      }
+    }
 
+    await this.getHightSchool(this.props.form.getFieldValue('address'));
     await this.setState({
       optionList
     });
@@ -408,6 +421,40 @@ export default connect(
   mapDispatchToProps
 )(
   Form.create({
-    name: 'saveBasicInfo'
+    name: 'saveBasicInfo',
+    mapPropsToFields(props){
+      let user = props.user;
+      let address = [user.provinceCode, user.cityCode, user.areaCode];
+
+      return {
+        nickname: Form.createFormField({
+          value: user.nickname
+        }),
+        gender: Form.createFormField({
+          value: user.gender
+        }),
+        phone: Form.createFormField({
+          value: user.phone
+        }),
+        email: Form.createFormField({
+          value: user.email
+        }),
+        address: Form.createFormField({
+          value: address
+        }),
+        accountCategory: Form.createFormField({
+          value: user.accountCategory
+        }),
+        score: Form.createFormField({
+          value: user.score
+        }),
+        examYear: Form.createFormField({
+          value: user.examYear
+        }),
+        highSchool: Form.createFormField({
+          value: user.highSchool
+        })
+      };
+    }
   })(Step1Controller)
 );

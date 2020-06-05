@@ -51,7 +51,7 @@ class HomePersonalController extends React.Component {
               </Link>
             </Menu.Item>
             <Menu.Item key={PASSWORD.path} className="personl-menu-item">
-              <Link to={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${PASSWORD.path}/${this.props.user.score>0?1:0}`}>
+              <Link to={`/${BCG_ROOT_NAME}/${PERSONAL.path}/${PASSWORD.path}/1`}>
                 <Icon type="key" />
                 修改密码
               </Link>
