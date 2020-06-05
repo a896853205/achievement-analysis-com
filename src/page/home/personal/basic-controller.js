@@ -28,6 +28,7 @@ import { connect } from 'react-redux';
 import { actions as userActions } from '../../../redux/user-model';
 import { actions as voluntaryActions } from '../../../redux/voluntary-model';
 import { VIP_PROFILE } from '../../../constants/route-constants';
+import { FILL_TYPE } from '../../../config/app-config';
 
 const { Option } = Select;
 const { confirm } = Modal;
@@ -294,11 +295,11 @@ class BasicController extends React.Component {
                       保存
                     </Button>
                   </div>
-                ) : (
+                ) : (FILL_TYPE==1 ? undefined : (
                   <Button onClick={this.toVipPage} type='primary'>
                     获得更多修改次数
                   </Button>
-                )}
+                ))}
               </Form.Item>
             </Form>
           ) : (
