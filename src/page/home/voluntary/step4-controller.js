@@ -106,6 +106,7 @@ class Step4Controller extends React.Component {
         await this.setState({ btnLoading: true });
 
         // 提交到后台后返回uuid
+
         let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
           lotId: this.props.lotId,
           voluntary: this.props.voluntaryDetail,
@@ -187,6 +188,7 @@ class Step4Controller extends React.Component {
       onCancel() {}
     });
   };
+
 }
 
 // 从store接收state数据

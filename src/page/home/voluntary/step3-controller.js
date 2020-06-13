@@ -206,7 +206,7 @@ class Step3Controller extends React.Component {
   switchVoluntaryTable = async ()=>{
     const lotId = this.props.lot_id;
     console.log(this.props.voluntary[lotId], lotId, 44444444);
-    if(this.props.voluntary[lotId].length==0){
+    if(this.props.voluntary[lotId].length===0){
       // 进到这里就说明出bug了
       console.log('aaaaa','整活');
       // 重新走一遍逻辑
