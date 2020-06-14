@@ -109,7 +109,7 @@ class Step1Controller extends React.Component {
               <Cascader
                 loadData={this.loadAddress}
                 options={this.state.optionList}
-                changeOnSelect
+                // changeOnSelect
                 onChange={this.getHightSchool}
               />
             )}
@@ -424,7 +424,7 @@ export default connect(
     name: 'saveBasicInfo',
     mapPropsToFields(props){
       let user = props.user;
-      let address = [user.provinceCode, user.cityCode, user.areaCode];
+      let address = user.address || [user.provinceCode, user.cityCode, user.areaCode];
 
       return {
         nickname: Form.createFormField({
