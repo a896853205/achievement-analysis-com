@@ -10,7 +10,7 @@ import { withRouter, Link } from 'react-router-dom';
 import {
   VOLUNTARY,
   BCG_ROOT_NAME,
-  QUESTIONNAIRE,
+
   LOGIN,
   SCHOOL_RECOMMEND,
   SCHOOL_DETAIL,
@@ -123,7 +123,7 @@ class IndexController extends React.Component {
               title={<h1>学业测评</h1>}
             >
               <div style={{cursor:'pointer'}}
-                onClick={ FILL_TYPE == 0 ? this.handleSimulatedApplyOpen : this.handleFormalApplyOpen} >
+                onClick={ FILL_TYPE === 0 ? this.handleSimulatedApplyOpen : this.handleFormalApplyOpen} >
                 <img src='/index-icon/1.png' alt='' />
               </div>
             </Popover>
@@ -142,7 +142,7 @@ class IndexController extends React.Component {
             >
               <div
                 style={{cursor:'pointer'}}
-                onClick={ FILL_TYPE == 0 ? this.handleSimulatedApplyOpen : this.handleFormalApplyOpen}
+                onClick={ FILL_TYPE === 0 ? this.handleSimulatedApplyOpen : this.handleFormalApplyOpen}
               >
                 <img src='/index-icon/2.png' alt='' />
               </div>
@@ -161,7 +161,7 @@ class IndexController extends React.Component {
               title={<h1>专业优先</h1>}
             >
               <div style={{cursor:'pointer'}}
-                   onClick={ FILL_TYPE == 0 ? this.handleSimulatedApplyOpen : this.handleFormalApplyOpen}>
+                   onClick={ FILL_TYPE === 0 ? this.handleSimulatedApplyOpen : this.handleFormalApplyOpen}>
                 <img src='/index-icon/3.png' alt='' />
               </div>
             </Popover>
@@ -195,7 +195,7 @@ class IndexController extends React.Component {
             >
               <div
                 style={{cursor:'pointer'}}
-                onClick={ FILL_TYPE == 0 ? this.handleSimulatedApplyOpen : this.handleFormalApplyOpen}
+                onClick={ FILL_TYPE === 0 ? this.handleSimulatedApplyOpen : this.handleFormalApplyOpen}
               >
                 <img src='/index-icon/5.png' alt='' />
               </div>
@@ -488,7 +488,7 @@ class IndexController extends React.Component {
     *   如果已经是VIP，跳转到填报志愿页
     * */
     if(this.props.user.uuid){
-      if(this.props.user.roleCode == 1){
+      if(this.props.user.roleCode === 1){
         Modal.warning({
           content:'请开通VIP',
           onOk: ()=>{

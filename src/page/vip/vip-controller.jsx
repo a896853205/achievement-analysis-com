@@ -33,11 +33,6 @@ export const vipPage = connect(
   mapStateToProps,
   mapDispatchToProps
 )((props) => {
-  const testClick = async () => {
-    let data = await launchRequest(APIS.PAY_TEST);
-  };
-
-
   const couterRef = useRef();
   const handleToAlipayClick = async () => {
     let url = await launchRequest(APIS.GET_ALIPAY_PAYMENT_URL);
@@ -88,11 +83,11 @@ export const vipPage = connect(
             </div>
           </div>
           <div className='vip-card-info-box'>
-            {props.user.roleCode == 1 ?
+            {props.user.roleCode === 1 ?
               <h4>VIP志愿卡（黑龙江专用）</h4> :
               <h4>获取更多体验次数</h4>
             }
-            {props.user.roleCode == 1 ?
+            {props.user.roleCode === 1 ?
               <p className='card-profile'>
                 考试院专家推荐平台，录取参考数据与省考试院完全一致
               </p> :

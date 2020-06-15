@@ -72,14 +72,13 @@ export default connect(
 
   let {
     lotId,
-    voluntary,
     initVoluntary,
     recordSchoolOption,
     recordVoluntary
   } = props;
 
   useEffect(() => {
-    const hasVoluntary = !!(voluntary[lotId] && voluntary[lotId].length);
+    // const hasVoluntary = !!(voluntary[lotId] && voluntary[lotId].length);
     (async () => {
       let [
         {
@@ -117,7 +116,7 @@ export default connect(
       setProvinceList(provinceList);
       setGatherOptionList(gatherOptionList)
     })();
-  }, [lotId]);
+  }, [lotId, initVoluntary, recordVoluntary]);
 
   useEffect(() => {
     return () => {
@@ -207,7 +206,7 @@ export default connect(
           <Radio.Group onChange={handleLotsChange} value={props.lotId}>
             {lotsOption.map(lotsItem => {
               // 取消三批
-              if(lotsItem.id != 6) {
+              if(lotsItem.id !== 6) {
                 return (
                   <Radio value={lotsItem.id} key={lotsItem.id}>
                     {lotsItem.lots_name}

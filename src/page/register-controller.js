@@ -33,7 +33,7 @@ class RegisterController extends React.Component {
           async () => {
             this.count();
             // 请求
-            let result = await launchRequest(APIS.SAVE_VERIFY_CODE, {
+            await launchRequest(APIS.SAVE_VERIFY_CODE, {
               username: values.username
             });
 

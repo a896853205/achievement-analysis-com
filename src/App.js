@@ -9,7 +9,7 @@ import IndexController from './page/index-controller';
 import BackgroundController from './page/home-controller';
 import NewsDetailController from '@/page/news/news-detail-controller';
 import NewsMoreController from '@/page/news/news-more-controller.jsx';
-import VipController from '@/page/vip/vip-controller.jsx';
+
 import SchoolRecommendController from '@/page/school/school-recommend-controller.jsx';
 import RegistrationController from '@/page/register-controller';
 import WarningController from '@/page/warning-controller';

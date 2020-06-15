@@ -46,7 +46,7 @@ class TableController extends React.Component {
         align: 'center',
         width: 80,
         render: text => (
-          <span>{text == 4 ? '二批':'原三批'}</span>
+          <span>{text === 4 ? '二批':'原三批'}</span>
         )
       },
       {
@@ -399,7 +399,7 @@ class TableController extends React.Component {
         <Table
           style={{ background: '#fff' }}
           rowKey={record => record.school_id}
-          columns={this.props.lot_id == 4 ? columns : columns2}
+          columns={this.props.lot_id === 4 ? columns : columns2}
           dataSource={this.props.schoolList}
           onExpand={this.onExpand}
           expandIcon={CustomExpandIcon}
