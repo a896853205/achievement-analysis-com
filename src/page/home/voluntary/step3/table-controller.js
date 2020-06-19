@@ -412,6 +412,7 @@ class TableController extends React.Component {
             <SubTableController
               key={record.school_id}
               schoolId={record.school_id}
+              schoolLotId={record.lot_id}
               style={{ margin: 0 }}
             />
           )}

@@ -141,10 +141,9 @@ class SubTableController extends React.Component {
     await this.setState({
       loading: true
     });
-
     let { majorList } = await launchRequest(APIS.GET_MAJOR, {
       schoolId: this.props.schoolId,
-      lotId: this.props.lotId
+      lotId: this.props.schoolLotId
     });
 
     this.setState({

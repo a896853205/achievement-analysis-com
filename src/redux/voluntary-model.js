@@ -298,6 +298,13 @@ export const voluntaryReducer = handleActions(
       let { voluntary, lot_id } = state;
       let { changeVolunteerId, schoolData } = result;
 
+      // 因二三批合并，需要替换一下三批的lot_id，仍使用之前的lot_id
+      if(result.schoolData.lot_id === 6){
+        voluntary[lot_id][changeVolunteerId - 1].lot_id = 6;
+      }else {
+        voluntary[lot_id][changeVolunteerId - 1].lot_id = lot_id;
+      }
+
       // 找到原来的位置清空
       let oldIndex = voluntary[lot_id].findIndex(item => {
         return item.schoolId === schoolData.school_id;

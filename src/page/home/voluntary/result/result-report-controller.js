@@ -208,11 +208,8 @@ class ResultReportController extends React.Component {
       this.props.recordVoluntaryIdGetResult(readUrlParams('from'));
 
       const receiveLotId = await launchRequest(APIS.GET_LOTID_BY_VOLUNTARY_UUID, { voluntaryUuid: readUrlParams('from') }, DominConfigs.REQUEST_TYPE.GET);
-      console.log(receiveLotId, 8888888888);
       this.setState({ receiveLotId});
-      console.log(this.state.receiveLotId, 2222222222);
     }
-    console.log(this.props.voluntaryResult, +this.props.match.params.lotId, 1111111);
   };
 }
 
