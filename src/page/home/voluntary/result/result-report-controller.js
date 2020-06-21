@@ -70,6 +70,31 @@ class ResultReportController extends React.Component {
 
     return option;
   };
+
+  // 提前批 2个志愿
+  getOption3 = result => {
+    const option = {
+      xAxis: {
+        type: 'category',
+        data: ['志愿A', '志愿B']
+      },
+      yAxis: {
+        type: 'value',
+        max: Math.max(...result),
+        min: Math.min(...result)
+      },
+      series: [
+        {
+          data: [],
+          type: 'line'
+        }
+      ]
+    };
+
+    option.series[0].data = result;
+
+    return option;
+  };
   render() {
     return (
       <div className='voluntary-result-content'>
@@ -139,15 +164,32 @@ class ResultReportController extends React.Component {
                 <p>
                   智赢推荐填报方案：系统分为A高风险，B中风险，C微风险，D最佳匹配，E完美专业
                 </p>
-                <p>
-                  保守型组合：  CDDEE    DDDEE
-                </p>
-                <p>
-                  冲刺型组合一：CCCDD    CCDDD    CCDDE
-                </p>
-                <p>
-                  冲刺型组合二：BCCDD    BCDDD    BCDDE
-                </p>
+                { +this.props.match.params.lotId === 4 || this.state.receiveLotId === 4 ?
+                    <div>
+                      <p>
+                        保守型组合：（CCDDD DEEEE）、（DDDDD DEEEE）
+                      </p>
+                      <p>
+                        冲刺型组合一：（CCCCC CDDDD）、（CCCCD DDDDD ）、（CCCCD DDDEE）
+                      </p>
+                      <p>
+                        冲刺型组合二：（BBCCC CDDDD）、（BBCCD DDDDD ）、（BBCCD DDDEE）
+                      </p>
+                    </div>
+                  :
+                  <div>
+                    <p>
+                      保守型组合： （CDDEE）、（DDDEE）
+                    </p>
+                    <p>
+                      冲刺型组合一：（CCCDD）、（CCDDD）、（CCDDE）
+                    </p>
+                    <p>
+                      冲刺型组合二：（BCCDD）、（BCDDD ）、（BCDDE）
+                    </p>
+                  </div>
+                }
+
                 <p>
                   {this.props.voluntaryResult.gradedResult.gradedDetailArr.map(
                     item => (
@@ -155,22 +197,39 @@ class ResultReportController extends React.Component {
                     )
                   )}
                 </p>
-                {+this.props.match.params.lotId === 4 || this.state.receiveLotId === 4 ?
-                  <ReactEcharts
-                    option={this.getOption2(
-                      this.props.voluntaryResult.gradedResult.schoolScoreArr
-                    )}
-                    style={{ height: '350px' }}
-                    className='questionnaire-chart'
-                  /> :
-                  <ReactEcharts
-                    option={this.getOption(
-                      this.props.voluntaryResult.gradedResult.schoolScoreArr
-                    )}
-                    style={{ height: '350px' }}
-                    className='questionnaire-chart'
-                  />
+                {+this.props.match.params.lotId === 3 ||+this.props.match.params.lotId === 5 || this.state.receiveLotId === 3 || this.state.receiveLotId === 5 ?
+                  undefined
+                  :
+                  (
+                    +this.props.match.params.lotId === 4 || this.state.receiveLotId === 4 ?
+                      <ReactEcharts
+                        option={this.getOption2(
+                          this.props.voluntaryResult.gradedResult.schoolScoreArr
+                        )}
+                        style={{ height: '350px' }}
+                        className='questionnaire-chart'
+                      /> : (
+                        +this.props.match.params.lotId === 1 || this.state.receiveLotId === 1 ?
+                          <ReactEcharts
+                            option={this.getOption3(
+                              this.props.voluntaryResult.gradedResult.schoolScoreArr
+                            )}
+                            style={{ height: '350px' }}
+                            className='questionnaire-chart'
+                          />
+                          :
+                          <ReactEcharts
+                            option={this.getOption(
+                              this.props.voluntaryResult.gradedResult.schoolScoreArr
+                            )}
+                            style={{ height: '350px' }}
+                            className='questionnaire-chart'
+                          />
+
+                      )
+                  )
                 }
+
               </div>
             </div>
           ) : (
