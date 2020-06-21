@@ -137,7 +137,16 @@ class ResultReportController extends React.Component {
                 )}
                 <p>{this.props.voluntaryResult.gradedResult.describe}</p>
                 <p>
-                  智赢建议：填报志愿应拉开一定的层次，建议按照院校录取不同集合由高到低顺序选择。高风险、中风险、低风险和最佳匹配各个类别集合志愿不能倒置。
+                  智赢推荐填报方案：系统分为A高风险，B中风险，C微风险，D最佳匹配，E完美专业
+                </p>
+                <p>
+                  保守型组合：  CDDEE    DDDEE
+                </p>
+                <p>
+                  冲刺型组合一：CCCDD    CCDDD    CCDDE
+                </p>
+                <p>
+                  冲刺型组合二：BCCDD    BCDDD    BCDDE
                 </p>
                 <p>
                   {this.props.voluntaryResult.gradedResult.gradedDetailArr.map(
