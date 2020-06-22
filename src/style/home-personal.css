@@ -30,6 +30,11 @@
   margin-bottom: 15px;
 }
 
+.user-vip-logo {
+  width: 30px;
+  height: 30px;
+}
+
 .personal-contant {
   width: calc(100% - 270px);
   background-color: #F7F7F7;

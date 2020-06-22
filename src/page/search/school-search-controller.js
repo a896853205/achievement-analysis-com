@@ -20,6 +20,7 @@ import { SCHOOL_DETAIL } from '@/constants/route-constants';
 
 // css
 import '@/style/search/school-search.css';
+import { LOGIN } from 'constants/route-constants';
 
 const { Search } = Input;
 
@@ -164,7 +165,7 @@ class SchoolSearchController extends React.Component {
                 >
                   <Link
                     to={{
-                      pathname: `/${SCHOOL_DETAIL.path}/${item.school_id}`
+                      pathname: !this.props.user.roleCode ? `/${LOGIN.path}` : `/${SCHOOL_DETAIL.path}/${item.school_id}`
                     }}
                   >
                     <h5
@@ -365,7 +366,12 @@ class SchoolSearchController extends React.Component {
 
 // 从store接收state数据
 const mapStateToProps = store => {
-  return {};
+  const userStore = store['userStore'];
+  let { user } = userStore;
+
+  return {
+    user,
+  };
 };
 
 // 向store dispatch action

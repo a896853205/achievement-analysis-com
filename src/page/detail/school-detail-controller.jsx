@@ -16,6 +16,7 @@ import wait from '@/util/wait-helper';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
+import { store } from 'redux';
 
 const { Option } = Select;
 const { Column } = Table;
@@ -27,6 +28,8 @@ export default props => {
   } else {
     schoolId = props.schoolId;
   }
+
+  console.log(props);
 
   return (
     <div className='school-detail-box page-inner-width-box'>
@@ -332,10 +335,31 @@ const SchoolDetailProfile = props => {
   );
 };
 
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+const mapStateToProps = store => {
+  const userStore = store['userStore'];
+  let { user } = userStore;
+
+  return { user };
+};
+
 // 学校分数模块
-const SchoolScoreList = props => {
+const SchoolScoreList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(props => {
+  //解决刷新，可能有问题
+  if(props.user.accountCategory){
+    sessionStorage.setItem('accountCategory',props.user.accountCategory);
+  } else{
+    props.user.accountCategory = sessionStorage.getItem('accountCategory');
+  }
+
   const [scoreList, setScoreList] = useState([]);
-  const [accountCategory, setAccountCategory] = useState(1);
+  const [accountCategory, setAccountCategory] = useState(props.user.accountCategory ? parseInt(props.user.accountCategory) : 1);
   const [loading, setLoading] = useState(true);
 
   let { schoolId } = props;
@@ -420,7 +444,7 @@ const SchoolScoreList = props => {
       </Table>
     </div>
   );
-};
+});
 
 // 学校排名模块
 const SchoolRank = props => {
@@ -488,17 +512,6 @@ const SchoolRank = props => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {};
-};
-
-const mapStateToProps = store => {
-  const userStore = store['userStore'];
-  let { user } = userStore;
-
-  return { user };
-};
-
 // 学校专业分数线模块
 const SchoolMajorScoreList = connect(
   mapStateToProps,
@@ -507,7 +520,7 @@ const SchoolMajorScoreList = connect(
   const [loading, setLoading] = useState(true);
   const [schoolMajor, setSchoolMajor] = useState([]),
        [allYear, setAllYear] = useState([]),
-    [accountCategory, setAccountCategory] = useState(1),
+    [accountCategory, setAccountCategory] = useState(props.user.accountCategory ? parseInt(props.user.accountCategory) : 1),
   [year, setYear] = useState(new Date().getFullYear()-1);
 
   let { schoolId } = props;
