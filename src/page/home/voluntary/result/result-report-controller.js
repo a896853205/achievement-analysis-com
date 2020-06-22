@@ -22,6 +22,7 @@ class ResultReportController extends React.Component {
   state = {
     receiveLotId: ''
   };
+  // 五个志愿
   getOption = result => {
     const option = {
       xAxis: {
@@ -77,6 +78,31 @@ class ResultReportController extends React.Component {
       xAxis: {
         type: 'category',
         data: ['志愿A', '志愿B']
+      },
+      yAxis: {
+        type: 'value',
+        max: Math.max(...result),
+        min: Math.min(...result)
+      },
+      series: [
+        {
+          data: [],
+          type: 'line'
+        }
+      ]
+    };
+
+    option.series[0].data = result;
+
+    return option;
+  };
+
+  // B段 1个志愿
+  getOption4 = result => {
+    const option = {
+      xAxis: {
+        type: 'category',
+        data: ['志愿A']
       },
       yAxis: {
         type: 'value',
@@ -161,11 +187,11 @@ class ResultReportController extends React.Component {
                   <Tag color='#f50'>不合理</Tag>
                 )}
                 <p>{this.props.voluntaryResult.gradedResult.describe}</p>
-                <p>
-                  智赢推荐填报方案：系统分为A高风险，B中风险，C微风险，D最佳匹配，E完美专业
-                </p>
                 { +this.props.match.params.lotId === 4 || this.state.receiveLotId === 4 ?
                     <div>
+                      <p>
+                        智赢推荐填报方案：系统分为A高风险，B中风险，C微风险，D最佳匹配，E完美专业
+                      </p>
                       <p>
                         保守型组合：（CCDDD DEEEE）、（DDDDD DEEEE）
                       </p>
@@ -176,18 +202,28 @@ class ResultReportController extends React.Component {
                         冲刺型组合二：（BBCCC CDDDD）、（BBCCD DDDDD ）、（BBCCD DDDEE）
                       </p>
                     </div>
-                  :
-                  <div>
-                    <p>
-                      保守型组合： （CDDEE）、（DDDEE）
-                    </p>
-                    <p>
-                      冲刺型组合一：（CCCDD）、（CCDDD）、（CCDDE）
-                    </p>
-                    <p>
-                      冲刺型组合二：（BCCDD）、（BCDDD ）、（BCDDE）
-                    </p>
-                  </div>
+                  : (
+                    +this.props.match.params.lotId === 2 ||
+                    this.state.receiveLotId === 2 ||
+                    +this.props.match.params.lotId === 7 ||
+                    this.state.receiveLotId === 7 ?
+                      <div>
+                        <p>
+                          智赢推荐填报方案：系统分为A高风险，B中风险，C微风险，D最佳匹配，E完美专业
+                        </p>
+                        <p>
+                          保守型组合： （CDDEE）、（DDDEE）
+                        </p>
+                        <p>
+                          冲刺型组合一：（CCCDD）、（CCDDD）、（CCDDE）
+                        </p>
+                        <p>
+                          冲刺型组合二：（BCCDD）、（BCDDD ）、（BCDDE）
+                        </p>
+                      </div>
+                      :
+                      undefined
+                  )
                 }
 
                 <p>
@@ -198,7 +234,13 @@ class ResultReportController extends React.Component {
                   )}
                 </p>
                 {+this.props.match.params.lotId === 3 ||+this.props.match.params.lotId === 5 || this.state.receiveLotId === 3 || this.state.receiveLotId === 5 ?
-                  undefined
+                  <ReactEcharts
+                    option={this.getOption4(
+                      this.props.voluntaryResult.gradedResult.schoolScoreArr
+                    )}
+                    style={{ height: '350px' }}
+                    className='questionnaire-chart'
+                  />
                   :
                   (
                     +this.props.match.params.lotId === 4 || this.state.receiveLotId === 4 ?
