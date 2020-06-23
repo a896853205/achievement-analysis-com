@@ -23,7 +23,7 @@ class ResultReportController extends React.Component {
     receiveLotId: ''
   };
   // 五个志愿
-  getOption = result => {
+  getOption = (result, maxAndMin) => {
     const option = {
       xAxis: {
         type: 'category',
@@ -31,8 +31,8 @@ class ResultReportController extends React.Component {
       },
       yAxis: {
         type: 'value',
-        max: Math.max(...result),
-        min: Math.min(...result)
+        max: maxAndMin.max,
+        min: maxAndMin.min
       },
       series: [
         {
@@ -48,7 +48,7 @@ class ResultReportController extends React.Component {
   };
 
   // 二批A 10个志愿
-  getOption2 = result => {
+  getOption2 = (result, maxAndMin) => {
     const option = {
       xAxis: {
         type: 'category',
@@ -56,8 +56,8 @@ class ResultReportController extends React.Component {
       },
       yAxis: {
         type: 'value',
-        max: Math.max(...result),
-        min: Math.min(...result)
+        max: maxAndMin.max,
+        min: maxAndMin.min
       },
       series: [
         {
@@ -73,7 +73,7 @@ class ResultReportController extends React.Component {
   };
 
   // 提前批 2个志愿
-  getOption3 = result => {
+  getOption3 = (result, maxAndMin) => {
     const option = {
       xAxis: {
         type: 'category',
@@ -81,8 +81,8 @@ class ResultReportController extends React.Component {
       },
       yAxis: {
         type: 'value',
-        max: Math.max(...result),
-        min: Math.min(...result)
+        max: maxAndMin.max,
+        min: maxAndMin.min
       },
       series: [
         {
@@ -98,7 +98,7 @@ class ResultReportController extends React.Component {
   };
 
   // B段 1个志愿
-  getOption4 = result => {
+  getOption4 = (result, maxAndMin) => {
     const option = {
       xAxis: {
         type: 'category',
@@ -106,8 +106,8 @@ class ResultReportController extends React.Component {
       },
       yAxis: {
         type: 'value',
-        max: Math.max(...result),
-        min: Math.min(...result)
+        max: maxAndMin.max,
+        min: maxAndMin.min
       },
       series: [
         {
@@ -236,7 +236,8 @@ class ResultReportController extends React.Component {
                 {+this.props.match.params.lotId === 3 ||+this.props.match.params.lotId === 5 || this.state.receiveLotId === 3 || this.state.receiveLotId === 5 ?
                   <ReactEcharts
                     option={this.getOption4(
-                      this.props.voluntaryResult.gradedResult.schoolScoreArr
+                      this.props.voluntaryResult.gradedResult.schoolScoreArr,
+                      this.props.voluntaryResult.gradedResult.maxAndMin
                     )}
                     style={{ height: '350px' }}
                     className='questionnaire-chart'
@@ -246,7 +247,8 @@ class ResultReportController extends React.Component {
                     +this.props.match.params.lotId === 4 || this.state.receiveLotId === 4 ?
                       <ReactEcharts
                         option={this.getOption2(
-                          this.props.voluntaryResult.gradedResult.schoolScoreArr
+                          this.props.voluntaryResult.gradedResult.schoolScoreArr,
+                          this.props.voluntaryResult.gradedResult.maxAndMin
                         )}
                         style={{ height: '350px' }}
                         className='questionnaire-chart'
@@ -254,7 +256,8 @@ class ResultReportController extends React.Component {
                         +this.props.match.params.lotId === 1 || this.state.receiveLotId === 1 ?
                           <ReactEcharts
                             option={this.getOption3(
-                              this.props.voluntaryResult.gradedResult.schoolScoreArr
+                              this.props.voluntaryResult.gradedResult.schoolScoreArr,
+                              this.props.voluntaryResult.gradedResult.maxAndMin
                             )}
                             style={{ height: '350px' }}
                             className='questionnaire-chart'
@@ -262,7 +265,8 @@ class ResultReportController extends React.Component {
                           :
                           <ReactEcharts
                             option={this.getOption(
-                              this.props.voluntaryResult.gradedResult.schoolScoreArr
+                              this.props.voluntaryResult.gradedResult.schoolScoreArr,
+                              this.props.voluntaryResult.gradedResult.maxAndMin
                             )}
                             style={{ height: '350px' }}
                             className='questionnaire-chart'
