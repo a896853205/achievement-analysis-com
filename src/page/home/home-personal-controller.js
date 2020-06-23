@@ -35,6 +35,9 @@ class HomePersonalController extends React.Component {
               alt=""
             />
             <p className="aus-user-name">
+              {this.props.user.roleCode === 2 ?(
+                <img src='/vip/user-vip-logo.png' alt='' className='aus-user-name user-vip-logo'/>
+              ) : null}
               {this.props.user.nickname ? this.props.user.nickname : '智赢规划'}
             </p>
           </div>

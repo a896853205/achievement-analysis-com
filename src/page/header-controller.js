@@ -297,6 +297,9 @@ class HeaderController extends React.Component {
               </Menu>
             </Col>
             <Col span={2} className='header-personal-box'>
+              {this.props.user.roleCode === 2 ?(
+                <img src='/vip/user-vip-logo.png' alt='' className='user-menu-span user-vip-logo'/>
+              ) : null}
               {this.props.user.uuid ? (
                 <Dropdown overlay={userMenu}>
                   <span className='user-menu-span login-text'>
