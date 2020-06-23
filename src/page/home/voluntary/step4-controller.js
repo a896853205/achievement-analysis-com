@@ -23,13 +23,24 @@ const { confirm } = Modal;
 
 class Step4Controller extends React.Component {
   state = {
-    btnLoading: false
+    btnLoading: false,
+    isShow: 'none',
+    errMsg: []
   };
   render() {
     return (
       <div>
         {/* 在这里显示批次之类的重要其他信息 */}
-        <VoluntaryDetailController />
+        <VoluntaryDetailController/>
+        <div style={{ display: this.state.isShow }}>
+          <Alert
+            message="温馨提示："
+            description={this.state.errMsg.toString()}
+            type="warning"
+            showIcon
+          />
+        </div>
+
         <div className='voluntarty-button-box'>
           <div>
             <Alert
@@ -95,98 +106,139 @@ class Step4Controller extends React.Component {
       </div>
     );
   }
-  handleClickSubmit = async () => {
-    confirm({
-      title: '生成报表',
-      content: '您确定生成报表吗? 生成报表会使用一次机会.',
-      okText: '确认',
-      cancelText: '取消',
-      onOk: async () => {
-        // loading
-        await this.setState({ btnLoading: true });
-
-        // 提交到后台后返回uuid
-
-        let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
-          lotId: this.props.lotId,
-          voluntary: this.props.voluntaryDetail,
-          reportType: 1
-        });
-        if (voluntaryId) {
-          // 将uuid存入redux
-          this.props.recordVoluntaryResultType('report');
-          this.props.recordVoluntaryIdGetResult(voluntaryId);
-
-
-          // 在这里将生成报表次数减少1
-          await launchRequest(APIS.UPDATE_REPORT_ALTER_TIME_DROP_1);
-
-
-          await this.props.getUser();
-
-          // 结束loading
-          await this.setState({ btnLoading: false });
-
-          // 跳转页面
-          // 要拆分路由，所以不再对redux中step进行维护，改用路由的方式跳转
-          // this.props.nextStep();
-          this.props.history.push(`/${BCG_ROOT_NAME}/${REPORT.path}/${this.props.lotId}/${voluntaryId}`);
-        } else {
-          // 结束loading
-          await this.setState({ btnLoading: false });
-          // 跳转到充值VIP页
-        }
-      },
-      onCancel() {}
+  checkVoulutary = voluntaryDetail => {
+    // 如果选了大学，就至少选一个专业，如果没选大学，那就无所谓
+    let checkResult = [];
+    voluntaryDetail.forEach(item => {
+      if (
+        item.schoolName &&
+        item.major[0].majorId === "" &&
+        item.major[1].majorId === "" &&
+        item.major[2].majorId === "" &&
+        item.major[3].majorId === "" &&
+        item.major[4].majorId === "" &&
+        item.major[5].majorId === ""
+      ) {
+        checkResult.push(`${item.volunteer_name}下的${item.schoolName}未选任何专业  `);
+      }
     });
+    if (checkResult.length > 0) {
+      checkResult.push(`请至少选择一个专业。`);
+    }
+    return checkResult;
+  };
+  handleClickSubmit = async () => {
+    console.log(this.props.voluntaryDetail, 'voluntaryDetail');
+    console.log(this.checkVoulutary(this.props.voluntaryDetail));
+    let checkResult = this.checkVoulutary(this.props.voluntaryDetail);
+    if (checkResult.length > 0) {
+      this.setState({
+        isShow: 'block',
+        errMsg: checkResult
+      })
+    }else {
+      confirm({
+        title: '生成报表',
+        content: '您确定生成报表吗? 生成报表会使用一次机会.',
+        okText: '确认',
+        cancelText: '取消',
+        onOk: async () => {
+
+          // loading
+          await this.setState({ btnLoading: true });
+
+          // 提交到后台后返回uuid
+
+          let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
+            lotId: this.props.lotId,
+            voluntary: this.props.voluntaryDetail,
+            reportType: 1
+          });
+          if (voluntaryId) {
+            // 将uuid存入redux
+            this.props.recordVoluntaryResultType('report');
+            this.props.recordVoluntaryIdGetResult(voluntaryId);
+
+
+            // 在这里将生成报表次数减少1
+            await launchRequest(APIS.UPDATE_REPORT_ALTER_TIME_DROP_1);
+
+
+            await this.props.getUser();
+
+            // 结束loading
+            await this.setState({ btnLoading: false });
+
+            // 跳转页面
+            // 要拆分路由，所以不再对redux中step进行维护，改用路由的方式跳转
+            // this.props.nextStep();
+            this.props.history.push(`/${BCG_ROOT_NAME}/${REPORT.path}/${this.props.lotId}/${voluntaryId}`);
+          } else {
+            // 结束loading
+            await this.setState({ btnLoading: false });
+            // 跳转到充值VIP页
+          }
+        },
+        onCancel() {}
+      });
+    }
+
   };
 
   handleClickDeepSubmit = async () => {
-    confirm({
-      title: '生成深度体验表',
-      content: '您确定生成深度体验表吗? 生成深度体验表会使用一次机会.',
-      okText: '确认',
-      cancelText: '取消',
-      onOk: async () => {
-        // loading
-        await this.setState({ btnLoading: true });
+    let checkResult = this.checkVoulutary(this.props.voluntaryDetail);
+    if (checkResult.length > 0) {
+      this.setState({
+        isShow: 'block',
+        errMsg: checkResult
+      })
+    }else {
+      confirm({
+        title: '生成深度体验表',
+        content: '您确定生成深度体验表吗? 生成深度体验表会使用一次机会.',
+        okText: '确认',
+        cancelText: '取消',
+        onOk: async () => {
+          // loading
+          await this.setState({ btnLoading: true });
 
-        // 提交到后台后返回uuid,而且重新查询一下用户数据
-        let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
-          lotId: this.props.lotId,
-          voluntary: this.props.voluntaryDetail,
-          reportType: 2
-        });
-
-
-        if (voluntaryId) {
-          // 将uuid存入redux
-          this.props.recordVoluntaryResultType('deepReport');
-          this.props.recordVoluntaryListOption(voluntaryId);
-          this.props.recordVoluntaryDeepUuid(voluntaryId);
-
-          // 在这里将深度体验次数减少1
-          await launchRequest(APIS.UPDATE_DEEP_ALTER_TIME_DROP_1);
-
-          await this.props.getUser();
-
-          // 结束loading
-          await this.setState({ btnLoading: false });
+          // 提交到后台后返回uuid,而且重新查询一下用户数据
+          let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
+            lotId: this.props.lotId,
+            voluntary: this.props.voluntaryDetail,
+            reportType: 2
+          });
 
 
+          if (voluntaryId) {
+            // 将uuid存入redux
+            this.props.recordVoluntaryResultType('deepReport');
+            this.props.recordVoluntaryListOption(voluntaryId);
+            this.props.recordVoluntaryDeepUuid(voluntaryId);
 
-          // 跳转页面
-          // 要拆分路由，所以不再对redux中step进行维护，改用路由的方式跳转
-          // this.props.nextStep();
-          this.props.history.push(`/${BCG_ROOT_NAME}/${DEEP_REPORT.path}/${this.props.lotId}/${voluntaryId}`);
-        } else {
-          // 结束loading
-          await this.setState({ btnLoading: false });
-          // 跳转到充值VIP页
-        }
-      },
-      onCancel() {}
-    });
+            // 在这里将深度体验次数减少1
+            await launchRequest(APIS.UPDATE_DEEP_ALTER_TIME_DROP_1);
+
+            await this.props.getUser();
+
+            // 结束loading
+            await this.setState({ btnLoading: false });
+
+
+
+            // 跳转页面
+            // 要拆分路由，所以不再对redux中step进行维护，改用路由的方式跳转
+            // this.props.nextStep();
+            this.props.history.push(`/${BCG_ROOT_NAME}/${DEEP_REPORT.path}/${this.props.lotId}/${voluntaryId}`);
+          } else {
+            // 结束loading
+            await this.setState({ btnLoading: false });
+            // 跳转到充值VIP页
+          }
+        },
+        onCancel() {}
+      });
+    }
   };
 
 }
