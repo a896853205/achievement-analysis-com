@@ -220,10 +220,10 @@ class HeaderController extends React.Component {
                   }
                 >
                   <Menu.Item key='7'>
-                    <div onClick={ FILL_TYPE == 0 ? this.handleSimulatedApplyOpen : this.handleSimulatedApplyClose }>模拟填报</div>
+                    <div onClick={ FILL_TYPE === 0 ? this.handleSimulatedApplyOpen : this.handleSimulatedApplyClose }>模拟填报</div>
                   </Menu.Item>
                   <Menu.Item key='8'>
-                    <div onClick={FILL_TYPE == 1 ? this.handleFormalApplyOpen : this.handleFormalApplyClose}>正式填报</div>
+                    <div onClick={FILL_TYPE === 1 ? this.handleFormalApplyOpen : this.handleFormalApplyClose}>正式填报</div>
                   </Menu.Item>
                   <Menu.Item key='9'>
                     <Link to={'/'}> 院校优先 </Link>
@@ -338,7 +338,7 @@ class HeaderController extends React.Component {
     *   如果已经是VIP，跳转到填报志愿页
     * */
     if(this.props.user.uuid){
-      if(this.props.user.roleCode == 1){
+      if(this.props.user.roleCode === 1){
         Modal.warning({
           content:'请开通VIP',
           onOk: ()=>{

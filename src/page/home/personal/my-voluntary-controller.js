@@ -27,19 +27,30 @@ class MyVoluntaryController extends React.Component {
   };
   render() {
     return (
-      <div style={{display: 'flex'}}>
+      <div style={{ display: 'flex' }}>
         <Table
           dataSource={this.state.reportVoluntary}
           rowKey={record => record.uuid}
-          style={{width: '50%'}}
+          style={{ width: '50%' }}
         >
           <Column
             title='报表志愿提交时间'
             dataIndex='submit_time'
             key='submit_time'
+            render={(text, record) => (
+              <span>
+                {record.submit_time.slice(0, 16)}
+              </span>
+            )}
           />
-          <Column title='志愿批次' dataIndex='lots_name' />
-          <Column title='志愿考试年份' dataIndex='year' />
+          <Column
+            title='志愿批次'
+            dataIndex='lots_name'
+            render={(text, record) => (
+              <span>{record.lots_name === '三批' ? '二批A' : record.lots_name}</span>
+            )}
+          />
+          <Column title='志愿考试年份' dataIndex='year'/>
           <Column
             title='操作'
             dataIndex='showResult'
@@ -58,15 +69,26 @@ class MyVoluntaryController extends React.Component {
         <Table
           dataSource={this.state.deepVoluntary}
           rowKey={record => record.uuid}
-          style={{width: '50%'}}
+          style={{ width: '50%' }}
         >
           <Column
             title='深度体验提交时间'
             dataIndex='submit_time'
             key='submit_time'
+            render={(text, record) => (
+              <span>
+                {record.submit_time.slice(0, 16)}
+              </span>
+            )}
           />
-          <Column title='志愿批次' dataIndex='lots_name' />
-          <Column title='志愿考试年份' dataIndex='year' />
+          <Column
+            title='志愿批次'
+            dataIndex='lots_name'
+            render={(text, record) => (
+              <span>{record.lots_name === '三批' ? '二批A' : record.lots_name}</span>
+            )}
+          />
+          <Column title='志愿考试年份' dataIndex='year'/>
           <Column
             title='操作'
             dataIndex='showResult'
@@ -90,8 +112,8 @@ class MyVoluntaryController extends React.Component {
   componentDidMount = async () => {
     let myVoluntary = await launchRequest(GET_MY_VOLUNTARY);
     
-    let reportVoluntary = myVoluntary.filter(item => item.reportType === 1).reverse();
-    let deepVoluntary = myVoluntary.filter(item => item.reportType === 2).reverse();
+    let reportVoluntary = myVoluntary.filter(item => item.reportType === 1);
+    let deepVoluntary = myVoluntary.filter(item => item.reportType === 2);
 
     this.setState({
       reportVoluntary,

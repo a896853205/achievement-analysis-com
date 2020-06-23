@@ -1,8 +1,14 @@
 .voluntary-detail-box {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .voluntary-card {
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 0 18px 20px;
+  text-align: left;
+}
+
+.padding-left {
+  padding-left: 20px;
 }

@@ -71,7 +71,7 @@ export default connect(
     *   如果已经是VIP，跳转到填报志愿页
     * */
     if(props.user.uuid){
-      if(props.user.roleCode == 1){
+      if(props.user.roleCode === 1){
         Modal.warning({
           content:'请开通VIP',
           onOk: ()=>{
@@ -119,7 +119,7 @@ export default connect(
             <Button
               type='round'
               className='index-login-button'
-              onClick={ FILL_TYPE == 0 ? handleSimulatedApplyOpen : handleFormalApplyOpen }
+              onClick={ FILL_TYPE === 0 ? handleSimulatedApplyOpen : handleFormalApplyOpen }
             >
               开始填报吧
             </Button>

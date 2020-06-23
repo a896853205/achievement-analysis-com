@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 // import { actions as voluntaryActions } from '../../../redux/voluntary-model';
 
 // css
-import '@/style/voluntary/voluntary-detail.css';
+import '../../../../style/voluntary/voluntary-detail.css';
 
 // UI
 import { Card } from 'antd';
 class VoluntaryDetailController extends React.Component {
   render() {
     return (
-      <div className='voluntary-detail-box'>
+      <div className='voluntary-detail-box padding-left'>
         {this.props.voluntaryDetail.map(voluntaryItem => (
           <Card
             className='voluntary-card'

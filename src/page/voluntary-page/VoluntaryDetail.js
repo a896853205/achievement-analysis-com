@@ -45,7 +45,7 @@ class VoluntaryDetail extends React.Component {
 
   // 刷新页面时，先拿到暂存的志愿表信息
 
-  // 得再这里取值 坑b
+  // 得再这里取值 坑死了，咱也不知道为什么
   async componentDidUpdate(prevProps, prevState, snapshot) {
     if(JSON.stringify(prevProps.user) !== JSON.stringify(this.props.user)){
       // saveMyVoluntary

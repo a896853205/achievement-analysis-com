@@ -24,7 +24,7 @@ class ReportController extends React.Component {
           <div className='voluntary-main-box'>
             <Divider>结果</Divider>
             <div className='steps-content'>
-              <ResultReportController/>
+              <ResultReportController {...this.props} />
             </div>
 
             <PreviousStep {...this.props}/>

@@ -10,11 +10,20 @@ import '@/style/voluntary/result.css';
 
 import ResultVoluntaryDetailController from '../../../home/voluntary/result/result-voluntary-detail-controller';
 import { readUrlParams } from '@/util/parseUrlParams';
-import VoluntaryDetailController from '@/page/home/voluntary/step4/voluntary-detail-controller';
+import VoluntaryDetailController from '../../../../page/home/voluntary/step4/voluntary-detail-controller';
 import { actions as voluntaryActions } from '../../../../redux/voluntary-model';
 
+// 请求文件
+import { launchRequest } from '../../../../util/request';
+import * as APIS from '../../../../constants/api-constants';
+import * as DominConfigs from '../../../../constants/domin-constants';
+
 class ResultReportController extends React.Component {
-  getOption = result => {
+  state = {
+    receiveLotId: ''
+  };
+  // 五个志愿
+  getOption = (result, maxAndMin) => {
     const option = {
       xAxis: {
         type: 'category',
@@ -22,8 +31,83 @@ class ResultReportController extends React.Component {
       },
       yAxis: {
         type: 'value',
-        max: Math.max(...result),
-        min: Math.min(...result)
+        max: maxAndMin.max,
+        min: maxAndMin.min
+      },
+      series: [
+        {
+          data: [],
+          type: 'line'
+        }
+      ]
+    };
+
+    option.series[0].data = result;
+
+    return option;
+  };
+
+  // 二批A 10个志愿
+  getOption2 = (result, maxAndMin) => {
+    const option = {
+      xAxis: {
+        type: 'category',
+        data: ['志愿A', '志愿B', '志愿C', '志愿D', '志愿E', '志愿F', '志愿G', '志愿H', '志愿I', '志愿J']
+      },
+      yAxis: {
+        type: 'value',
+        max: maxAndMin.max,
+        min: maxAndMin.min
+      },
+      series: [
+        {
+          data: [],
+          type: 'line'
+        }
+      ]
+    };
+
+    option.series[0].data = result;
+
+    return option;
+  };
+
+  // 提前批 2个志愿
+  getOption3 = (result, maxAndMin) => {
+    const option = {
+      xAxis: {
+        type: 'category',
+        data: ['志愿A', '志愿B']
+      },
+      yAxis: {
+        type: 'value',
+        max: maxAndMin.max,
+        min: maxAndMin.min
+      },
+      series: [
+        {
+          data: [],
+          type: 'line'
+        }
+      ]
+    };
+
+    option.series[0].data = result;
+
+    return option;
+  };
+
+  // B段 1个志愿
+  getOption4 = (result, maxAndMin) => {
+    const option = {
+      xAxis: {
+        type: 'category',
+        data: ['志愿A']
+      },
+      yAxis: {
+        type: 'value',
+        max: maxAndMin.max,
+        min: maxAndMin.min
       },
       series: [
         {
@@ -42,16 +126,16 @@ class ResultReportController extends React.Component {
       <div className='voluntary-result-content'>
         <h1>志愿分析评测报告</h1>
         <div className="voluntary-result-mgb20">
-          名称: 志愿分析评测报告 批次:
+          名称: 志愿分析评测报告 批次：
           {this.props.voluntaryResult.lotsName}
         </div>
 
-        { readUrlParams('from') ? (
+        {readUrlParams('from') ? (
           <ResultVoluntaryDetailController
-           schoolAndMajorUuid={readUrlParams('from')}
+            schoolAndMajorUuid={readUrlParams('from')}
           />
-        ) : (<VoluntaryDetailController />)}
-        
+        ) : (<VoluntaryDetailController/>)}
+
 
         <div className='voluntary-result-detail-box'>
           {this.props.voluntaryResult.completeResult ? (
@@ -72,7 +156,7 @@ class ResultReportController extends React.Component {
                   <Tag color='#f50'>不合理</Tag>
                 )}
                 <p>{this.props.voluntaryResult.completeResult.describe}</p>
-                <p>智赢建议:不要放弃任何一个机会</p>
+                <p>智赢建议：不要放弃任何一个机会。</p>
                 <p>
                   {this.props.voluntaryResult.completeResult.unWriteDetailArr.map(
                     item => (
@@ -83,7 +167,7 @@ class ResultReportController extends React.Component {
               </div>
             </div>
           ) : (
-            <Skeleton />
+            <Skeleton/>
           )}
           {this.props.voluntaryResult.gradedResult ? (
             <div className='voluntary-result-title-box'>
@@ -103,9 +187,45 @@ class ResultReportController extends React.Component {
                   <Tag color='#f50'>不合理</Tag>
                 )}
                 <p>{this.props.voluntaryResult.gradedResult.describe}</p>
-                <p>
-                  智赢建议:填报志愿应拉开一定的层次,建议按照院校录取不同集合由高到低顺序选择.高风险、中风险、低风险和最佳匹配各个类别集合志愿不能倒置.
-                </p>
+                { +this.props.match.params.lotId === 4 || this.state.receiveLotId === 4 ?
+                    <div>
+                      <p>
+                        智赢推荐填报方案：系统分为A高风险，B中风险，C微风险，D最佳匹配，E完美专业
+                      </p>
+                      <p>
+                        保守型组合：（CCDDD DEEEE）、（DDDDD DEEEE）
+                      </p>
+                      <p>
+                        冲刺型组合一：（CCCCC CDDDD）、（CCCCD DDDDD ）、（CCCCD DDDEE）
+                      </p>
+                      <p>
+                        冲刺型组合二：（BBCCC CDDDD）、（BBCCD DDDDD ）、（BBCCD DDDEE）
+                      </p>
+                    </div>
+                  : (
+                    +this.props.match.params.lotId === 2 ||
+                    this.state.receiveLotId === 2 ||
+                    +this.props.match.params.lotId === 7 ||
+                    this.state.receiveLotId === 7 ?
+                      <div>
+                        <p>
+                          智赢推荐填报方案：系统分为A高风险，B中风险，C微风险，D最佳匹配，E完美专业
+                        </p>
+                        <p>
+                          保守型组合： （CDDEE）、（DDDEE）
+                        </p>
+                        <p>
+                          冲刺型组合一：（CCCDD）、（CCDDD）、（CCDDE）
+                        </p>
+                        <p>
+                          冲刺型组合二：（BCCDD）、（BCDDD ）、（BCDDE）
+                        </p>
+                      </div>
+                      :
+                      undefined
+                  )
+                }
+
                 <p>
                   {this.props.voluntaryResult.gradedResult.gradedDetailArr.map(
                     item => (
@@ -113,17 +233,53 @@ class ResultReportController extends React.Component {
                     )
                   )}
                 </p>
-                <ReactEcharts
-                  option={this.getOption(
-                    this.props.voluntaryResult.gradedResult.schoolScoreArr
-                  )}
-                  style={{ height: '350px' }}
-                  className='questionnaire-chart'
-                />
+                {+this.props.match.params.lotId === 3 ||+this.props.match.params.lotId === 5 || this.state.receiveLotId === 3 || this.state.receiveLotId === 5 ?
+                  <ReactEcharts
+                    option={this.getOption4(
+                      this.props.voluntaryResult.gradedResult.schoolScoreArr,
+                      this.props.voluntaryResult.gradedResult.maxAndMin
+                    )}
+                    style={{ height: '350px' }}
+                    className='questionnaire-chart'
+                  />
+                  :
+                  (
+                    +this.props.match.params.lotId === 4 || this.state.receiveLotId === 4 ?
+                      <ReactEcharts
+                        option={this.getOption2(
+                          this.props.voluntaryResult.gradedResult.schoolScoreArr,
+                          this.props.voluntaryResult.gradedResult.maxAndMin
+                        )}
+                        style={{ height: '350px' }}
+                        className='questionnaire-chart'
+                      /> : (
+                        +this.props.match.params.lotId === 1 || this.state.receiveLotId === 1 ?
+                          <ReactEcharts
+                            option={this.getOption3(
+                              this.props.voluntaryResult.gradedResult.schoolScoreArr,
+                              this.props.voluntaryResult.gradedResult.maxAndMin
+                            )}
+                            style={{ height: '350px' }}
+                            className='questionnaire-chart'
+                          />
+                          :
+                          <ReactEcharts
+                            option={this.getOption(
+                              this.props.voluntaryResult.gradedResult.schoolScoreArr,
+                              this.props.voluntaryResult.gradedResult.maxAndMin
+                            )}
+                            style={{ height: '350px' }}
+                            className='questionnaire-chart'
+                          />
+
+                      )
+                  )
+                }
+
               </div>
             </div>
           ) : (
-            <Skeleton />
+            <Skeleton/>
           )}
           {this.props.voluntaryResult.planResult ? (
             <div className='voluntary-result-title-box'>
@@ -153,17 +309,22 @@ class ResultReportController extends React.Component {
               </div>
             </div>
           ) : (
-            <Skeleton />
+            <Skeleton/>
           )}
         </div>
       </div>
     );
   }
-  componentDidMount() {
-    if(readUrlParams('from')){
+
+  componentDidMount =  async ()=>{
+
+    if (readUrlParams('from')) {
       this.props.recordVoluntaryIdGetResult(readUrlParams('from'));
+
+      const receiveLotId = await launchRequest(APIS.GET_LOTID_BY_VOLUNTARY_UUID, { voluntaryUuid: readUrlParams('from') }, DominConfigs.REQUEST_TYPE.GET);
+      this.setState({ receiveLotId});
     }
-  }
+  };
 }
 
 // 从store接收state数据

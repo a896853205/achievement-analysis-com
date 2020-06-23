@@ -295,7 +295,7 @@ class BasicController extends React.Component {
                       保存
                     </Button>
                   </div>
-                ) : (FILL_TYPE==1 ? undefined : (
+                ) : (FILL_TYPE===1 ? undefined : (
                   <Button onClick={this.toVipPage} type='primary'>
                     获得更多修改次数
                   </Button>

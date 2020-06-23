@@ -28,10 +28,7 @@ import {
   DEEP_REPORT
 
 } from '../constants/route-constants';
-// 请求文件
-import { launchRequest } from '../util/request';
-import * as DominConfigs from '../constants/domin-constants';
-import * as APIS from '../constants/api-constants';
+
 // UI
 import { Result, Button } from 'antd';
 import CompleteInfoController from './voluntary-page/CompleteInfoController';
