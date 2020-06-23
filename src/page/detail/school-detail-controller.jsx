@@ -112,9 +112,7 @@ const SchoolEnrollmentNewsList = props => {
               </h5>
               <span>
                 <span>
-                  {item.createTime
-                    ? moment(item.createTime).format('YYYY-MM-DD ')
-                    : '-'}
+                  { item.createTime }
                 </span>
                 <span className='enrollment-view'>
                   浏览 {item.viewTimes ? item.viewTimes : '-'}
