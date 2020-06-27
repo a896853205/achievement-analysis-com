@@ -205,7 +205,7 @@ class Step3Controller extends React.Component {
   // 打开或收起志愿表
   switchVoluntaryTable = async ()=>{
     const lotId = this.props.lot_id;
-    console.log(this.props.voluntary[lotId], lotId, 44444444);
+    // console.log(this.props.voluntary[lotId], lotId, 44444444);
     if(this.props.voluntary[lotId].length===0){
       // 进到这里就说明出bug了
       console.log('aaaaa','整活');

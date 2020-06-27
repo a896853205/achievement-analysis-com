@@ -128,8 +128,8 @@ class Step4Controller extends React.Component {
     return checkResult;
   };
   handleClickSubmit = async () => {
-    console.log(this.props.voluntaryDetail, 'voluntaryDetail');
-    console.log(this.checkVoulutary(this.props.voluntaryDetail));
+    // console.log(this.props.voluntaryDetail, 'voluntaryDetail');
+    // console.log(this.checkVoulutary(this.props.voluntaryDetail));
     let checkResult = this.checkVoulutary(this.props.voluntaryDetail);
     if (checkResult.length > 0) {
       this.setState({

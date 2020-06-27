@@ -61,6 +61,11 @@ class BasicController extends React.Component {
         2019
       </Option>
     );
+    yearsList.push(
+      <Option key={2020} value={2020}>
+        2020
+      </Option>
+    );
     // }
 
     let highSchoolOption = this.state.highSchoolList.map(item => (
