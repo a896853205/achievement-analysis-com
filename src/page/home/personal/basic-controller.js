@@ -88,7 +88,7 @@ class BasicController extends React.Component {
                         message: '请输入姓名'
                       }
                     ]
-                  })(<Input placeholder='请输入姓名' />)}
+                  })(<Input placeholder='请输入姓名'/>)}
                 </Form.Item>
                 <Form.Item label='电话'>
                   {getFieldDecorator('phone', {
@@ -98,7 +98,7 @@ class BasicController extends React.Component {
                         message: '请输入手机号'
                       }
                     ]
-                  })(<Input />)}
+                  })(<Input/>)}
                 </Form.Item>
                 <Form.Item label='电子邮箱'>
                   {getFieldDecorator('email', {
@@ -108,7 +108,7 @@ class BasicController extends React.Component {
                         message: '请输入正确的邮箱'
                       }
                     ]
-                  })(<Input />)}
+                  })(<Input/>)}
                 </Form.Item>
                 <Form.Item label='地区'>
                   {getFieldDecorator('address', {
@@ -179,10 +179,17 @@ class BasicController extends React.Component {
             </div>
           )}
         </div>
-        <Divider />
+        <Divider/>
         <div className='basic-info-content'>
           {this.state.isImportAlert ? (
+
             <Form {...formItemLayout} onSubmit={this.handleImportSubmit}>
+              {this.props.user.scoreAlterTime > 0 ?
+                (<Alert style={{width:'300px',marginBottom:'10px'}} message="请点击 [保存] 按钮，更新最新信息。" type="warning" showIcon />)
+                :
+                (<Alert style={{width:'250px',marginBottom:'10px'}} message="次数不足，请充值。" type="warning" showIcon />)
+              }
+
               <Form.Item label='考试年份'>
                 {getFieldDecorator('examYear', {
                   rules: [
@@ -191,7 +198,7 @@ class BasicController extends React.Component {
                       message: '请选择考试年份'
                     }
                   ]
-                })(<Select>{yearsList}</Select>)}
+                })(<Select disabled={this.props.user.scoreAlterTime > 0 ? false : true}>{yearsList}</Select>)}
               </Form.Item>
               <Form.Item label='性别'>
                 {getFieldDecorator('gender', {
@@ -202,7 +209,7 @@ class BasicController extends React.Component {
                     }
                   ]
                 })(
-                  <Radio.Group>
+                  <Radio.Group disabled={this.props.user.scoreAlterTime > 0 ? false : true}>
                     <Radio value='1'>男</Radio>
                     <Radio value='2'>女</Radio>
                   </Radio.Group>
@@ -217,7 +224,7 @@ class BasicController extends React.Component {
                     }
                   ]
                 })(
-                  <Radio.Group>
+                  <Radio.Group disabled={this.props.user.scoreAlterTime > 0 ? false : true}>
                     <Radio value='1'>理科</Radio>
                     <Radio value='2'>文科</Radio>
                   </Radio.Group>
@@ -235,11 +242,12 @@ class BasicController extends React.Component {
                       validator: (rule, value) => value > 0 && value <= 750
                     }
                   ]
-                })(<InputNumber />)}
+                })(<InputNumber disabled={this.props.user.scoreAlterTime > 0 ? false : true}/>)}
                 <Button
                   type='primary'
                   onClick={this.handleClickGetScore}
                   loading={this.props.meLoading}
+                  disabled={this.props.user.scoreAlterTime > 0 ? false : true}
                 >
                   查询位次/线差
                 </Button>
@@ -300,7 +308,7 @@ class BasicController extends React.Component {
                       保存
                     </Button>
                   </div>
-                ) : (FILL_TYPE===1 ? undefined : (
+                ) : (FILL_TYPE === 1 ? undefined : (
                   <Button onClick={this.toVipPage} type='primary'>
                     获得更多修改次数
                   </Button>
