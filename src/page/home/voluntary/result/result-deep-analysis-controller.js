@@ -5,13 +5,13 @@ import ReactEcharts from 'echarts-for-react';
 import { Cascader } from 'antd';
 
 // css
-import '@/style/result/deep-result.css';
+import '../../../../style/result/deep-result.css';
 // 关于数据模块交互
 import { connect } from 'react-redux';
 
 // 请求文件
-import { launchRequest } from '@/util/request';
-import * as APIS from '@/constants/api-constants';
+import { launchRequest } from '../../../../util/request';
+import * as APIS from '../../../../constants/api-constants';
 
 class ResultDeepAnalysisController extends React.Component {
   state = {
@@ -109,7 +109,6 @@ class ResultDeepAnalysisController extends React.Component {
   handleChangeSchoolMajor = async value => {
     let [voluntarieerId, majorIndex] = value;
     let data = {};
-
     if (voluntarieerId !== undefined && majorIndex !== undefined) {
       data = await launchRequest(APIS.GET_VOLUNTARY_DEEP_RESULT, {
         voluntaryUuid: this.props.voluntaryDeepUuid,
@@ -117,14 +116,12 @@ class ResultDeepAnalysisController extends React.Component {
         majorIndex
       });
     }
-
     if (data.unitSatisfactionObj) {
       this.setState({
         professionalKnowledge: data.unitSatisfactionObj,
         jobAdaptability: data.unitSatisfactionObj
       });
     }
-
     if (data.majorFutureObj) {
       this.setState({
         area: data.majorFutureObj,
