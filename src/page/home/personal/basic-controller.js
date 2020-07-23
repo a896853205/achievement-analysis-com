@@ -38,7 +38,9 @@ class BasicController extends React.Component {
     isAlert: false,
     isImportAlert: false,
     optionList: [],
-    highSchoolList: [{ code: '其他', highSchoolName: '其他' }]
+    highSchoolList: [{ code: '其他', highSchoolName: '其他' }],
+    second: 3, //刷新秒数,
+    isShow: false
   };
   render() {
     const { getFieldDecorator } = this.props.form,
@@ -342,6 +344,18 @@ class BasicController extends React.Component {
             </div>
           )}
         </div>
+        <Modal
+          closable={false}
+          maskClosable={false}
+          title={null}
+          visible={this.state.isShow}
+          keyboard={false}
+          footer={
+            [<Button type="primary" key="ok" onClick={()=>{window.location.reload();}} >直接刷新</Button>]
+          }
+        >
+          {this.state.second}后自动刷新
+        </Modal>
       </div>
     );
   }
@@ -360,6 +374,21 @@ class BasicController extends React.Component {
     });
   };
 
+  increaseSecond = () => {
+    this.setState({
+      isShow: true
+      }
+    );
+    setInterval(()=>{
+      let num = this.state.second - 1;
+      if(num>=0){
+        this.setState({
+          second: num
+        })
+      }
+    },1000);
+  };
+
   handleImportSubmit = e => {
     e.preventDefault(); //阻止button submit的默认行为
 
@@ -371,10 +400,14 @@ class BasicController extends React.Component {
           title: '您确定使用一次修改分数的机会吗?',
           content: `剩余修改次数${this.props.user.scoreAlterTime}次`,
           onOk: () => {
+            this.increaseSecond();
             this.props.getMeScoreRank(values);
             this.props.recordUserImport(values);
             this.props.initVoluntary([]);
             this.setState({ isImportAlert: false });
+            setTimeout(()=>{
+              window.location.reload();
+            },3000);
           },
           onCancel: () => {},
           okText: '确认',
