@@ -189,7 +189,7 @@ class BasicController extends React.Component {
               {this.props.user.scoreAlterTime > 0 ?
                 (<Alert style={{width:'300px',marginBottom:'10px'}} message="请点击 [保存] 按钮，更新最新信息。" type="warning" showIcon />)
                 :
-                (<Alert style={{width:'250px',marginBottom:'10px'}} message="次数不足，请充值。" type="warning" showIcon />)
+                (FILL_TYPE ===0 ? (<Alert style={{width:'250px',marginBottom:'10px'}} message="次数不足，请充值。" type="warning" showIcon />):undefined)
               }
 
               <Form.Item label='考试年份'>
@@ -400,10 +400,10 @@ class BasicController extends React.Component {
           title: '您确定使用一次修改分数的机会吗?',
           content: `剩余修改次数${this.props.user.scoreAlterTime}次`,
           onOk: () => {
-            this.increaseSecond();
             this.props.getMeScoreRank(values);
             this.props.recordUserImport(values);
             this.props.initVoluntary([]);
+            this.increaseSecond();
             this.setState({ isImportAlert: false });
             setTimeout(()=>{
               window.location.reload();
