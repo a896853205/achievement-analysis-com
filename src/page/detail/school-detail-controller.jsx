@@ -437,7 +437,9 @@ const SchoolScoreList = connect(
           title='最低位次'
           dataIndex='lastRank'
           key='lastRank'
-          render={text => (text ? text : '-')}
+          render={(text,record) => (
+            record.score ? record.lastRank : '-'
+          )}
         />
       </Table>
     </div>
