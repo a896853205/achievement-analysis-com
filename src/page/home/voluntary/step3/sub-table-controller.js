@@ -14,7 +14,7 @@ import { actions as voluntaryActions } from '../../../../redux/voluntary-model';
 class SubTableController extends React.Component {
   state = {
     majorList: [],
-    loading: false
+    loading: false,
   };
 
   render() {
@@ -22,7 +22,7 @@ class SubTableController extends React.Component {
 
     if (this.props.voluntary[this.props.lotId]) {
       voluntaryObj = this.props.voluntary[this.props.lotId].find(
-        voluntaryItem => {
+        (voluntaryItem) => {
           return voluntaryItem.schoolId === this.props.schoolId;
         }
       );
@@ -38,12 +38,12 @@ class SubTableController extends React.Component {
       {
         title: '招生专业',
         dataIndex: 'major_name',
-        key: 'major_name'
+        key: 'major_name',
       },
       {
         title: '招生人数',
         dataIndex: 'enrollment',
-        key: 'enrollment'
+        key: 'enrollment',
       },
       {
         title: '学制/学费',
@@ -53,7 +53,7 @@ class SubTableController extends React.Component {
           <div style={{ width: 80 }}>
             {record.education_system}/{record.tuition}
           </div>
-        )
+        ),
       },
 
       {
@@ -61,7 +61,7 @@ class SubTableController extends React.Component {
         dataIndex: 'riskRate',
         key: 'riskRate',
         align: 'center',
-        render: text => {
+        render: (text) => {
           switch (text) {
             case 1:
               return <Tag color='green'>低</Tag>;
@@ -72,13 +72,13 @@ class SubTableController extends React.Component {
             default:
               return <Tag color='purple'>未知</Tag>;
           }
-        }
+        },
       },
       {
         title: '备注',
         dataIndex: 'comment',
         key: 'comment',
-        align: 'center'
+        align: 'center',
       },
       {
         title: '填报',
@@ -88,22 +88,22 @@ class SubTableController extends React.Component {
           <Select
             placeholder='请选择'
             style={{ width: 125 }}
-            onChange={e => {
+            onChange={(e) => {
               this.handleMajorChange(e, record);
             }}
             disabled={
               this.props.voluntary[this.props.lotId]
-                ? this.props.voluntary[this.props.lotId].findIndex(item => {
+                ? this.props.voluntary[this.props.lotId].findIndex((item) => {
                     return item.schoolId === this.props.schoolId;
                   }) === -1
                 : undefined
             }
             value={
-              majorList.findIndex(majorItem => {
+              majorList.findIndex((majorItem) => {
                 return majorItem.majorId === record.enrollment_id;
               }) === -1
                 ? undefined
-                : majorList.findIndex(majorItem => {
+                : majorList.findIndex((majorItem) => {
                     return majorItem.majorId === record.enrollment_id;
                   })
             }
@@ -115,8 +115,8 @@ class SubTableController extends React.Component {
             <Select.Option value={4}>专业5</Select.Option>
             <Select.Option value={5}>专业6</Select.Option>
           </Select>
-        )
-      }
+        ),
+      },
     ];
 
     return (
@@ -130,7 +130,7 @@ class SubTableController extends React.Component {
         }}
         loading={this.state.loading}
         pagination={false}
-        rowKey={record => record.enrollment_id}
+        rowKey={(record) => record.enrollment_id}
         columns={columns}
         dataSource={this.state.majorList}
       />
@@ -139,16 +139,16 @@ class SubTableController extends React.Component {
 
   componentDidMount = async () => {
     await this.setState({
-      loading: true
+      loading: true,
     });
     let { majorList } = await launchRequest(APIS.GET_MAJOR, {
       schoolId: this.props.schoolId,
-      lotId: this.props.schoolLotId
+      lotId: this.props.lotId,
     });
 
     this.setState({
       majorList,
-      loading: false
+      loading: false,
     });
   };
 
@@ -156,28 +156,28 @@ class SubTableController extends React.Component {
     this.props.recordMajor({
       schoolId: this.props.schoolId,
       majorData: record,
-      changeMajorIndex: value
+      changeMajorIndex: value,
     });
   };
 }
 
 // 从store接收state数据
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   const voluntaryStore = store['voluntaryStore'];
   let { lot_id, voluntary } = voluntaryStore;
 
   return {
     lotId: lot_id,
-    voluntary: [...voluntary]
+    voluntary: [...voluntary],
   };
 };
 
 // 向store dispatch action
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    recordMajor: params => {
+    recordMajor: (params) => {
       dispatch(voluntaryActions.recordMajor(params));
-    }
+    },
   };
 };
 

@@ -212,7 +212,7 @@ export default connect(
                     {lotsItem.lots_name}
                   </Radio>
                 );
-              }
+              } else return null;
             })}
           </Radio.Group>
         </div>
