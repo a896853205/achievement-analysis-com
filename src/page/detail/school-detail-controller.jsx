@@ -521,7 +521,7 @@ const SchoolMajorScoreList = connect(
   const [schoolMajor, setSchoolMajor] = useState([]),
        [allYear, setAllYear] = useState([]),
     [accountCategory, setAccountCategory] = useState(props.user.accountCategory ? parseInt(props.user.accountCategory) : 1),
-  [year, setYear] = useState(new Date().getFullYear());
+  [year, setYear] = useState(new Date().getFullYear()-1);
 
   let { schoolId } = props;
 
