@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 // UI组件
-import { Table, Button } from 'antd';
+import { Table, Button,Spin,message } from 'antd';
 
 // 请求
 import { launchRequest } from '@/util/request';
@@ -23,102 +23,132 @@ const { Column } = Table;
 class MyVoluntaryController extends React.Component {
   state = {
     reportVoluntary: [],
-    deepVoluntary: []
+    deepVoluntary: [],
+    btnLoading:false
   };
   render() {
     return (
       <div style={{ display: 'flex' }}>
-        <Table
-          dataSource={this.state.reportVoluntary}
-          rowKey={record => record.uuid}
-          style={{ width: '50%' }}
-        >
-          <Column
-            title='报表志愿提交时间'
-            dataIndex='submit_time'
-            key='submit_time'
-            render={(text, record) => (
-              <span>
+        <div style={{ width: '50%' }}>
+          <Spin
+            tip='数据加载中'
+            delay={200}
+            spinning={this.state.btnLoading}
+          >
+            <Table
+              dataSource={this.state.reportVoluntary}
+              rowKey={record => record.uuid}
+            >
+              <Column
+                title='报表志愿提交时间'
+                dataIndex='submit_time'
+                key='submit_time'
+                render={(text, record) => (
+                  <span>
                 {record.submit_time.slice(0, 16)}
               </span>
-            )}
-          />
-          <Column
-            title='志愿批次'
-            dataIndex='lots_name'
-            render={(text, record) => (
-              <span>{record.lots_name === '三批' ? '二批A' : record.lots_name}</span>
-            )}
-          />
-          <Column title='志愿考试年份' dataIndex='year'/>
-          <Column
-            title='操作'
-            dataIndex='showResult'
-            render={(text, record) => (
-              <Button
-                color='blue'
-                onClick={() => {
-                  this.handleClickVoluntaryResut(record.uuid);
-                }}
-              >
-                查看报表
-              </Button>
-            )}
-          />
-        </Table>
-        <Table
-          dataSource={this.state.deepVoluntary}
-          rowKey={record => record.uuid}
-          style={{ width: '50%' }}
-        >
-          <Column
-            title='深度体验提交时间'
-            dataIndex='submit_time'
-            key='submit_time'
-            render={(text, record) => (
-              <span>
+                )}
+              />
+              <Column
+                title='志愿批次'
+                dataIndex='lots_name'
+                render={(text, record) => (
+                  <span>{record.lots_name === '三批' ? '二批A' : record.lots_name}</span>
+                )}
+              />
+              <Column title='志愿考试年份' dataIndex='year'/>
+              <Column
+                title='操作'
+                dataIndex='showResult'
+                render={(text, record) => (
+                  <Button
+                    color='blue'
+                    onClick={() => {
+                      this.handleClickVoluntaryResut(record.uuid);
+                    }}
+                  >
+                    查看报表
+                  </Button>
+                )}
+              />
+            </Table>
+          </Spin>
+        </div>
+        <div style={{ width: '50%' }}>
+          <Spin
+            tip='数据加载中'
+            delay={200}
+            spinning={this.state.btnLoading}
+          >
+            <Table
+              dataSource={this.state.deepVoluntary}
+              rowKey={record => record.uuid}
+            >
+              <Column
+                title='深度体验提交时间'
+                dataIndex='submit_time'
+                key='submit_time'
+                render={(text, record) => (
+                  <span>
                 {record.submit_time.slice(0, 16)}
               </span>
-            )}
-          />
-          <Column
-            title='志愿批次'
-            dataIndex='lots_name'
-            render={(text, record) => (
-              <span>{record.lots_name === '三批' ? '二批A' : record.lots_name}</span>
-            )}
-          />
-          <Column title='志愿考试年份' dataIndex='year'/>
-          <Column
-            title='操作'
-            dataIndex='showResult'
-            render={(text, record) => (
-              <Button
-                color='blue'
-                onClick={() => {
-                  this.handleClickDeepResut(record.uuid);
-                }}
-              >
-                查看深度体验
-              </Button>
-            )}
-          />
-        </Table>
+                )}
+              />
+              <Column
+                title='志愿批次'
+                dataIndex='lots_name'
+                render={(text, record) => (
+                  <span>{record.lots_name === '三批' ? '二批A' : record.lots_name}</span>
+                )}
+              />
+              <Column title='志愿考试年份' dataIndex='year'/>
+              <Column
+                title='操作'
+                dataIndex='showResult'
+                render={(text, record) => (
+                  <Button
+                    color='blue'
+                    onClick={() => {
+                      this.handleClickDeepResut(record.uuid);
+                    }}
+                  >
+                    查看深度体验
+                  </Button>
+                )}
+              />
+            </Table>
+          </Spin>
+        </div>
       </div>
     );
   }
 
   // 查询自己的所有志愿
   componentDidMount = async () => {
-    let myVoluntary = await launchRequest(GET_MY_VOLUNTARY);
-    
-    let reportVoluntary = myVoluntary.filter(item => item.reportType === 1);
-    let deepVoluntary = myVoluntary.filter(item => item.reportType === 2);
-
     this.setState({
-      reportVoluntary,
-      deepVoluntary
+      btnLoading: true
     });
+    launchRequest(GET_MY_VOLUNTARY).then(myVoluntary=>{
+      if(myVoluntary){
+        let reportVoluntary = myVoluntary.filter(item => item.reportType === 1);
+        let deepVoluntary = myVoluntary.filter(item => item.reportType === 2);
+        this.setState({
+          reportVoluntary,
+          deepVoluntary,
+          btnLoading: false
+        });
+      }
+    }).catch(err=>{
+      console.log(err);
+      this.setState({
+        btnLoading: false
+      });
+      message.error('数据获取失败，请刷新重试');
+    });
+    
+
+
+
   };
 
   handleClickVoluntaryResut = voluntaryId => {
