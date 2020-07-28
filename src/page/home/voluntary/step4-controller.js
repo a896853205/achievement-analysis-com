@@ -16,7 +16,7 @@ import { launchRequest } from '@/util/request';
 import * as APIS from '../../../constants/api-constants';
 
 // UI组件
-import { Button, Modal, Alert } from 'antd';
+import { Button, Modal, Alert,message } from 'antd';
 import { BCG_ROOT_NAME, DEEP_REPORT, REPORT } from '../../../constants/route-constants';
 
 const { confirm } = Modal;
@@ -24,6 +24,7 @@ const { confirm } = Modal;
 class Step4Controller extends React.Component {
   state = {
     btnLoading: false,
+    btnLoading2: false,
     isShow: 'none',
     errMsg: []
   };
@@ -81,7 +82,7 @@ class Step4Controller extends React.Component {
             {this.props.user.deepAlterTime ? (
               <Button
                 className='btn-large btn-transition-blue-background'
-                loading={this.state.btnLoading}
+                loading={this.state.btnLoading2}
                 onClick={this.handleClickDeepSubmit}
                 size='large'
                 type='primary'
@@ -128,8 +129,7 @@ class Step4Controller extends React.Component {
     return checkResult;
   };
   handleClickSubmit = async () => {
-    // console.log(this.props.voluntaryDetail, 'voluntaryDetail');
-    // console.log(this.checkVoulutary(this.props.voluntaryDetail));
+
     let checkResult = this.checkVoulutary(this.props.voluntaryDetail);
     if (checkResult.length > 0) {
       this.setState({
@@ -137,60 +137,57 @@ class Step4Controller extends React.Component {
         errMsg: checkResult
       })
     }else {
+      this.setState({
+        btnLoading: true
+      });
       confirm({
         title: '生成报表',
         content: '您确定生成报表吗? 生成报表会使用一次机会.',
         okText: '确认',
         cancelText: '取消',
         onOk: async () => {
-
-          // loading
-          await this.setState({ btnLoading: true });
-
           // 提交到后台后返回uuid
-
-          let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
+          launchRequest(APIS.SAVE_VOLUNTARY, {
             lotId: this.props.lotId,
             voluntary: this.props.voluntaryDetail,
             reportType: 1
+          }).then(voluntaryId => {
+            if (voluntaryId) {
+              // 将uuid存入redux
+              this.props.recordVoluntaryResultType('report');
+              this.props.recordVoluntaryIdGetResult(voluntaryId);
+              // 在这里将生成报表次数减少1
+              launchRequest(APIS.UPDATE_REPORT_ALTER_TIME_DROP_1);
+              this.props.getUser();
+              // 结束loading
+              this.setState({ btnLoading: false });
+              // 跳转页面
+              // 要拆分路由，所以不再对redux中step进行维护，改用路由的方式跳转
+              // this.props.nextStep();
+              this.props.history.push(`/${BCG_ROOT_NAME}/${REPORT.path}/${this.props.lotId}/${voluntaryId}`);
+            }
+          }).catch(err => {
+            console.log(err);
+            message.error('生成报表失败，请重试一次');
+            this.setState({ btnLoading: false });
           });
-          if (voluntaryId) {
-            // 将uuid存入redux
-            this.props.recordVoluntaryResultType('report');
-            this.props.recordVoluntaryIdGetResult(voluntaryId);
-
-
-            // 在这里将生成报表次数减少1
-            await launchRequest(APIS.UPDATE_REPORT_ALTER_TIME_DROP_1);
-
-
-            await this.props.getUser();
-
-            // 结束loading
-            await this.setState({ btnLoading: false });
-
-            // 跳转页面
-            // 要拆分路由，所以不再对redux中step进行维护，改用路由的方式跳转
-            // this.props.nextStep();
-            this.props.history.push(`/${BCG_ROOT_NAME}/${REPORT.path}/${this.props.lotId}/${voluntaryId}`);
-          } else {
-            // 结束loading
-            await this.setState({ btnLoading: false });
-            // 跳转到充值VIP页
-          }
         },
-        onCancel() {}
+        onCancel:()=> {
+          this.setState({ btnLoading: false });
+        }
       });
     }
 
   };
 
   handleClickDeepSubmit = async () => {
+    this.setState({ btnLoading2: true });
     let checkResult = this.checkVoulutary(this.props.voluntaryDetail);
     if (checkResult.length > 0) {
       this.setState({
         isShow: 'block',
-        errMsg: checkResult
+        errMsg: checkResult,
+        btnLoading2: false
       })
     }else {
       confirm({
@@ -200,7 +197,7 @@ class Step4Controller extends React.Component {
         cancelText: '取消',
         onOk: async () => {
           // loading
-          await this.setState({ btnLoading: true });
+          await this.setState({ btnLoading2: true });
 
           // 提交到后台后返回uuid,而且重新查询一下用户数据
           let voluntaryId = await launchRequest(APIS.SAVE_VOLUNTARY, {
@@ -222,7 +219,7 @@ class Step4Controller extends React.Component {
             await this.props.getUser();
 
             // 结束loading
-            await this.setState({ btnLoading: false });
+            await this.setState({ btnLoading2: false });
 
 
 
@@ -232,11 +229,13 @@ class Step4Controller extends React.Component {
             this.props.history.push(`/${BCG_ROOT_NAME}/${DEEP_REPORT.path}/${this.props.lotId}/${voluntaryId}`);
           } else {
             // 结束loading
-            await this.setState({ btnLoading: false });
+            await this.setState({ btnLoading2: false });
             // 跳转到充值VIP页
           }
         },
-        onCancel() {}
+        onCancel:()=> {
+          this.setState({ btnLoading2: false });
+        }
       });
     }
   };

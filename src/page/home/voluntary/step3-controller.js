@@ -4,7 +4,7 @@ import React from 'react';
 import '../../../style/voluntary/step3.css';
 
 // UI组件
-import { Collapse, Button, Icon, Modal, Tabs, Spin, Affix } from 'antd';
+import { Collapse, Button, Icon, Modal, Tabs, Spin, Affix,message } from 'antd';
 
 // 自定义组件
 import SchoolFirstController from './step3/school-first-controller';
@@ -27,7 +27,8 @@ const { confirm } = Modal;
 class Step3Controller extends React.Component {
   state = {
     isFold: false,
-    loading: false
+    loading: false,
+    saveLoading: false
   };
 
   render() {
@@ -109,6 +110,7 @@ class Step3Controller extends React.Component {
                     size='large'
                     type='primary'
                     onClick={this.handleClickSaveVoluntary}
+                    loading={this.state.saveLoading}
                   >
                     保存
                   </Button>
@@ -174,26 +176,49 @@ class Step3Controller extends React.Component {
   };
 
   handleClickCheckVoluntary = async () => {
-    await launchRequest(APIS.SAVE_TEMP_VOLUNTARY, {
-      voluntary: this.props.voluntary
-    });
-    await this.setState({
+    this.setState({
       loading: true
     });
-    this.props.recordVoluntaryDetail(this.props.voluntary[this.props.lot_id]);
-    // 要拆分路由，所以不再对redux中step进行维护，改用路由的方式跳转
-    // this.props.nextStep();
-    this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY_DETAIL.path}/${this.props.lot_id}`);
-
-    this.setState({
-      loading: false
+    launchRequest(APIS.SAVE_TEMP_VOLUNTARY, {
+      voluntary: this.props.voluntary
+    }).then(res=>{
+      if(res){
+        this.setState({
+          loading: false
+        });
+        this.props.recordVoluntaryDetail(this.props.voluntary[this.props.lot_id]);
+        // 要拆分路由，所以不再对redux中step进行维护，改用路由的方式跳转
+        // this.props.nextStep();
+        this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY_DETAIL.path}/${this.props.lot_id}`);
+      }
+    }).catch(err=>{
+      console.log(err);
+      this.setState({
+        loading: false
+      });
+      message.error('查询失败，请重试一次');
     });
   };
   // 暂存函数
   handleClickSaveVoluntary = () => {
+    this.setState({
+      saveLoading:true
+    });
     // saveMyVoluntary
     launchRequest(APIS.SAVE_TEMP_VOLUNTARY, {
       voluntary: this.props.voluntary
+    }).then(res => {
+      if (res) {
+        this.setState({
+          saveLoading: false
+        });
+      }
+    }).catch(err => {
+      console.log(err);
+      this.setState({
+        saveLoading:false
+      });
+      message.error('保存失败，请重试一次');
     });
   };
 

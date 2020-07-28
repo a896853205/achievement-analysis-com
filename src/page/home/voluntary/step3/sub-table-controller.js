@@ -5,7 +5,7 @@ import { launchRequest } from '../../../../util/request';
 import * as APIS from '../../../../constants/api-constants';
 
 // UI组件
-import { Table, Select, Tag } from 'antd';
+import { Table, Select, Tag,message } from 'antd';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
@@ -138,18 +138,27 @@ class SubTableController extends React.Component {
   }
 
   componentDidMount = async () => {
-    await this.setState({
+    this.setState({
       loading: true,
     });
-    let { majorList } = await launchRequest(APIS.GET_MAJOR, {
+    launchRequest(APIS.GET_MAJOR, {
       schoolId: this.props.schoolId,
       lotId: this.props.lotId,
+    }).then(res=>{
+      if(res){
+        this.setState({
+          majorList: res.majorList,
+          loading: false,
+        });
+      }
+    }).catch(err=>{
+      console.log(err);
+      this.setState({
+        loading: false,
+      });
+      message.error('获取专业失败，请暂存后刷新页面重试一次');
     });
 
-    this.setState({
-      majorList,
-      loading: false,
-    });
   };
 
   handleMajorChange = (value, record) => {
