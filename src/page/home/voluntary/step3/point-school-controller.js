@@ -19,6 +19,7 @@ class PointSchoolController extends React.Component {
     return (
       <div>
         <div>
+          {/* TODO: 搜索学校 -> 搜索学校模糊提醒 */}
           <Search
             enterButton='搜索学校'
             size='large'

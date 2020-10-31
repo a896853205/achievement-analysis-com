@@ -4,7 +4,16 @@ import React from 'react';
 import '../../../style/voluntary/step3.css';
 
 // UI组件
-import { Collapse, Button, Icon, Modal, Tabs, Spin, Affix,message } from 'antd';
+import {
+  Collapse,
+  Button,
+  Icon,
+  Modal,
+  Tabs,
+  Spin,
+  Affix,
+  message,
+} from 'antd';
 
 // 自定义组件
 import SchoolFirstController from './step3/school-first-controller';
@@ -18,7 +27,10 @@ import * as APIS from '../../../constants/api-constants';
 // 关于数据模块交互
 import { connect } from 'react-redux';
 import { actions as voluntaryActions } from '../../../redux/voluntary-model';
-import { BCG_ROOT_NAME, VOLUNTARY_DETAIL } from '../../../constants/route-constants';
+import {
+  BCG_ROOT_NAME,
+  VOLUNTARY_DETAIL,
+} from '../../../constants/route-constants';
 
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
@@ -28,15 +40,15 @@ class Step3Controller extends React.Component {
   state = {
     isFold: false,
     loading: false,
-    saveLoading: false
+    saveLoading: false,
   };
 
   render() {
     // 右侧志愿表的删除UI
-    const genExtra = voluntaryItem => (
+    const genExtra = (voluntaryItem) => (
       <Icon
         type='delete'
-        onClick={event => {
+        onClick={(event) => {
           confirm({
             title: '删除志愿信息',
             content: '您确定删除该志愿的信息吗?',
@@ -46,7 +58,7 @@ class Step3Controller extends React.Component {
             onOk: () => {
               this.props.deleteVoluntary(voluntaryItem.five_volunteer_id);
             },
-            onCancel() {}
+            onCancel() {},
           });
           event.stopPropagation();
         }}
@@ -85,7 +97,7 @@ class Step3Controller extends React.Component {
                   <Collapse bordered={true}>
                     {this.props.voluntary[this.props.lot_id]
                       ? this.props.voluntary[this.props.lot_id].map(
-                          voluntaryItem => (
+                          (voluntaryItem) => (
                             <Panel
                               header={`${voluntaryItem.volunteer_name} ${voluntaryItem.schoolName}`}
                               key={voluntaryItem.five_volunteer_id}
@@ -170,132 +182,140 @@ class Step3Controller extends React.Component {
     );
   }
 
-  handleChangeTabsKey = key => {
+  handleChangeTabsKey = (key) => {
     this.props.recordVoluntaryType(parseInt(key));
     this.props.recordSchoolList();
   };
 
   handleClickCheckVoluntary = async () => {
     this.setState({
-      loading: true
+      loading: true,
     });
     launchRequest(APIS.SAVE_TEMP_VOLUNTARY, {
-      voluntary: this.props.voluntary
-    }).then(res=>{
-      if(res){
+      voluntary: this.props.voluntary,
+    })
+      .then((res) => {
+        if (res) {
+          this.setState({
+            loading: false,
+          });
+          this.props.recordVoluntaryDetail(
+            this.props.voluntary[this.props.lot_id]
+          );
+          // 要拆分路由，所以不再对redux中step进行维护，改用路由的方式跳转
+          // this.props.nextStep();
+          this.props.history.push(
+            `/${BCG_ROOT_NAME}/${VOLUNTARY_DETAIL.path}/${this.props.lot_id}`
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err);
         this.setState({
-          loading: false
+          loading: false,
         });
-        this.props.recordVoluntaryDetail(this.props.voluntary[this.props.lot_id]);
-        // 要拆分路由，所以不再对redux中step进行维护，改用路由的方式跳转
-        // this.props.nextStep();
-        this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY_DETAIL.path}/${this.props.lot_id}`);
-      }
-    }).catch(err=>{
-      console.log(err);
-      this.setState({
-        loading: false
+        message.error('查询失败，请重试一次');
       });
-      message.error('查询失败，请重试一次');
-    });
   };
   // 暂存函数
   handleClickSaveVoluntary = () => {
     this.setState({
-      saveLoading:true
+      saveLoading: true,
     });
     // saveMyVoluntary
     launchRequest(APIS.SAVE_TEMP_VOLUNTARY, {
-      voluntary: this.props.voluntary
-    }).then(res => {
-      if (res) {
+      voluntary: this.props.voluntary,
+    })
+      .then((res) => {
+        if (res) {
+          this.setState({
+            saveLoading: false,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
         this.setState({
-          saveLoading: false
+          saveLoading: false,
         });
-      }
-    }).catch(err => {
-      console.log(err);
-      this.setState({
-        saveLoading:false
+        message.error('保存失败，请重试一次');
       });
-      message.error('保存失败，请重试一次');
-    });
   };
 
   async componentDidMount() {
     this.props.setLotId(+this.props.match.params.lotId);
   }
 
-
   // 打开或收起志愿表
-  switchVoluntaryTable = async ()=>{
+  switchVoluntaryTable = async () => {
     const lotId = this.props.lot_id;
     // console.log(this.props.voluntary[lotId], lotId, 44444444);
-    if(this.props.voluntary[lotId].length===0){
-      // 进到这里就说明出bug了
-      console.log('aaaaa','整活');
+    if (this.props.voluntary[lotId].length === 0) {
       // 重新走一遍逻辑
-      const voluntary  = await launchRequest(APIS.GET_TEMP_VOLUNTARY);
-      const { voluntaryOptionList } = await launchRequest(APIS.GET_SCHOOL_OPTION, {
-        lotId
-      });
+      const voluntary = await launchRequest(APIS.GET_TEMP_VOLUNTARY);
+      const { voluntaryOptionList } = await launchRequest(
+        APIS.GET_SCHOOL_OPTION,
+        {
+          lotId,
+        }
+      );
       // 先判断是否有暂存
-      if (voluntary && voluntary[this.props.lot_id] && voluntary[this.props.lot_id].length) {
-        console.log('赋值voluntary',555);
+      if (
+        voluntary &&
+        voluntary[this.props.lot_id] &&
+        voluntary[this.props.lot_id].length
+      ) {
         this.props.recordVoluntary(voluntary);
       } else {
         // 然后再判断每个批次的表格是否有基础信息
-        console.log('赋值voluntaryOptionList',555);
         this.props.initVoluntary(voluntaryOptionList);
       }
     }
 
-
     this.setState({
-      isFold: !this.state.isFold
-    })
-  }
-
+      isFold: !this.state.isFold,
+    });
+  };
 }
 
 // 从store接收state数据
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   const voluntaryStore = store['voluntaryStore'];
   let { voluntary, schoolTableLoading, lot_id } = voluntaryStore;
 
   return {
     voluntary: [...voluntary],
     schoolTableLoading,
-    lot_id
+    lot_id,
   };
 };
 
 // 向store dispatch action
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    recordVoluntary: params => {
+    recordVoluntary: (params) => {
       dispatch(voluntaryActions.recordVoluntary(params));
     },
-    initVoluntary: params => {
+    initVoluntary: (params) => {
       dispatch(voluntaryActions.initVoluntary(params));
     },
-    deleteVoluntary: params => {
+    deleteVoluntary: (params) => {
       dispatch(voluntaryActions.deleteVoluntary(params));
     },
     nextStep: () => {
       dispatch(voluntaryActions.nextStep());
     },
-    recordVoluntaryDetail: params => {
+    recordVoluntaryDetail: (params) => {
       dispatch(voluntaryActions.recordVoluntaryDetail(params));
     },
     // 查数据库
-    recordSchoolList: params => {
+    recordSchoolList: (params) => {
       dispatch(voluntaryActions.recordSchoolList(params));
     },
-    recordVoluntaryType: params => {
+    recordVoluntaryType: (params) => {
       dispatch(voluntaryActions.recordVoluntaryType(params));
     },
-    setLotId: lotId => {
+    setLotId: (lotId) => {
       dispatch(voluntaryActions.setLotId(lotId));
     },
   };
