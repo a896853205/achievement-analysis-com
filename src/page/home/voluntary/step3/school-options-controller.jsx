@@ -9,8 +9,8 @@ import { Checkbox, Radio } from 'antd';
 
 // 请求文件
 import { launchRequest } from '@/util/request';
-import * as APIS from '../../../../constants/api-constants';
-import * as DominConfigs from '../../../../constants/domin-constants';
+import * as APIS from '@/constants/api-constants';
+import * as DominConfigs from '@/constants/domin-constants';
 
 const mapStateToProps = store => {
   const voluntaryStore = store['voluntaryStore'];

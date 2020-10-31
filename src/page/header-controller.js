@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 // UI组件
-import { Row, Menu, Col, Dropdown, Icon, Modal } from 'antd';
+import { Row, Menu, Col, Dropdown, Icon, Modal} from 'antd';
 
 // 路由
 import { Link } from 'react-router-dom';
@@ -35,6 +35,7 @@ import {
 import { FILL_TYPE } from '../config/app-config';
 
 const { SubMenu } = Menu;
+
 
 class HeaderController extends React.Component {
   state = {

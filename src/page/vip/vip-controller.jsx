@@ -1,31 +1,30 @@
 import React, { useRef } from 'react';
 import QRCode from 'qrcode';
+import { Link } from 'react-router-dom';
 
-// 关于数据模块交互
+import { Carousel, Result } from 'antd';
 import { connect } from 'react-redux';
 
-// 请求文件
-import { launchRequest } from '../../util/request';
 import * as APIS from '../../constants/api-constants';
-
-import { Carousel } from 'antd';
-
-import '@/style/vip/profile.css';
-
 import Button from '@material-ui/core/Button';
+import { launchRequest } from '../../util/request';
+import '@/style/vip/profile.css';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
+// 为VIP添加的开关按钮，如果为true则打开VIP页面
+const OPEN_VIP = false;
+
 // 从store接收state数据
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   const { user } = store['userStore'];
   return {
-    user
+    user,
   };
 };
 
 // 向store dispatch action
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
@@ -51,7 +50,7 @@ export const vipPage = connect(
   //使用menu
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -60,52 +59,56 @@ export const vipPage = connect(
   };
 
   return (
-    <div className='page-inner-width-box vip-profile'>
-      {/* 页面左部分 */}
-      <div className='left-box'>
-        <div className='left-top-box'>
-          <div className='carousel-box'>
-            <Carousel autoplay className='carousel'>
-              <img src='/vip/left1.jpg' alt=''/>
-              <img src='/vip/left2.jpg' alt=''/>
-              <img src='/vip/left3.jpg' alt=''/>
-            </Carousel>
-            <div className='carousel-list'>
-              <div className='carousel-list-item'>
-                <img src='/vip/left1.jpg' alt=''/>
+    <>
+      {OPEN_VIP ? (
+        <div className='page-inner-width-box vip-profile'>
+          {/* 页面左部分 */}
+          <div className='left-box'>
+            <div className='left-top-box'>
+              <div className='carousel-box'>
+                <Carousel autoplay className='carousel'>
+                  <img src='/vip/left1.jpg' alt='' />
+                  <img src='/vip/left2.jpg' alt='' />
+                  <img src='/vip/left3.jpg' alt='' />
+                </Carousel>
+                <div className='carousel-list'>
+                  <div className='carousel-list-item'>
+                    <img src='/vip/left1.jpg' alt='' />
+                  </div>
+                  <div className='carousel-list-item'>
+                    <img src='/vip/left2.jpg' alt='' />
+                  </div>
+                  <div className='carousel-list-item'>
+                    <img src='/vip/left3.jpg' alt='' />
+                  </div>
+                </div>
               </div>
-              <div className='carousel-list-item'>
-                <img src='/vip/left2.jpg' alt=''/>
-              </div>
-              <div className='carousel-list-item'>
-                <img src='/vip/left3.jpg' alt=''/>
-              </div>
-            </div>
-          </div>
-          <div className='vip-card-info-box'>
-            {props.user.roleCode === 1 ?
-              <h4>VIP志愿卡（黑龙江专用）</h4> :
-              <h4>获取更多体验次数</h4>
-            }
-            {props.user.roleCode === 1 ?
-              <p className='card-profile'>
-                考试院专家推荐平台，录取参考数据与省考试院完全一致
-              </p> :
-              <p className='card-profile'>
-                包含：10次修改分数次数、100次生成报表次数、100次深度体验次数
-              </p>
-            }
-            <div className='card-money-box'>
-              <p>
-                <span>价格</span>
-                <span className='money'>¥360</span>
-                <span className='origin-money'>原价¥680</span>
-              </p>
-              <p>
-                <span className='vip-link'>查看权限</span>
-              </p>
-            </div>
-            {/* <div className='card-type-box'>
+              <div className='vip-card-info-box'>
+                {props.user.roleCode === 1 ? (
+                  <h4>VIP志愿卡（黑龙江专用）</h4>
+                ) : (
+                  <h4>获取更多体验次数</h4>
+                )}
+                {props.user.roleCode === 1 ? (
+                  <p className='card-profile'>
+                    考试院专家推荐平台，录取参考数据与省考试院完全一致
+                  </p>
+                ) : (
+                  <p className='card-profile'>
+                    包含：10次修改分数次数、100次生成报表次数、100次深度体验次数
+                  </p>
+                )}
+                <div className='card-money-box'>
+                  <p>
+                    <span>价格</span>
+                    <span className='money'>¥360</span>
+                    <span className='origin-money'>原价¥680</span>
+                  </p>
+                  <p>
+                    <span className='vip-link'>查看权限</span>
+                  </p>
+                </div>
+                {/* <div className='card-type-box'>
               <button>
                 <span>志愿卡</span>
                 <span>(VIP)</span>
@@ -123,8 +126,8 @@ export const vipPage = connect(
                 <span>(送自招宝典)</span>
               </button>
             </div> */}
-            <div className='buy-button-box'>
-              {/*<Button
+                <div className='buy-button-box'>
+                  {/*<Button
                 aria-controls='simple-menu'
                 aria-haspopup='true'
                 onClick={testClick}
@@ -132,60 +135,62 @@ export const vipPage = connect(
               >
                 test
               </Button>*/}
-              <Button
-                aria-controls='simple-menu'
-                aria-haspopup='true'
-                onClick={handleClick}
-                className='buy-button'
-              >
-                立即购买
-              </Button>
-              <Menu
-                id='simple-menu'
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleToAlipayClick}>
-                  <img src='/vip/zhifubao.jpg' alt='' className='wechat'/>
-                  支付宝支付
-                </MenuItem>
-                <MenuItem onClick={handleToWeChatClick}>
-                  <img src='/vip/wechat.jpg' alt='' className='wechat'/>
-                  微信支付
-                </MenuItem>
-              </Menu>
+                  <Button
+                    aria-controls='simple-menu'
+                    aria-haspopup='true'
+                    onClick={handleClick}
+                    className='buy-button'
+                  >
+                    立即购买
+                  </Button>
+                  <Menu
+                    id='simple-menu'
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                  >
+                    <MenuItem onClick={handleToAlipayClick}>
+                      <img src='/vip/zhifubao.jpg' alt='' className='wechat' />
+                      支付宝支付
+                    </MenuItem>
+                    <MenuItem onClick={handleToWeChatClick}>
+                      <img src='/vip/wechat.jpg' alt='' className='wechat' />
+                      微信支付
+                    </MenuItem>
+                  </Menu>
 
-              <canvas ref={couterRef}></canvas>
-              <span className='vip-link'>咨询热线: 18644091056</span>
+                  <canvas ref={couterRef}></canvas>
+                  <span className='vip-link'>咨询热线: 18644091056</span>
+                </div>
+                <div className='vip-describe-list-box'>
+                  <ul>
+                    <li>
+                      使用功能：学业测评、查数据、智能填报、志愿合理分析、就业前景分析等。
+                    </li>
+                    <li>
+                      适用对象：普通类文理科考生（自主招生、专科及艺术体育类考生暂不适用）。
+                    </li>
+                    <li>
+                      使用时效：有效期截止到用户自行选择高考年的9月1日为止。
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
-            <div className='vip-describe-list-box'>
-              <ul>
-                <li>
-                  使用功能：学业测评、查数据、智能填报、志愿合理分析、就业前景分析等。
-                </li>
-                <li>
-                  适用对象：普通类文理科考生（自主招生、专科及艺术体育类考生暂不适用）。
-                </li>
-                <li>使用时效：有效期截止到用户自行选择高考年的9月1日为止。</li>
-              </ul>
+            <div className='left-bottom-box'>
+              <div className='vip-detail-nav-box'>
+                <button>服务详情</button>
+                <button>用户评价</button>
+                <button>常见问题</button>
+              </div>
+              <img className='vip-detail' src='/vip/vip-detail.jpg' alt='' />
             </div>
           </div>
-        </div>
-        <div className='left-bottom-box'>
-          <div className='vip-detail-nav-box'>
-            <button>服务详情</button>
-            <button>用户评价</button>
-            <button>常见问题</button>
-          </div>
-          <img className='vip-detail' src='/vip/vip-detail.jpg' alt=''/>
-        </div>
-      </div>
-      {/* 页面右部分 */}
-      <div className='right-box'>
-        <img className='vip-top-adv' src='/vip/right.jpg' alt=''/>
-        {/* <div className='vip-middle-adv-box'>
+          {/* 页面右部分 */}
+          <div className='right-box'>
+            <img className='vip-top-adv' src='/vip/right.jpg' alt='' />
+            {/* <div className='vip-middle-adv-box'>
           <h5>400万考生的首选，专家的认可</h5>
           <img src='/vip/vip-middle-adv.jpg' alt='' />
           <div>太和一中志愿公益讲座</div>
@@ -279,7 +284,18 @@ export const vipPage = connect(
             </div>
           </div>
         </div> */}
-      </div>
-    </div>
+          </div>
+        </div>
+      ) : (
+        <Result
+          subTitle='很抱歉，VIP功能已暂时关闭，欢迎您的下次使用'
+          extra={
+            <Button type='primary'>
+              <Link to={'/'}>回到首页</Link>
+            </Button>
+          }
+        />
+      )}
+    </>
   );
 });

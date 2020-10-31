@@ -11,8 +11,6 @@ import SchoolOptionsController from './school-options-controller.jsx';
 import { connect } from 'react-redux';
 import { actions as voluntaryActions } from '../../../../redux/voluntary-model';
 
-
-
 const { Search } = Input;
 
 class MajorFirstController extends React.Component {
@@ -20,6 +18,7 @@ class MajorFirstController extends React.Component {
     return (
       <div>
         <div>
+          {/* TODO: 搜索专业 */}
           <Search
             enterButton='搜索专业'
             size='large'

@@ -47,7 +47,7 @@ class App extends Component {
   render() {
     return (
       <div className='layout'>
-        <WarningController/>
+        <WarningController />
         <HeaderController />
         <Content>
           <div>
