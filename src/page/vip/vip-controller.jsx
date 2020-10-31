@@ -2,24 +2,17 @@ import React, { useRef } from 'react';
 import QRCode from 'qrcode';
 import { Link } from 'react-router-dom';
 
-// 关于数据模块交互
+import { Carousel, Result } from 'antd';
 import { connect } from 'react-redux';
 
-// 请求文件
-import { launchRequest } from '../../util/request';
 import * as APIS from '../../constants/api-constants';
-
-import { Carousel, Result } from 'antd';
-
-import '@/style/vip/profile.css';
-
 import Button from '@material-ui/core/Button';
+import { launchRequest } from '../../util/request';
+import '@/style/vip/profile.css';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-// UI组件
 
-
-//为VIP添加的开关按钮，如果为true则打开VIP页面
+// 为VIP添加的开关按钮，如果为true则打开VIP页面
 const OPEN_VIP = false;
 
 // 从store接收state数据
@@ -66,7 +59,7 @@ export const vipPage = connect(
   };
 
   return (
-    <div>
+    <>
       {OPEN_VIP ? (
         <div className='page-inner-width-box vip-profile'>
           {/* 页面左部分 */}
@@ -303,6 +296,6 @@ export const vipPage = connect(
           }
         />
       )}
-    </div>
+    </>
   );
 });
