@@ -130,7 +130,6 @@ class HeaderController extends React.Component {
               </button>
             </Link>
           </div>
-          {/* TODO: 此处注释掉开通VIP功能*/}
           {/* {!this.props.user.roleCode ? (
             <Link
               to={{
@@ -227,7 +226,6 @@ class HeaderController extends React.Component {
                   <Menu.Item key='8'>
                     <div onClick={FILL_TYPE === 1 ? this.handleFormalApplyOpen : this.handleFormalApplyClose}>正式填报</div>
                   </Menu.Item>
-                  {/* TODO: 此处注释掉院校优先与专业优先 */}
                   {/* <Menu.Item key='9'>
                     <Link to={'/'}> 院校优先 </Link>
                   </Menu.Item>
