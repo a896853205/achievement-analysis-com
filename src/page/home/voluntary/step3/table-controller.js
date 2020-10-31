@@ -259,7 +259,11 @@ class TableController extends React.Component {
                 item => item.year === this.props.user.examYear - 1
               );
               if (cerrctObj) {
-                return <span>{`${cerrctObj.rank ? cerrctObj.rank : '-'}/${cerrctObj.score ? cerrctObj.score : '-'}`}</span>;
+                return <span>
+                  <p>
+                    {`位次:${cerrctObj.rank ? cerrctObj.rank : '-'} 分数:${cerrctObj.score ? cerrctObj.score : '-'}`}
+                </p>
+               </span>;
               } else {
                 return <span>-</span>;
               }
