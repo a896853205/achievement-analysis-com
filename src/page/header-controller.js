@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 // UI组件
-import { Row, Menu, Col, Dropdown, Icon, Modal } from 'antd';
+import { Row, Menu, Col, Dropdown, Icon, Modal} from 'antd';
 
 // 路由
 import { Link } from 'react-router-dom';
@@ -35,6 +35,7 @@ import {
 import { FILL_TYPE } from '../config/app-config';
 
 const { SubMenu } = Menu;
+
 
 class HeaderController extends React.Component {
   state = {
@@ -129,7 +130,8 @@ class HeaderController extends React.Component {
               </button>
             </Link>
           </div>
-          {!this.props.user.roleCode ? (
+          {/* TODO: 此处注释掉开通VIP功能*/}
+          {/* {!this.props.user.roleCode ? (
             <Link
               to={{
                 pathname: `/${REGISTER.path}`,
@@ -151,7 +153,7 @@ class HeaderController extends React.Component {
                 <span className='search-bottom-bottom-text'>VIP</span>
               </button>
             </Link>
-          ) : null}
+          ) : null} */}
         </div>
         <div className='index-menu-box'>
           <Row className='page-inner-width-box'>
@@ -225,12 +227,13 @@ class HeaderController extends React.Component {
                   <Menu.Item key='8'>
                     <div onClick={FILL_TYPE === 1 ? this.handleFormalApplyOpen : this.handleFormalApplyClose}>正式填报</div>
                   </Menu.Item>
-                  <Menu.Item key='9'>
+                  {/* TODO: 此处注释掉院校优先与专业优先 */}
+                  {/* <Menu.Item key='9'>
                     <Link to={'/'}> 院校优先 </Link>
                   </Menu.Item>
                   <Menu.Item key='10'>
                     <Link to={'/'}>专业优先</Link>
-                  </Menu.Item>
+                  </Menu.Item> */}
                   <Menu.Item key='11'>
                     <Link to={'/'}>指定院校</Link>
                   </Menu.Item>
