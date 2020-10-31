@@ -119,7 +119,7 @@ export default connect(
             <Button
               type='round'
               className='index-login-button'
-              onClick={ FILL_TYPE === 0 ? handleSimulatedApplyOpen : handleFormalApplyOpen }
+              onClick={ FILL_TYPE ? handleSimulatedApplyOpen : handleFormalApplyOpen }
             >
               开始填报吧
             </Button>

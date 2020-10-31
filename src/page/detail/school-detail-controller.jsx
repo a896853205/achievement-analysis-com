@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import moment from 'moment';
-
 // UI样式
 import '@/style/detail/school-detail.css';
 import { Icon, Table, Select, Skeleton, Modal } from 'antd';
@@ -16,7 +14,6 @@ import wait from '@/util/wait-helper';
 
 // 关于数据模块交互
 import { connect } from 'react-redux';
-import { store } from 'redux';
 
 const { Option } = Select;
 const { Column } = Table;
@@ -53,7 +50,7 @@ export default props => {
   );
 };
 
-//学校招生简章模块
+// 学校招生简章模块
 const SchoolEnrollmentNewsList = props => {
   const [schoolEnrollmentNews, setSchoolEnrollmentNews] = useState([]);
   const [loading, setLoading] = useState(true);
