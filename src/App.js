@@ -96,7 +96,7 @@ class App extends Component {
                 path={`/${MAJOR_DETAIL.path}/:id`}
                 component={MajorDetailController}
               />
-              <Route path={`/${VIP_PROFILE.path}`} component={vipPage} />
+              <Route path={`/${VIP_PROFILE.path}`} component={null} />
               <Route
                 path={`/${BCG_ROOT_NAME}`}
                 component={BackgroundController}

@@ -129,7 +129,7 @@ class HeaderController extends React.Component {
               </button>
             </Link>
           </div>
-          {!this.props.user.roleCode ? (
+          {/* {!this.props.user.roleCode ? (
             <Link
               to={{
                 pathname: `/${REGISTER.path}`,
@@ -151,7 +151,7 @@ class HeaderController extends React.Component {
                 <span className='search-bottom-bottom-text'>VIP</span>
               </button>
             </Link>
-          ) : null}
+          ) : null} */}
         </div>
         <div className='index-menu-box'>
           <Row className='page-inner-width-box'>
@@ -225,12 +225,12 @@ class HeaderController extends React.Component {
                   <Menu.Item key='8'>
                     <div onClick={FILL_TYPE === 1 ? this.handleFormalApplyOpen : this.handleFormalApplyClose}>正式填报</div>
                   </Menu.Item>
-                  <Menu.Item key='9'>
+                  {/* <Menu.Item key='9'>
                     <Link to={'/'}> 院校优先 </Link>
                   </Menu.Item>
                   <Menu.Item key='10'>
                     <Link to={'/'}>专业优先</Link>
-                  </Menu.Item>
+                  </Menu.Item> */}
                   <Menu.Item key='11'>
                     <Link to={'/'}>指定院校</Link>
                   </Menu.Item>
