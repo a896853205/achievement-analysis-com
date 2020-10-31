@@ -261,7 +261,7 @@ class TableController extends React.Component {
               if (cerrctObj) {
                 return <span>
                   <p>
-                    {`位次:${cerrctObj.rank ? cerrctObj.rank : '-'} 分数:${cerrctObj.score ? cerrctObj.score : '-'}`}
+                    {`${cerrctObj.rank ? cerrctObj.rank : '-'} /${cerrctObj.score ? cerrctObj.score : '-'}`}
                 </p>
                </span>;
               } else {
