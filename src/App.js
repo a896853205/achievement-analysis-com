@@ -39,7 +39,7 @@ import {
   SCHOOL_RECOMMEND,
   REGISTER
 } from '@/constants/route-constants';
-// import { vipPage } from './page/vip/vip-controller';
+import { vipPage } from './page/vip/vip-controller';
 
 const { Content } = Layout;
 
@@ -47,7 +47,7 @@ class App extends Component {
   render() {
     return (
       <div className='layout'>
-        <WarningController/>
+        <WarningController />
         <HeaderController />
         <Content>
           <div>
@@ -96,16 +96,7 @@ class App extends Component {
                 path={`/${MAJOR_DETAIL.path}/:id`}
                 component={MajorDetailController}
               />
-              <Route path={`/${VIP_PROFILE.path}`} component={() => (
-                  <Result
-                    subTitle='很抱歉，VIP功能已暂时关闭，欢迎您的下次使用'
-                    extra={
-                      <Button type='primary'>
-                        <Link to={'/'}>回到首页</Link>
-                      </Button>
-                    }
-                  />
-                )} />
+              <Route path={`/${VIP_PROFILE.path}`} component={vipPage} />
               <Route
                 path={`/${BCG_ROOT_NAME}`}
                 component={BackgroundController}
