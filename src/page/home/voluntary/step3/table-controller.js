@@ -45,7 +45,9 @@ class TableController extends React.Component {
         key: 'school_remark',
         align: 'center',
         width: 80,
-        render: (text) => <span>{text === 4 ? '二批' : '原三批'}</span>,
+        render: text => (
+          <span>{text === 4 ? '二批' : '原三批'}</span>
+        )
       },
       {
         title: '地区',
@@ -91,9 +93,9 @@ class TableController extends React.Component {
                 return (
                   <p>
                     <p>
-                      位次: {cerrctObj.rank ? cerrctObj.rank : '-'}
+                      位次:{cerrctObj.rank ? cerrctObj.rank : '-'}
                       <p></p>
-                      分数: {cerrctObj.score ? cerrctObj.score : '-'}
+                      分数:{cerrctObj.score ? cerrctObj.score : '-'}
                     </p>
                   </p>
                 );
@@ -114,9 +116,9 @@ class TableController extends React.Component {
                 return (
                   <p>
                     <p>
-                      位次: {cerrctObj.rank ? cerrctObj.rank : '-'}
+                      位次:{cerrctObj.rank ? cerrctObj.rank : '-'}
                       <p></p>
-                      分数: {cerrctObj.score ? cerrctObj.score : '-'}
+                      分数:{cerrctObj.score ? cerrctObj.score : '-'}
                     </p>
                   </p>
                 );
@@ -137,9 +139,9 @@ class TableController extends React.Component {
                 return (
                   <p>
                     <p>
-                      位次: {cerrctObj.rank ? cerrctObj.rank : '-'}
+                      位次:{cerrctObj.rank ? cerrctObj.rank : '-'}
                       <p></p>
-                      分数: {cerrctObj.score ? cerrctObj.score : '-'}
+                      分数:{cerrctObj.score ? cerrctObj.score : '-'}
                     </p>
                   </p>
                 );
@@ -194,28 +196,28 @@ class TableController extends React.Component {
             value={
               this.props.voluntary[this.props.lot_id]
                 ? this.props.voluntary[this.props.lot_id].find(
-                    (voluntaryItem) => {
+                  voluntaryItem => {
+                    return voluntaryItem.schoolId === record.school_id;
+                  }
+                )
+                  ? this.props.voluntary[this.props.lot_id].find(
+                    voluntaryItem => {
                       return voluntaryItem.schoolId === record.school_id;
                     }
-                  )
-                  ? this.props.voluntary[this.props.lot_id].find(
-                      (voluntaryItem) => {
-                        return voluntaryItem.schoolId === record.school_id;
-                      }
-                    ).five_volunteer_id
+                  ).five_volunteer_id
                   : undefined
                 : undefined
             }
           >
             {this.props.voluntary[this.props.lot_id]
-              ? this.props.voluntary[this.props.lot_id].map((voluntaryItem) => (
-                  <Option
-                    key={voluntaryItem.five_volunteer_id}
-                    value={voluntaryItem.five_volunteer_id}
-                  >
-                    {voluntaryItem.volunteer_name}
-                  </Option>
-                ))
+              ? this.props.voluntary[this.props.lot_id].map(voluntaryItem => (
+                <Option
+                  key={voluntaryItem.five_volunteer_id}
+                  value={voluntaryItem.five_volunteer_id}
+                >
+                  {voluntaryItem.volunteer_name}
+                </Option>
+              ))
               : undefined}
           </Select>
         ),
@@ -283,8 +285,11 @@ class TableController extends React.Component {
               if (cerrctObj) {
                 return (
                   <p>
-                    <p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}`}</p>
-                    <p>{`分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p>
+                    <p>
+                      位次:{cerrctObj.rank ? cerrctObj.rank : '-'}
+                      <p></p>
+                      分数:{cerrctObj.score ? cerrctObj.score : '-'}
+                    </p>
                   </p>
                 );
               } else {
@@ -303,8 +308,11 @@ class TableController extends React.Component {
               if (cerrctObj) {
                 return (
                   <p>
-                    <p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}`}</p>
-                    <p>{`分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p>
+                    <p>
+                      位次:{cerrctObj.rank ? cerrctObj.rank : '-'}
+                      <p></p>
+                      分数:{cerrctObj.score ? cerrctObj.score : '-'}
+                    </p>
                   </p>
                 );
               } else {
@@ -323,8 +331,11 @@ class TableController extends React.Component {
               if (cerrctObj) {
                 return (
                   <p>
-                    <p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}`}</p>
-                    <p>{`分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p>
+                    <p>
+                      位次:{cerrctObj.rank ? cerrctObj.rank : '-'}
+                      <p></p>
+                      分数:{cerrctObj.score ? cerrctObj.score : '-'}
+                    </p>
                   </p>
                 );
               } else {
@@ -378,15 +389,15 @@ class TableController extends React.Component {
             value={
               this.props.voluntary[this.props.lot_id]
                 ? this.props.voluntary[this.props.lot_id].find(
-                    (voluntaryItem) => {
+                  voluntaryItem => {
+                    return voluntaryItem.schoolId === record.school_id;
+                  }
+                )
+                  ? this.props.voluntary[this.props.lot_id].find(
+                    voluntaryItem => {
                       return voluntaryItem.schoolId === record.school_id;
                     }
-                  )
-                  ? this.props.voluntary[this.props.lot_id].find(
-                      (voluntaryItem) => {
-                        return voluntaryItem.schoolId === record.school_id;
-                      }
-                    ).five_volunteer_id
+                  ).five_volunteer_id
                   : undefined
                 : undefined
             }
