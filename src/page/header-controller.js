@@ -228,8 +228,8 @@ class HeaderController extends React.Component {
                     <div
                       onClick={
                         FILL_TYPE
-                          ? this.handleSimulatedApplyOpen
-                          : this.handleSimulatedApplyClose
+                          ? this.handleSimulatedApplyClose
+                          : this.handleSimulatedApplyOpen
                       }
                     >
                       模拟填报
