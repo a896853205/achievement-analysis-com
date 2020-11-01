@@ -6,14 +6,12 @@ import { Carousel, Result } from 'antd';
 import { connect } from 'react-redux';
 
 import * as APIS from '../../constants/api-constants';
+import { OPEN_VIP } from '@/config/app-config';
 import Button from '@material-ui/core/Button';
 import { launchRequest } from '../../util/request';
 import '@/style/vip/profile.css';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-
-// 为VIP添加的开关按钮，如果为true则打开VIP页面
-const OPEN_VIP = false;
 
 // 从store接收state数据
 const mapStateToProps = (store) => {

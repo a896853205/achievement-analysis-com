@@ -20,7 +20,7 @@ class MajorFirstController extends React.Component {
     return (
       <div>
         <div>
-          {/* TODO: 搜索专业 */}
+          {/* TODO: 搜索专业 -> 搜索专业模糊提醒 */}
           <Search
             enterButton='搜索专业'
             size='large'

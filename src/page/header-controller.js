@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 // UI组件
-import { Row, Menu, Col, Dropdown, Icon, Modal} from 'antd';
+import { Row, Menu, Col, Dropdown, Icon, Modal } from 'antd';
 
 // 路由
 import { Link } from 'react-router-dom';
@@ -29,13 +29,13 @@ import {
   SEARCH_MAJOR,
   VIP_PROFILE,
   NEWS_MORE,
-  REGISTER, COMPLETE_INFO
+  REGISTER,
+  COMPLETE_INFO,
 } from '../constants/route-constants';
 
 import { FILL_TYPE } from '../config/app-config';
 
 const { SubMenu } = Menu;
-
 
 class HeaderController extends React.Component {
   state = {
@@ -48,7 +48,9 @@ class HeaderController extends React.Component {
         <Menu.Item>
           <Link
             to={{
-              pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${BASIC.path}/${this.props.user.score>0?1:0}`,
+              pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${BASIC.path}/${
+                this.props.user.score > 0 ? 1 : 0
+              }`,
             }}
           >
             修改信息
@@ -66,7 +68,9 @@ class HeaderController extends React.Component {
         <Menu.Item>
           <Link
             to={{
-              pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${MY_VOLUNTARY.path}/${this.props.user.score>0?1:0}`,
+              pathname: `/${BCG_ROOT_NAME}/${PERSONAL.path}/${
+                MY_VOLUNTARY.path
+              }/${this.props.user.score > 0 ? 1 : 0}`,
             }}
           >
             我的志愿
@@ -221,10 +225,26 @@ class HeaderController extends React.Component {
                   }
                 >
                   <Menu.Item key='7'>
-                    <div onClick={ FILL_TYPE === 0 ? this.handleSimulatedApplyOpen : this.handleSimulatedApplyClose }>模拟填报</div>
+                    <div
+                      onClick={
+                        FILL_TYPE
+                          ? this.handleSimulatedApplyOpen
+                          : this.handleSimulatedApplyClose
+                      }
+                    >
+                      模拟填报
+                    </div>
                   </Menu.Item>
                   <Menu.Item key='8'>
-                    <div onClick={FILL_TYPE === 1 ? this.handleFormalApplyOpen : this.handleFormalApplyClose}>正式填报</div>
+                    <div
+                      onClick={
+                        FILL_TYPE
+                          ? this.handleFormalApplyOpen
+                          : this.handleFormalApplyClose
+                      }
+                    >
+                      正式填报
+                    </div>
                   </Menu.Item>
                   {/* <Menu.Item key='9'>
                     <Link to={'/'}> 院校优先 </Link>
@@ -298,13 +318,18 @@ class HeaderController extends React.Component {
               </Menu>
             </Col>
             <Col span={2} className='header-personal-box'>
-              {this.props.user.roleCode === 2 ?(
-                <img src='/vip/user-vip-logo.png' alt='' className='user-menu-span user-vip-logo'/>
+              {this.props.user.roleCode === 2 ? (
+                <img
+                  src='/vip/user-vip-logo.png'
+                  alt=''
+                  className='user-menu-span user-vip-logo'
+                />
               ) : null}
               {this.props.user.uuid ? (
                 <Dropdown overlay={userMenu}>
                   <span className='user-menu-span login-text'>
-                    {this.props.user.nickname ? this.props.user.nickname : '我'} <Icon type='down' />
+                    {this.props.user.nickname ? this.props.user.nickname : '我'}{' '}
+                    <Icon type='down' />
                   </span>
                 </Dropdown>
               ) : (
@@ -336,43 +361,45 @@ class HeaderController extends React.Component {
   // 正式填报开启
   handleFormalApplyOpen = () => {
     /*
-    * 正式填报
-    *   如果未登录，跳转到登录页
-    *   如果已登录，权限是1，跳转到开通vip页面
-    *   如果已经是VIP，跳转到填报志愿页
-    * */
-    if(this.props.user.uuid){
-      if(this.props.user.roleCode === 1){
+     * 正式填报
+     *   如果未登录，跳转到登录页
+     *   如果已登录，权限是1，跳转到开通vip页面
+     *   如果已经是VIP，跳转到填报志愿页
+     * */
+    if (this.props.user.uuid) {
+      if (this.props.user.roleCode === 1) {
         Modal.warning({
-          content:'请开通VIP',
-          onOk: ()=>{
+          content: '请开通VIP',
+          onOk: () => {
             this.props.history.push(`/${VIP_PROFILE.path}`);
-          }
+          },
         });
-      }else {
-        if(this.props.user.score > 0) {
+      } else {
+        if (this.props.user.score > 0) {
           this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY.path}`);
-        }else {
+        } else {
           Modal.warning({
             content: '当前为正式填报，*高考分数，一经填写，不能修改',
-            onOk: ()=>{
-              this.props.history.push(`/${BCG_ROOT_NAME}/${COMPLETE_INFO.path}`);
-            }
+            onOk: () => {
+              this.props.history.push(
+                `/${BCG_ROOT_NAME}/${COMPLETE_INFO.path}`
+              );
+            },
           });
         }
       }
-    }else {
+    } else {
       this.props.history.push(`/${LOGIN.path}`);
     }
   };
   // 正式填报关闭
   handleFormalApplyClose = () => {
     // 如果未登录 跳转到登录页
-    if(this.props.user.uuid){
+    if (this.props.user.uuid) {
       Modal.warning({
-        content:'正式填报入口已关闭，请使用模拟填报'
+        content: '正式填报入口已关闭，请使用模拟填报',
       });
-    }else {
+    } else {
       this.props.history.push(`/${LOGIN.path}`);
     }
   };
@@ -380,25 +407,25 @@ class HeaderController extends React.Component {
   // 模拟填报开启
   handleSimulatedApplyOpen = () => {
     // 如果未登录 跳转到登录页
-    if(this.props.user.uuid){
+    if (this.props.user.uuid) {
       // 如果已经登录，尚未完善个人信息，就跳转至个人信息页
-      if(this.props.user.score > 0) {
+      if (this.props.user.score > 0) {
         this.props.history.push(`/${BCG_ROOT_NAME}/${VOLUNTARY.path}`);
-      }else {
+      } else {
         this.props.history.push(`/${BCG_ROOT_NAME}/${COMPLETE_INFO.path}`);
       }
-    }else {
+    } else {
       this.props.history.push(`/${LOGIN.path}`);
     }
   };
   // 模拟填报关闭
   handleSimulatedApplyClose = () => {
     // 如果未登录 跳转到登录页
-    if(this.props.user.uuid){
+    if (this.props.user.uuid) {
       Modal.warning({
-        content:'模拟填报入口已关闭，请使用正式填报'
+        content: '模拟填报入口已关闭，请使用正式填报',
       });
-    }else {
+    } else {
       this.props.history.push(`/${LOGIN.path}`);
     }
   };
