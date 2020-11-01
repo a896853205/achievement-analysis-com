@@ -1,7 +1,7 @@
 import React from 'react';
 
 // UI组件
-import { Input } from 'antd';
+import { Input, Select} from 'antd';
 
 // 自定义组件
 import TableController from './table-controller';
@@ -10,10 +10,12 @@ import SchoolOptionsController from './school-options-controller.jsx';
 // 关于数据模块交互
 import { connect } from 'react-redux';
 import { actions as voluntaryActions } from '../../../../redux/voluntary-model';
+import Search from 'antd/lib/input/Search';
 
-const { Search } = Input;
+const { Option } = Select;
 
 class MajorFirstController extends React.Component {
+
   render() {
     return (
       <div>
