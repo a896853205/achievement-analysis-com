@@ -2,15 +2,15 @@ import React, { useRef } from 'react';
 import QRCode from 'qrcode';
 import { Link } from 'react-router-dom';
 
-import { Carousel, Result, Button } from 'antd';
+import { Carousel, Result, Button, Menu } from 'antd';
 import { connect } from 'react-redux';
 
 import * as APIS from '../../constants/api-constants';
 import { OPEN_VIP } from '@/config/app-config';
 import { launchRequest } from '../../util/request';
 import '@/style/vip/profile.css';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+// import Menu from '@material-ui/core/Menu';
+// import MenuItem from '@material-ui/core/MenuItem';
 
 // 从store接收state数据
 const mapStateToProps = (store) => {
@@ -43,6 +43,7 @@ export const vipPage = connect(
     if (url) {
       QRCode.toCanvas(couterRef.current, url);
     }
+    setAnchorEl(null);
   };
   //使用menu
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -132,30 +133,38 @@ export const vipPage = connect(
               >
                 test
               </Button>*/}
-                  <Button
-                    // aria-controls='simple-menu'
-                    // aria-haspopup='true'
-                    onClick={handleClick}
-                    className='buy-button'
-                  >
-                    立即购买
-                  </Button>
-                  <Menu
-                    id='simple-menu'
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                  >
-                    <MenuItem onClick={handleToAlipayClick}>
-                      <img src='/vip/zhifubao.jpg' alt='' className='wechat' />
-                      支付宝支付
-                    </MenuItem>
-                    <MenuItem onClick={handleToWeChatClick}>
-                      <img src='/vip/wechat.jpg' alt='' className='wechat' />
-                      微信支付
-                    </MenuItem>
-                  </Menu>
+                  {anchorEl ? (
+                    <Menu
+                      id='simple-menu'
+                      className='buy-menu'
+                      // anchorEl={anchorEl}
+                      keepMounted
+                      open={Boolean(anchorEl)}
+                      onClose={handleClose}
+                    >
+                      <Menu.Item onClick={handleToAlipayClick}>
+                        <img
+                          src='/vip/zhifubao.jpg'
+                          alt=''
+                          className='wechat'
+                        />
+                        支付宝支付
+                      </Menu.Item>
+                      <Menu.Item onClick={handleToWeChatClick}>
+                        <img src='/vip/wechat.jpg' alt='' className='wechat' />
+                        微信支付
+                      </Menu.Item>
+                    </Menu>
+                  ) : (
+                    <Button
+                      aria-controls='simple-menu'
+                      aria-haspopup='true'
+                      onClick={handleClick}
+                      className='buy-button'
+                    >
+                      立即购买
+                    </Button>
+                  )}
 
                   <canvas ref={couterRef}></canvas>
                   <span className='vip-link'>咨询热线: 18644091056</span>

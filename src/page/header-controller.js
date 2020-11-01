@@ -134,7 +134,7 @@ class HeaderController extends React.Component {
               </button>
             </Link>
           </div>
-          {/* {!this.props.user.roleCode ? (
+          {!this.props.user.roleCode ? (
             <Link
               to={{
                 pathname: `/${REGISTER.path}`,
@@ -156,7 +156,7 @@ class HeaderController extends React.Component {
                 <span className='search-bottom-bottom-text'>VIP</span>
               </button>
             </Link>
-          ) : null} */}
+          ) : null}
         </div>
         <div className='index-menu-box'>
           <Row className='page-inner-width-box'>

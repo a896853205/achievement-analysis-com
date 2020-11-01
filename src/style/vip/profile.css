@@ -122,13 +122,19 @@
 .vip-profile .left-box .left-top-box .vip-card-info-box .buy-button-box {
   display: flex;
   align-items: flex-end;
+  height: 200px;
   margin-bottom: 25px;
+  width: 100%;
+}
+
+.vip-profile .left-box .left-top-box .vip-card-info-box .buy-button-box .buy-menu {
+  margin-left: 80px;
 }
 
 .vip-profile .left-box .left-top-box .vip-card-info-box .buy-button-box .buy-button {
   background: #f06000;
   color: #fff;
-  width: 380px;
+  width: 280px;
   height: 40px;
   border: 0;
   margin-right: 5px;

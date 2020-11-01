@@ -14,4 +14,4 @@ export const SAP_CONTROL = process.env.NODE_ENV;
 export const FILL_TYPE = false;
 
 /** VIP是否可以购买开关 */
-export const OPEN_VIP = false;
+export const OPEN_VIP = true;
