@@ -90,7 +90,15 @@ class PointTableController extends React.Component {
                 item => item.year === this.props.user.examYear - 1
               );
               if (cerrctObj) {
-                return <p><p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}`}</p><p>{`分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p></p>;
+                return (
+                  <p>
+                    <p>
+                      位次:{cerrctObj.rank ? cerrctObj.rank : '-'}
+                      <p></p>
+                      分数:{cerrctObj.score ? cerrctObj.score : '-'}
+                    </p>
+                  </p>
+                );
               } else {
                 return <span>-</span>;
               }
@@ -105,7 +113,15 @@ class PointTableController extends React.Component {
                 item => item.year === this.props.user.examYear - 2
               );
               if (cerrctObj) {
-                return <p><p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}`}</p><p>{`分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p></p>;
+                return (
+                  <p>
+                    <p>
+                      位次:{cerrctObj.rank ? cerrctObj.rank : '-'}
+                      <p></p>
+                      分数:{cerrctObj.score ? cerrctObj.score : '-'}
+                    </p>
+                  </p>
+                );
               } else {
                 return <span>-</span>;
               }
@@ -120,7 +136,15 @@ class PointTableController extends React.Component {
                 item => item.year === this.props.user.examYear - 3
               );
               if (cerrctObj) {
-                return <p><p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}`}</p><p>{`分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p></p>;
+                return (
+                  <p>
+                    <p>
+                      位次:{cerrctObj.rank ? cerrctObj.rank : '-'}
+                      <p></p>
+                      分数:{cerrctObj.score ? cerrctObj.score : '-'}
+                    </p>
+                  </p>
+                );
               } else {
                 return <span>-</span>;
               }
@@ -287,7 +311,15 @@ class PointTableController extends React.Component {
                 item => item.year === this.props.user.examYear - 1
               );
               if (cerrctObj) {
-                return <p><p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}`}</p><p>{`分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p></p>;
+                return (
+                  <p>
+                    <p>
+                      位次:{cerrctObj.rank ? cerrctObj.rank : '-'}
+                      <p></p>
+                      分数:{cerrctObj.score ? cerrctObj.score : '-'}
+                    </p>
+                  </p>
+                );
               } else {
                 return <span>-</span>;
               }
@@ -302,7 +334,15 @@ class PointTableController extends React.Component {
                 item => item.year === this.props.user.examYear - 2
               );
               if (cerrctObj) {
-                return <p><p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}`}</p><p>{`分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p></p>;
+                return (
+                  <p>
+                    <p>
+                      位次:{cerrctObj.rank ? cerrctObj.rank : '-'}
+                      <p></p>
+                      分数:{cerrctObj.score ? cerrctObj.score : '-'}
+                    </p>
+                  </p>
+                );
               } else {
                 return <span>-</span>;
               }
@@ -317,7 +357,15 @@ class PointTableController extends React.Component {
                 item => item.year === this.props.user.examYear - 3
               );
               if (cerrctObj) {
-                return <p><p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}`}</p><p>{`分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p></p>;
+                return (
+                  <p>
+                    <p>
+                      位次:{cerrctObj.rank ? cerrctObj.rank : '-'}
+                      <p></p>
+                      分数:{cerrctObj.score ? cerrctObj.score : '-'}
+                    </p>
+                  </p>
+                );
               } else {
                 return <span>-</span>;
               }
