@@ -79,18 +79,18 @@ class PointTableController extends React.Component {
       },
       {
         title: '历年位次/分数',
-        width: 330,
+        width: 360,
         children: [
           {
             title: this.props.user.examYear - 1,
             key: 'oldOneScore',
-            width: 110,
+            width: 120,
             render: record => {
               let cerrctObj = record.scoreAndRank.find(
                 item => item.year === this.props.user.examYear - 1
               );
               if (cerrctObj) {
-                return <span><p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p></span>;
+                return <p><p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}`}</p><p>{`分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p></p>;
               } else {
                 return <span>-</span>;
               }
@@ -99,13 +99,13 @@ class PointTableController extends React.Component {
           {
             title: this.props.user.examYear - 2,
             key: 'oldTwoScore',
-            width: 110,
+            width: 120,
             render: record => {
               let cerrctObj = record.scoreAndRank.find(
                 item => item.year === this.props.user.examYear - 2
               );
               if (cerrctObj) {
-                return <span><p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p></span>;
+                return <p><p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}`}</p><p>{`分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p></p>;
               } else {
                 return <span>-</span>;
               }
@@ -114,13 +114,13 @@ class PointTableController extends React.Component {
           {
             title: this.props.user.examYear - 3,
             key: 'oldThreeScore',
-            width: 110,
+            width: 120,
             render: record => {
               let cerrctObj = record.scoreAndRank.find(
                 item => item.year === this.props.user.examYear - 3
               );
               if (cerrctObj) {
-                return <span><p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p></span>;
+                return <p><p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}`}</p><p>{`分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p></p>;
               } else {
                 return <span>-</span>;
               }
@@ -276,18 +276,18 @@ class PointTableController extends React.Component {
       },
       {
         title: '历年位次/分数',
-        width: 330,
+        width: 360,
         children: [
           {
             title: this.props.user.examYear - 1,
             key: 'oldOneScore',
-            width: 110,
+            width: 120,
             render: record => {
               let cerrctObj = record.scoreAndRank.find(
                 item => item.year === this.props.user.examYear - 1
               );
               if (cerrctObj) {
-                return <span><p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p></span>;
+                return <p><p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}`}</p><p>{`分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p></p>;
               } else {
                 return <span>-</span>;
               }
@@ -296,13 +296,13 @@ class PointTableController extends React.Component {
           {
             title: this.props.user.examYear - 2,
             key: 'oldTwoScore',
-            width: 110,
+            width: 120,
             render: record => {
               let cerrctObj = record.scoreAndRank.find(
                 item => item.year === this.props.user.examYear - 2
               );
               if (cerrctObj) {
-                return <span><p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p></span>;
+                return <p><p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}`}</p><p>{`分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p></p>;
               } else {
                 return <span>-</span>;
               }
@@ -311,13 +311,13 @@ class PointTableController extends React.Component {
           {
             title: this.props.user.examYear - 3,
             key: 'oldThreeScore',
-            width: 110,
+            width: 120,
             render: record => {
               let cerrctObj = record.scoreAndRank.find(
                 item => item.year === this.props.user.examYear - 3
               );
               if (cerrctObj) {
-                return <span><p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p></span>;
+                return <p><p>{`位次:${cerrctObj.rank ? cerrctObj.rank : '-'}`}</p><p>{`分数:${cerrctObj.score ? cerrctObj.score : '-'}`}</p></p>;
               } else {
                 return <span>-</span>;
               }
