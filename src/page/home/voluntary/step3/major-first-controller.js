@@ -4,7 +4,6 @@ import React from 'react';
 import { Input } from 'antd';
 
 // 自定义组件
-import MySelect from './my-select-controller' 
 import TableController from './table-controller';
 import SchoolOptionsController from './school-options-controller.jsx';
 
@@ -21,14 +20,13 @@ class MajorFirstController extends React.Component {
       <div>
         <div>
           {/* TODO: 搜索专业 */}
-          {/* <Search
+          <Search
             enterButton='搜索专业'
             size='large'
             onSearch={this.handleSearchMajor}
             onChange={this.handleChangeName}
             placeholder='请输入专业名称'
-          /> */}
-          <MySelect/>
+          /> 
         </div>
         <SchoolOptionsController />
         <TableController />
