@@ -1,11 +1,7 @@
 import { ENVIRONMENT } from '../constants/app-constants';
 
 // 环境控制
-<<<<<<< HEAD
- export const SAP_CONTROL = ENVIRONMENT.DEV;     // 开发环境
-=======
 export const SAP_CONTROL = ENVIRONMENT.DEV;     // 开发环境
->>>>>>> f6b4c6830065f3576daa111d180b69e342cf5029
 // export const SAP_CONTROL = ENVIRONMENT.TEST; // 测试环境
 // export const SAP_CONTROL = ENVIRONMENT.PRO; // 生产环境
 
