@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 // 路由
 import { NEWS_DETAIL, NEWS_MORE } from '@/constants/route-constants';
 
-export default props => {
+export default function IndexQuestionNewsList(props) {
   const [newsList, setNewsList] = useState([]);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export default props => {
       return (
         <Link
           to={{
-            pathname: `/${NEWS_DETAIL.path}/${item.uuid}&${item.type}`
+            pathname: `/${NEWS_DETAIL.path}/${item.uuid}&${item.type}`,
           }}
           key={item.uuid}
         >
@@ -41,7 +41,7 @@ export default props => {
         </span>
         <Link
           to={{
-            pathname: `/${NEWS_MORE.path}/5`
+            pathname: `/${NEWS_MORE.path}/5`,
           }}
         >
           <span className='index-more'>
@@ -52,4 +52,4 @@ export default props => {
       <ul className='index-question-ul-box'>{newsList}</ul>
     </div>
   );
-};
+}

@@ -40,13 +40,13 @@
 }
 
 .carou-left-img {
-  background-image: url('/index-icon/index-background-left.png');
+  /* background-image: url('/index-icon/index-background-left.png'); */
   width: calc((100% - 870px - 330px) / 2);
   height: 360px;
 }
 
 .carou-right-img {
-  background-image: url('/index-icon/index-background-left.png');
+  /* background-image: url('/index-icon/index-background-left.png'); */
   width: calc((100% - 870px - 330px) / 2);
   height: 360px;
   transform: rotateY(180deg);

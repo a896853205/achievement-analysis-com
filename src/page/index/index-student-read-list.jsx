@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 // 路由
 import { NEWS_DETAIL, NEWS_MORE } from '@/constants/route-constants';
 
-export default props => {
+export default function IndexStudentReadList(props) {
   const [newsList, setNewsList] = useState([]);
 
   useEffect(() => {
@@ -16,14 +16,14 @@ export default props => {
       return (
         <Link
           to={{
-            pathname: `/${NEWS_DETAIL.path}/${item.uuid}&${item.type}`
+            pathname: `/${NEWS_DETAIL.path}/${item.uuid}&${item.type}`,
           }}
           key={item.uuid}
         >
           <li
             style={{
               display: 'flex',
-              alignItems: 'center'
+              alignItems: 'center',
             }}
           >
             <div
@@ -32,7 +32,7 @@ export default props => {
                 width: '6px',
                 height: '6px',
                 background: '#F06000',
-                marginRight: '5px'
+                marginRight: '5px',
               }}
             />
             <span>{item.title}</span>
@@ -51,14 +51,14 @@ export default props => {
           <Icon
             type='user'
             style={{
-              color: '#767DFA'
+              color: '#767DFA',
             }}
           />{' '}
           考生必读
         </span>
         <Link
           to={{
-            pathname: `/${NEWS_MORE.path}/3`
+            pathname: `/${NEWS_MORE.path}/3`,
           }}
         >
           <span className='index-more'>
@@ -69,4 +69,4 @@ export default props => {
       <ul>{newsList}</ul>
     </div>
   );
-};
+}

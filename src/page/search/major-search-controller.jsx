@@ -16,7 +16,7 @@ import { Skeleton } from 'antd';
 // UI 样式
 import '@/style/search/major-search.css';
 
-export default props => {
+export default function MajorSearchController(props) {
   return (
     <div className='page-inner-width-box major-search-box'>
       <div className='major-search-left-box'>
@@ -62,9 +62,9 @@ export default props => {
       </div>
     </div>
   );
-};
+}
 
-const MajorCategory = props => {
+const MajorCategory = (props) => {
   const [majorCategory, setMajorCategory] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -74,7 +74,7 @@ const MajorCategory = props => {
 
       const [majorCategory] = await Promise.all([
         launchRequest(APIS.GET_MAJOR_CATEGORY),
-        wait(500)
+        wait(500),
       ]);
 
       setMajorCategory(majorCategory);
@@ -85,7 +85,7 @@ const MajorCategory = props => {
   return (
     <div>
       <Skeleton loading={loading}>
-        {majorCategory.map(item => (
+        {majorCategory.map((item) => (
           <div
             key={item.major_category_code}
             className='major-category-one-level-item-box'
@@ -99,14 +99,14 @@ const MajorCategory = props => {
                 <span>
                   {(() => {
                     let totalNum = 0;
-                    item.data.map(item => (totalNum += item.data.length));
+                    item.data.map((item) => (totalNum += item.data.length));
                     return totalNum;
                   })()}
                   个本科专业
                 </span>
               </span>
             </h4>
-            {item.data.map(oneLevelItem => (
+            {item.data.map((oneLevelItem) => (
               <div
                 key={oneLevelItem.major_level_one_code}
                 className='major-category-two-level-item-box'
@@ -120,11 +120,11 @@ const MajorCategory = props => {
                   </span>
                 </h5>
                 <ul className='major-category-three-level-item-box'>
-                  {oneLevelItem.data.map(twoLevelItem => (
+                  {oneLevelItem.data.map((twoLevelItem) => (
                     <li key={twoLevelItem.major_level_two_code}>
                       <Link
                         to={{
-                          pathname: `/${MAJOR_DETAIL.path}/${twoLevelItem.major_level_two_code}`
+                          pathname: `/${MAJOR_DETAIL.path}/${twoLevelItem.major_level_two_code}`,
                         }}
                       >
                         {twoLevelItem.major_name}
@@ -141,7 +141,7 @@ const MajorCategory = props => {
   );
 };
 
-const HotMajor = props => {
+const HotMajor = (props) => {
   const [hotMajors, setHotMajors] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -151,7 +151,7 @@ const HotMajor = props => {
 
       const [hotMajors] = await Promise.all([
         launchRequest(APIS.GET_HOT_MAJORS),
-        wait(500)
+        wait(500),
       ]);
 
       setHotMajors(hotMajors);
@@ -167,7 +167,7 @@ const HotMajor = props => {
           {hotMajors.map((item, index) => (
             <Link
               to={{
-                pathname: `/${MAJOR_DETAIL.path}/${item.major_level_two_code}`
+                pathname: `/${MAJOR_DETAIL.path}/${item.major_level_two_code}`,
               }}
               key={item.major_level_two_code}
             >

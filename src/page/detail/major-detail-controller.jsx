@@ -20,7 +20,7 @@ import wait from '@/util/wait-helper';
 const { TreeNode } = Tree;
 const { TabPane } = Tabs;
 
-export default props => {
+export default function MajorDetailContoller(props) {
   const majorTwoCode = props.match.params.id;
 
   return (
@@ -51,9 +51,9 @@ export default props => {
       </div>
     </div>
   );
-};
+}
 
-const MajorProfile = props => {
+const MajorProfile = (props) => {
   const majorTwoCode = props.majorTwoCode;
 
   const [majorName, setMajorName] = useState('');
@@ -66,10 +66,10 @@ const MajorProfile = props => {
       setLoading(true);
 
       let [
-        { majorName, majorLevelOneName, majorCategoryName }
+        { majorName, majorLevelOneName, majorCategoryName },
       ] = await Promise.all([
         launchRequest(APIS.GET_MAJOR_PROFILE, { majorTwoCode }),
-        wait(500)
+        wait(500),
       ]);
 
       setMajorName(majorName);
@@ -92,7 +92,7 @@ const MajorProfile = props => {
   );
 };
 
-const MajorDetail = props => {
+const MajorDetail = (props) => {
   const majorTwoCode = props.majorTwoCode;
 
   const [educationSystem, setEducationSystem] = useState('');
@@ -115,11 +115,11 @@ const MajorDetail = props => {
           studyThreshold,
           mainCourse,
           postgraduateIntro,
-          graduateDestination
-        }
+          graduateDestination,
+        },
       ] = await Promise.all([
         launchRequest(APIS.GET_MARJO_DETAIL, { majorTwoCode }),
-        wait(500)
+        wait(500),
       ]);
 
       setEducationSystem(educationSystem);
@@ -203,7 +203,7 @@ const MajorDetail = props => {
   );
 };
 
-const MajorCategoryTree = withRouter(props => {
+const MajorCategoryTree = withRouter((props) => {
   const majorTwoCode = props.majorTwoCode;
   const [majorCategory, setMajorCategory] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -214,7 +214,7 @@ const MajorCategoryTree = withRouter(props => {
 
       const [majorCategory] = await Promise.all([
         launchRequest(APIS.GET_MAJOR_CATEGORY),
-        wait(500)
+        wait(500),
       ]);
 
       setMajorCategory(majorCategory);
@@ -228,23 +228,23 @@ const MajorCategoryTree = withRouter(props => {
         <Tree
           showLine
           defaultExpandedKeys={[majorTwoCode]}
-          onSelect={selectKey => {
+          onSelect={(selectKey) => {
             props.history.push(`/${MAJOR_DETAIL.path}/${selectKey}`);
           }}
         >
-          {majorCategory.map(item => (
+          {majorCategory.map((item) => (
             <TreeNode
               title={item.name}
               selectable={false}
               key={item.major_category_code}
             >
-              {item.data.map(oneLevelItem => (
+              {item.data.map((oneLevelItem) => (
                 <TreeNode
                   title={oneLevelItem.name}
                   key={oneLevelItem.major_level_one_code}
                   selectable={false}
                 >
-                  {oneLevelItem.data.map(twoLevelItem => (
+                  {oneLevelItem.data.map((twoLevelItem) => (
                     <TreeNode
                       title={twoLevelItem.major_name}
                       key={twoLevelItem.major_level_two_code}

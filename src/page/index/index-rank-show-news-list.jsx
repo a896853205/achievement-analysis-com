@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 // 路由
 import { NEWS_DETAIL, NEWS_MORE } from '@/constants/route-constants';
 
-export default props => {
+export default function IndexRankShowNewsList(props) {
   const [newsList, setNewsList] = useState([]);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export default props => {
       return (
         <Link
           to={{
-            pathname: `/${NEWS_DETAIL.path}/${item.uuid}&${item.type}`
+            pathname: `/${NEWS_DETAIL.path}/${item.uuid}&${item.type}`,
           }}
           key={item.uuid}
         >
@@ -51,14 +51,14 @@ export default props => {
           <Icon
             type='bar-chart'
             style={{
-              color: '#3CC6FC'
+              color: '#3CC6FC',
             }}
           />
           排名集锦
         </span>
         <Link
           to={{
-            pathname: `/${NEWS_MORE.path}/4`
+            pathname: `/${NEWS_MORE.path}/4`,
           }}
         >
           <span className='index-more'>
@@ -69,4 +69,4 @@ export default props => {
       <ul>{newsList}</ul>
     </div>
   );
-};
+}

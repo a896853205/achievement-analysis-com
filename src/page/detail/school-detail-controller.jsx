@@ -18,7 +18,7 @@ import { connect } from 'react-redux';
 const { Option } = Select;
 const { Column } = Table;
 
-export default props => {
+export default function SchoolDetailController(props) {
   let schoolId;
   if (props.match) {
     schoolId = props.match.params.id;
@@ -48,10 +48,10 @@ export default props => {
       <SchoolMajorScoreList schoolId={schoolId} />
     </div>
   );
-};
+}
 
 // 学校招生简章模块
-const SchoolEnrollmentNewsList = props => {
+const SchoolEnrollmentNewsList = (props) => {
   const [schoolEnrollmentNews, setSchoolEnrollmentNews] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -68,7 +68,7 @@ const SchoolEnrollmentNewsList = props => {
 
       let [schoolEnrollmentNews] = await Promise.all([
         launchRequest(APIS.GET_SCHOOL_ENROLLMENT_GUIDE_NEWS, { schoolId }),
-        wait(500)
+        wait(500),
       ]);
 
       setSchoolEnrollmentNews(schoolEnrollmentNews);
@@ -82,9 +82,9 @@ const SchoolEnrollmentNewsList = props => {
 
       let [enrollmentNewsContent] = await Promise.all([
         launchRequest(APIS.GET_ENROLLMENT_GUIDE_NEWS_DETAIL, {
-          uuid: enrollmentNewsDetailUuid
+          uuid: enrollmentNewsDetailUuid,
         }),
-        wait(500)
+        wait(500),
       ]);
 
       setEnrollmentNewsContent(enrollmentNewsContent.content);
@@ -105,15 +105,13 @@ const SchoolEnrollmentNewsList = props => {
                   setEnrollmentNewsDetailUuid(item.uuid);
                 }}
                 style={{
-                  cursor: 'pointer'
+                  cursor: 'pointer',
                 }}
               >
                 {item.title}
               </h5>
               <span>
-                <span>
-                  { item.createTime }
-                </span>
+                <span>{item.createTime}</span>
                 <span className='enrollment-view'>
                   浏览 {item.viewTimes ? item.viewTimes : '-'}
                 </span>
@@ -134,10 +132,10 @@ const SchoolEnrollmentNewsList = props => {
         <Skeleton loading={modalLoading}>
           <div
             style={{
-              display: 'block'
+              display: 'block',
             }}
             dangerouslySetInnerHTML={{
-              __html: enrollmentNewsContent
+              __html: enrollmentNewsContent,
             }}
           ></div>
         </Skeleton>
@@ -147,7 +145,7 @@ const SchoolEnrollmentNewsList = props => {
 };
 
 // 学校简介模块
-const SchoolDetailProfile = props => {
+const SchoolDetailProfile = (props) => {
   const [schoolName, setschoolName] = useState('');
   const [schoolCreateTime, setSchoolCreateTime] = useState('-');
   const [masterNum, setMasterNum] = useState('-');
@@ -178,14 +176,14 @@ const SchoolDetailProfile = props => {
           schoolCreateTime,
           masterNum,
           doctorNum,
-          logoName
-        }
+          logoName,
+        },
       ] = await Promise.all([
         launchRequest(APIS.GET_SCHOOL_DETAIL, {
-          schoolId
+          schoolId,
         }),
         // 避免闪烁
-        wait(500)
+        wait(500),
       ]);
 
       setschoolName(schoolName);
@@ -278,7 +276,7 @@ const SchoolDetailProfile = props => {
                     height: '50px',
                     fontSize: '45px',
                     lineHeight: '45px',
-                    marginBottom: '10px'
+                    marginBottom: '10px',
                   }}
                 >
                   硕
@@ -293,7 +291,7 @@ const SchoolDetailProfile = props => {
                     height: '50px',
                     fontSize: '45px',
                     lineHeight: '45px',
-                    marginBottom: '10px'
+                    marginBottom: '10px',
                   }}
                 >
                   博
@@ -330,11 +328,11 @@ const SchoolDetailProfile = props => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   const userStore = store['userStore'];
   let { user } = userStore;
 
@@ -345,16 +343,18 @@ const mapStateToProps = store => {
 const SchoolScoreList = connect(
   mapStateToProps,
   mapDispatchToProps
-)(props => {
+)((props) => {
   //解决刷新，可能有问题
-  if(props.user.accountCategory){
-    sessionStorage.setItem('accountCategory',props.user.accountCategory);
-  } else{
+  if (props.user.accountCategory) {
+    sessionStorage.setItem('accountCategory', props.user.accountCategory);
+  } else {
     props.user.accountCategory = sessionStorage.getItem('accountCategory');
   }
 
   const [scoreList, setScoreList] = useState([]);
-  const [accountCategory, setAccountCategory] = useState(props.user.accountCategory ? parseInt(props.user.accountCategory) : 1);
+  const [accountCategory, setAccountCategory] = useState(
+    props.user.accountCategory ? parseInt(props.user.accountCategory) : 1
+  );
   const [loading, setLoading] = useState(true);
 
   let { schoolId } = props;
@@ -366,10 +366,10 @@ const SchoolScoreList = connect(
       let [scoreList] = await Promise.all([
         launchRequest(APIS.GET_SCHOOL_SCORE_LIST, {
           schoolId,
-          accountCategory
+          accountCategory,
         }),
         // 避免闪烁
-        wait(500)
+        wait(500),
       ]);
 
       setScoreList(scoreList);
@@ -384,7 +384,7 @@ const SchoolScoreList = connect(
         {/* Select */}
         <Select
           value={accountCategory}
-          onChange={value => setAccountCategory(value)}
+          onChange={(value) => setAccountCategory(value)}
           style={{ width: 200 }}
         >
           <Option value={1}>理科</Option>
@@ -393,7 +393,7 @@ const SchoolScoreList = connect(
       </h3>
       {/* Table */}
       <Table
-        rowKey={record =>
+        rowKey={(record) =>
           '' + record.year + record.lotsName + record.score + record.enrollment
         }
         dataSource={scoreList}
@@ -404,39 +404,37 @@ const SchoolScoreList = connect(
           title='年份'
           dataIndex='year'
           key='year'
-          render={text => (text ? text : '-')}
+          render={(text) => (text ? text : '-')}
         />
         <Column
           title='招生批次	'
           dataIndex='lotsName'
           key='lotsName'
-          render={text => (text ? text : '-')}
+          render={(text) => (text ? text : '-')}
         />
         <Column
           title='最高分'
           dataIndex='maxScore'
           key='maxScore'
-          render={text => (text ? text : '-')}
+          render={(text) => (text ? text : '-')}
         />
         <Column
           title='最低分'
           dataIndex='score'
           key='score'
-          render={text => (text ? text : '-')}
+          render={(text) => (text ? text : '-')}
         />
         <Column
           title='录取数'
           dataIndex='enrollment'
           key='enrollment'
-          render={text => (text ? text : '-')}
+          render={(text) => (text ? text : '-')}
         />
         <Column
           title='最低位次'
           dataIndex='lastRank'
           key='lastRank'
-          render={(text,record) => (
-            record.score ? record.lastRank : '-'
-          )}
+          render={(text, record) => (record.score ? record.lastRank : '-')}
         />
       </Table>
     </div>
@@ -444,7 +442,7 @@ const SchoolScoreList = connect(
 });
 
 // 学校排名模块
-const SchoolRank = props => {
+const SchoolRank = (props) => {
   const [wuShuLianRank, setWuShuLianRank] = useState('-');
   const [ruanKeRank, setRuanKeRank] = useState('-');
   const [schoolFriendRank, setSchoolFriendRank] = useState('-');
@@ -460,10 +458,10 @@ const SchoolRank = props => {
 
       let [schoolRank] = await Promise.all([
         launchRequest(APIS.GET_SCHOOL_RANK, {
-          schoolId
+          schoolId,
         }),
         // 避免闪烁
-        wait(500)
+        wait(500),
       ]);
 
       if (schoolRank) {
@@ -513,12 +511,14 @@ const SchoolRank = props => {
 const SchoolMajorScoreList = connect(
   mapStateToProps,
   mapDispatchToProps
-)(props => {
+)((props) => {
   const [loading, setLoading] = useState(true);
   const [schoolMajor, setSchoolMajor] = useState([]),
-       [allYear, setAllYear] = useState([]),
-    [accountCategory, setAccountCategory] = useState(props.user.accountCategory ? parseInt(props.user.accountCategory) : 1),
-  [year, setYear] = useState(new Date().getFullYear()-1);
+    [allYear, setAllYear] = useState([]),
+    [accountCategory, setAccountCategory] = useState(
+      props.user.accountCategory ? parseInt(props.user.accountCategory) : 1
+    ),
+    [year, setYear] = useState(new Date().getFullYear() - 1);
 
   let { schoolId } = props;
 
@@ -530,17 +530,17 @@ const SchoolMajorScoreList = connect(
         launchRequest(APIS.GET_SCHOOL_MAJOR, {
           schoolId,
           accountCategory,
-          year
+          year,
         }),
         launchRequest(APIS.GET_ALL_YEAR, {}, DominConfigs.REQUEST_TYPE.GET),
         // 避免闪烁
-        wait(500)
+        wait(500),
       ]);
       setSchoolMajor(schoolMajor);
       setAllYear(allYear);
       setLoading(false);
     })();
-  }, [schoolId, accountCategory,year]);
+  }, [schoolId, accountCategory, year]);
 
   return (
     <div className='school-detail-item-box'>
@@ -548,10 +548,10 @@ const SchoolMajorScoreList = connect(
         <span>院校专业分数</span>
         <Select
           value={year}
-          onChange={value => setYear(value)}
+          onChange={(value) => setYear(value)}
           style={{ width: 200 }}
         >
-          {allYear.map( item =>(
+          {allYear.map((item) => (
             <Option value={item.year}>{item.year}</Option>
           ))}
           {/*<Option value={2019}>2019</Option>*/}
@@ -561,7 +561,7 @@ const SchoolMajorScoreList = connect(
         </Select>
         <Select
           value={accountCategory}
-          onChange={value => setAccountCategory(value)}
+          onChange={(value) => setAccountCategory(value)}
           style={{ width: 200 }}
         >
           <Option value={1}>理科</Option>
@@ -579,53 +579,53 @@ const SchoolMajorScoreList = connect(
           <Column
             title='年份'
             dataIndex='year'
-            render={text => (text ? text : '-')}
+            render={(text) => (text ? text : '-')}
           />
           <Column
             title='专业代码'
             dataIndex='majorLevelTwoCode'
-            render={text => (text ? text : '-')}
+            render={(text) => (text ? text : '-')}
             width='100px'
           />
           <Column
             title='专业名称'
             dataIndex='majorName'
-            render={text => (text ? text : '-')}
+            render={(text) => (text ? text : '-')}
             width='150px'
           />
           <Column
             title='备注'
             dataIndex='comment'
-            render={text => (text ? text : '-')}
+            render={(text) => (text ? text : '-')}
           />
           <Column
             title='招生批次'
             dataIndex='lotsName'
-            render={text => (text ? text : '-')}
+            render={(text) => (text ? text : '-')}
             width='100px'
           />
           <Column
             title='最高分'
             dataIndex='enrollmentScoreMax'
-            render={text => (text ? text : '-')}
+            render={(text) => (text ? text : '-')}
             width='80px'
           />
           <Column
             title='最低分'
             dataIndex='enrollmentScore'
-            render={text => (text ? text : '-')}
+            render={(text) => (text ? text : '-')}
             width='80px'
           />
           <Column
             title='录取人数'
             dataIndex='enrollment'
-            render={text => (text ? text : '-')}
+            render={(text) => (text ? text : '-')}
             width='100px'
           />
           <Column
             title='文理'
             dataIndex='accountCategory'
-            render={text => (text === 1 ? '理科' : '文科')}
+            render={(text) => (text === 1 ? '理科' : '文科')}
             width='100px'
           />
         </Table>
