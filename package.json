@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.2.2",
+    "@babel/plugin-proposal-decorators": "^7.12.1",
     "@babel/polyfill": "^7.12.1",
     "@material-ui/core": "^4.9.11",
     "antd": "^3.26.20",
     "core-js": "^2.6.11",
+    "cross-env": "^7.0.2",
     "echarts": "^4.9.0",
     "echarts-for-react": "^2.0.16",
     "md5": "^2.3.0",
