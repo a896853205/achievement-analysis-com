@@ -18,7 +18,7 @@ const mapStateToProps = (store) => {
   };
 };
 
-export const vipPage = connect(mapStateToProps)((props) => {
+export default connect(mapStateToProps)((props) => {
   const couterRef = useRef();
   const handleToAlipayClick = async () => {
     let url = await launchRequest(APIS.GET_ALIPAY_PAYMENT_URL);
@@ -36,7 +36,7 @@ export const vipPage = connect(mapStateToProps)((props) => {
   };
 
   return (
-    <>
+    <div>
       {OPEN_VIP ? (
         <div className='page-inner-width-box vip-profile'>
           {/* 页面左部分 */}
@@ -260,6 +260,6 @@ export const vipPage = connect(mapStateToProps)((props) => {
           }
         />
       )}
-    </>
+    </div>
   );
 });
