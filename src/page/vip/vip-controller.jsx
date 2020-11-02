@@ -1,19 +1,14 @@
 import React, { useRef } from 'react';
-import QRCode from 'qrcode';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { Carousel, Result } from 'antd';
-import { connect } from 'react-redux';
-
-import * as APIS from '../../constants/api-constants';
-import Button from '@material-ui/core/Button';
-import { launchRequest } from '../../util/request';
+import { Carousel, Result, Button } from 'antd';
+import * as APIS from '@/constants/api-constants';
+import { OPEN_VIP } from '@/config/app-config';
+import { AlipayCircleOutlined, WechatFilled } from '@ant-design/icons';
+import { launchRequest } from '@/util/request';
 import '@/style/vip/profile.css';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-
-// 为VIP添加的开关按钮，如果为true则打开VIP页面
-const OPEN_VIP = false;
+import QRCode from 'qrcode';
 
 // 从store接收state数据
 const mapStateToProps = (store) => {
@@ -23,15 +18,7 @@ const mapStateToProps = (store) => {
   };
 };
 
-// 向store dispatch action
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
-
-export const vipPage = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)((props) => {
+export default connect(mapStateToProps)((props) => {
   const couterRef = useRef();
   const handleToAlipayClick = async () => {
     let url = await launchRequest(APIS.GET_ALIPAY_PAYMENT_URL);
@@ -47,19 +34,9 @@ export const vipPage = connect(
       QRCode.toCanvas(couterRef.current, url);
     }
   };
-  //使用menu
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   return (
-    <>
+    <div>
       {OPEN_VIP ? (
         <div className='page-inner-width-box vip-profile'>
           {/* 页面左部分 */}
@@ -127,40 +104,27 @@ export const vipPage = connect(
               </button>
             </div> */}
                 <div className='buy-button-box'>
-                  {/*<Button
-                aria-controls='simple-menu'
-                aria-haspopup='true'
-                onClick={testClick}
-                className='buy-button'
-              >
-                test
-              </Button>*/}
                   <Button
-                    aria-controls='simple-menu'
-                    aria-haspopup='true'
-                    onClick={handleClick}
+                    onClick={handleToAlipayClick}
+                    type='primary'
+                    size='large'
                     className='buy-button'
                   >
-                    立即购买
+                    <AlipayCircleOutlined />
+                    支付宝购买
                   </Button>
-                  <Menu
-                    id='simple-menu'
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
+                  <Button
+                    onClick={handleToWeChatClick}
+                    type='primary'
+                    size='large'
+                    className='buy-button'
                   >
-                    <MenuItem onClick={handleToAlipayClick}>
-                      <img src='/vip/zhifubao.jpg' alt='' className='wechat' />
-                      支付宝支付
-                    </MenuItem>
-                    <MenuItem onClick={handleToWeChatClick}>
-                      <img src='/vip/wechat.jpg' alt='' className='wechat' />
-                      微信支付
-                    </MenuItem>
-                  </Menu>
-
-                  <canvas ref={couterRef}></canvas>
+                    <WechatFilled />
+                    微信购买
+                  </Button>
+                  <div className='wechat-canvas'>
+                    <canvas ref={couterRef} />
+                  </div>
                   <span className='vip-link'>咨询热线: 18644091056</span>
                 </div>
                 <div className='vip-describe-list-box'>
@@ -296,6 +260,6 @@ export const vipPage = connect(
           }
         />
       )}
-    </>
+    </div>
   );
 });

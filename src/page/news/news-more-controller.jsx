@@ -17,7 +17,7 @@ import wait from '@/util/wait-helper';
 
 // 引用时间类
 import moment from 'moment';
-export default props => {
+export default function NewsMoreController(props) {
   const [page, setPage] = useState(1);
   const [pageLength, setPageLength] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -35,13 +35,13 @@ export default props => {
       let [{ moreNewsList, pageLength }] = await Promise.all([
         launchRequest(APIS.GET_MORE_NEWS, {
           page,
-          type: newsType
+          type: newsType,
         }),
         // 避免闪烁
-        wait(500)
+        wait(500),
       ]);
 
-      let moreNewsListLi = moreNewsList.map(item => {
+      let moreNewsListLi = moreNewsList.map((item) => {
         return <NewsLi key={item.uuid} newsData={item} />;
       });
       setNewsList(moreNewsListLi);
@@ -58,7 +58,7 @@ export default props => {
       let [hotNews] = await Promise.all([
         launchRequest(APIS.GET_HOT_NEWS),
         // 避免闪烁
-        wait(500)
+        wait(500),
       ]);
 
       sethotNews(hotNews);
@@ -76,7 +76,7 @@ export default props => {
         <Pagination
           total={pageLength}
           current={page}
-          onChange={chickPage => {
+          onChange={(chickPage) => {
             setPage(chickPage);
           }}
         />
@@ -87,11 +87,11 @@ export default props => {
         </div>
         <Skeleton active loading={hotLoading}>
           <ul className='news-hot-ul'>
-            {hotNews.map(item => (
+            {hotNews.map((item) => (
               <Link
                 key={item.uuid}
                 to={{
-                  pathname: `/${NEWS_DETAIL.path}/${item.uuid}&${item.type}`
+                  pathname: `/${NEWS_DETAIL.path}/${item.uuid}&${item.type}`,
                 }}
               >
                 <li>{item.title}</li>
@@ -102,9 +102,9 @@ export default props => {
       </div>
     </div>
   );
-};
+}
 
-const NewsLi = props => {
+const NewsLi = (props) => {
   let {
     comeFrom,
     createTime,
@@ -112,13 +112,13 @@ const NewsLi = props => {
     title,
     type,
     uuid,
-    viewTimes
+    viewTimes,
   } = props.newsData;
   return (
     <li className='news-more-item-box'>
       <Link
         to={{
-          pathname: `/${NEWS_DETAIL.path}/${uuid}&${type}`
+          pathname: `/${NEWS_DETAIL.path}/${uuid}&${type}`,
         }}
       >
         <img src={profilePicUrl} alt='' />
@@ -126,7 +126,7 @@ const NewsLi = props => {
       <div>
         <Link
           to={{
-            pathname: `/${NEWS_DETAIL.path}/${uuid}&${type}`
+            pathname: `/${NEWS_DETAIL.path}/${uuid}&${type}`,
           }}
         >
           <h5>{title}</h5>
@@ -135,7 +135,7 @@ const NewsLi = props => {
           文章简介
           <Link
             to={{
-              pathname: `/${NEWS_DETAIL.path}/${uuid}&${type}`
+              pathname: `/${NEWS_DETAIL.path}/${uuid}&${type}`,
             }}
           >
             阅读全文

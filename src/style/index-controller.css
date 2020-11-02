@@ -40,13 +40,13 @@
 }
 
 .carou-left-img {
-  background-image: url('/index-icon/index-background-left.png');
+  /* background-image: url('/index-icon/index-background-left.png'); */
   width: calc((100% - 870px - 330px) / 2);
   height: 360px;
 }
 
 .carou-right-img {
-  background-image: url('/index-icon/index-background-left.png');
+  /* background-image: url('/index-icon/index-background-left.png'); */
   width: calc((100% - 870px - 330px) / 2);
   height: 360px;
   transform: rotateY(180deg);
@@ -445,44 +445,3 @@
 }
 
 /* 考生必读 end */
-/* 首页全局样式 */
-.page-inner-width-box {
-  max-width: 1200px;
-  min-width: 1200px;
-  margin: 0 auto;
-}
-
-.page-inner-left-box {
-  width: 870px;
-  background: #fff;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 21px 15px 9px;
-}
-
-.h2-title-box {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding-bottom: 5px;
-  border-bottom: 2px solid #bfbfbf;
-  margin-bottom: 7px;
-}
-
-.index-h2-title {
-  color: #0e407b;
-  font-size: 18px;
-}
-
-.index-more {
-  color: #898989;
-  font-size: 15px;
-}
-
-.upright-line {
-  height: calc(323px - 9px);
-  width: 2px;
-  background: #e5e5e5;
-  align-self: flex-end;
-}
