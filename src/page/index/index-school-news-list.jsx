@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import { NEWS_DETAIL } from '@/constants/route-constants';
 import { NEWS_MORE } from 'constants/route-constants';
 
-export default props => {
+export default function IndexSchoolNewsList(props) {
   const [newsList, setNewsList] = useState([]);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export default props => {
       return (
         <Link
           to={{
-            pathname: `/${NEWS_DETAIL.path}/${item.uuid}&${item.type}`
+            pathname: `/${NEWS_DETAIL.path}/${item.uuid}&${item.type}`,
           }}
           key={item.uuid}
         >
@@ -54,14 +54,14 @@ export default props => {
             type='message'
             theme='filled'
             style={{
-              color: '#17BD9C'
+              color: '#17BD9C',
             }}
           />
           院校资讯
         </span>
         <Link
           to={{
-            pathname: `/${NEWS_MORE.path}/1`
+            pathname: `/${NEWS_MORE.path}/1`,
           }}
         >
           <span className='index-more'>
@@ -72,4 +72,4 @@ export default props => {
       <ul>{newsList}</ul>
     </div>
   );
-};
+}
