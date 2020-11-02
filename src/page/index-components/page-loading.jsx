@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Spin } from 'antd';
+
 import '@/style/page-loading.css';
 
 export default function PageLoading() {
