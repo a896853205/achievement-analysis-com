@@ -1,16 +1,14 @@
 import React, { useRef } from 'react';
-import QRCode from 'qrcode';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { Carousel, Result, Button, Menu } from 'antd';
-import { connect } from 'react-redux';
-
-import * as APIS from '../../constants/api-constants';
+import { Carousel, Result, Button } from 'antd';
+import * as APIS from '@/constants/api-constants';
 import { OPEN_VIP } from '@/config/app-config';
-import { launchRequest } from '../../util/request';
+import { AlipayCircleOutlined, WechatFilled } from '@ant-design/icons';
+import { launchRequest } from '@/util/request';
 import '@/style/vip/profile.css';
-// import Menu from '@material-ui/core/Menu';
-// import MenuItem from '@material-ui/core/MenuItem';
+import QRCode from 'qrcode';
 
 // 从store接收state数据
 const mapStateToProps = (store) => {
@@ -20,15 +18,7 @@ const mapStateToProps = (store) => {
   };
 };
 
-// 向store dispatch action
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
-
-export const vipPage = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)((props) => {
+export const vipPage = connect(mapStateToProps)((props) => {
   const couterRef = useRef();
   const handleToAlipayClick = async () => {
     let url = await launchRequest(APIS.GET_ALIPAY_PAYMENT_URL);
@@ -43,17 +33,6 @@ export const vipPage = connect(
     if (url) {
       QRCode.toCanvas(couterRef.current, url);
     }
-    setAnchorEl(null);
-  };
-  //使用menu
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
   };
 
   return (
@@ -125,48 +104,27 @@ export const vipPage = connect(
               </button>
             </div> */}
                 <div className='buy-button-box'>
-                  {/*<Button
-                aria-controls='simple-menu'
-                aria-haspopup='true'
-                onClick={testClick}
-                className='buy-button'
-              >
-                test
-              </Button>*/}
-                  {anchorEl ? (
-                    <Menu
-                      id='simple-menu'
-                      className='buy-menu'
-                      // anchorEl={anchorEl}
-                      keepMounted
-                      open={Boolean(anchorEl)}
-                      onClose={handleClose}
-                    >
-                      <Menu.Item onClick={handleToAlipayClick}>
-                        <img
-                          src='/vip/zhifubao.jpg'
-                          alt=''
-                          className='wechat'
-                        />
-                        支付宝支付
-                      </Menu.Item>
-                      <Menu.Item onClick={handleToWeChatClick}>
-                        <img src='/vip/wechat.jpg' alt='' className='wechat' />
-                        微信支付
-                      </Menu.Item>
-                    </Menu>
-                  ) : (
-                    <Button
-                      aria-controls='simple-menu'
-                      aria-haspopup='true'
-                      onClick={handleClick}
-                      className='buy-button'
-                    >
-                      立即购买
-                    </Button>
-                  )}
-
-                  <canvas ref={couterRef}></canvas>
+                  <Button
+                    onClick={handleToAlipayClick}
+                    type='primary'
+                    size='large'
+                    className='buy-button'
+                  >
+                    <AlipayCircleOutlined />
+                    支付宝购买
+                  </Button>
+                  <Button
+                    onClick={handleToWeChatClick}
+                    type='primary'
+                    size='large'
+                    className='buy-button'
+                  >
+                    <WechatFilled />
+                    微信购买
+                  </Button>
+                  <div className='wechat-canvas'>
+                    <canvas ref={couterRef} />
+                  </div>
                   <span className='vip-link'>咨询热线: 18644091056</span>
                 </div>
                 <div className='vip-describe-list-box'>

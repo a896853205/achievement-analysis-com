@@ -127,18 +127,25 @@
   width: 100%;
 }
 
-.vip-profile .left-box .left-top-box .vip-card-info-box .buy-button-box .buy-menu {
-  margin-left: 80px;
+.vip-profile .left-box .left-top-box .vip-card-info-box .buy-button-box .wechat-canvas {
+  width: 165px;
 }
 
 .vip-profile .left-box .left-top-box .vip-card-info-box .buy-button-box .buy-button {
+  border: 1px solid #f06000;
   background: #f06000;
   color: #fff;
-  width: 280px;
-  height: 40px;
   border: 0;
-  margin-right: 5px;
+  margin-right: 10px;
+  width: 130px;
 }
+
+/* .vip-profile .left-box .left-top-box .vip-card-info-box .buy-button-box .buy-img {
+  color: #fff;
+  height: 30px;
+  border: 0; 
+   margin-right: 5px;
+} */
 
 .vip-profile .left-box .left-top-box .vip-card-info-box .vip-describe-list-box {
   font-size: 13px;
