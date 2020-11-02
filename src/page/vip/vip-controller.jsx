@@ -1,17 +1,14 @@
 import React, { useRef } from 'react';
-import QRCode from 'qrcode';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { Carousel, Result, Button } from 'antd';
-import { AlipayCircleOutlined, WechatFilled } from '@ant-design/icons';
-import { connect } from 'react-redux';
-
-import * as APIS from '../../constants/api-constants';
+import * as APIS from '@/constants/api-constants';
 import { OPEN_VIP } from '@/config/app-config';
-import { launchRequest } from '../../util/request';
+import { AlipayCircleOutlined, WechatFilled } from '@ant-design/icons';
+import { launchRequest } from '@/util/request';
 import '@/style/vip/profile.css';
-// import Menu from '@material-ui/core/Menu';
-// import MenuItem from '@material-ui/core/MenuItem';
+import QRCode from 'qrcode';
 
 // 从store接收state数据
 const mapStateToProps = (store) => {
@@ -21,15 +18,7 @@ const mapStateToProps = (store) => {
   };
 };
 
-// 向store dispatch action
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
-
-export const vipPage = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)((props) => {
+export const vipPage = connect(mapStateToProps)((props) => {
   const couterRef = useRef();
   const handleToAlipayClick = async () => {
     let url = await launchRequest(APIS.GET_ALIPAY_PAYMENT_URL);
@@ -45,16 +34,6 @@ export const vipPage = connect(
       QRCode.toCanvas(couterRef.current, url);
     }
   };
-  //使用menu
-  // const [anchorEl, setAnchorEl] = React.useState(null);
-
-  // const handleClick = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
 
   return (
     <>
@@ -125,14 +104,6 @@ export const vipPage = connect(
               </button>
             </div> */}
                 <div className='buy-button-box'>
-                  {/*<Button
-                aria-controls='simple-menu'
-                aria-haspopup='true'
-                onClick={testClick}
-                className='buy-button'
-              >
-                test
-              </Button>*/}
                   <Button
                     onClick={handleToAlipayClick}
                     type='primary'
@@ -140,11 +111,6 @@ export const vipPage = connect(
                     className='buy-button'
                   >
                     <AlipayCircleOutlined />
-                    {/* <img
-                      src='/vip/zhifubao.jpg'
-                      alt=''
-                      className='buy-img'
-                    /> */}
                     支付宝购买
                   </Button>
                   <Button
@@ -156,7 +122,6 @@ export const vipPage = connect(
                     <WechatFilled />
                     微信购买
                   </Button>
-                  {/* <img src='/vip/wechat.jpg' alt='' className='buy-img' /> */}
                   <div className='wechat-canvas'>
                     <canvas ref={couterRef} />
                   </div>
