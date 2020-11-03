@@ -10,21 +10,23 @@ import SchoolOptionsController from './school-options-controller.jsx';
 // 关于数据模块交互
 import { connect } from 'react-redux';
 import { actions as voluntaryActions } from '../../../../redux/voluntary-model';
+import MySelect from './mySelect-component';
 
-const { Search } = Input;
+// const { Search } = Input;
 
 class MajorFirstController extends React.Component {
   render() {
     return (
       <div>
         <div>
-          <Search
+          {/* <Search
             enterButton='搜索专业'
             size='large'
             onSearch={this.handleSearchMajor}
             onChange={this.handleChangeName}
             placeholder='请输入专业名称'
-          /> 
+          />  */}
+          <MySelect/>
         </div>
         <SchoolOptionsController />
         <TableController />
@@ -33,12 +35,12 @@ class MajorFirstController extends React.Component {
   }
 
   // 搜专业名
-  handleSearchMajor = () => {
+  /* handleSearchMajor = () => {
     this.props.recordSchoolList();
   };
   handleChangeName = e => {
     this.props.recordMajorName(e.target.value);
-  };
+  }; */
 }
 
 // 从store接收state数据
