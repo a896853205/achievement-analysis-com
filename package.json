@@ -27,7 +27,9 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development react-app-rewired start",
     "build": "cross-env NODE_ENV=production react-app-rewired build",
-    "test": "react-app-rewired test"
+    "test": "react-app-rewired test",
+    "initDeploy": "pm2 deploy production setup",
+    "deploy": "pm2 deploy production update"
   },
   "eslintConfig": {
     "extends": "react-app"
