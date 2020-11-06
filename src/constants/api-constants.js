@@ -86,9 +86,9 @@ export const GET_MAJOR_PROFILE = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_
 export const GET_MARJO_DETAIL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MAJOR}/getMajorDetail`;
 export const GET_HOT_MAJORS = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MAJOR}/getHotMajors`;
 export const GET_SCHOOL_MAJOR = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MAJOR}/getSchoolMajor`;
-export const GET_ALL_YEAR = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MAJOR}/getAllYear`;
+export const GET_ALL_YEAR = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MAJOR}/getAllYear`
 
-// 获取上传Token
+// 获取上传Token       
 export const GetUploadToken = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_UPLOAD}/getuploadtoken`;
 
 // 保存验证码
@@ -100,4 +100,6 @@ export const GET_WECHAT_PAYMENT_QR_URL = `${DominConfigs.DOMAIN}${DominConfigs.P
 
 export const PAY_TEST = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_PAYMENT}/test`;
 
+// 模糊查询
+export const GET_FUZZY_SEARCH_MAJOR = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_FUZZY_MAJOR}/major`;
 

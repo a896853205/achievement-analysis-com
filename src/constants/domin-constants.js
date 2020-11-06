@@ -27,7 +27,8 @@ export const PART = {
   OPT_NEWS: '/news',
   OPT_INDEX: '/index',
   OPT_MAJOR: '/major',
-  OPT_PAYMENT: '/payment'
+  OPT_PAYMENT: '/payment',
+  OPT_FUZZY_MAJOR: '/fuzzySearch'
 };
 
 // 请求类型
