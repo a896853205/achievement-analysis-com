@@ -34,6 +34,7 @@ export async function launchRequest(
 	} else if (requestType === DominConfigs.REQUEST_TYPE.GET) {
 		if (!ignoreParam) {
 			const allKey = Object.keys(params);
+
 			if (allKey && allKey.length > 0) {
 				if (url.indexOf('?') === -1) {
 					url = `${url}?`;

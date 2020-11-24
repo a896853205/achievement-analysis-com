@@ -9,6 +9,7 @@ export const SEARCH_SCHOOL = { path: 'searchSchool', name: '学校搜索页' };
 export const SEARCH_MAJOR = { path: 'searchMajor', name: '专业搜索页' };
 export const NEWS_DETAIL = { path: 'newsDetail', name: '新闻详细页' };
 export const NEWS_MORE = { path: 'newsMore', name: '新闻更多页' };
+export const SEARCH_MAJOR_LIST = { path: 'searchMajorList', name: '专业搜索列表页' };
 
 export const VOLUNTARY_RESULT = {
   path: 'voluntaryResult',

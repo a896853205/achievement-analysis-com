@@ -1,25 +1,107 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useDebounceFn } from 'ahooks';
 
 // 路由
 import { Link } from 'react-router-dom';
-import { MAJOR_DETAIL } from '@/constants/route-constants';
+import { MAJOR_DETAIL, SEARCH_MAJOR_LIST } from '@/constants/route-constants';
 
 // 请求文件
-import { launchRequest } from '../../util/request';
-import * as APIS from '../../constants/api-constants';
+import { actions as voluntaryActions } from '@/redux/voluntary-model';
+import { launchRequest } from '@/util/request';
+import * as APIS from '@/constants/api-constants';
+import * as DominConfigs from '@/constants/domin-constants';
 
 // 自定义函数
 import wait from '@/util/wait-helper';
 
-import { Skeleton } from 'antd';
+import { Skeleton, Button, Select } from 'antd';
 
 // UI 样式
 import '@/style/search/major-search.css';
+const { Option } = Select;
 
 export default function MajorSearchController(props) {
+
+  // 模糊查询函数组件编写
+  const dispatch = useDispatch();
+  const [majorList, setMajorList] = useState([]);
+  const { researchMajorName } = useSelector((state) => state.voluntaryStore);
+
+  const { run: handleSearch } = useDebounceFn(
+    async (majorName) => {
+      console.log(majorName);
+      try {
+        if (majorName.length === 0) {
+          return;
+        } else {
+          let fuzzyMajorList = await launchRequest(
+            // 自己单独提出一个新的名称
+            APIS.GET_FUZZY_SEARCH_MAJOR,
+            {
+              majorName,
+            },
+            DominConfigs.REQUEST_TYPE.POST
+          );
+          setMajorList(fuzzyMajorList);
+        }
+      } catch (e) {
+        console.log('err', e);
+      }
+    },
+    {
+      wait: 500,
+    }
+  );
+
+  const handleChange = useCallback(
+    (majorName) => {
+      dispatch(voluntaryActions.setResearchMajorName(majorName));
+    },
+    [dispatch]
+  );
+
   return (
     <div className='page-inner-width-box major-search-box'>
       <div className='major-search-left-box'>
+        <Select
+          showSearch
+          className='fuzzy-select'
+          placeholder='请输入专业名称'
+          onSearch={handleSearch}
+          onChange={handleChange}
+        >
+          {majorList.map((major) => {
+            return (
+              <Option
+                key={`${major.uuid} ${major.majorName}`}
+                value={major.majorName}
+              >
+                {major.majorName}
+              </Option>
+            );
+          })}
+        </Select>
+        {researchMajorName ?
+          <Link
+            to={{
+              pathname: `/${SEARCH_MAJOR_LIST.path}`
+            }}
+          >
+            <Button
+              type='primary'
+              className='fuzzy-select-button'
+            >
+              搜索专业
+            </Button>
+          </Link> :
+          <Button
+            type='primary'
+            className='fuzzy-select-button'
+            disabled
+          >
+            搜索专业
+          </Button>}
         <MajorCategory />
       </div>
       <div className='major-search-right-box'>

@@ -170,9 +170,9 @@ class SchoolSearchController extends React.Component {
                   >
                     <h5
                       className='school-title'
-                      // onClick={() => {
-                      //   this.handleClickSchoolName(item.school_id);
-                      // }}
+                    // onClick={() => {
+                    //   this.handleClickSchoolName(item.school_id);
+                    // }}
                     >
                       {item.school_name}
                     </h5>

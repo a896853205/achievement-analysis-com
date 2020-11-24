@@ -8,6 +8,7 @@ import './fuzzy-select-major-css.css';
 import { actions as voluntaryActions } from '@/redux/voluntary-model';
 import { launchRequest } from '@/util/request';
 import * as APIS from '@/constants/api-constants';
+import * as DominConfigs from '@/constants/domin-constants';
 
 const { Option } = Select;
 
@@ -18,18 +19,22 @@ function FuzzySelectMajor() {
 
   const { run: handleSearch } = useDebounceFn(
     async (majorName) => {
-      if (majorName.length === 0) {
-        return;
-      } else {
-        let fuzzyMajorList = await launchRequest(
-          // 自己单独提出一个新的名称
-          APIS.GET_FUZZY_SEARCH_MAJOR,
-          {
-            majorName,
-          },
-          'GET'
-        );
-        setMajorList(fuzzyMajorList);
+      try {
+        if (majorName.length === 0) {
+          return;
+        } else {
+          let fuzzyMajorList = await launchRequest(
+            // 自己单独提出一个新的名称
+            APIS.GET_FUZZY_SEARCH_MAJOR,
+            {
+              majorName,
+            },
+            DominConfigs.REQUEST_TYPE.POST
+          );
+          setMajorList(fuzzyMajorList);
+        }
+      } catch (e) {
+        console.log('err', e);
       }
     },
     {
@@ -61,7 +66,7 @@ function FuzzySelectMajor() {
           return (
             <Option
               key={`${major.uuid} ${major.majorName}`}
-              value={`${major.uuid} ${major.majorName}`}
+              value={major.majorName}
             >
               {major.majorName}
             </Option>

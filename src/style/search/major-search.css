@@ -4,9 +4,20 @@
   justify-content: space-between;
   padding-top: 10px;
 }
+
 /* 专业搜索左边样式 start */
 .major-search-left-box {
   width: 860px;
+}
+
+.fuzzy-select {
+  width: 85%;
+  height: 50px;
+  padding-right: 30px;
+}
+
+.fuzzy-select-button {
+  width: 15%;
 }
 
 .major-category-one-level-item-box {
@@ -130,5 +141,6 @@
   width: 50px;
   text-align: center;
 }
+
 /* 专业搜索右边样式 end */
 /* 专业搜索样式 end */

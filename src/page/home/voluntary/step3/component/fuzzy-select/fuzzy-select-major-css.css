@@ -1,7 +1,9 @@
-.fuzzy-select{
-    width: 90%;
+.fuzzy-select {
+    width: 85%;
     height: 50px;
+    padding-right: 30px;
 }
-.fuzzy-select-button{
-    width: 10%;
+
+.fuzzy-select-button {
+    width: 15%;
 }

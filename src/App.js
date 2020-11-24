@@ -12,6 +12,7 @@ import {
   BCG_ROOT_NAME,
   SEARCH_SCHOOL,
   SEARCH_MAJOR,
+  SEARCH_MAJOR_LIST,
   NEWS_DETAIL,
   NEWS_MORE,
   SCHOOL_DETAIL,
@@ -46,6 +47,9 @@ const SchoolDetailController = lazy(() =>
 );
 const MajorDetailController = lazy(() =>
   import('@/page/detail/major-detail-controller')
+);
+const MajorSearchListController = lazy(() =>
+  import('@/page/search/major-search-list-controller.jsx')
 );
 const vipPage = lazy(() => import('@/page/vip/vip-controller'));
 
@@ -88,6 +92,11 @@ class App extends Component {
                   path={`/${SEARCH_MAJOR.path}`}
                   exact
                   component={MajorSearchController}
+                />
+                <Route
+                  path={`/${SEARCH_MAJOR_LIST.path}`}
+                  exact
+                  component={MajorSearchListController}
                 />
                 <Route
                   path={`/${NEWS_DETAIL.path}/:uuid&:type`}

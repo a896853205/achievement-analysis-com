@@ -36,7 +36,8 @@ export const actions = {
   recordVoluntaryDeepUuid: createAction('recordVoluntaryDeepUuid'),
   recordVoluntaryType: createAction('recordVoluntaryType'),
   recordPage: createAction('recordPage'),
-  recordVoluntarySchoolAndMajorUuid:createAction('recordVoluntarySchoolAndMajorUuid')
+  recordVoluntarySchoolAndMajorUuid: createAction('recordVoluntarySchoolAndMajorUuid'),
+  setResearchMajorName: createAction('setResearchMajorName')
 };
 const recordVoluntaryResult = createAction('recordVoluntaryResult');
 const setMeScoreRank = createAction('setMeScoreRank');
@@ -45,20 +46,20 @@ const switchSchoolTableLoading = createAction('switchSchoolTableLoading');
 const _recordVoluntaryListOption = createAction('_recordVoluntaryListOption');
 // 异步函数
 const effects = {
-  recordVoluntaryResultSaga: function*({ payload }) {
+  recordVoluntaryResultSaga: function* ({ payload }) {
     const data = yield call(launchRequest, APIS.GET_VOLUNTARY_RESULT, {
       voluntaryUuid: payload
     });
     yield put(recordVoluntaryResult(data));
   },
   // 记录志愿表的二级菜单联动
-  recordVoluntaryListOptionSaga: function*({ payload }) {
+  recordVoluntaryListOptionSaga: function* ({ payload }) {
     const data = yield call(launchRequest, APIS.GET_VOLUNTARY_LIST_OPTION, {
       voluntaryUuid: payload
     });
     yield put(_recordVoluntaryListOption(data));
   },
-  recordMeScoreRankSaga: function*({ payload }) {
+  recordMeScoreRankSaga: function* ({ payload }) {
     yield put(userActions._recordUser(payload));
 
     yield put(switchMeLoading(true));
@@ -80,7 +81,7 @@ const effects = {
     );
     yield put(switchMeLoading(false));
   },
-  recordSchoolListSaga: function*() {
+  recordSchoolListSaga: function* () {
     yield put(switchSchoolTableLoading(true));
 
     let schoolList = [];
@@ -175,7 +176,7 @@ const effects = {
   }
 };
 
-export const voluntarySaga = function*() {
+export const voluntarySaga = function* () {
   yield takeEvery(
     actions.recordVoluntaryIdGetResult,
     effects.recordVoluntaryResultSaga
@@ -190,7 +191,7 @@ export const voluntarySaga = function*() {
 
 export const voluntaryReducer = handleActions(
   {
-    recordVoluntarySchoolAndMajorUuid(state,{ payload }) {
+    recordVoluntarySchoolAndMajorUuid(state, { payload }) {
       return {
         ...state,
         schoolAndMajorUuid: payload
@@ -299,9 +300,9 @@ export const voluntaryReducer = handleActions(
       let { changeVolunteerId, schoolData } = result;
 
       // 因二三批合并，需要替换一下三批的lot_id，仍使用之前的lot_id
-      if(result.schoolData.lot_id === 6){
+      if (result.schoolData.lot_id === 6) {
         voluntary[lot_id][changeVolunteerId - 1].lot_id = 6;
-      }else {
+      } else {
         voluntary[lot_id][changeVolunteerId - 1].lot_id = lot_id;
       }
 
@@ -406,10 +407,10 @@ export const voluntaryReducer = handleActions(
         schoolName: result
       };
     },
-    recordMajorName(state, { payload: result }) {
+    setResearchMajorName(state, { payload: result }) {
       return {
         ...state,
-        majorName: result
+        researchMajorName: result
       };
     },
     recordVoluntaryDeepUuid(state, { payload: result }) {
@@ -429,7 +430,13 @@ export const voluntaryReducer = handleActions(
         ...state,
         page: result
       };
-    }
+    },
+    recordMajorName(state, { payload: result }) {
+      return {
+        ...state,
+        majorName: result
+      };
+    },
   },
   {
     step: 0,
@@ -450,6 +457,7 @@ export const voluntaryReducer = handleActions(
     },
     schoolName: '',
     majorName: '',
+    researchMajorName: '',
     schoolList: [],
     page: 1,
     schoolTableLoading: false,
